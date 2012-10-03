@@ -1,4 +1,4 @@
-length = 65;
+length = 40;
 thickness = 3;
 
 module frame_90() {
@@ -14,11 +14,14 @@ module frame_90() {
 	rotate([90, 0, 0]) translate([2, 3, 0])
 	  cylinder(r=8, h=length, center=true);
       }
+      // Tensioner attachment.
+      translate([25, 22, 0]) rotate([0, 15, 0])
+	cube([20, 20, 20], center=true);
     }
     // Flat bottom for print surface.
     translate([0, 0, -10]) cube([3*length, 3*length, 20], center=true);
     // Screw holes for vertical beam.
-    for (y = [7.5:25:length]) {
+    for (y = [7.5:length-15:length]) {
       translate([7.5, y, thickness]) rotate([0, 15, 0]) {
 	translate([0, 0, -thickness])
 	  cylinder(r=1.6, h=20, center=true, $fn=12);
@@ -26,12 +29,12 @@ module frame_90() {
       }
     }
     // Screw holes for horizontal beam.
-    for (x = [22.5:25:length+15]) {
+    for (x = [22.5:length-15:length+15]) {
       translate([x, 7.5, 0]) cylinder(r=1.6, h=20, center=true, $fn=12);
     }
     // Big cutout.
     translate([length, length, 0])
-      # cylinder(r=length-15, h=20, center=true, $fn=60);
+      # cylinder(r=length-15, h=60, center=true, $fn=4);
   }
 }
 

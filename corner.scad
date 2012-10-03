@@ -1,4 +1,5 @@
 radius = 27.5;
+bracket = 10;
 
 module corner() {
   difference() {
@@ -16,9 +17,9 @@ module corner() {
       cube([15.1, 60, 16], center=true);
     // Frame brackets under the corner.
     rotate([0, 0, -30]) translate([radius-20, 20, 0])
-      cube([12, 60, 16], center=true);
+      cube([bracket, 60, 16], center=true);
     rotate([0, 0, 30]) translate([-radius+20, 20, 0])
-      cube([12, 60, 16], center=true);
+      cube([bracket, 60, 16], center=true);
     // Screw holes.
     for (a = [-45, 45]) {
       rotate([0, 0, a]) rotate([90, 0, 0]) {
