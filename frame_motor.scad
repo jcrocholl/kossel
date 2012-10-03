@@ -34,25 +34,25 @@ module frame_motor() {
     }
     // Motor center cutout.
     translate([0, motor_offset, 0]) rotate([90, 0, 0])
-      cylinder(r=12, h=40, center=true);
+      cylinder(r=16, h=40, center=true);
     // Motor mounting screw holes.
     for (z = [-1, 1]) {
       translate([motor_screws/2, motor_offset, z*motor_screws/2])
 	rotate([90, 0, 0])
-	cylinder(r=1.65, h=30, center=true, $fn=12);
+	cylinder(r=1.6, h=30, center=true, $fn=12);
       translate([motor_screws/2, motor_offset-11, z*motor_screws/2])
 	rotate([90, 0, 0])
 	cylinder(r=4, h=10, center=true, $fn=24);
-      translate([22, 0, z*motor_screws/2])
-	rotate([90, 0, 20])
-	cylinder(r=7, h=50, center=true);
+      translate([17, 0, z*motor_screws*0.45])
+	rotate([90, 0, 5])
+	cylinder(r=9, h=50, center=true);
     }
     // Vertical OpenBeam mounting screw holes.
     for (z = [-1, 0, 1]) {
       translate([0, 0, z*(height-15)/2])
 	rotate([90, 0, 45])
 	translate([0, 0, 7.5+thickness]) {
-	cylinder(r=1.7, h=8, $fn=12, center=true);
+	cylinder(r=1.6, h=8, $fn=12, center=true);
 	cylinder(r=3, h=8, $fn=12);
       }
     }
@@ -62,7 +62,7 @@ module frame_motor() {
 	rotate([0, 0, -30])
 	translate([7.5+thickness/2, y, z*(height-15)/2])
 	  rotate([0, 90, 0])
-	  cylinder(r=1.7, h=10, $fn=12, center=true);
+	  cylinder(r=1.6, h=10, $fn=12, center=true);
       }
     }
   }

@@ -1,5 +1,5 @@
 radius = 9;
-width = 16;
+width = 18;
 top = 5;
 smoothness = 60;
 
@@ -24,7 +24,7 @@ module spool() {
 	translate([0, 4.5, width/2+3]) rotate([90, 0, 0]) {
 	cylinder(r=1.65, h=radius+5, center=true, $fn=12);
 	translate([0, 0, 1-radius])
-	  cylinder(r=10, h=5, center=true, $fn=12);
+	  cylinder(r=10, h=6, center=true);
 	for (z = [0:10]) {
 	  translate([0, z, 1.5]) rotate([0, 0, 30])
 	    cylinder(r=3.25, h=5, center=true, $fn=6);
