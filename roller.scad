@@ -23,10 +23,8 @@ module roller() {
 	cube([16, 23, bearing_offset], center=true);
       // Attachment for diagonal rods.
       translate([-25, 16, bearing_offset/2]) {
-	rotate([90, 0, 0]) cylinder(r=5.5, h=16, center=true);
-	translate([5.5, 0, 0]) cube([11, 16, 11], center=true);
-	rotate([0, 61, 0])
-	  translate([11, 0, 0]) cube([22, 8, 11], center=true);
+	rotate([90, 0, 0]) cylinder(r1=3, r2=6, h=16, center=true);
+	translate([5, 0, 0]) cube([10, 16, 7], center=true);
       }
     }
     // Inside space for OpenBeam.
@@ -57,7 +55,7 @@ module roller() {
 	cylinder(r=m3_nut_radius, h=10, center=true, $fn=6);
     }
     // Adjustable endstop screw.
-    translate([-20, 14, bearing_offset/2+3]) {
+    translate([-20, 14, bearing_offset/2+2]) {
       cylinder(r=1.4, h=35, center=true, $fn=12);
       cylinder(r=m3_nut_radius, h=10, $fn=6);
     }
