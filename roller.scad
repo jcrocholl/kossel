@@ -27,7 +27,7 @@ module roller() {
 	translate([5, 0, 0]) cube([10, 16, 7], center=true);
       }
       // Adjustable endstop screw.
-      translate([5, 14, bearing_offset-2])
+      translate([8, 14, bearing_offset-2])
 	cylinder(r=5.5, h=12, center=true);
     }
     // Inside space for OpenBeam.
@@ -58,9 +58,9 @@ module roller() {
 	cylinder(r=m3_nut_radius, h=10, center=true, $fn=6);
     }
     // Adjustable endstop screw.
-    translate([5, 14, bearing_offset+2]) {
+    translate([8, 14, bearing_offset+1]) {
       cylinder(r=1.4, h=28, center=true, $fn=12);
-      # cylinder(r=m3_nut_radius, h=10, $fn=6);
+      cylinder(r=m3_nut_radius, h=10, $fn=6);
     }
   }
   // 623zz ball bearings.
