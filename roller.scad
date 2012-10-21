@@ -10,9 +10,9 @@ module roller() {
 	  cylinder(h=8, r=15, center=true, $fn=48);
 	// Screw guide tubes.
         translate([-14, 12, z]) rotate([90, 0, 0])
-          cylinder(r=5.5, h=23, center=true);
+          cylinder(r1=6, r2=3, h=23, center=true);
         translate([14, 12, z]) rotate([90, 0, 0])
-          cylinder(r=5.5, h=23, center=true);
+          cylinder(r1=6, r2=3, h=23, center=true);
 	// Diagonal guide ramps.
 	translate([0, 12, z]) cube([28, 23, 6], center=true);
       }
@@ -24,15 +24,13 @@ module roller() {
       // Attachment for diagonal rods.
       translate([-25, 16, bearing_offset/2]) {
 	rotate([90, 0, 0])
-	  cylinder(r=3.6, h=12, center=true, $fn=20);
-	rotate([0, 10, 0]) translate([5.5, 0, 0])
-	  cube([11, 16, 7], center=true);
-	rotate([0, -10, 0]) translate([5.5, 0, 0])
+	  cylinder(r1=2.5, r2=5.5, h=16, center=true, $fn=20);
+	translate([5.5, 0, 0])
 	  cube([11, 16, 7], center=true);
       }
       // Adjustable endstop screw.
       translate([8, 14, bearing_offset-2])
-	cylinder(r=5.5, h=12, center=true);
+	cylinder(r1=3, r2=5.5, h=12, center=true);
     }
     // Inside space for OpenBeam.
     color([1, 0, 0]) rotate([0, 0, 45]) cube([17, 17, 120], center=true);
@@ -59,9 +57,7 @@ module roller() {
       translate([-25, 18, z]) rotate([90, 0, 0])
 	cylinder(r=1.6, h=20, center=true, $fn=12);
       translate([-25, 6, z]) rotate([90, 0, 0])
-	#cylinder(r=m3_nut_radius, h=10, center=true, $fn=6);
-      translate([-26, 6, z]) rotate([90, 0, 0])
-	cylinder(r=m3_nut_radius+1.1, h=10, center=true, $fn=6);
+	cylinder(r=m3_nut_radius, h=10, center=true, $fn=6);
     }
     // Adjustable endstop screw.
     translate([8, 14, bearing_offset+1]) {
