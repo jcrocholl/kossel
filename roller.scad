@@ -1,5 +1,6 @@
 bearing_offset = 20;
 m3_nut_radius = 3.2;
+cone_radius = 6;
 
 module roller() {
   difference() {
@@ -10,9 +11,9 @@ module roller() {
 	  cylinder(h=8, r=15, center=true, $fn=48);
 	// Screw guide tubes.
         translate([-14, 12, z]) rotate([90, 0, 0])
-          cylinder(r1=6, r2=3, h=23, center=true);
+          cylinder(r1=cone_radius+0.5, r2=3, h=23, center=true);
         translate([14, 12, z]) rotate([90, 0, 0])
-          cylinder(r1=6, r2=3, h=23, center=true);
+          cylinder(r1=cone_radius+0.5, r2=3, h=23, center=true);
 	// Diagonal guide ramps.
 	translate([0, 12, z]) cube([28, 23, 6], center=true);
       }
@@ -24,13 +25,13 @@ module roller() {
       // Attachment for diagonal rods.
       translate([-25, 16, bearing_offset/2]) {
 	rotate([90, 0, 0])
-	  cylinder(r1=2.5, r2=5.5, h=16, center=true, $fn=20);
+	  cylinder(r1=2.5, r2=cone_radius, h=16, center=true, $fn=20);
 	translate([5.5, 0, 0])
 	  cube([11, 16, 7], center=true);
       }
       // Adjustable endstop screw.
       translate([8, 14, bearing_offset-2])
-	cylinder(r1=3, r2=5.5, h=12, center=true);
+	cylinder(r1=4, r2=cone_radius, h=12, center=true);
     }
     // Inside space for OpenBeam.
     color([1, 0, 0]) rotate([0, 0, 45]) cube([17, 17, 120], center=true);
@@ -64,6 +65,9 @@ module roller() {
       cylinder(r=1.4, h=28, center=true, $fn=12);
       cylinder(r=m3_nut_radius, h=10, $fn=6);
     }
+    // Fishline attachment in the front.
+    translate([-10, 8, 0]) rotate([0, 90, 0]) #
+      cylinder(r=1.4, h=30, center=true, $fn=12);
   }
   // 623zz ball bearings.
   rotate([90, 0, 135]) translate([12.5, 20, 3.8])
@@ -98,8 +102,8 @@ module right() {
   }
 }
 
-translate([-21, 0, 19]) rotate([90, 0, 0]) left();
-// translate([21, 0, 19]) rotate([-90, 0, 180]) right();
+// translate([-21, 0, 19]) rotate([90, 0, 0]) left();
+translate([21, 0, 19]) rotate([-90, 0, 180]) right();
 
 // OpenBeam.
 // % rotate([0, 0, 45]) cube([15, 15, 120], center=true);
