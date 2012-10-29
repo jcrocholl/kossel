@@ -25,7 +25,7 @@ module corner() {
       rotate([0, 0, a]) rotate([90, 0, 0]) {
 	cylinder(r=1.6, h=60, center=true, $fn=12);
 	translate([0, 0, radius])
-	  cylinder(r=3.3, h=7, center=true, $fn=24);
+	  cylinder(r=3.3, h=8, center=true, $fn=24);
       }
     }
   }
