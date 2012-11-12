@@ -7,7 +7,7 @@ motor_offset = 40; // mm from motor face to OpenBeam center
 motor_thickness = 5; // mm bracket thickness
 
 height = 15 + motor_width + 15;
-thickness = 3;
+thickness = 3.6;
 diagonal = 15*sqrt(2);
 
 module frame_motor() {
@@ -48,7 +48,7 @@ module frame_motor() {
 	cylinder(r=9, h=50, center=true);
     }
     // Vertical OpenBeam mounting screw holes.
-    for (z = [-1, 0, 1]) {
+    for (z = [-1, 1]) {
       translate([0, 0, z*(height-15)/2])
 	rotate([90, 0, 45])
 	translate([0, 0, 7.5+thickness]) {
@@ -68,6 +68,7 @@ module frame_motor() {
   }
 }
 
+translate([0, 0, 12.8])
 rotate([0, 90, 0])
 rotate([0, 0, 30])
 frame_motor();
