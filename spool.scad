@@ -15,7 +15,7 @@ module spool() {
 	cylinder(r=radius+2, h=top, center=true, $fn=smoothness);
     }
     // Motor shaft.
-    cylinder(r=2.75, h=50, center=true, $fn=24);
+    cylinder(r=2.6, h=50, center=true, $fn=24);
     // Filament tunnels.
     translate([0, radius, width/2-1.5]) rotate([-30, 0, 0])
       #cube([1, 2*radius, 1.5], center=true);
@@ -23,7 +23,7 @@ module spool() {
       #cube([1, 2*radius, 1.5], center=true);
     translate([0, 5, 0])
       #cylinder(r=1, h=40, center=true, $fn=6);
-    // Set screw holes and nut traps.
+    // M3 screws and nuts on three sides.
     for (a = [0:120:359]) {
       rotate([0, 0, a])
 	translate([0, 4.5, width/2+3]) rotate([90, 0, 0]) {
