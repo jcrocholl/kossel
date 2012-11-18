@@ -1,5 +1,6 @@
+include <configuration.scad>;
+
 height = 45;
-thickness = 3.6;
 diagonal = 15*sqrt(2);
 
 module frame_cheek() {

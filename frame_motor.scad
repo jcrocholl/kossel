@@ -1,3 +1,5 @@
+include <configuration.scad>;
+
 motor_screws = 31; // mm center-to-center
 motor_width = 42.5; // mm total motor face width
 motor_height = 15; // mm bracket height
@@ -7,7 +9,6 @@ motor_offset = 40; // mm from motor face to OpenBeam center
 motor_thickness = 5; // mm bracket thickness
 
 height = 15 + motor_width + 15;
-thickness = 3.6;
 diagonal = 15*sqrt(2);
 
 module frame_motor() {

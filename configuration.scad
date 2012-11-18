@@ -10,3 +10,6 @@ m3_open_radius = 3.2/2;
 // NEMA17 stepper motors.
 motor_shaft_diameter = 5;
 motor_shaft_radius = (motor_shaft_diameter+0.3)/2;
+
+// Frame brackets.
+thickness = 3.6;

@@ -1,6 +1,5 @@
+include <configuration.scad>;
 use <corner.scad>;
-
-thickness = 3.6;
 
 module frame_top() {
   difference() {
