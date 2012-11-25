@@ -36,7 +36,7 @@ module tensioner_608() {
       translate([-6, 6, 0]) cube([9, 9, 23], center=true);
       // Vertical M3 screw for tension.
       translate([0, -7, -8]) scale([1, 1, -1]) {
-	cylinder(r=m3_open_radius, h=50, center=true, $fn=12);
+	cylinder(r=m3_wide_radius, h=50, center=true, $fn=12);
 	cylinder(r=m3_nut_radius, h=5, $fn=6);
 	cylinder(r1=m3_nut_radius-2, r2=m3_nut_radius+2, h=5, $fn=6);
       }

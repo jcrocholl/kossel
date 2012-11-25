@@ -28,7 +28,7 @@ module spool() {
     // M3 screws and nuts on three sides.
     for (a = [0:120:359]) {
       rotate([0, 0, a]) translate([0, 4.5, width/2+3]) rotate([90, 0, 0]) {
-	cylinder(r=m3_open_radius, h=radius+5, center=true, $fn=12);
+	cylinder(r=m3_wide_radius, h=radius+5, center=true, $fn=12);
 	translate([0, 0, 1-radius]) cylinder(r=10, h=6, center=true);
 	for (z = [0:10]) {
 	  translate([0, z, 1.5]) rotate([0, 0, 30])
