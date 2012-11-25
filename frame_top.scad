@@ -16,7 +16,7 @@ module frame_top() {
 	}
       }
     }
-    translate([-5, 12.5, 0]) # cylinder(r=1.5, h=20, $fn=12);
+    translate([-5, 12.7, 0]) # cylinder(r=1.5, h=20, $fn=12);
   }
 }
 
@@ -26,4 +26,4 @@ translate([0, 0, 7.5+thickness]) {
 }
 
 use <tensioner_608.scad>;
-% translate([-1.5, 22, 10]) rotate([180, 0, 45]) tensioner_608();
+% translate([0, 24.8, 10]) rotate([180, 0, 22.5]) tensioner_608();
