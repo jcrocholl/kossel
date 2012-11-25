@@ -72,7 +72,6 @@ translate([0, 0, 12.8])
 rotate([0, 90, 0])
 rotate([0, 0, 30])
 frame_motor();
-// scale([-1, 1, 1]) frame_motor();
 
 // OpenBeam.
 // % rotate([0, 0, 45]) cube([15, 15, 100], center=true);
