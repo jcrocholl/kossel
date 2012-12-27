@@ -5,11 +5,13 @@ bracket_height = 12.5 + space/2 - 1;
 power_supply_height = 30.5;
 power_supply_width = 50.1;
 
-module frame_power_supply() {
+module power_supply() {
   difference() {
-    translate([0, bracket_height/2-5, (10+thickness)/2])
-      cube([power_supply_width+20, bracket_height, 10+thickness],
-	   center=true);
+    translate([0, bracket_height/2-5, (10+thickness)/2]) minkowski() {
+        cube([power_supply_width+12, bracket_height-10, thickness],
+	     center=true);
+        cylinder(r=5, h=10, center=true);
+    }
     translate([0, 0, 10+thickness])
       cube([power_supply_width+30, 20, 20],
 	   center=true);
@@ -26,5 +28,5 @@ module frame_power_supply() {
   }
 }
 
-translate([0, space+15, 0]) rotate([0, 0, 180]) frame_power_supply();
-frame_power_supply();
+translate([0, space+15, 0]) rotate([0, 0, 180]) power_supply();
+power_supply();
