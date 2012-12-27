@@ -23,26 +23,26 @@ for (a = [0:120:359]) {
   }
 }
 
-
 module frame_glass() {
   difference() {
     union() {
-      minkowski() {
-        translate([0, triangle_offset-20, thickness/2])
-          cube([25, 40, thickness-1], center=true);
+      translate([0, triangle_offset-20, thickness/2]) minkowski() {
+        difference() {
+          cube([32, 40, thickness-1], center=true);
+          cube([28, 50, 20], center=true);
+        }
         cylinder(r=5, h=1, center=true);
       }
       intersection() {
-        translate([0, triangle_offset+5-20, (thickness+1)/2])
-           rotate([0, 0, 30])
-           cylinder(r=80, h=thickness+1, center=true, $fn=3);
+        translate([0, triangle_offset-20, (thickness+1)/2])
+          cube([42, 50, thickness+1], center=true);
         cylinder(r=glass_radius+5, h=20, center=true, $fn=120);
       }
     }
-    cylinder(r=glass_radius-10, h=20, center=true, $fn=120);
+    cylinder(r=glass_radius-5, h=20, center=true, $fn=120);
     translate([0, 0, thickness-1])
       cylinder(r=glass_radius, h=glass_thickness, $fn=120);
-    for (x = [-10, 10]) {
+    for (x = [-15, 15]) {
       translate([x, triangle_offset, 0]) #
         cylinder(r=m3_wide_radius, h=20, center=true, $fn=12);
     }
