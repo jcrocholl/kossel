@@ -1,13 +1,13 @@
 include <configuration.scad>;
 
 space = 43;  // Between horizontal OpenBeam pieces.
-bracket_height = 15+space/2-1;
+bracket_height = 12.5 + space/2 - 1;
 power_supply_height = 30.5;
 power_supply_width = 50.1;
 
-module power_supply_bracket() {
+module frame_power_supply() {
   difference() {
-    translate([0, bracket_height/2-7.5, (10+thickness)/2])
+    translate([0, bracket_height/2-5, (10+thickness)/2])
       cube([power_supply_width+20, bracket_height, 10+thickness],
 	   center=true);
     translate([0, 0, 10+thickness])
@@ -26,5 +26,5 @@ module power_supply_bracket() {
   }
 }
 
-translate([0, space+15, 0]) rotate([0, 0, 180]) power_supply_bracket();
-power_supply_bracket();
+translate([0, space+15, 0]) rotate([0, 0, 180]) frame_power_supply();
+frame_power_supply();
