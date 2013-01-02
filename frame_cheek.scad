@@ -22,8 +22,8 @@ module frame_cheek() {
     for (z = [0, 1]) {
       translate([0, 0, z*(height-15)]) rotate([90, 0, 45])
 	translate([0, 0, 7.5+thickness]) {
-	cylinder(r=1.6, h=20, $fn=12, center=true);
-	cylinder(r=2.8, h=10, $fn=12);
+	cylinder(r=1.6, h=20, $fn=24, center=true);
+	cylinder(r=2.8, h=10, $fn=24);
       }
     }
     // Horizontal OpenBeam mounting screw holes.
@@ -31,10 +31,10 @@ module frame_cheek() {
       rotate([0, 0, -30])
 	translate([7.5+thickness/2, y, 0])
 	rotate([0, 90, 0])
-	cylinder(r=1.6, h=10, $fn=12, center=true);
+	cylinder(r=1.6, h=10, $fn=24, center=true);
     }
     translate([38, 35, 51]) rotate([0, 90, -30]) #
-      cylinder(r=45, h=20, center=true, $fn=60);
+      cylinder(r=45, h=20, center=true, $fn=120);
   }
 }
 

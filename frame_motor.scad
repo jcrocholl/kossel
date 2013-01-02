@@ -24,7 +24,7 @@ module frame_motor() {
 	intersection() {
 	  translate([30, motor_offset-15, 0])
 	    rotate([0, 0, 30])
-	    cylinder(r=30, h=motor_width+6, $fn=3, center=true);
+	    cylinder(r=30, h=motor_width+6, $fn=6, center=true);
 	  translate([25, 35, 0]) rotate([0, 0, -30])
 	    cube([50, 15, 60], center=true);
 	}
@@ -40,10 +40,10 @@ module frame_motor() {
     for (z = [-1, 1]) {
       translate([motor_screws/2, motor_offset, z*motor_screws/2])
 	rotate([90, 0, 0])
-	cylinder(r=1.6, h=30, center=true, $fn=12);
+	cylinder(r=1.6, h=30, center=true, $fn=24);
       translate([motor_screws/2, motor_offset-11, z*motor_screws/2])
 	rotate([90, 0, 0])
-	cylinder(r=4, h=10, center=true, $fn=24);
+	cylinder(r=4, h=10, center=true, $fn=48);
       translate([17, 0, z*motor_screws*0.45])
 	rotate([90, 0, 5])
 	cylinder(r=9, h=50, center=true);
@@ -53,7 +53,7 @@ module frame_motor() {
       translate([0, 0, z*(height-15)/2])
 	rotate([90, 0, 45])
 	translate([0, 0, 7.5+thickness]) {
-	cylinder(r=1.6, h=8, $fn=12, center=true);
+	cylinder(r=1.6, h=8, $fn=24, center=true);
       }
     }
     // Horizontal OpenBeam mounting screw holes.
@@ -62,7 +62,7 @@ module frame_motor() {
 	rotate([0, 0, -30])
 	translate([7.5+thickness/2, y, z*(height-15)/2])
 	  rotate([0, 90, 0])
-	  cylinder(r=1.6, h=10, $fn=12, center=true);
+	  cylinder(r=1.6, h=10, $fn=24, center=true);
       }
     }
   }

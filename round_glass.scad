@@ -9,11 +9,11 @@ triangle_inside = triangle_openbeam + 42;
 triangle_offset = triangle_inside/2 * tan(30) + 7.5;
 
 // Borosilicate glass.
-glass_diameter = 170;
+glass_diameter = 171.45;
 glass_radius = glass_diameter/2;
-glass_thickness = 2.9;
+glass_thickness = 19.05;
 translate([0, 0, thickness-1]) %
-  cylinder(r=glass_radius, h=glass_thickness, $fn=120);
+  cylinder(r=glass_radius, h=glass_thickness, $fn=240);
 
 // OpenBeam triangle.
 for (a = [0:120:359]) {
@@ -36,15 +36,15 @@ module frame_glass() {
       intersection() {
         translate([0, triangle_offset-20, (thickness+1)/2])
           cube([42, 50, thickness+1], center=true);
-        cylinder(r=glass_radius+5, h=20, center=true, $fn=120);
+        cylinder(r=glass_radius+5, h=20, center=true, $fn=240	);
       }
     }
-    cylinder(r=glass_radius-5, h=20, center=true, $fn=120);
+    cylinder(r=glass_radius-5, h=20, center=true, $fn=240);
     translate([0, 0, thickness-1])
-      cylinder(r=glass_radius, h=glass_thickness, $fn=120);
+      cylinder(r=glass_radius, h=glass_thickness, $fn=240);
     for (x = [-15, 15]) {
       translate([x, triangle_offset, 0]) #
-        cylinder(r=m3_wide_radius, h=20, center=true, $fn=12);
+        cylinder(r=m3_wide_radius, h=20, center=true, $fn=24);
     }
   }
 }
