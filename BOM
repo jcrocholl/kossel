@@ -1,0 +1,13 @@
+Bill of Materials (unverified)
+==============================
+
+1 x effector.stl
+6 x frame_cheek.stl    (duplicate of frame_endstop.stl?)
+6 x frame_endstop.stl  (duplicate of frame_cheek.stl?)
+6 x frame_motor.stl
+3 x frame_top.stl
+3 x roller_left.stl
+3 x roller_right.stl
+3 x round_glass.stl
+1 x tensioner_axle.stl
+3 x spool.stl
