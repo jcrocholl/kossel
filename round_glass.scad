@@ -1,6 +1,6 @@
 include <configuration.scad>;
 
-triangle_openbeam = 300; // mm length
+triangle_openbeam = 360; // mm length
 
 // Intersection points between inside edges of triangle OpenBeam.
 triangle_inside = triangle_openbeam + 42;
@@ -9,7 +9,7 @@ triangle_inside = triangle_openbeam + 42;
 triangle_offset = triangle_inside/2 * tan(30) + 7.5;
 
 // Borosilicate glass.
-glass_diameter = 171.45;
+glass_diameter = 254;
 glass_radius = glass_diameter/2;
 glass_thickness = 19.05;
 translate([0, 0, thickness-1]) %
