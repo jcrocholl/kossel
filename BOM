@@ -11,3 +11,36 @@ Bill of Materials (unverified)
 3 x round_glass.stl
 1 x tensioner_axle.stl
 3 x spool.stl
+
+TODO(gblock): Update BOM with a summary from below.
+
+Instructions:
+Taken during the build itself, and referenced against replibot.blogspot.co.uk
+
+To build a lower corner (There are three):
+2 x frame_motor.stl
+2 x frame_endstop.stl
+12 x M3x8mm screws (in the central four posts within the rail)
+4 x M3x20mm screws
+16 x M3 nuts
+
+Each frame_motor gets four central M3x8mm screws that go into horizontal posts, two M3x20mm screws that go from the frame_endstop through the frame_motor into the vertical extrusion, and two M3x8MM screws that are used to mount the motor to the assembled corner.
+
+
+To build an upper corner (There are three):
+
+To build the central platform:
+
+
+
+Parts suppliers (+prices?) used:
+TriDPrinting.com
+McMaster-carr
+SeeMeCNC
+Farnell/Element14
+MatterHackers
+Panucatt
+TrinityLabs
+iMaterialize
+OpenBeamUSA
+
