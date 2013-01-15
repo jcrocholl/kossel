@@ -119,11 +119,16 @@ Step X: Attach horizontal arms to upper corners (there are 3)
 4 x M3 nuts
 
 
-STEP X:  Attach filament to spools.
-
-
-STEP X:  Attach spools to motor (there are three).
+STEP X: Attach filament to spools.  (Inner knot, filament can remain loose.)
+1 x 65 lb spectra line ('filament')
 1 x spool.stl
+
+This involves cutting a length of spectra at 2.5x your height.  (There's slop in there that you'll be trimmin')
+Thread one end of the spectra line through the spool at the 'open' end, and tie your best knot.  The spool is now ready to be motor-mounted.
+
+
+STEP X:  Mount spools to motor (there are three).
+1 x filament-wired spool from previous step.
 3 x M3x8mm screws
 3 x M3 nuts
 
@@ -131,7 +136,7 @@ STEP X:  Attach spools to motor (there are three).
 Step X: Attach motor.
 
 
-TODO(gblock): Run the filament and apply tension.
+TODO(gblock): Run the filament and apply tension to the line.
 
 
 
