@@ -41,6 +41,10 @@ The accuracy of the system depends on a good spool.  I had really beautiful ones
 AFTER PRINTING: Get all your shit together in one place.
 
 
+Bill of Materials:  Tools
+1 x 2.5mm hex driver (I use hex nuts for everything, they're purty)
+1 x 5.5mm nut driver (Ditto)
+
 Bill of Materials: Exoskeleton
 
 
@@ -53,29 +57,46 @@ Bill of Materials: Brains
 
 
 
-ATTACH PRINT BASE TO EXOSKELETON
---------------------------------
+
+
+BUILD THE EXOSKELETON
+---------------------
+
+STEP 1:  Attach round_glass.stl sections to hold the print area.
+
+3 x 'short' OpenBeam
 3 x round_glass.stl
 6 x M3 nuts
-3 x M3x6mm screws (?)
+3 x M3x8mm screws (? Can't verify - I have a 10" plate and a bastardized setup.)
 
 First you're going to need to do the one thing you'd prefer to do last - attach the sections that will hold your print base.  This is because the nuts will be trapped in the center of the upper horizontal section, and you'll be capping both ends of the extrusion in the next step when you build the exoskeleton.
 
 Best to just get it over with.  Choose three of the short segments of OpenBeam that will be the upper section of the lower support, and attach your round_glass.stl sections in the center.  You can get the positioning right later - what's important now is that they're there, and facing the correct position (on the upper side, pointing what will be towards the center of the platform).
 
 
-BUILD THE EXOSKELETON
----------------------
-To build a lower corner (There are three):
+STEP 2:  Build 3 (three) 'sidewalls'; for each:
+1 x 'short' OpenBeam with a round_glass.stl attached.
+1 x 'short' OpenBeam
 2 x frame_motor.stl
-2 x frame_endstop.stl
-12 x M3x8mm screws (in the central four posts within the rail)
-4 x M3x20mm screws
-16 x M3 nuts
-3 x OpenBeam short arms (for lower section)
-3 x OpenBeam short arms (for the upper section, as prepared earlier in "attach print base to exoskeleton").
+8 x M3x8mm screws
+8 x M3 nuts
 
-Each frame_motor gets four central M3x8mm screws that go into horizontal posts, two M3x20mm screws that go from the frame_endstop through the frame_motor into the vertical extrusion, and two M3x8MM screws that are used to mount the motor to the assembled corner.  Ensure that the OpenBeam containing your round_glass is on the top, with the round_glass section pointing into the middle of the triangle.
+Pair the frame motors with the sidewalls; the angled bit will overhang on either side of the sidewall, and the protruding bit will be on the inside (and will eventually hold the motor, at an angle that points the motor's rotor towards the corner.)  Your round_glass.stl should be at the 'top' of the unit, pointing in the same direction as the motor mount.
+
+
+STEP 3: Attach corners and vertical posts to the sidewalls:
+3 x sidewalls, created moments ago;
+3 x 'long' OpenBeam
+6 x corner.stl
+12 x M3x20mm screws
+12 x M3 nuts
+
+At each corner, connect two of the sidewalls by passing an M3x8mm bolt through the corner, through the 'wing' of the frame.stl, and into the OpenBeam extension; each vertical post gets two screws in each of the two outer faces.
+
+This is most easily done by loosely threading a nut onto the end of the bolt and 'sliding' the vertical rail down the nuts into the unit, tightening from the outside once that position is locked.
+
+At this time, your round_glass.stl extensions should be all at the top of the triangle, and all pointing inwards; it should be obvious where your glass is going to be mounted.
+
 
 TODO(gblock): Attach tensioners (there are three):
 
