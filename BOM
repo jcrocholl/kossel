@@ -22,11 +22,21 @@ Bill of Materials:  Printed Parts
 3 x roller_right.stl
 3 x round_glass.stl
 1 x tensioner_axle.stl
+3 x tensioner_608.stl
 3 x spool.stl
 
-BEFORE PRINTING: Adjust the round_glass.stl to match the size of your round base.
+BEFORE PRINTING: 
 
-Noteworthy:  The accuracy of the system depends on a good spool.  I had really beautiful ones printed by iMaterialize's high-resolution printing process; you can use anything you like, so long as it's well made.  Don't use a sloppy spool.
+1. Make adjustments for the size of your round base.
+   At the time of writing, adjust the round_glass.stl to match the size of your round base; I believe this is moving to configuration.scad.
+
+2. Make adjustments for the bearings you've chosen.
+   We're splurging on posh bearings with delrin cases from igus; you can follow Kossel's lead and heat-shrink yourself some tires on ordinary bearings if that's the way you want to play it; but change configuration.scad to match your bearings.
+
+
+PRINTING:
+
+The accuracy of the system depends on a good spool.  I had really beautiful ones printed by iMaterialize's high-resolution printing process; you can use anything you like, so long as it's well made.  Don't use a sloppy spool.
 
 AFTER PRINTING: Get all your shit together in one place.
 
@@ -67,10 +77,10 @@ To build a lower corner (There are three):
 
 Each frame_motor gets four central M3x8mm screws that go into horizontal posts, two M3x20mm screws that go from the frame_endstop through the frame_motor into the vertical extrusion, and two M3x8MM screws that are used to mount the motor to the assembled corner.  Ensure that the OpenBeam containing your round_glass is on the top, with the round_glass section pointing into the middle of the triangle.
 
+TODO(gblock): Attach tensioners (there are three):
+
+
 TODO(gblock): Build an upper corner (there are three):
-
-
-TODO(gblock): Attach tensioners.
 
 
 TODO(gblock): Attach motors and spool.
@@ -135,4 +145,9 @@ Panucatt
 TrinityLabs
 iMaterialize
 OpenBeamUSA
+igus.co.uk
 
+
+Bearings
+------------------
+BB-623-B180-10-ES bearings, delrin rollers, igus.co.uk - Stupidly priced.
