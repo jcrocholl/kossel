@@ -15,21 +15,87 @@ Bill of Materials (unverified)
 TODO(gblock): Update BOM with a summary from below.
 
 Instructions:
-Taken during the build itself, and referenced against replibot.blogspot.co.uk
 
+BEFORE PRINTING: Adjust the round_glass.stl to match the size of your round base.
+AFTER PRINTING: Get all your shit together in one place.
+
+
+From notes taken during the build itself, and referenced against replibot.blogspot.co.uk
+
+ATTACH PRINT BASE TO EXOSKELETON
+--------------------------------
+3 x round_glass.stl
+6 x M3 nuts
+3 x M3x6mm screws (?)
+
+First you're going to need to do the one thing you'd prefer to do last - attach the sections that will hold your print base.  This is because the nuts will be trapped in the center of the upper horizontal section, and you'll be capping both ends of the extrusion in the next step when you build the exoskeleton.
+
+Best to just get it over with.  Choose three of the short segments of OpenBeam that will be the upper section of the lower support, and attach your round_glass.stl sections in the center.  You can get the positioning right later - what's important now is that they're there, and facing the correct position (on the upper side, pointing what will be towards the center of the platform).
+
+
+BUILD THE EXOSKELETON
+---------------------
 To build a lower corner (There are three):
 2 x frame_motor.stl
 2 x frame_endstop.stl
 12 x M3x8mm screws (in the central four posts within the rail)
 4 x M3x20mm screws
 16 x M3 nuts
+3 x OpenBeam short arms (for lower section)
+3 x OpenBeam short arms (for the upper section, as prepared earlier in "attach print base to exoskeleton").
 
-Each frame_motor gets four central M3x8mm screws that go into horizontal posts, two M3x20mm screws that go from the frame_endstop through the frame_motor into the vertical extrusion, and two M3x8MM screws that are used to mount the motor to the assembled corner.
+Each frame_motor gets four central M3x8mm screws that go into horizontal posts, two M3x20mm screws that go from the frame_endstop through the frame_motor into the vertical extrusion, and two M3x8MM screws that are used to mount the motor to the assembled corner.  Ensure that the OpenBeam containing your round_glass is on the top, with the round_glass section pointing into the middle of the triangle.
+
+TODO(gblock): Build an upper corner (there are three):
 
 
-To build an upper corner (There are three):
+TODO(gblock): Attach tensioners.
 
-To build the central platform:
+
+TODO(gblock): Attach motors and spool.
+
+
+TODO(gblock): Run the filament and apply tension.
+
+
+
+ATTACH THE ROLLERS TO THE BEAMS
+-------------------------------
+To build a roller (there are three):
+1 x roller_left.stl
+1 x roller_right.stl
+6 x 608 delrin rollers (TODO(gblock): Get details from Andy on the rollers we're using)
+4 x M3x30mm screws (to hold left and right together)
+6 x M3x8mm screws (to pin the delrin rollers, three in each half)
+10 x M3 nuts
+
+Attach the rollers to left and right halves, and then pin the left and right halves to the frame motor.
+Note that in my print, the left and right halves came out _just_on the edge of what a 30mm will hold.
+
+Each half has an extension that sticks out; orient that so that the sticky-outy-bit is on the top of the roller, and facing inwards into the triangle; this is where you'll attach the effector later.
+
+
+BUILD YOUR EFFECTOR
+-------------------
+1 x finished extruder of your choice + bolts/screws to screw to effector.
+1 x effector.stl
+6 x (where the fuck did I get these awesome arms from?)
+6 x M3x8mm screws
+6 x M3 nuts
+
+The effector platform gets the extruder bolted to it centrally, top or bottom, it's your choice; most people appear to be putting it above, to leave more vertical room for the build space, but that can result in the delta arms hitting the extruder (which then affects the horizontal size of the build space).  Your decision will ultimately be based on how big (or how small) your extruder is.
+
+CENTER IT CAREFULLY.  Deltas are geometry-based, and the geometry *MUST* be good; your extruder should sit exactly within the center of the effector.  Arms must be precisely the same length - again, geometry *MUST* be perfect, or it will affect your print.
+
+
+ATTACH YOUR EFFECTOR TO THE ROLLERS
+-----------------------------------
+6 x M3x12mm screws
+6 x M3x6mm nuts
+
+Attach each arm to the outside of the roller.
+
+
 
 
 
