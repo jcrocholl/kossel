@@ -1,5 +1,17 @@
-Bill of Materials (unverified)
-==============================
+CONSTRUCTION INSTRUCTIONS FOR A KOSSEL
+======================================
+Printer: http://reprap.org/wiki/Kossel, designed by Johann Rocholl
+Document Author: gblock@ctoforaday.com
+
+
+From notes taken during the build itself, and referenced against replibot.blogspot.co.uk and http://www.flickr.com/photos/jcrocholl
+These instructions ARE INCOMPLETE.  I've not even finished the build yet.  Your mileage will vary.  This will be wrong on more than one occasion, and you will throw good money away on something that you'll have to change tomorrow.
+
+I'm steering religiously close to the Kossel design; this document will change as Johann's underlying design does.
+
+
+Bill of Materials:  Printed Parts
+---------------------------------
 
 1 x effector.stl
 6 x frame_cheek.stl
@@ -12,15 +24,24 @@ Bill of Materials (unverified)
 1 x tensioner_axle.stl
 3 x spool.stl
 
-TODO(gblock): Update BOM with a summary from below.
-
-Instructions:
-
 BEFORE PRINTING: Adjust the round_glass.stl to match the size of your round base.
+
+Noteworthy:  The accuracy of the system depends on a good spool.  I had really beautiful ones printed by iMaterialize's high-resolution printing process; you can use anything you like, so long as it's well made.  Don't use a sloppy spool.
+
 AFTER PRINTING: Get all your shit together in one place.
 
 
-From notes taken during the build itself, and referenced against replibot.blogspot.co.uk
+Bill of Materials: Exoskeleton
+
+
+Bill of Materials: Brains
+-------------------------
+
+1 x Total cheat by buying a completed brain that supports a...
+1 x 24v power supply.
+
+
+
 
 ATTACH PRINT BASE TO EXOSKELETON
 --------------------------------
@@ -96,6 +117,11 @@ ATTACH YOUR EFFECTOR TO THE ROLLERS
 Attach each arm to the outside of the roller.
 
 
+TODO(gblock): Attach endstops
+TODO(gblock): Wire all this shit together
+TODO(gblock): ...
+TODO(gblock): ...
+TODO(gblock): profit.
 
 
 
