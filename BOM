@@ -14,8 +14,8 @@ Bill of Materials:  Printed Parts
 ---------------------------------
 
 1 x effector.stl
-6 x frame_cheek.stl
-6 x frame_endstop.stl
+3 x frame_cheek.stl
+3 x frame_endstop.stl
 6 x frame_motor.stl
 3 x frame_top.stl
 3 x roller_left.stl
@@ -33,7 +33,6 @@ BEFORE PRINTING:
 2. Make adjustments for the bearings you've chosen.
    We're splurging on posh bearings with delrin cases from igus; you can follow Kossel's lead and heat-shrink yourself some tires on ordinary bearings if that's the way you want to play it; but change configuration.scad to match your bearings.
 
-
 PRINTING:
 
 The accuracy of the system depends on a good spool.  I had really beautiful ones printed by iMaterialize's high-resolution printing process; you can use anything you like, so long as it's well made.  Don't use a sloppy spool.
@@ -44,6 +43,7 @@ AFTER PRINTING: Get all your shit together in one place.
 Bill of Materials:  Tools
 1 x 2.5mm hex driver (I use hex nuts for everything, they're purty)
 1 x 5.5mm nut driver (Ditto)
+
 
 Bill of Materials: Exoskeleton
 
@@ -101,10 +101,34 @@ At this time, your round_glass.stl extensions should be all at the top of the tr
 TODO(gblock): Attach tensioners (there are three):
 
 
-TODO(gblock): Build an upper corner (there are three):
+STEP X: Build an upper corner (there are three):
+1 x frame_cheek.stl
+1 x frame_endstop.stl
+1 x frame_top.stl
+2 x M3x20mm screws
+2 x M3x8mm screws
+4 x M3 nuts
+
+Like the lower corners, but with a cap on the top that will be used to apply tension via a screw to the tensioner.
+The endstop portion of the frame has extra screw holes... for an endstop, as you might have guessed.
 
 
-TODO(gblock): Attach motors and spool.
+Step X: Attach horizontal arms to upper corners (there are 3)
+1 x 'short' OpenBeam
+4 x M3x8mm screws
+4 x M3 nuts
+
+
+STEP X:  Attach filament to spools.
+
+
+STEP X:  Attach spools to motor (there are three).
+1 x spool.stl
+3 x M3x8mm screws
+3 x M3 nuts
+
+
+Step X: Attach motor.
 
 
 TODO(gblock): Run the filament and apply tension.
@@ -155,8 +179,10 @@ ATTACH YOUR EFFECTOR TO THE ROLLERS
 
 Attach each arm to the outside of the roller.
 
-
 TODO(gblock): Attach endstops
+
+
+
 TODO(gblock): Wire all this shit together
 TODO(gblock): ...
 TODO(gblock): ...
@@ -180,3 +206,12 @@ igus.co.uk
 Bearings
 ------------------
 BB-623-B180-10-ES bearings, delrin rollers, igus.co.uk - Stupidly priced.
+
+
+
+
+
+TODO
+----
+1) Update to new roller design.  (6 Jan)
+2) Re-print spools with proper nut captures.  (9 Jan)
