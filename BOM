@@ -63,7 +63,6 @@ BUILD THE EXOSKELETON
 ---------------------
 
 STEP 1:  Attach round_glass.stl sections to hold the print area.
-
 3 x 'short' OpenBeam
 3 x round_glass.stl
 6 x M3 nuts
@@ -161,7 +160,7 @@ Note that in my print, the left and right halves came out _just_on the edge of w
 
 Each half has an extension that sticks out; orient that so that the sticky-outy-bit is on the top of the roller, and facing inwards into the triangle; this is where you'll attach the effector later.
 
-Last, there's a place at the top to include an M4 nut and a screw; this allows you to set an adjustable height to hit the 
+Last, there's a place at the top to include an M4 nut and a screw; this allows you to make height adjustments to adjust the vertical height at which you trip the endstop.
 
 
 BUILD YOUR EFFECTOR
@@ -184,10 +183,8 @@ ATTACH YOUR EFFECTOR TO THE ROLLERS
 
 Attach each arm to the outside of the roller.
 
+
 TODO(gblock): Attach endstops
-
-
-
 TODO(gblock): Wire all this shit together
 TODO(gblock): ...
 TODO(gblock): ...
