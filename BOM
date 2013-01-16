@@ -118,6 +118,21 @@ Step X: Attach horizontal arms to upper corners (there are 3)
 4 x M3 nuts
 
 
+VERIFY EXOSKELETON GEOMETRY
+---------------------------
+At this point, stop, and review the geometry of your frame.  Your frame should be:
+ - Stable
+ - Dimensionally "true"
+
+You should not see twists in the frame; everything should lie stable and flat, regardless of which position you put the form in.  Verify this by lying it on flat surfaces in a variety of ways, and ensuring that there is no "twist" in the frame height; the extrusion should be reliable, and it should lie on any of its vertical faces perfectly.  If the lengths of the verticals aren't perfect, you don't care - but if _any_ dimensional twisting exists in the horizontals, you must correct for it now.
+
+Take your time, here; the quality of your prints depends on the geometry.  Crappy geometry yields crappy prints.
+
+
+ADD FILAMENT DRIVES
+-------------------
+
+
 STEP X: Attach filament to spools.  (Inner knot, filament can remain loose.)
 1 x 65 lb spectra line ('filament')
 1 x spool.stl

@@ -9,9 +9,10 @@ triangle_inside = triangle_openbeam + 42;
 triangle_offset = triangle_inside/2 * tan(30) + 7.5;
 
 // Borosilicate glass.
-glass_diameter = 254;
+glass_diameter = 170; // 254
 glass_radius = glass_diameter/2;
 glass_thickness = 19.05;
+lip_thickness = glass_thickness/2;
 translate([0, 0, thickness-1]) %
   cylinder(r=glass_radius, h=glass_thickness, $fn=240);
 
@@ -39,9 +40,19 @@ module frame_glass() {
         cylinder(r=glass_radius+5, h=20, center=true, $fn=240	);
       }
     }
+	
+
+    // TODO(gblock):  Move this up, so that we separate the axis/platform
+    // that holds the cylinder from the axis/platform that 
+
+    // Lower cylindrical cutout
     cylinder(r=glass_radius-5, h=20, center=true, $fn=240);
-    translate([0, 0, thickness-1])
+
+    // Upper lip
+    translate([0, 0, glass_thickness])
       cylinder(r=glass_radius, h=glass_thickness, $fn=240);
+
+    // Insert screw holes.
     for (x = [-15, 15]) {
       translate([x, triangle_offset, 0]) #
         cylinder(r=m3_wide_radius, h=20, center=true, $fn=24);
