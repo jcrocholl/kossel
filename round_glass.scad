@@ -1,20 +1,20 @@
 include <configuration.scad>;
 
-triangle_openbeam = 360; // mm length
+glass_diameter = 170; // mm  TODO(gblock): Mine is 254; move to config
+glass_radius = glass_diameter/2;
+glass_thickness = 2.9; // mm TODO(gblock): Mine is 19.05; move to config
+triangle_openbeam = 300; // mm length  TODO(gblock): Mine is 360; move to config
+clip_width = 20; // mm
 
 // Intersection points between inside edges of triangle OpenBeam.
-triangle_inside = triangle_openbeam + 42;
+triangle_inside = triangle_openbeam + 45;
 
 // Distance from center to inside edge of OpenBeam.
 triangle_offset = triangle_inside/2 * tan(30) + 7.5;
 
 // Borosilicate glass.
-glass_diameter = 170; // 254
-glass_radius = glass_diameter/2;
-glass_thickness = 19.05;
-lip_thickness = glass_thickness/2;
 translate([0, 0, thickness-1]) %
-  cylinder(r=glass_radius, h=glass_thickness, $fn=240);
+  cylinder(r=glass_radius, h=glass_thickness, $fn=120);
 
 // OpenBeam triangle.
 for (a = [0:120:359]) {
@@ -29,33 +29,23 @@ module frame_glass() {
     union() {
       translate([0, triangle_offset-20, thickness/2]) minkowski() {
         difference() {
-          cube([32, 40, thickness-1], center=true);
-          cube([28, 50, 20], center=true);
+          cube([clip_width+21, 40, thickness-1], center=true);
+          cube([clip_width+11, 50, 20], center=true);
         }
         cylinder(r=5, h=1, center=true);
       }
       intersection() {
         translate([0, triangle_offset-20, (thickness+1)/2])
-          cube([42, 50, thickness+1], center=true);
-        cylinder(r=glass_radius+5, h=20, center=true, $fn=240	);
+          cube([clip_width+31, 50, thickness+1], center=true);
+        cylinder(r=glass_radius+5, h=20, center=true, $fn=120);
       }
     }
-	
-
-    // TODO(gblock):  Move this up, so that we separate the axis/platform
-    // that holds the cylinder from the axis/platform that 
-
-    // Lower cylindrical cutout
-    cylinder(r=glass_radius-5, h=20, center=true, $fn=240);
-
-    // Upper lip
-    translate([0, 0, glass_thickness])
-      cylinder(r=glass_radius, h=glass_thickness, $fn=240);
-
-    // Insert screw holes.
-    for (x = [-15, 15]) {
+    cylinder(r=glass_radius-5, h=20, center=true, $fn=120);
+    translate([0, 0, thickness-1])
+      cylinder(r=glass_radius, h=glass_thickness, $fn=120);
+    for (x = [clip_width/2+8, -clip_width/2-8]) {
       translate([x, triangle_offset, 0]) #
-        cylinder(r=m3_wide_radius, h=20, center=true, $fn=24);
+        cylinder(r=m3_wide_radius, h=20, center=true, $fn=12);
     }
   }
 }
