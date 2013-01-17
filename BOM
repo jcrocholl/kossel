@@ -97,22 +97,32 @@ This is most easily done by loosely threading a nut onto the end of the bolt and
 At this time, your round_glass.stl extensions should be all at the top of the triangle, and all pointing inwards; it should be obvious where your glass is going to be mounted.
 
 
-TODO(gblock): Attach tensioners (there are three):
+STEP 4: Attach tensioners (there are three):
+1 x tensioner_608.stl
+1 x tensioner_axle.stl OR 1 x M8x16mm bolt
+1 x 608ZZ bearing
+
+First, build the tensioner.  Insert the bearing into the tensioner between the vertical strip; it will be a tight fit, and you may need to file down the interior to ensure there's room.  You should get free rotation of the bearing.  Once you've done so, fit the axle/bolt to hold the bearing in position.  Recheck that the bearing spins freely.
+
+Slide the tensioner down the OpenRail extrusion, bearing facing upwards and pointing towards the center.
 
 
-STEP X: Build an upper corner (there are three):
+STEP 5: Build an upper corner (there are three):
 1 x frame_cheek.stl
 1 x frame_endstop.stl
 1 x frame_top.stl
 2 x M3x20mm screws
 2 x M3x8mm screws
 4 x M3 nuts
+1 x M3x40mm (anything larger should do)
 
 Like the lower corners, but with a cap on the top that will be used to apply tension via a screw to the tensioner.
 The endstop portion of the frame has extra screw holes... for an endstop, as you might have guessed.
 
+Last, drop a screw from the top of the corner down into the tensioner.
 
-Step X: Attach horizontal arms to upper corners (there are 3)
+
+STEP 6: Attach horizontal arms to upper corners (there are 3)
 1 x 'short' OpenBeam
 4 x M3x8mm screws
 4 x M3 nuts
