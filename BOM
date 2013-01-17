@@ -127,6 +127,8 @@ STEP 6: Attach horizontal arms to upper corners (there are 3)
 4 x M3x8mm screws
 4 x M3 nuts
 
+Attach horizontal arms using the specified screws.
+
 
 VERIFY EXOSKELETON GEOMETRY
 ---------------------------
@@ -160,8 +162,7 @@ STEP X:  Mount spools to motor (there are three).
 Step X: Attach motor.
 
 
-TODO(gblock): Run the filament and apply tension to the line.
-
+Your rollers should now be tensioned, and able to take the weight of the beams.
 
 
 ATTACH THE ROLLERS TO THE BEAMS
@@ -187,9 +188,35 @@ Each half has an extension that sticks out; orient that so that the sticky-outy-
 
 Last, there's a place at the top to include an M4 nut and a screw; this allows you to make height adjustments to adjust the vertical height at which you trip the endstop.
 
+TODO(gblock): Thread the m3x12MM bolt to hold the filament.
+TODO(gblock): Thread the M4x8MM screw.
+
+
+RUNNING THE FILAMENT
+--------------------
+You're now at the stage where you're ready to run the filament.
+
+
+STEP 1: Floor the rollers
+Rest the rollers on the lowest point of their journey as a zero position.
+
+STEP 2: Run the filament
+Run the filament attached to the drum past the roller and up through the "outside" of the tensioner's top bearing; in the other direction.  Thread through the slot down to the roller, where you will thread it around an m3x12MM bolt and attach to the roller.  After a few turns, bring the filament down to the drum, add enough turns of spool to equal one length of vertical carriage, thread through the outer spool hole, and tie off the line.
+
+STEP 3:  Apply limited tension
+Apply enough tension to verify movement; you'll tighten further momentarily.
+
+STEP 3:  Verify motion
+You should now be able to move the roller through its entire axis of movement; ensure that as you move it up, one section of the drum unrolls while the other rolls.  If your roller stops short, you've not left enough length on the roller at the end of step 2.
+
+STEP 4:  Torque it up, baby
+Apply a good amount of tension to the line; it should thrum when you pluck it.
+
 
 BUILD YOUR EFFECTOR
 -------------------
+
+STEP 1:  Build the effector
 1 x finished extruder of your choice + bolts/screws to screw to effector.
 1 x effector.stl
 6 x (where the fuck did I get these awesome arms from?)
@@ -201,12 +228,23 @@ The effector platform gets the extruder bolted to it centrally, top or bottom, i
 CENTER IT CAREFULLY.  Deltas are geometry-based, and the geometry *MUST* be good; your extruder should sit exactly within the center of the effector.  Arms must be precisely the same length - again, geometry *MUST* be perfect, or it will affect your print.
 
 
-ATTACH YOUR EFFECTOR TO THE ROLLERS
------------------------------------
-6 x M3x12mm screws
-6 x M3x6mm nuts
+STEP 2: Attach the traxxas arms to the effector
+6 x M3x20mm screws
+6 x M3 nuts
+12 x M3 washers
 
-Attach each arm to the outside of the roller.
+Put a washer on either side of the effector's central holes.  Drive the the screw from the inside out, with the nut on the outside; the order should be screw head -> washer -> plastic -> washer -> traxxas -> nut.  Do that for each of the six effector positions.
+
+
+STEP 3: Attach the effector to the arms
+1 x Effector with six traxxas arms
+6 x M3x20mm screws
+6 x M3 nuts
+12 x M3 washers
+
+Put a washer on either side of each rollers's arm attachment points.  Drive the screw from the inside out, with the nut on the outside; the order should be screw head -> washer -> plastic -> washer -> traxxas -> nut.  Do that for each side the three rollers.
+
+The rollers should be capable of taking the weight of the effector without losing position; the moters should have a strong enough moment, due to the magnets therein, that the plaform won't move until the motor steps.
 
 
 TODO(gblock): Attach endstops
