@@ -1,16 +1,21 @@
-bearing_id = 3;
+// Based on MendelMax J-Head Micro-Extruder V5 by Ultibots:
+// http://www.thingiverse.com/thing:42112
+//
+// Completely rewritten in OpenSCAD by Johann on 2013-01-19.
+
+bearing_id = 3; // 623zz bearings are 3x10x4mm.
 bearing_od = 10;
 bearing_width = 4;
-bearing_offset = 0.9;
+bearing_offset = 2.4;
 
 body_height = 42;
-body_width = 42;
-body_offset = 7;
+body_width = 42; // V5: 52mm.
+body_offset = 5; // V5: 7mm.
 body_thickness = 21;
 body_roundness = 10;
 
-groovemount_od = 16;
-groovemount_height = 5;
+groovemount_od = 16.6; // 16mm nominal.
+groovemount_height = 5; // Must push down on GrooveMount.
 
 drive_gear_offset = 7;
 drive_gear_width = 12;
@@ -22,10 +27,10 @@ cutout_height = 26;
 
 funnel_depth = 5;
 filament_offset = 1.5;
-filament_id = 2.5;
+filament_id = 2.5; // This is for 1.75mm filament.
 
 foot_width = 62;
-foot_offset = 2;
+foot_offset = 0; // V5: 2mm but most GrooveMount plates are centered.
 
 motor_mount_radius = 21;
 motor_mount_angle = 54;
@@ -49,7 +54,7 @@ idler_z = 6.5;
 module pg35l_extruder() {
   union() {
     // Single wall support surfaces, to be removed after printing.
-    for (x = [-body_width/2, 8-body_width/2]) {
+    for (x = [-body_width/2, -body_width/3]) {
       for (y = [-bearing_y, bearing_y]) {
 	translate([x-body_offset+0.6, y, bearing_offset])
 	  cube([0.5, bearing_od, body_thickness*2/3], center=true);
@@ -143,7 +148,7 @@ module pg35l_extruder() {
 	}
       }
       // Foot mounting screws and nut pockets.
-      translate([-foot_offset, 5-body_height/2, 0])
+      translate([-foot_offset, 5-body_height/2, filament_offset])
       for (a = [0, 180]) {
 	rotate([-90, a, 0]) translate([25, 0, 0]) {
 	  cylinder(r=m4_radius, h=13, center=true, $fn=12);
