@@ -1,7 +1,7 @@
 bearing_id = 3;
 bearing_od = 10;
 bearing_width = 4;
-bearing_offset = 0;
+bearing_offset = 0.9;
 
 body_height = 42;
 body_width = 42;
@@ -49,10 +49,10 @@ idler_z = 6.5;
 module pg35l_extruder() {
   union() {
     // Single wall support surfaces, to be removed after printing.
-    for (x = [-body_width/2, -body_width/3]) {
+    for (x = [-body_width/2, 8-body_width/2]) {
       for (y = [-bearing_y, bearing_y]) {
 	translate([x-body_offset+0.6, y, bearing_offset])
-	  cube([0.4, bearing_od, body_thickness/2], center=true);
+	  cube([0.5, bearing_od, body_thickness*2/3], center=true);
       }
     }
     intersection() {
@@ -123,11 +123,11 @@ module pg35l_extruder() {
       for (y = [-bearing_y, bearing_y]) {
 	translate([-bearing_x, y, bearing_offset]) {
 	  cylinder(r=(bearing_od+3)/2, h=bearing_width+2, center=true, $fn=32);
-	  translate([-7, 0, 0])
-	    cube([14, bearing_od+3, bearing_width+2], center=true);
+	  translate([-6.5, 0, 0])
+	    cube([13, bearing_od+3, bearing_width+2], center=true);
 	}
 	translate([-bearing_x, y, m3_nut_height-body_thickness/2]) {
-	  rotate([180, 0, -a])
+	  rotate([180, 0, 0])
 	    cylinder(r=m3_nut_radius, h=m3_nut_height*2, $fn=6);
 	  translate([0, 0, 0.5])
 	    cylinder(r=m3_radius, h=body_thickness, $fn=12);
@@ -136,7 +136,7 @@ module pg35l_extruder() {
       // Idler screws.
       for (i = [-1, 1]) {
 	translate([0, i*idler_y, i*idler_z]) rotate([0, 90, 0]) {
-	  # cylinder(r=m3_radius, h=20, center=true, $fn=12);
+	  cylinder(r=m3_radius, h=20, center=true, $fn=12);
 	  for (x = [0, -3*i])
 	    translate([x, 0, idler_x])
 	      cylinder(r=m3_nut_radius, h=m3_nut_height, center=true, $fn=6);
@@ -146,7 +146,7 @@ module pg35l_extruder() {
       translate([-foot_offset, 5-body_height/2, 0])
       for (a = [0, 180]) {
 	rotate([-90, a, 0]) translate([25, 0, 0]) {
-	  cylinder(r=m4_radius, h=15, center=true, $fn=12);
+	  cylinder(r=m4_radius, h=13, center=true, $fn=12);
 	  cylinder(r=m4_nut_radius, h=7, $fn=6);
 	}
       }
