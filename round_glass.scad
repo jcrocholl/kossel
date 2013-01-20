@@ -43,7 +43,7 @@ module frame_glass() {
     cylinder(r=glass_radius-5, h=20, center=true, $fn=120);
     translate([0, 0, thickness-1])
       cylinder(r=glass_radius, h=glass_thickness, $fn=120);
-    for (x = [-18, 18]) {
+    for (x = [clip_width/2+8, -clip_width/2-8]) {
       translate([x, triangle_offset, 0]) #
         cylinder(r=m3_wide_radius, h=20, center=true, $fn=12);
     }
