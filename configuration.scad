@@ -1,5 +1,5 @@
 // Increase this if your slicer or printer make holes too tight.
-extra_radius = 0.1;
+extra_radius = 0.15;
 
 // OD = outside diameter, corner to corner.
 m3_nut_od = 6.1;
