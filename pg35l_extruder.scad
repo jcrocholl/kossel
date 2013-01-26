@@ -6,7 +6,7 @@
 bearing_id = 3; // 623zz bearings are 3x10x4mm.
 bearing_od = 10;
 bearing_width = 4;
-bearing_offset = 2.4;
+bearing_offset = 1.5;
 
 body_height = 42;
 body_width = 42; // V5: 52mm.
@@ -151,8 +151,8 @@ module pg35l_extruder() {
       translate([-foot_offset, 5-body_height/2, filament_offset])
       for (a = [0, 180]) {
 	rotate([-90, a, 0]) translate([25, 0, 0]) {
-	  cylinder(r=m4_radius, h=13, center=true, $fn=12);
-	  cylinder(r=m4_nut_radius, h=7, $fn=6);
+	  cylinder(r=m3_radius, h=13, center=true, $fn=12);
+	  cylinder(r=m3_nut_radius, h=7, $fn=6);
 	}
       }
       // Groove mount.
