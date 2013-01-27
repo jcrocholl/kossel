@@ -6,7 +6,7 @@ module frame_top() {
     union() {
       intersection() {
 	corner(15+thickness);
-	translate([0, 0, -8]) sphere(r=31, $fn=120);
+	translate([0, 0, -8]) sphere(r=31, $fn=60);
       }
       translate([-5, 10, 7.5]) {
 	cylinder(r=7, h=thickness);
@@ -16,7 +16,7 @@ module frame_top() {
 	}
       }
     }
-    translate([-5, 12.7, 0]) # cylinder(r=1.5, h=20, $fn=24);
+    translate([-5, 12.7, 0]) # cylinder(r=1.5, h=20, $fn=12);
   }
 }
 

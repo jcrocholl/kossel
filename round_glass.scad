@@ -1,9 +1,9 @@
 include <configuration.scad>;
 
-glass_diameter = 170; // mm  TODO(gblock): Mine is 254; move to config
+glass_diameter = 170; // mm
 glass_radius = glass_diameter/2;
-glass_thickness = 2.9; // mm TODO(gblock): Mine is 19.05; move to config
-triangle_openbeam = 300; // mm length  TODO(gblock): Mine is 360; move to config
+glass_thickness = 2.9; // mm
+triangle_openbeam = 300; // mm length
 clip_width = 20; // mm
 
 // Intersection points between inside edges of triangle OpenBeam.

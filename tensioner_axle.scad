@@ -1,7 +1,7 @@
 module tensioner_axle() {
   difference() {
     translate([0, 0, 3]) rotate([0, 90, 0]) intersection() {
-      cylinder(r=4, h=14, center=true, $fn=40);
+      cylinder(r=4, h=14, center=true, $fn=20);
       scale([1, 1, 2]) sphere(r=5);
     }
     // Flat bottom for print surface.
