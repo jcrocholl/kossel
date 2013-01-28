@@ -54,7 +54,7 @@ Get all your shit together in one place.
  - 9 x 360mm OpenBeam 1515 extrusion (or any dimension, referred to henceforth as 'short')
  - 3 x 600mm OpenBeam 1515 extrusion (or any dimension, referred to henceforth as 'long')
 
-TODO(gblock):  Tally up other parts here from below instructions later.
+*TODO(gblock):  Tally up other parts here from below instructions later.*
 
 Note that my exoskeleton dimensions are from OpenBeamUSA's Kossel 3D printer extrusion kit; also note that if you're ordering anything custom you may as well have them cut to fit.
 
@@ -153,24 +153,26 @@ Take your time, here; the quality of your prints depends on the geometry.  Crapp
 ##ADD FILAMENT DRIVES
 
 
-### STEP X: Attach filament to spools.  (Inner knot, filament can remain loose.)
+### STEP 1: Attach filament to spools.  (Inner knot, filament can remain loose.)
  - 1 x 65 lb spectra line ('filament')
  - 1 x spool.stl
+ 
 
 This involves cutting a length of spectra at 2.5x your height.  (There's slop in there that you'll be trimmin')
 Thread one end of the spectra line through the spool at the 'open' end, and tie your best knot.  The spool is now ready to be motor-mounted.
 
 
-### STEP X:  Mount spools to motor (there are three).
- - 1 x filament-wired spool from previous step.
- - 3 x M3x8mm screws
- - 3 x M3 nuts
+### STEP 2:  Mount spools to motor (there are three).
+ - 1 x filament-wired spool from previous step
+ - 3 x M4x8mm screws
 
+M4 screws will screw directly into the holes set in the spool; tighten them down directly onto the rotor shaft.  If you have a rotor shaft with a flat section, ensure that one of the screws is perpendicular to that flat section.  Don't overtighten, or you'll strip the spool.
 
-### Step X: Attach motor.
+### Step 3: Attach motor (there are three)
+ - 1 x spooled motor from previous step
+ - 4 x M3x12mm screw
 
-
-Your rollers should now be tensioned, and able to take the weight of the beams.
+Attaching the motor is straightforward; you'll find that the holes in the corners line up with the screw holes that mount the motor, for easy access.  Use a long driver and you'll reach them with no difficulty.
 
 
 ## ATTACH THE ROLLERS TO THE BEAMS
