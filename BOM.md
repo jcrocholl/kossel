@@ -121,15 +121,15 @@ Slide the tensioner down the OpenRail extrusion, bearing facing upwards and poin
  - 1 x frame_cheek.stl
  - 1 x frame_endstop.stl
  - 1 x frame_top.stl
+ - 1 x M3x50mm screw
  - 2 x M3x20mm screws
  - 2 x M3x8mm screws
- - 4 x M3 nuts
- - 1 x M3x40mm (anything larger should do)
+ - 5 x M3 nuts
 
 Like the lower corners, but with a cap on the top that will be used to apply tension via a screw to the tensioner.
 The endstop portion of the frame has extra screw holes... for an endstop, as you might have guessed.
 
-Last, drop a screw from the top of the corner down into the tensioner.
+Last, drop a screw from the top of the corner down into the tensioner; secure it from beneath with an M3 bolt to secure it; this will ultimately get pulled up by the screw in order to apply tension to the line.  It should be secured at roughly the same height as the bottom of the frame endstops.
 
 
 ### STEP 6: Attach horizontal arms to upper corners (there are 3)
@@ -149,75 +149,91 @@ You should not see twists in the frame; everything should lie stable and flat, r
 
 Take your time, here; the quality of your prints depends on the geometry.  Crappy geometry yields crappy prints.
 
+## ATTACH THE ROLLERS TO THE BEAMS
 
-##ADD FILAMENT DRIVES
+### STEP 1:  Apply bearings to roller halves 
+ - 3 x roller.stl, left variant
+ - 3 x roller.stl, right variant
+ - 6 x 623 bearings
+ - 4 x M3x35mm screws (to hold left and right together; 30mm is a hair too short)
+ - 6 x M3x10mm screws (to pin the delrin rollers, three in each half; anything 8-12mm probably works here.)
+10 x M3 nuts
+ - 12 x M3 washers (must fit next to bearing without affecting movement; bearing-dependent, potentially optional.)
+ - 1 x M3x12MM screw
+
+Attach the rollers to left and right halves, three in each side.  Do that by putting a screw through the roller, add two washers, and then screw directly into the plastic; it should have printed tight enough to allow the bolt to thread.  Don't overtighten, or you'll be printing a new one and starting over again.
+
+### STEP 2:  Attach rollers to beam.
+
+Note that in my print, the left and right halves came out _just_on the edge of what a 30mm will hold; I need 35mm screws to hold left and right halves together.
+
+Each half has an extension that sticks out; orient that so that the sticky-outy-bit is on the top of the roller, and facing inwards into the triangle; this is where you'll attach the effector later.
+
+One of the halves has a hole facing inwards; put an M3x12mm screw into it, leaving it out so you can wrap filament around it before tightening it down.
+
+TODO(gblock): Last, there's a place at the top to include an M4 nut and a screw; this allows you to make height adjustments to adjust the vertical height at which you trip the endstop.
 
 
-### STEP 1: Attach filament to spools.  (Inner knot, filament can remain loose.)
+## THREADING A FILAMENT DRIVE
+
+For each filament drive, you're going to perform the following steps:
+
+
+### STEP 1: Attach filament to spool.  (Inner knot, filament can remain loose.)
  - 1 x 65 lb spectra line ('filament')
  - 1 x spool.stl
  
+This involves cutting a length of spectra at *3x* your height.  Excess will get wrapped around the spool, or be taken up by your tensioner.
 
-This involves cutting a length of spectra at 2.5x your height.  (There's slop in there that you'll be trimmin')
-Thread one end of the spectra line through the spool at the 'open' end, and tie your best knot.  The spool is now ready to be motor-mounted.
+Thread one end of the spectra line through the spool at the 'open' end, and tie your best knot.
 
 
-### STEP 2:  Mount spools to motor (there are three).
+### STEP 2:  Mount spool to motor.
  - 1 x filament-wired spool from previous step
  - 3 x M4x8mm screws
 
-M4 screws will screw directly into the holes set in the spool; tighten them down directly onto the rotor shaft.  If you have a rotor shaft with a flat section, ensure that one of the screws is perpendicular to that flat section.  Don't overtighten, or you'll strip the spool.
+M4 screws will screw directly into the holes set in the spool; tighten them down directly onto the rotor shaft.  If you have a rotor shaft with a flat section, ensure that one of the screws is perpendicular to that flat section.  
 
-### Step 3: Attach motor (there are three)
+Keep in mind the following when doing so:
+ - Don't over-tighten, or you'll strip the spool.
+ - Don't tighten too close to the motor edge; the motor should move freely.
+
+
+### STEP 3:  Thread the tensioner.
+The tensioner,  bearing should be screwed into your post at a reasonable height.
+
+The thread from the drive end of the spool comes this will go straight to the outer side of the upper bearing; thread back down through the inside of the bearing.  It can take a few tries, but the line is stiff enough that you shouldn't have too much trouble.
+
+
+### STEP 4:  Attach the other end of the filament to the spool.
+Now go ahead and put the filament end through the spool, loose thread pointing away from the motor shaft.  Knot it, and take up the slack. 
+
+Wrap the slack on the drum counterclockwise until you've taken up most of the slack and the motor is in about the right position.
+Leave enough slack to wrap around the screw sticking out of the roller; you'll need a complete drum rotation of slack.
+
+
+### STEP 5: Attach motors
  - 1 x spooled motor from previous step
  - 4 x M3x12mm screw
 
 Attaching the motor is straightforward; you'll find that the holes in the corners line up with the screw holes that mount the motor, for easy access.  Use a long driver and you'll reach them with no difficulty.
 
 
-## ATTACH THE ROLLERS TO THE BEAMS
+### STEP 6: Connect the rollers
+  - 1 x M3x12mm screw
 
-### STEP 1:  Apply bearings to rollers 
-To build a roller (there are three):
- - 1 x roller_left.stl
- - 1 x roller_right.stl
- - 6 x 623 bearings
- - 4 x M3x35mm screws (to hold left and right together; 30mm is a hair too short)
- - 6 x M3x10mm screws (to pin the delrin rollers, three in each half; anything 8-12mm probably works here.)
-10 x M3 nuts
- - 12 x M3 washers (must fit next to bearing without affecting movement; bearing-dependent, potentially optional.)
- - 1 x M4x8mm screw
- - 1 x M4 nut
-
-Attach the rollers to left and right halves, three in each side.  Do that by putting a screw through the roller, add two washers, and then screw directly into the plastic; it should have printed tight enough to allow the bolt to thread.  Don't overtighten, or you'll be printing a new one and starting over again.
-
-Note that in my print, the left and right halves came out _just_on the edge of what a 30mm will hold; I need 35mm screws to hold left and right halves together.
-
-Each half has an extension that sticks out; orient that so that the sticky-outy-bit is on the top of the roller, and facing inwards into the triangle; this is where you'll attach the effector later.
-
-Last, there's a place at the top to include an M4 nut and a screw; this allows you to make height adjustments to adjust the vertical height at which you trip the endstop.
-
-TODO(gblock): Thread the m3x12MM bolt to hold the filament.
-TODO(gblock): Thread the M4x8MM screw.
+Wrap as much remaining loose thread around the M3 screw and insert into the roller.
 
 
-## RUNNING THE FILAMENT
-You're now at the stage where you're ready to run the filament.
-
-
-### STEP 1: Floor the rollers
-Rest the rollers on the lowest point of their journey as a zero position.
-
-### STEP 2: Run the filament
-Run the filament attached to the drum past the roller and up through the "outside" of the tensioner's top bearing; in the other direction.  Thread through the slot down to the roller, where you will thread it around an m3x12MM bolt and attach to the roller.  After a few turns, bring the filament down to the drum, add enough turns of spool to equal one length of vertical carriage, thread through the outer spool hole, and tie off the line.
-
-### STEP 3:  Apply limited tension
+### STEP 7:  Apply limited tension
 Apply enough tension to verify movement; you'll tighten further momentarily.
 
-### STEP 4:  Verify motion
+
+### STEP 8:  Verify motion
 You should now be able to move the roller through its entire axis of movement; ensure that as you move it up, one section of the drum unrolls while the other rolls.  If your roller stops short, you've not left enough length on the roller at the end of step 2.
 
-### STEP 5:  Torque it up, baby
+
+### STEP 9:  Torque it up, baby
 Apply a good amount of tension to the line; it should thrum when you pluck it.
 
 
