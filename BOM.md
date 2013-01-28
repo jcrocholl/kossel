@@ -224,7 +224,7 @@ Attaching the motor is straightforward; you'll find that the holes in the corner
 
 Wrap a single turn of thread around the M3 screw as you can and insert into the roller.  Loosen the tensioner if it makes it easier, but be aware that slack on the line now may unravel the spool, and cause you to go back to the beginning.
 
-This happens a lot.  It drives me nuts.  There's got to be a better way.
+TODO(gblock): This happens a lot.  It drives me nuts.  There's got to be a better way.
 
 
 ### STEP 7:  Apply limited tension
