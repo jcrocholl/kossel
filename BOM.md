@@ -209,7 +209,7 @@ The thread from the drive end of the spool comes this will go straight to the ou
 Now go ahead and put the filament end through the spool, loose thread pointing away from the motor shaft.  Knot it, and take up the slack. 
 
 Wrap the slack on the drum counterclockwise until you've taken up most of the slack and the motor is in about the right position.
-Leave enough slack to wrap around the screw sticking out of the roller; you'll need a complete drum rotation of slack.
+Take up as much of the slack as you reasonably can, positioning the motor for attachment.
 
 
 ### STEP 5: Attach motors
@@ -222,7 +222,9 @@ Attaching the motor is straightforward; you'll find that the holes in the corner
 ### STEP 6: Connect the rollers
   - 1 x M3x12mm screw
 
-Wrap as much remaining loose thread around the M3 screw and insert into the roller.
+Wrap a single turn of thread around the M3 screw as you can and insert into the roller.  Loosen the tensioner if it makes it easier, but be aware that slack on the line now may unravel the spool, and cause you to go back to the beginning.
+
+This happens a lot.  It drives me nuts.  There's got to be a better way.
 
 
 ### STEP 7:  Apply limited tension
@@ -230,7 +232,7 @@ Apply enough tension to verify movement; you'll tighten further momentarily.
 
 
 ### STEP 8:  Verify motion
-You should now be able to move the roller through its entire axis of movement; ensure that as you move it up, one section of the drum unrolls while the other rolls.  If your roller stops short, you've not left enough length on the roller at the end of step 2.
+You should now be able to move the roller through its entire axis of movement; ensure that as you move it up, one section of the drum unrolls while the other rolls.  If your roller stops short, you've not left enough length on the roller at the end of step 4.  Go back.
 
 
 ### STEP 9:  Torque it up, baby
