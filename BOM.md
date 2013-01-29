@@ -179,24 +179,24 @@ TODO(gblock): Last, there's a place at the top to include an M4 nut and a screw;
 For each filament drive, you're going to perform the following steps:
 
 
-### STEP 1: Attach filament to spool.  (Inner knot, filament can remain loose.)
+### STEP 1: Attach filament to spool
  - 1 x 65 lb spectra line ('filament')
  - 1 x spool.stl
  
-This involves cutting a length of spectra at *3x* your height.  Excess will get wrapped around the spool, or be taken up by your tensioner.
+This involves cutting a length of spectra at *3.2x* your height.  Excess will get wrapped around the spool, or be taken up by your tensioner.
 
 Thread one end of the spectra line through the spool at the 'open' end, and tie your best knot.
 
 
-### STEP 2:  Mount spool to motor.
+### STEP 2:  Mount spool to motor
  - 1 x filament-wired spool from previous step
  - 3 x M4x8mm screws
 
-M4 screws will screw directly into the holes set in the spool; tighten them down directly onto the rotor shaft.  If you have a rotor shaft with a flat section, ensure that one of the screws is perpendicular to that flat section.  
+M4 screws will screw directly into the holes set in the spool; tighten them down directly onto the rotor shaft.  If you have a rotor shaft with a flat section, ensure that one of the screws is perpendicular to that flat section.
 
 Keep in mind the following when doing so:
  - Don't over-tighten, or you'll strip the spool.
- - Don't tighten too close to the motor edge; the motor should move freely.
+ - Ensure that the spool moves freely once screwed in; on mine, the screw heads grind if they're too close.
 
 
 ### STEP 3:  Thread the tensioner.
@@ -218,25 +218,48 @@ Take up as much of the slack as you reasonably can, positioning the motor for at
 
 Attaching the motor is straightforward; you'll find that the holes in the corners line up with the screw holes that mount the motor, for easy access.  Use a long driver and you'll reach them with no difficulty.
 
+You may have to remove and do this again, if you accidentally unwind; consider only screwing in one of the four screws, if it's stable.
 
-### STEP 6: Connect the rollers
+
+### STEP 7:  Take up slack
+At this point, we're going to take up most of the slack on the line.  Ensure the thread is over the bearing in your tensioner, and tighten the bolt coming down through the top until the slack has been taken up.
+
+Don't overtighten, here - we're only looking to pick up loose thread, and we'll be loosening this again shortly.
+
+
+### STEP 8:  Adjust the spool
+We don't want either end of the movement of the spool to be at the "knot" of the thread.
+
+Pulling on either string should turn the spool; adjust it until there are three turns of thread on the side of the spool nearest the motor.
+
+
+### STEP 9: Connect the rollers
   - 1 x M3x12mm screw
+  - 1 x M3 washer
 
-Wrap a single turn of thread around the M3 screw as you can and insert into the roller.  Loosen the tensioner if it makes it easier, but be aware that slack on the line now may unravel the spool, and cause you to go back to the beginning.
+*NB: Over-loosening here will result in the drum losing a loop, and you'll have to unwind and start over.  This happens to me every single time, so be prepared for a bit of frustration.*
 
-TODO(gblock): This happens a lot.  It drives me nuts.  There's got to be a better way.
+The roller has a screw hole on its inner face; that screw hole is where you will attach the roller to the filament.
+
+Loosen the tensioner gradually until you can wrap a single turn of thread around an M3 screw near the roller.  Add a washer behind the turn, and screw it into the roller loosely, ensuring that the string facing the drum remains taut.
+
+Take up the slack again on the tensioner.
 
 
-### STEP 7:  Apply limited tension
-Apply enough tension to verify movement; you'll tighten further momentarily.
+### STEP 10: Verify motor attachment
+If in an earlier stage you didn't use all of the bolts on the motor, take a moment to do so now.
 
 
-### STEP 8:  Verify motion
+### STEP 11:  Tension the line
+At this point, you should be able to begin applying tension to the line; do the following repeatedly, until you're comfortable:
+
+1. Apply a small amount of tension.
+2. Move the roller through some of its motion; halt if you see the line lose tension.
+3. Go back to step 1.
+
+
+### STEP 12:  Verify motion
 You should now be able to move the roller through its entire axis of movement; ensure that as you move it up, one section of the drum unrolls while the other rolls.  If your roller stops short, you've not left enough length on the roller at the end of step 4.  Go back.
-
-
-### STEP 9:  Torque it up, baby
-Apply a good amount of tension to the line; it should thrum when you pluck it.
 
 
 ## BUILD YOUR EFFECTOR
@@ -303,3 +326,15 @@ BB-623-B180-10-ES bearings, delrin rollers, igus.co.uk - Stupidly priced.
  - First-hand build instructions from Andy Hayward (not public)
  - [replibot's instructions at replibot.blogspot.co.uk](replibot.blogspot.co.uk)
  - [Photos by jcrocholl](http://www.flickr.com/photos/jcrocholl)
+
+
+## Design TODOs
+
+### Document Traxxas arms
+ - Pick up Andy's construction instructions; jrocholl also posted his process.
+
+### Spool Issues
+ - Redesign the spool to allow a bit more room for screw heads
+ - Consider capturing nuts in the spool
+ - Consider leaving less room between motor head and spool wall
+ - Leave a taller lip on the spool, to make accidental unwind more unlikely
