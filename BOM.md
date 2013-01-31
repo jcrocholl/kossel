@@ -34,22 +34,25 @@ The second thing you're going to have printed is a tool to help during spool win
 
 #### BEFORE PRINTING
 
-1. Make adjustments for the size of your round base.
+1. **Make adjustments for the size of your round base.**  
    At the time of writing, adjust the round_glass.stl to match the size of your round base; I believe this is moving to configuration.scad.  In my case, the round base rests on the triangular frame, on some insulation, and is held in place by some M3 bolts and spacers, which felt a bit more stable and robust.
 
-2. Make adjustments for the bearings you're choosing for your roller.
-   We're splurging on posh bearings with delrin cases from igus; you can follow Kossel's lead and heat-shrink yourself some tires on ordinary bearings if that's the way you want to play it; but change configuration.scad to match your bearings.
+2. **Make adjustments for the bearings for your roller.**  
+   I'm splurging on posh bearings with delrin cases from igus; you can follow Kossel's lead and heat-shrink yourself some tyres on ordinary bearings if that's the way you want to play it.  Change configuration.scad to match your bearings' dimensions.
 
 #### PRINTING
 
-The accuracy of the system depends on a good spool.  I had really beautiful ones printed by iMaterialize's high-resolution printing process, and 3d.grabercars.com has gorgeous delrin ones with grooves carved for the line; you can use anything you like, so long as it's well made.  Don't use a sloppy spool.
-
-Also, all delta printers are dependent on good geometry.  Take your time during the build; use various mechanisms to verify the trueness of the frame, including appropriate tools if you've got them to hand.  Trueness matters; when any of the angles are wrong, the math will be wrong, and your output will suffer from various different kinds of inaccuracies.  Build carefully, measure carefully, and you'll get a good quality print.
-
+The accuracy of the system depends on a good spool.  I had really beautiful ones printed by iMaterialize's high-resolution printing process, and 3d.grabercars.com has gorgeous delrin ones with grooves carved for the line; you can use anything you like, so long as it's well made.  *Don't use a sloppy spool.*
 
 #### AFTER PRINTING: 
 
-Get all your shit together in one place.
+1. **Review the spool print.**  
+   Review your spool print; make sure you've got 
+> * **A very smooth surface of the spool.**  
+>   Inaccuracies here will ruin your print quality.  Turn it on a lathe if necessary.
+> * **Tunnels for the spectral line.**  
+>   Verify (and drill out if necessary) the angled holes from the wall of the spool up to the spool's surface on either end.  
+>   Verify (and drill out if necessary) the horizontal tunnel (circa 1.5mm in diameter, the length of the spool) just under those holes.
 
 
 ### Bill of Materials:  Tools
@@ -64,9 +67,11 @@ Get all your shit together in one place.
 
 Note that my exoskeleton dimensions are from OpenBeamUSA's Kossel 3D printer extrusion kit; also note that if you're ordering anything custom you may as well have them cut to fit.
 
+When using OpenBeam extensions, keep stability in mind; a 15mm extrusion isn't going to have vast amounts of strength to resist twisting along its vertical axis; the longer your vertical axis, the weaker that extrusion will be.  This is not a design, sans modifications, that you'll be making a meter high - 6-700mm is a good height to work at.  For taller printers, consider using a design variation based on a larger extrusion.
+
 
 ### Bill of Materials: Brains
- - 1 x Azteeg X3, RUMBA, or any other printer controller of your choice or design
+ - 1 x Azteeg X3, RUMBA, or any other MARLIN-supported controller
  - 1 x power supply, depending on your controller
 
 I'm focusing specifically on all-in-one controllers like this - but you're welcome to do your build on any controller you choose.  I'm not going to go into much detail here - I'm no hardware engineer by training - and you'll find that your mileage may well vary based on firmware.
@@ -75,6 +80,8 @@ Feel free to use anything supported by MARLIN firmware.  You'll be using modific
 
 
 ## BUILD THE EXOSKELETON
+
+All delta printers are dependent on good geometry.  Take your time during the exoskeleton build; use various mechanisms to verify the trueness and stability of the frame, including appropriate tools if you've got them to hand.  Trueness matters; when any of the angles are wrong, the math will be wrong, and your output will suffer from various different kinds of inaccuracies.  Build carefully, measure carefully, and you'll get a good quality print.
 
 ### STEP 1:  Attach round_glass.stl sections to hold the print area.
  - 3 x 'short' OpenBeam
@@ -175,97 +182,95 @@ Note that in my print, the left and right halves came out _just_on the edge of w
 
 Each half has an extension that sticks out; orient that so that the sticky-outy-bit is on the top of the roller, and facing inwards into the triangle; this is where you'll attach the effector later.
 
-One of the halves has a hole facing inwards; put an M3x12mm screw into it, leaving it out so you can wrap filament around it before tightening it down.
+One of the halves has a hole facing inwards; put an M3x12mm screw into it, leaving it out so you can wrap spectra line around it before tightening it down.
 
 TODO(gblock): Last, there's a place at the top to include an M4 nut and a screw; this allows you to make height adjustments to adjust the vertical height at which you trip the endstop.
 
 
-## THREADING A FILAMENT DRIVE
+## THREADING A spectra line DRIVE
 
-For each filament drive, you're going to perform the following steps:
+For each spectra line drive, you're going to perform the following steps:
 
 
-### STEP 1: Attach filament to spool
- - 1 x 65 lb spectra line ('filament')
+### STEP 1: Wind spectra line on spool
+ - 1 x 65 lb spectra line
  - 1 x spool.stl
+ - 1 x clamp-rotated.stl (you'll only ever need one)
  
-This involves cutting a length of spectra at *3.2x* your height.  Excess will get wrapped around the spool, or be taken up by your tensioner.
+This involves cutting a length of spectra at 5x your height, to leave some slop.  Don't worry - you'll trim the excess later.
 
-Thread one end of the spectra line through the spool at the 'open' end, and tie your best knot.
+Ensure you've reviewed your spool print as per the earlier instructions.
+Begin by reviewing your spool print; make sure you've got angled holes that go from the wall of the spool up to the spool's surface, as well as a horizontal tunnel about 1.5mm in diameter straight through the spool.
+
+You're going to begin by threading the horizontal 1.5mm tunnel that runs just under the spool's surface.  Thread the tunnel, placing the spool into the center of your length of spectra line.
+
+For each end of the spool, find the angled hole that points from the outer face up through to the base of the surface of the spool.  Insert each loose end through its nearest hole up to the spool's surface.
+
+Now we can wind.  *Direction matters*. On the 'open' end that connects to the motor, wind half a vertical length clockwise, adding two turns.  On the other end, wind half a vertical length anti-clockwise, adding two turns.
+
+If you fail to use opposing turns, the whole spool will unravel when the clamp is removed in a later step.  Now put the clamp over the spool; if you're careful, this will prevent it from unraveling while you do the rest.
 
 
 ### STEP 2:  Mount spool to motor
- - 1 x filament-wired spool from previous step
+ - 1 x spectra line-wired spool from previous step
  - 3 x M4x8mm screws
 
 M4 screws will screw directly into the holes set in the spool; tighten them down directly onto the rotor shaft.  If you have a rotor shaft with a flat section, ensure that one of the screws is perpendicular to that flat section.
 
 Keep in mind the following when doing so:
  - Don't over-tighten, or you'll strip the spool.
- - Ensure that the spool moves freely once screwed in; on mine, the screw heads grind if they're too close.
+ - Ensure that the spool moves freely once screwed in; on mine, the screw heads can grind if they're too close.
 
 
-### STEP 3:  Thread the tensioner.
-The tensioner,  bearing should be screwed into your post at a reasonable height.
-
-The thread from the drive end of the spool comes this will go straight to the outer side of the upper bearing; thread back down through the inside of the bearing.  It can take a few tries, but the line is stiff enough that you shouldn't have too much trouble.
-
-
-### STEP 4:  Attach the other end of the filament to the spool.
-Now go ahead and put the filament end through the spool, loose thread pointing away from the motor shaft.  Knot it, and take up the slack. 
-
-Wrap the slack on the drum counterclockwise until you've taken up most of the slack and the motor is in about the right position.
-Take up as much of the slack as you reasonably can, positioning the motor for attachment.
-
-
-### STEP 5: Attach motors
+### STEP 3: Attach motors
  - 1 x spooled motor from previous step
  - 4 x M3x12mm screw
 
 Attaching the motor is straightforward; you'll find that the holes in the corners line up with the screw holes that mount the motor, for easy access.  Use a long driver and you'll reach them with no difficulty.
 
-You may have to remove and do this again, if you accidentally unwind; consider only screwing in one of the four screws, if it's stable.
+
+### STEP 3:  Thread the bearing
+- 1 x M3x12mm screw
+- 1 x M3 washer
+
+The thread from the motor's side of the spool will go straight up to the outer side of the upper bearing.  Thread back down through the inside of the bearing down toward the roller.
+
+It can take a few tries, but the line is stiff enough that you shouldn't have too much trouble.
 
 
-### STEP 7:  Take up slack
-At this point, we're going to take up most of the slack on the line.  Ensure the thread is over the bearing in your tensioner, and tighten the bolt coming down through the top until the slack has been taken up.
+### STEP 4: Tie both ends of the line to the roller.
+- 1 x M3x12mm screw
+- 1 x M3 washer
 
-Don't overtighten, here - we're only looking to pick up loose thread, and we'll be loosening this again shortly.
+The roller has a screw hole on its inner face; that screw hole is where you will attach the roller to the spectra line.
 
+You're going to attach it in the middle of the beam's vertical height, equidistant from either side.  In my case, I tied both lines to the screw and then screwed the tied line into the roller; you may choose to insert the screw partway into the roller, tie, and screw down the rest of the way.
 
-### STEP 8:  Adjust the spool
-We don't want either end of the movement of the spool to be at the "knot" of the thread.
+Either way, make sure that you've created a good knot, at a height equidistant down the beam, on the screw.  Doing the top one first will hold any weight in position while you do the lower; or you can use an additional piece of line to hold the roller at height.
 
-Pulling on either string should turn the spool; adjust it until there are three turns of thread on the side of the spool nearest the motor.
+Once you've fastened the lines to the bolt, screw the bolt all the way into the roller, on top of the looped lines.
 
-
-### STEP 9: Connect the rollers
-  - 1 x M3x12mm screw
-  - 1 x M3 washer
-
-*NB: Over-loosening here will result in the drum losing a loop, and you'll have to unwind and start over.  This happens to me every single time, so be prepared for a bit of frustration.*
-
-The roller has a screw hole on its inner face; that screw hole is where you will attach the roller to the filament.
-
-Loosen the tensioner gradually until you can wrap a single turn of thread around an M3 screw near the roller.  Add a washer behind the turn, and screw it into the roller loosely, ensuring that the string facing the drum remains taut.
-
-Take up the slack again on the tensioner.
+Trim the excess line.
 
 
-### STEP 10: Verify motor attachment
-If in an earlier stage you didn't use all of the bolts on the motor, take a moment to do so now.
+### STEP 5:  Verify movement
+Ensure the thread is over the bearing in your tensioner.  Rightening the tensioner's bolt until most of the slack has been taken off of the line.
+
+Now remove the clip.
+
+Don't over-tighten, here - we're only looking to verify movement.
 
 
-### STEP 11:  Tension the line
+### STEP 6:  Verify motion
+You should now be able to move the roller through its entire axis of movement; ensure that as you move it up, one section of the drum unrolls while the other rolls.  If your roller stops short, you've not put enough turns on your spool in step 1.  Start over.  
+
+
+### STEP 7:  Tension the line
 At this point, you should be able to begin applying tension to the line; do the following repeatedly, until you're comfortable:
 
 1. Apply a small amount of tension.
 2. Move the roller through some of its motion; halt if you see the line lose tension.
 3. Go back to step 1.
-
-
-### STEP 12:  Verify motion
-You should now be able to move the roller through its entire axis of movement; ensure that as you move it up, one section of the drum unrolls while the other rolls.  If your roller stops short, you've not left enough length on the roller at the end of step 4.  Go back.
 
 
 ## BUILD YOUR EFFECTOR
