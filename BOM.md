@@ -14,6 +14,8 @@ We'll separate the printed from non-printed parts.
 
 ### Printed Parts
 
+The primary set of printed parts comes from jrocholl/kossel on GitHub.  They're OpenSCAD files that you convert into STL to render.
+
  - 1 x effector.stl
  - 3 x frame_cheek.stl
  - 3 x frame_endstop.stl
@@ -21,10 +23,14 @@ We'll separate the printed from non-printed parts.
  - 3 x frame_top.stl
  - 3 x roller.stl (left variant, see bottom of scad)
  - 3 x roller.stl (right variant, see bottom of scad)
- - 3 x round_glass.stl (depends on platform size; in my build, omitted)
+ - 3 x round_glass.stl (to be adjusted to build platform size)
  - 1 x tensioner_axle.stl
  - 3 x tensioner_608.stl
  - 3 x spool.stl
+
+The second thing you're going to have printed is a tool to help during spool winding - A thing on ThingVerse that can take one of your wound spools and clamp it so the strings don't unravel while you're working.
+
+ - 1 x clamp-rotated.stl from [thingiverse.com/thing:36366](http://www.thingiverse.com/thing:36366)
 
 #### BEFORE PRINTING
 
