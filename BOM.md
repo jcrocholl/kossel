@@ -330,8 +330,9 @@ BB-623-B180-10-ES bearings, delrin rollers, igus.co.uk - Stupidly priced.
 ----------------------
  - First-hand build instructions from Gregory Block (gblock@ctoforaday.com)
  - First-hand build instructions from Andy Hayward (not public)
- - [replibot's instructions at replibot.blogspot.co.uk](replibot.blogspot.co.uk)
- - [Photos by jcrocholl](http://www.flickr.com/photos/jcrocholl)
+ - Replibot's instructions: [replibot.blogspot.co.uk](replibot.blogspot.co.uk)
+ - Photos by jcrocholl:  [flickr.com/photos/jcrocholl](http://www.flickr.com/photos/jcrocholl)
+ - Video of attaching the line on the Kossel spool: [youtube.com/watch?v=7qNsSOrZ9Oc](http://www.youtube.com/watch?v=7qNsSOrZ9Oc)
 
 
 ## Design TODOs
