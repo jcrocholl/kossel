@@ -327,10 +327,12 @@ TODO(gblock): profit.
 * TrinityLabs
 * iMaterialize
 * OpenBeamUSA
-* igus [igus.co.uk](http://www.igus.co.uk) / polyer bearings
-* Bolt me up [www.boltmeup.com](http://www.boltmeup.com) / compression springs, stainless steel nuts & bolts
-* A2 Stainless [www.a2stainless.co.uk](http://www.a2stainless.co.uk) / stainless steel nuts & bolts
-* Westfield Fasteners Ltd [www.westfieldfasteners.co.uk](http://www.westfieldfasteners.co.uk) / stainless steel nuts & bolts
+* [igus (UK) Ltd](http://www.igus.co.uk) / polymer bearings
+* [Bolt me up LLP](http://www.boltmeup.com) / compression springs, stainless steel nuts & bolts
+* [A2 Stainless](http://www.a2stainless.co.uk) / stainless steel nuts & bolts
+* [Westfield Fasteners Ltd](http://www.westfieldfasteners.co.uk) / stainless steel nuts & bolts
+* [Zapp Automation Ltd](http://www.zappautomation.co.uk) / stepper motors, linear bearings
+* [Bearing Station](http://www.bearingstation.co.uk) / ball bearings
 
 ### Bearings
 BB-623-B180-10-ES bearings, delrin rollers, igus.co.uk - Stupidly priced.
@@ -343,6 +345,7 @@ BB-623-B180-10-ES bearings, delrin rollers, igus.co.uk - Stupidly priced.
  - Replibot's instructions: [replibot.blogspot.co.uk](replibot.blogspot.co.uk)
  - Photos by jcrocholl:  [flickr.com/photos/jcrocholl](http://www.flickr.com/photos/jcrocholl)
  - Video of attaching the line on the Kossel spool: [youtube.com/watch?v=7qNsSOrZ9Oc](http://www.youtube.com/watch?v=7qNsSOrZ9Oc)
+ - Kossel Construction and Delta 3D Printing: (https://plus.google.com/113309950105869831850/posts)
 
 
 ## Design TODOs
