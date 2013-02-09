@@ -1,7 +1,7 @@
 # CONSTRUCTION INSTRUCTIONS FOR A KOSSEL
 
 Printer: http://reprap.org/wiki/Kossel, designed by Johann Rocholl  
-Document Author: gblock@ctoforaday.com  
+Document Author: gblock@ctoforaday.com, ach@buteo.org  
 Document Format: Markdown
 
 These instructions ARE INCOMPLETE.  I've not even finished the build yet.  Your mileage will vary.  This will be wrong on more than one occasion, and you will throw good money away on something that you'll have to change tomorrow.
@@ -168,18 +168,19 @@ Take your time, here; the quality of your prints depends on the geometry.  Crapp
 ### STEP 1:  Apply bearings to roller halves 
  - 3 x roller.stl, left variant
  - 3 x roller.stl, right variant
- - 6 x 623 bearings
- - 4 x M3x35mm screws (to hold left and right together; 30mm is a hair too short)
- - 6 x M3x10mm screws (to pin the delrin rollers, three in each half; anything 8-12mm probably works here.)
+ - 18 x 623 bearings
+ - 12 x M3x50mm screws (to hold left and right together)
+ - 18 x M3x10mm screws (to pin the delrin rollers, three in each half; anything 8-12mm probably works here.)
 10 x M3 nuts
- - 12 x M3 washers (must fit next to bearing without affecting movement; bearing-dependent, potentially optional.)
- - 1 x M3x12MM screw
+ - 18 x M3 washers (must fit next to bearing without affecting movement; bearing-dependent, potentially optional.)
+ - 3 x M3x12MM screw
+ - 18 x 0.8 x 4.7 x 15mm compression spring
 
 Attach the rollers to left and right halves, three in each side.  Do that by putting a screw through the roller, add two washers, and then screw directly into the plastic; it should have printed tight enough to allow the bolt to thread.  Don't overtighten, or you'll be printing a new one and starting over again.
 
 ### STEP 2:  Attach rollers to beam.
 
-Note that in my print, the left and right halves came out _just_on the edge of what a 30mm will hold; I need 35mm screws to hold left and right halves together.
+Use the m3 x 50mm bolts to hold the carriage halves together, with a spring under the nut. Idealy your bolts should be threaded only on the last 15mm or so, so both carriage havles sit on the smooth, unthreaded, portion of the bolt. If you've space put a washer each end of the spring to stop it digging into the softer plastic of the carriage.
 
 Each half has an extension that sticks out; orient that so that the sticky-outy-bit is on the top of the roller, and facing inwards into the triangle; this is where you'll attach the effector later.
 
@@ -316,17 +317,20 @@ TODO(gblock): profit.
 
 
 ## Suppliers
-TriDPrinting.com
-McMaster-carr
-SeeMeCNC
-Farnell/Element14
-MatterHackers
-Panucatt
-TrinityLabs
-iMaterialize
-OpenBeamUSA
-igus.co.uk
 
+* TriDPrinting.com
+* McMaster-carr
+* SeeMeCNC
+* Farnell/Element14
+* MatterHackers
+* Panucatt
+* TrinityLabs
+* iMaterialize
+* OpenBeamUSA
+* igus [igus.co.uk](http://www.igus.co.uk) / polyer bearings
+* Bolt me up [www.boltmeup.com](http://www.boltmeup.com) / compression springs, stainless steel nuts & bolts
+* A2 Stainless [www.a2stainless.co.uk](http://www.a2stainless.co.uk) / stainless steel nuts & bolts
+* Westfield Fasteners Ltd [www.westfieldfasteners.co.uk](http://www.westfieldfasteners.co.uk) / stainless steel nuts & bolts
 
 ### Bearings
 BB-623-B180-10-ES bearings, delrin rollers, igus.co.uk - Stupidly priced.
@@ -335,7 +339,7 @@ BB-623-B180-10-ES bearings, delrin rollers, igus.co.uk - Stupidly priced.
 ## Sources and references
 ----------------------
  - First-hand build instructions from Gregory Block (gblock@ctoforaday.com)
- - First-hand build instructions from Andy Hayward (not public)
+ - First-hand build instructions from Andy Hayward [gplus.to/ach1000](https://plus.google.com/photos/108445838894930891556/albums/5831544897289918977)
  - Replibot's instructions: [replibot.blogspot.co.uk](replibot.blogspot.co.uk)
  - Photos by jcrocholl:  [flickr.com/photos/jcrocholl](http://www.flickr.com/photos/jcrocholl)
  - Video of attaching the line on the Kossel spool: [youtube.com/watch?v=7qNsSOrZ9Oc](http://www.youtube.com/watch?v=7qNsSOrZ9Oc)
@@ -345,9 +349,13 @@ BB-623-B180-10-ES bearings, delrin rollers, igus.co.uk - Stupidly priced.
 
 ### Document Traxxas arms
  - Pick up Andy's construction instructions; jrocholl also posted his process.
+ - Alternative arms with IGUS rod-ends
 
 ### Spool Issues
  - Redesign the spool to allow a bit more room for screw heads
  - Consider capturing nuts in the spool
  - Consider leaving less room between motor head and spool wall
  - Leave a taller lip on the spool, to make accidental unwind more unlikely
+
+### GT2 belt
+ - Use a GT2 belt instead of cable, this requires a different top-end for each vertical
