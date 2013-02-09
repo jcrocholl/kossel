@@ -6,7 +6,7 @@
 bearing_id = 3; // 623zz bearings are 3x10x4mm.
 bearing_od = 10;
 bearing_width = 4;
-bearing_offset = 2.4;
+bearing_offset = 3.5;
 
 body_height = 42;
 body_width = 42; // V5: 52mm.
