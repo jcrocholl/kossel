@@ -16,6 +16,7 @@ We'll separate the printed from non-printed parts.
 
 The primary set of printed parts comes from jrocholl/kossel on GitHub.  They're OpenSCAD files that you convert into STL to render.
 
+ - 6 x corner.stl
  - 1 x effector.stl
  - 3 x frame_cheek.stl
  - 3 x frame_endstop.stl
