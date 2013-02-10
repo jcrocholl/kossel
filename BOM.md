@@ -345,7 +345,8 @@ BB-623-B180-10-ES bearings, delrin rollers, igus.co.uk - Stupidly priced.
  - Replibot's instructions: [replibot.blogspot.co.uk](replibot.blogspot.co.uk)
  - Photos by jcrocholl:  [flickr.com/photos/jcrocholl](http://www.flickr.com/photos/jcrocholl)
  - Video of attaching the line on the Kossel spool: [youtube.com/watch?v=7qNsSOrZ9Oc](http://www.youtube.com/watch?v=7qNsSOrZ9Oc)
- - Kossel Construction and Delta 3D Printing: (https://plus.google.com/113309950105869831850/posts)
+ - Kossel Construction and Delta 3D Printing on <a href="https://plus.google.com/113309950105869831850" rel="publisher">Google+</a>
+
 
 
 ## Design TODOs
