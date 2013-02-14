@@ -24,6 +24,9 @@ module screw_socket() {
   // translate([0, 10, 13.6]) cube([8, 20, 20], center=true);
 }
 
+union() {
+  translate([-40, 55, -height/2]) cylinder(r=8, h=0.5);
+  translate([40, 55, -height/2]) cylinder(r=8, h=0.5);
 difference() {
   union() {
     intersection() {
@@ -80,7 +83,7 @@ difference() {
     }
   }
 }
-
+}
 
 motor_offset = 40;
 motor_length = 56;
