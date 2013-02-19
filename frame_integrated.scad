@@ -87,9 +87,9 @@ difference() {
       // Nut tunnels.
       translate([0, -100, 0]) {
         rotate([0, 0, -a*30]) translate([0, -5, -z/3]) #
-          cube([6, 20, 4], center=true);
-        translate([0, 0, z/3]) #
-          cube([6, 12, 4], center=true);
+          cube([7, 20, 4], center=true);
+        for (y = [0:3]) translate([0, -y, z/3 + z-15]) #
+          rotate([0, 0, a*30]) cylinder(r=4, h=4, center=true, $fn=6);
       }
       // Screw sockets.
       for (y = [-88, -44]) {
