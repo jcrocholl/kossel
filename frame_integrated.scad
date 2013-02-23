@@ -1,5 +1,5 @@
-// 2013-02-12 This file is still pretty experimental and will
-// probably have some significant changes in the near future.
+// 2013-02-22 This file is still somewhat experimental
+// and may go through more changes in the near future.
 
 include <configuration.scad>;
 
@@ -85,11 +85,11 @@ difference() {
     for (z = [-15, 15]) translate([-16*a, 111, z]) {
       // % rotate([90, 0, 0]) extrusion_cutout(200, 0);
       // Nut tunnels.
-      translate([0, -100, 0]) {
-        rotate([0, 0, -a*30]) translate([0, -5, -z/3]) #
-          cube([7, 20, 4], center=true);
-        for (y = [0:3]) translate([0, -y, z/3 + z-15]) #
-          rotate([0, 0, a*30]) cylinder(r=4, h=4, center=true, $fn=6);
+      for (y = [0:4]) {
+        translate([0, -100-y, -3*z/15]) scale([1, 1, -z/15]) #
+          rotate([0, 0, -a*30]) cylinder(r=4, h=16, $fn=6);
+        translate([0, -100-y, 3*z/15 + z-15]) #
+          rotate([0, 0, a*30]) cylinder(r=4, h=8, $fn=6);
       }
       // Screw sockets.
       for (y = [-88, -44]) {
