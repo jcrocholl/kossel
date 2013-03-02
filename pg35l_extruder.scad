@@ -17,17 +17,24 @@ body_roundness = 10;
 groovemount_od = 16.6; // 16mm nominal.
 groovemount_height = 5; // Must push down on GrooveMount.
 
-drive_gear_offset = 7;
+filament_offset = 1.5;
+filament_id = 2.5; // This is for 1.75mm filament.
+filament_squish = 0.0; // Distance the drive gear teeth press into the filament.
+
+// Measured drive gear sizes, sample size of one each (brandonheller):
+// Trinity Labs hobbed pulley: 12.66mm od, 11mm valley od
+// TriDPrinting hobbed pulley: 12.68mm od, 10.56mm valley od
+// Make sure to set these, to reduce friction from twisting the filament, as well as ensure that the drive gear bearings actually rest against the drive gear.
 drive_gear_width = 12;
 drive_gear_id = 5;
 drive_gear_od = 13;
+drive_gear_valley_od = 11; // Diameter of drive gear at the valley of the teeth.
+drive_gear_offset = drive_gear_valley_od/2+filament_id/2-filament_squish;  // Was: 7
 
 cutout_id = 14.5;
 cutout_height = 26;
 
 funnel_depth = 5;
-filament_offset = 1.5;
-filament_id = 2.5; // This is for 1.75mm filament.
 
 foot_width = 62;
 foot_offset = 0; // V5: 2mm but most GrooveMount plates are centered.
