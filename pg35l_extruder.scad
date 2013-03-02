@@ -28,7 +28,7 @@ filament_squish = 0.0; // Distance the drive gear teeth press into the filament.
 // Make sure to set these, to reduce friction from twisting the filament, as well as ensure that the drive gear bearings actually rest against the drive gear.
 drive_gear_width = 12;
 drive_gear_id = 5;
-drive_gear_od = 13;
+drive_gear_od = 12.67;
 drive_gear_valley_od = 11; // Diameter of drive gear at the valley of the teeth.
 drive_gear_offset = drive_gear_valley_od/2+filament_dia/2-filament_squish;  // Was: 7
 
