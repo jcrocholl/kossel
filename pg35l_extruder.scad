@@ -34,7 +34,8 @@ drive_gear_offset = drive_gear_valley_od/2+filament_id/2-filament_squish;  // Wa
 cutout_id = 14.5;
 cutout_height = 26;
 
-funnel_depth = 5;
+funnel_depth = 7;
+funnel_entrance_dia = 5;
 
 foot_width = 62;
 foot_offset = 0; // V5: 2mm but most GrooveMount plates are centered.
@@ -122,9 +123,11 @@ module pg35l_extruder() {
 	cube([40, cutout_height, body_thickness+1], center=true);
       // Filament path and funnel.
       translate([0, 0, filament_offset]) rotate([90, 0, 0]) {
-	cylinder(r=filament_id/2, h=2*body_height, center=true, $fn=12);
-	translate([0, 0, funnel_depth])
-	  cylinder(r1=drive_gear_od, r2=0, h=drive_gear_od,
+	// Filament cutout.
+       cylinder(r=filament_id/2, h=2*body_height, center=true, $fn=12);
+       // Filament funnel.
+	translate([0, 0, cutout_id/2])
+         cylinder(r1=funnel_entrance_dia, r2=filament_id/2, h=funnel_depth,
 		   center=true, $fn=24);
       }
       // Motor mount screws.
