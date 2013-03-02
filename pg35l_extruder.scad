@@ -18,7 +18,8 @@ groovemount_od = 16.6; // 16mm nominal.
 groovemount_height = 5; // Must push down on GrooveMount.
 
 filament_offset = 1.5;
-filament_dia = 2.5; // This is for 1.75mm filament.
+filament_dia = 1.75; // This is for 1.75mm filament.
+filament_hole_dia = 2.5; // Size of opening into and out of the extruder.
 filament_squish = 0.0; // Distance the drive gear teeth press into the filament.
 
 // Measured drive gear sizes, sample size of one each (brandonheller):
@@ -124,10 +125,10 @@ module pg35l_extruder() {
       // Filament path and funnel.
       translate([0, 0, filament_offset]) rotate([90, 0, 0]) {
 	// Filament cutout.
-       cylinder(r=filament_dia/2, h=2*body_height, center=true, $fn=12);
+       cylinder(r=filament_hole_dia/2, h=2*body_height, center=true, $fn=12);
        // Filament funnel.
 	translate([0, 0, cutout_id/2])
-         cylinder(r1=funnel_entrance_dia, r2=filament_dia/2, h=funnel_depth,
+         cylinder(r1=funnel_entrance_dia, r2=filament_hole_dia/2, h=funnel_depth,
 		   center=true, $fn=24);
       }
       // Motor mount screws.
