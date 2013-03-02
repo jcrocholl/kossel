@@ -44,12 +44,18 @@ m4_nut_radius = 4.5;
 m4_nut_width = 7.5;
 m4_nut_height = 4;
 
-bearing_x = 15.5;
-bearing_y = 7.5;
-
 idler_x = -5.5;
 idler_y = 10;
 idler_z = 6.5;
+
+// Place the two drive gear support bearings:
+//  - tangent to the drive gear
+//  - 90 degrees apart
+//  - 45 degrees rotated up or down from bottom of extruder.
+bearing_drive_gear_offset = drive_gear_od/2+bearing_od/2;
+bearing_drive_gear_offset_x_y = bearing_drive_gear_offset*(sqrt(2)/2);
+bearing_x = bearing_drive_gear_offset_x_y+drive_gear_offset; // Was: 15.5
+bearing_y = bearing_drive_gear_offset_x_y; // Was: 7.5
 
 module pg35l_extruder() {
   union() {
@@ -69,6 +75,7 @@ module pg35l_extruder() {
         for (y = [-bearing_y, bearing_y]) {
 	  translate([-bearing_x, y, bearing_offset]) {
 	    cylinder(r=bearing_od/2+0.5, h=body_thickness/2, center=true);
+	    // Drive gear support bearings
 	    % cylinder(r=bearing_od/2, h=bearing_width, center=true);
 	  }
 	}
