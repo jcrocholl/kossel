@@ -35,6 +35,8 @@ union() {
   translate([40, 55, -height/2]) cylinder(r=8, h=0.5);
 difference() {
   union() {
+    translate([18.5, -6.3, 0]) rotate([90, -90, 30])
+      scale([0.1, 0.1, 1]) import("orbitron.stl");
     intersection() {
       translate([0, 22, 0])
         cylinder(r=36, h=height, center=true, $fn=60);
