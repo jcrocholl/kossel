@@ -35,8 +35,6 @@ union() {
   translate([40, 55, -height/2]) cylinder(r=8, h=0.5);
 difference() {
   union() {
-    translate([18.5, -6.3, 0]) rotate([90, -90, 30])
-      scale([0.1, 0.1, 1]) import("orbitron.stl");
     intersection() {
       translate([0, 22, 0])
         cylinder(r=36, h=height, center=true, $fn=60);
@@ -52,6 +50,8 @@ difference() {
         cylinder(r=55, h=height+1, center=true, $fn=6);
     }
   }
+  translate([20.5, -10, 0]) rotate([90, -90, 30])
+    scale([0.1, 0.1, 1]) import("orbitron.stl");
   translate([0, 58, 0]) minkowski() {
     intersection() {
       rotate([0, 0, -90])
