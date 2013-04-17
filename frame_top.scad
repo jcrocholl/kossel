@@ -17,7 +17,7 @@ module extrusion_cutout(h, extra) {
 module screw_socket() {
   cylinder(r=1.65, h=20, center=true);
   translate([0, 0, 3.6]) cylinder(r=3.5, h=20);
-  scale([1, 1, -1]) cylinder(r1=4, r2=8, h=4);
+  scale([1, 1, -1]) cylinder(r1=4, r2=7, h=4);
   // translate([0, 10, 3.6]) cube([3.3, 20, 20], center=true);
   // translate([0, 10, 13.6]) cube([8, 20, 20], center=true);
 }
@@ -25,8 +25,8 @@ module screw_socket() {
 module vertex(height, cones) {
   union() {
     // Pads to improve print bed adhesion for slim ends.
-    translate([-40, 55, -height/2]) cylinder(r=8, h=0.5);
-    translate([40, 55, -height/2]) cylinder(r=8, h=0.5);
+    translate([-37.5, 52.2, -height/2]) cylinder(r=8, h=0.5);
+    translate([37.5, 52.2, -height/2]) cylinder(r=8, h=0.5);
     difference() {
       union() {
 	intersection() {
@@ -75,9 +75,17 @@ module vertex(height, cones) {
 	  screw_socket();
 	for (a = [-1, 1]) {
 	  rotate([0, 0, 30*a]) translate([-16*a, 111, z+7.5-height/2]) {
-	    % rotate([90, 0, 0]) extrusion_cutout(200, 0);
+	    // % rotate([90, 0, 0]) extrusion_cutout(200, 0);
+	    // Screw sockets.
 	    for (y = [-88, -44]) {
 	      translate([a*7.5, y, 0]) rotate([0, a*90, 0]) screw_socket();
+	    }
+	    // Nut tunnels.
+	    for (y = [0:4]) {
+	      translate([0, -100-y, 3])
+		rotate([0, 0, -a*30]) cylinder(r=4, h=16, $fn=6);
+	      translate([0, -100-y, -3]) scale([1, 1, -1])
+		rotate([0, 0, a*30]) cylinder(r=4, h=16, $fn=6);
 	    }
 	  }
 	}
