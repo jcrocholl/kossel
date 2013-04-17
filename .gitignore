@@ -1,4 +1,5 @@
 *.stl
+*.deps
 *.gcode
 *.gif
 *.png
