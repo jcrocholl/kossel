@@ -8,7 +8,7 @@ m3_nut_radius = m3_nut_od/2 + 0.2 + extra_radius;
 // Major diameter of metric 3mm thread.
 m3_major = 2.85;
 m3_radius = m3_major/2 + extra_radius;
-m3_wide_radius = m3_major/2 + 0.2 + extra_radius;
+m3_wide_radius = m3_major/2 + extra_radius + 0.2;
 
 // NEMA17 stepper motors.
 motor_shaft_diameter = 5;

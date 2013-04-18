@@ -15,11 +15,15 @@ module extrusion_cutout(h, extra) {
 }
 
 module screw_socket() {
-  cylinder(r=1.65, h=20, center=true);
-  translate([0, 0, 3.6]) cylinder(r=3.5, h=20);
-  scale([1, 1, -1]) cylinder(r1=4, r2=7, h=4);
-  // translate([0, 10, 3.6]) cube([3.3, 20, 20], center=true);
-  // translate([0, 10, 13.6]) cube([8, 20, 20], center=true);
+  cylinder(r=m3_wide_radius, h=20, center=true);
+  translate([0, 0, 3.8]) cylinder(r=3.5, h=5);
+}
+
+module screw_socket_cone() {
+  union() {
+    screw_socket();
+    scale([1, 1, -1]) cylinder(r1=4, r2=7, h=4);
+  }
 }
 
 module vertex(height, cones) {
@@ -56,9 +60,9 @@ module vertex(height, cones) {
 	}
 	// Idler support.
 	translate([0, 8, 0]) rotate([-90, 0, 0])
-	  cylinder(r1=15, r2=5, h=cones);
+	  cylinder(r1=15, r2=3, h=cones);
 	translate([0, 44, 0]) rotate([90, 0, 0])
-	  cylinder(r1=15, r2=5, h=cones);
+	  cylinder(r1=15, r2=3, h=cones);
       }
       translate([0, 58, 0]) minkowski() {
 	intersection() {
@@ -72,7 +76,7 @@ module vertex(height, cones) {
       extrusion_cutout(height+10, 2*extra_radius);
       for (z = [0:30:height]) {
 	translate([0, -7.5-extra_radius, z+7.5-height/2]) rotate([90, 0, 0])
-	  screw_socket();
+	  screw_socket_cone();
 	for (a = [-1, 1]) {
 	  rotate([0, 0, 30*a]) translate([-16*a, 111, z+7.5-height/2]) {
 	    // % rotate([90, 0, 0]) extrusion_cutout(200, 0);
@@ -96,10 +100,10 @@ module vertex(height, cones) {
 
 module frame_top() {
   difference() {
-    vertex(15, 12);
-    // Idler bearing support bolt.
+    vertex(15, 13.6);
+    // M4 bolt to support idler bearings.
     translate([0, 65, 0]) rotate([90, 0, 0])
-      cylinder(r=3, h=50);
+      cylinder(r=2, h=50);
     // Vertical belt tensioner.
     translate([0, 9, 0]) rotate([20, 0, 0]) union() {
       cylinder(r=m3_wide_radius, h=30, center=true);
