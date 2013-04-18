@@ -60,9 +60,9 @@ module vertex(height, cones) {
 	}
 	// Idler support.
 	translate([0, 8, 0]) rotate([-90, 0, 0])
-	  cylinder(r1=15, r2=3, h=cones);
+	  cylinder(r1=20, r2=3, h=cones);
 	translate([0, 44, 0]) rotate([90, 0, 0])
-	  cylinder(r1=15, r2=3, h=cones);
+	  cylinder(r1=20, r2=3, h=cones);
       }
       translate([0, 58, 0]) minkowski() {
 	intersection() {
