@@ -1,14 +1,15 @@
 include <configuration.scad>;
 
-use <frame_top.scad>;
+use <vertex.scad>;
 
 $fn = 24;
+extrusion = 15;
 motor_offset = 44;
 motor_length = 47;
 
 module frame_bottom() {
   difference() {
-    vertex(45, idler_offset=0, idler_space=100);  // No idler cones.
+    vertex(3*extrusion, idler_offset=0, idler_space=100);  // No idler cones.
     // KOSSEL logotype.
     translate([20.5, -10, 0]) rotate([90, -90, 30])
       scale([0.11, 0.11, 1]) import("logotype.stl");
