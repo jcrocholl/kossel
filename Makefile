@@ -4,4 +4,4 @@ all: frame_top.stl frame_motor.stl
 include $(wildcard *.deps)
 
 %.stl: %.scad
-	openscad -o $@ -m make -d $*.deps $<
+	openscad -m make -d $*.deps -o $@ $<

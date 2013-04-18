@@ -26,7 +26,7 @@ module screw_socket_cone() {
   }
 }
 
-module vertex(height, cones) {
+module vertex(height, idler_offset, idler_space) {
   union() {
     // Pads to improve print bed adhesion for slim ends.
     translate([-37.5, 52.2, -height/2]) cylinder(r=8, h=0.5);
@@ -58,11 +58,11 @@ module vertex(height, cones) {
 	  }
 	  cylinder(r=roundness, h=1, center=true);
 	}
-	// Idler support.
-	translate([0, 8, 0]) rotate([-90, 0, 0])
-	  cylinder(r1=20, r2=3, h=cones);
-	translate([0, 44, 0]) rotate([90, 0, 0])
-	  cylinder(r1=20, r2=3, h=cones);
+	// Idler support cones.
+	translate([0, 26+idler_offset-30, 0]) rotate([-90, 0, 0])
+	  cylinder(r1=30, r2=3, h=30-idler_space/2);
+	translate([0, 26+idler_offset+30, 0]) rotate([90, 0, 0])
+	  cylinder(r1=30, r2=3, h=30-idler_space/2);
       }
       translate([0, 58, 0]) minkowski() {
 	intersection() {
@@ -100,15 +100,15 @@ module vertex(height, cones) {
 
 module frame_top() {
   difference() {
-    vertex(15, 13.6);
+    vertex(15, idler_offset=3, idler_space=12.5);
     // M4 bolt to support idler bearings.
     translate([0, 65, 0]) rotate([90, 0, 0])
       cylinder(r=2, h=50);
     // Vertical belt tensioner.
-    translate([0, 9, 0]) rotate([20, 0, 0]) union() {
+    translate([0, 10, 0]) rotate([18, 0, 0]) union() {
       cylinder(r=m3_wide_radius, h=30, center=true);
-      translate([0, -3, 5]) cube([2*m3_wide_radius, 6, 12], center=true);
-      translate([0, 0, -5]) scale([1, 1, -1]) rotate([0, 0, 30])
+      translate([0, -3, 8]) cube([2*m3_wide_radius, 6, 12], center=true);
+      translate([0, 0, -3]) scale([1, 1, -1]) rotate([0, 0, 30])
 	cylinder(r1=m3_nut_radius, r2=m3_nut_radius+2, h=10, $fn=6);
     }
   }
