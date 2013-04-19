@@ -1,7 +1,6 @@
 include <configuration.scad>;
 
 $fn = 24;
-extrusion = 15;
 roundness = 6;
 
 module extrusion_cutout(h, extra) {

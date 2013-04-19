@@ -14,5 +14,9 @@ m3_wide_radius = m3_major/2 + extra_radius + 0.2;
 motor_shaft_diameter = 5;
 motor_shaft_radius = motor_shaft_diameter/2 + extra_radius;
 
-// Frame brackets.
+// Frame brackets. M3x8mm screws work best with 3.6 mm brackets.
 thickness = 3.6;
+
+// OpenBeam or Misumi. Currently only 15x15 mm, but there is a plan
+// to make models more parametric and allow 20x20 mm in the future.
+extrusion = 15;

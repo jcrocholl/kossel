@@ -3,7 +3,6 @@ include <configuration.scad>;
 use <vertex.scad>;
 
 $fn = 24;
-extrusion = 15;
 
 module frame_top() {
   difference() {
