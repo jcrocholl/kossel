@@ -2,7 +2,10 @@ include <configuration.scad>;
 
 separation = 40;
 thickness = 6;
-horn_thickness = 8;
+
+horn_thickness = 9;
+horn_x = 8;
+
 belt_width = 5;
 belt_x = 5.6;
 belt_z = 7;
@@ -19,13 +22,13 @@ module carriage() {
       translate([0, 0, thickness/2])
         cube([27, 32, thickness], center=true);
       // Ball joint mount horns.
-      difference() {
-        intersection() {
-          cube([separation, 40, 3*horn_thickness], center=true);
-          translate([0, 20, horn_thickness/2]) rotate([0, 0, 45])
-            cube([40, 40, horn_thickness], center=true);
+      for (x = [-1, 1]) {
+        scale([x, 1, 1]) intersection() {
+          translate([0, 14, horn_thickness/2])
+            cube([separation, 16, horn_thickness], center=true);
+          translate([horn_x, 16, horn_thickness/2]) rotate([0, 90, 0])
+            cylinder(r1=15, r2=3, h=separation/2-horn_x);
         }
-        cube([20, 100, 100], center=true);
       }
       // Belt clamps.
       intersection() {
