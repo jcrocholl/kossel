@@ -2,8 +2,8 @@ include <configuration.scad>;
 
 separation = 40;  // Distance between ball joint mounting faces.
 offset = 20;  // Same as DELTA_EFFECTOR_OFFSET in Marlin.
-mount_radius = 12.5;  // M3 hotend mounting screws, standard would be 25.
-inside_radius = 8;  // Hole for the hotend (J-Head diameter is 16mm).
+mount_radius = 12.5;  // Hotend mounting screws, standard would be 25mm.
+hotend_radius = 8;  // Hole for the hotend (J-Head diameter is 16mm).
 push_fit_radius = 4.5;  // Brass fitting for bowden tube.
 push_fit_height = 5;  // Length of brass threaded into printed plastic.
 height = 8;
@@ -34,7 +34,7 @@ difference() {
     }
   }
   translate([0, 0, push_fit_height-height/2])
-    cylinder(r=inside_radius, h=height, $fn=36);
+    cylinder(r=hotend_radius, h=height, $fn=36);
   cylinder(r=push_fit_radius, h=height+1, center=true);
   for (a = [0:60:359]) rotate([0, 0, a]) {
     translate([0, mount_radius, 0])

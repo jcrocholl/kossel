@@ -1,12 +1,12 @@
 include <configuration.scad>;
 
-separation = 44;
+separation = 40;
 thickness = 6;
 
-horn_thickness = 9;
+horn_thickness = 13;
 horn_x = 8;
 
-belt_width = 6;
+belt_width = 5;
 belt_x = 5.6;
 belt_z = 7;
 
@@ -33,13 +33,13 @@ module carriage() {
       // Belt clamps.
       intersection() {
          translate([5, 0, thickness + belt_width/2]) 
-           cube([13, 12, belt_width+6], center=true);
+           cube([13, 11, belt_width+4], center=true);
          translate([1, 0, thickness + belt_width/2]) rotate([0, 0, 45])
-           cube([11, 11, 20], center=true);
+           cube([10, 10, 20], center=true);
       }
       difference() {
         translate([10, 0, thickness + belt_width/2])
-          cube([7, 26, belt_width+6], center=true);
+          cube([7, 26, belt_width+4], center=true);
          translate([1, 0, thickness + belt_width/2]) rotate([0, 0, 45])
            cube([15, 15, 20], center=true);
       }
@@ -57,7 +57,7 @@ module carriage() {
     // Lock nuts for ball joints.
     for (x = [-1, 1]) {
       scale([x, 1, 1]) intersection() {
-        translate([horn_x-1, 16, horn_thickness/2]) rotate([90, 0, -90])
+        translate([horn_x, 16, horn_thickness/2]) rotate([90, 0, -90])
           cylinder(r1=m3_nut_radius, r2=m3_nut_radius+0.5, h=8,
                    center=true, $fn=6);
       }
