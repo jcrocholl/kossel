@@ -17,17 +17,26 @@ body_roundness = 10;
 groovemount_od = 16.6; // 16mm nominal.
 groovemount_height = 5; // Must push down on GrooveMount.
 
-drive_gear_offset = 7;
+filament_offset = 1.5;
+filament_dia = 1.75; // This is for 1.75mm filament.
+filament_hole_dia = 2.5; // Size of opening into and out of the extruder.
+filament_squish = 0.0; // Distance the drive gear teeth press into the filament.
+
+// Measured drive gear sizes, sample size of one each (brandonheller):
+// Trinity Labs hobbed pulley: 12.66mm od, 11mm valley od
+// TriDPrinting hobbed pulley: 12.68mm od, 10.56mm valley od
+// Make sure to set these, to reduce friction from twisting the filament, as well as ensure that the drive gear bearings actually rest against the drive gear.
 drive_gear_width = 12;
 drive_gear_id = 5;
-drive_gear_od = 13;
+drive_gear_od = 12.67;
+drive_gear_valley_od = 11; // Diameter of drive gear at the valley of the teeth.
+drive_gear_offset = drive_gear_valley_od/2+filament_dia/2-filament_squish;  // Was: 7
 
 cutout_id = 14.5;
 cutout_height = 26;
 
-funnel_depth = 5;
-filament_offset = 1.5;
-filament_id = 2.5; // This is for 1.75mm filament.
+funnel_depth = 7;
+funnel_entrance_dia = 5;
 
 foot_width = 62;
 foot_offset = 0; // V5: 2mm but most GrooveMount plates are centered.
@@ -44,12 +53,18 @@ m4_nut_radius = 4.5;
 m4_nut_width = 7.5;
 m4_nut_height = 4;
 
-bearing_x = 15.5;
-bearing_y = 7.5;
-
 idler_x = -5.5;
 idler_y = 10;
 idler_z = 6.5;
+
+// Place the two drive gear support bearings:
+//  - tangent to the drive gear
+//  - 90 degrees apart
+//  - 45 degrees rotated up or down from bottom of extruder.
+bearing_drive_gear_offset = drive_gear_od/2+bearing_od/2;
+bearing_drive_gear_offset_x_y = bearing_drive_gear_offset*(sqrt(2)/2);
+bearing_x = bearing_drive_gear_offset_x_y+drive_gear_offset; // Was: 15.5
+bearing_y = bearing_drive_gear_offset_x_y; // Was: 7.5
 
 module pg35l_extruder() {
   union() {
@@ -69,6 +84,7 @@ module pg35l_extruder() {
         for (y = [-bearing_y, bearing_y]) {
 	  translate([-bearing_x, y, bearing_offset]) {
 	    cylinder(r=bearing_od/2+0.5, h=body_thickness/2, center=true);
+	    // Drive gear support bearings
 	    % cylinder(r=bearing_od/2, h=bearing_width, center=true);
 	  }
 	}
@@ -108,9 +124,11 @@ module pg35l_extruder() {
 	cube([40, cutout_height, body_thickness+1], center=true);
       // Filament path and funnel.
       translate([0, 0, filament_offset]) rotate([90, 0, 0]) {
-	cylinder(r=filament_id/2, h=2*body_height, center=true, $fn=12);
-	translate([0, 0, funnel_depth])
-	  cylinder(r1=drive_gear_od, r2=0, h=drive_gear_od,
+	// Filament cutout.
+       cylinder(r=filament_hole_dia/2, h=2*body_height, center=true, $fn=12);
+       // Filament funnel.
+	translate([0, 0, cutout_id/2])
+         cylinder(r1=funnel_entrance_dia, r2=filament_hole_dia/2, h=funnel_depth,
 		   center=true, $fn=24);
       }
       // Motor mount screws.
