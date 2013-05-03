@@ -32,14 +32,14 @@ module carriage() {
       }
       // Belt clamps.
       intersection() {
-         translate([5, 0, thickness + belt_width/2]) 
+         translate([5, 0, thickness + belt_width/2])
            cube([13, 11, belt_width+4], center=true);
          translate([1, 0, thickness + belt_width/2]) rotate([0, 0, 45])
            cube([10, 10, 20], center=true);
       }
       difference() {
-        translate([10, 0, thickness + belt_width/2])
-          cube([7, 26, belt_width+4], center=true);
+        translate([10, -2, thickness + belt_width/2])
+          cube([7, 28, belt_width+4], center=true);
          translate([1, 0, thickness + belt_width/2]) rotate([0, 0, 45])
            cube([15, 15, 20], center=true);
       }
