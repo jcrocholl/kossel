@@ -32,25 +32,28 @@ module carriage() {
       }
       // Belt clamps.
       intersection() {
-         translate([5, 0, thickness + belt_width/2])
+         translate([5, 2, thickness + belt_width/2])
            cube([13, 11, belt_width+4], center=true);
-         translate([1, 0, thickness + belt_width/2]) rotate([0, 0, 45])
+         translate([1, 2, thickness + belt_width/2]) rotate([0, 0, 45])
            cube([10, 10, 20], center=true);
       }
       difference() {
         translate([10, -2, thickness + belt_width/2])
           cube([7, 28, belt_width+4], center=true);
-         translate([1, 0, thickness + belt_width/2]) rotate([0, 0, 45])
+         translate([1, 2, thickness + belt_width/2]) rotate([0, 0, 45])
            cube([15, 15, 20], center=true);
       }
     }
+    // Avoid touching diagonal push rods (carbon tube).
+    translate([20, -10, 14]) rotate([35, 35, 30])
+      cube([40, 40, 20], center=true);
     // Screws for linear slider.
     for (x = [-10, 10]) {
-      for (y = [-10, 10]) {
-        translate([x, y, thickness]) #
-          cylinder(r=m3_wide_radius, h=30, center=true, $fn=12);
-      }
+      translate([x, 10, thickness]) #
+        cylinder(r=m3_wide_radius, h=30, center=true, $fn=12);
     }
+    translate([-10, -10, thickness]) #
+      cylinder(r=m3_wide_radius, h=30, center=true, $fn=12);
     // Screws for ball joints.
     translate([0, 16, horn_thickness/2]) rotate([0, 90, 0]) #
       cylinder(r=m3_wide_radius, h=60, center=true, $fn=12);
