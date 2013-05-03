@@ -6,7 +6,7 @@ $fn = 24;
 motor_offset = 44;
 motor_length = 47;
 
-module frame_bottom() {
+module frame_motor() {
   difference() {
     // No idler cones.
     vertex(3*extrusion, idler_offset=0, idler_space=100);
@@ -37,4 +37,4 @@ module frame_bottom() {
   }
 }
 
-translate([0, 0, 22.5]) frame_bottom();
+translate([0, 0, 22.5]) frame_motor();
