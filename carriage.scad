@@ -34,14 +34,14 @@ module carriage() {
       intersection() {
          translate([5, 2, thickness + belt_width/2])
            cube([13, 11, belt_width+4], center=true);
-         translate([1, 2, thickness + belt_width/2]) rotate([0, 0, 45])
-           cube([10, 10, 20], center=true);
+         translate([0, 2, thickness + belt_width/2])
+           cylinder(r=10, h=20, center=true, $fn=3);
       }
       difference() {
         translate([10, -2, thickness + belt_width/2])
           cube([7, 28, belt_width+4], center=true);
-         translate([1, 2, thickness + belt_width/2]) rotate([0, 0, 45])
-           cube([15, 15, 20], center=true);
+         translate([0, 2, thickness + belt_width/2])
+           cylinder(r=13, h=20, center=true, $fn=3);
       }
     }
     // Avoid touching diagonal push rods (carbon tube).
