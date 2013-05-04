@@ -31,29 +31,29 @@ module carriage() {
         }
       }
       // Belt clamps.
-      intersection() {
-         translate([5, 2, thickness + belt_width/2])
-           cube([13, 11, belt_width+4], center=true);
-         translate([0, 2, thickness + belt_width/2])
-           cylinder(r=10, h=20, center=true, $fn=3);
-      }
       difference() {
-        translate([10, -2, thickness + belt_width/2])
-          cube([7, 28, belt_width+4], center=true);
-         translate([0, 2, thickness + belt_width/2])
-           cylinder(r=13, h=20, center=true, $fn=3);
+        union() {
+          translate([6.5, -2.5, horn_thickness/2+1])
+            cube([14, 7, horn_thickness-2], center=true);
+          translate([10.75, 2.5, horn_thickness/2+1])
+            cube([5.5, 16, horn_thickness-2], center=true);
+        }
+        // Avoid touching diagonal push rods (carbon tube).
+        translate([20, -10, 12.5]) rotate([35, 35, 30])
+          cube([40, 40, 20], center=true);
+      }
+      for (y = [-12, 7]) {
+        translate([1.25, y, horn_thickness/2+1])
+          cube([7, 8, horn_thickness-2], center=true);
       }
     }
-    // Avoid touching diagonal push rods (carbon tube).
-    translate([20, -10, 14]) rotate([35, 35, 30])
-      cube([40, 40, 20], center=true);
     // Screws for linear slider.
     for (x = [-10, 10]) {
-      translate([x, 10, thickness]) #
-        cylinder(r=m3_wide_radius, h=30, center=true, $fn=12);
+      for (y = [-10, 10]) {
+        translate([x, y, thickness]) #
+          cylinder(r=m3_wide_radius, h=30, center=true, $fn=12);
+      }
     }
-    translate([-10, -10, thickness]) #
-      cylinder(r=m3_wide_radius, h=30, center=true, $fn=12);
     // Screws for ball joints.
     translate([0, 16, horn_thickness/2]) rotate([0, 90, 0]) #
       cylinder(r=m3_wide_radius, h=60, center=true, $fn=12);
@@ -65,6 +65,9 @@ module carriage() {
                    center=true, $fn=6);
       }
     }
+	// Vertical calibration screw.
+    translate([0, 30, thickness/2]) rotate([90, 0, 0]) #
+      cylinder(r=m3_radius, h=20, $fn=12);
   }
 }
 
