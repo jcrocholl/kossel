@@ -65,7 +65,7 @@ module carriage() {
                    center=true, $fn=6);
       }
     }
-	// Vertical calibration screw.
+        // Vertical calibration screw.
     translate([0, 30, thickness/2]) rotate([90, 0, 0]) #
       cylinder(r=m3_radius, h=20, $fn=12);
   }

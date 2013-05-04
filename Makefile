@@ -5,3 +5,8 @@ include $(wildcard *.deps)
 
 %.stl: %.scad
 	openscad -m make -d $*.deps -o $@ $<
+
+# Replace tabs with spaces.
+%.tab: %.scad
+	cp $< $@
+	expand $@ > $<

@@ -25,9 +25,9 @@ module frame_motor() {
       rotate([90, 0, 0]) cylinder(r=12, h=20, center=true, $fn=60);
       // NEMA 17 mounting screws.
       for (a = [0:90:359]) rotate([0, a, 0]) {
-	  translate([15.5, 0, 15.5]) rotate([90, 0, 0])
-	    cylinder(r=1.65, h=20, center=true);
-	}
+          translate([15.5, 0, 15.5]) rotate([90, 0, 0])
+            cylinder(r=1.65, h=20, center=true);
+        }
     }
   }
   // NEMA 17 stepper motor.

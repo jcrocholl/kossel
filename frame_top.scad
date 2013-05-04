@@ -15,7 +15,7 @@ module frame_top() {
       cylinder(r=m3_wide_radius, h=30, center=true);
       translate([0, -3, 8]) cube([2*m3_wide_radius, 6, 12], center=true);
       translate([0, 0, -3]) scale([1, 1, -1]) rotate([0, 0, 30])
-	cylinder(r1=m3_nut_radius, r2=m3_nut_radius+2, h=10, $fn=6);
+        cylinder(r1=m3_nut_radius, r2=m3_nut_radius+2, h=10, $fn=6);
     }
   }
 }
