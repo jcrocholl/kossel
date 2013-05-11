@@ -1,4 +1,4 @@
-all: frame_top.stl frame_motor.stl carriage.stl effector.stl
+all: frame_top.stl frame_motor.stl carriage.stl effector.stl retractable.stl
 
 # Explicit wildcard expansion suppresses errors when no files are found.
 include $(wildcard *.deps)
