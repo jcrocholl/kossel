@@ -3,13 +3,14 @@ include <configuration.scad>;
 height = 36;
 height2 = 22;
 tunnel = 2;
+face_offset = 3;
 
 module microswitch() {
   difference() {
     union() {
       translate([0, 0, 2.5])
         cube([19.8, 6, 10], center=true);
-      translate([2.5, 0, 6])
+      translate([2.5, 0.5, 6])
         cube([2, 3.5, 5], center=true);
       for (x = [-8, -1, 8]) {
         translate([x, 0, 0])
@@ -79,13 +80,18 @@ module retractable() {
       foot();
     }
 	cylinder(r=tunnel/2, h=3*height, center=true, $fn=12);
-    translate([0, -6, height/2+12])
+    translate([0, -6, height/2+14])
       cube([tunnel, 12, height], center=true);
-    translate([-5, -7.1, 18]) rotate([90, 15, 0]) {
+    // Flat front face.
+    translate([0, -face_offset-10, height/2])
+      cube([30, 20, 2*height], center=true);
+    // Probe deployment trigger.
+    translate([-5, -face_offset-1.1, 18]) rotate([90, 15, 0]) {
       % trigger();
       cylinder(r=m3_radius, h=40, center=true, $fn=12);
     }
-    translate([-2.4, -9, 7]) {
+    // Space for ZM series micro switch.
+    translate([-2.4, -face_offset-3, 7]) {
       % microswitch();
       for (x = [-9.5/2, 9.5/2]) {
         translate([x, 0, 0]) rotate([90, 0, 0])
