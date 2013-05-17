@@ -1,5 +1,5 @@
 // Don't print this file, purchase real micro switches
-// (Honeywell ZM10B10A01 or similar).
+// e.g. Honeywell ZM10B10A01 or OMRON SS-5 or similar.
 
 module microswitch() {
   difference() {
