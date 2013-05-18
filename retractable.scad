@@ -10,16 +10,16 @@ face_offset = 4;
 module trigger() {
   difference() {
     union() {
-      cylinder(r=2.5, h=2, center=true, $fn=24);
-      rotate([0, 0, 15]) translate([0, 4, 0])
-        cube([5, 6, 2], center=true);
-      translate([0, 9, 0])
-        cube([5, 18, 2], center=true);
-      translate([0, 11, 2])
-        cube([5, 14, 5], center=true);
+      cylinder(r=3.5, h=2, center=true, $fn=24);
+      translate([1, 6, 0]) rotate([0, 0, 15]) translate([0, 4, 0])
+        cube([3, 10, 2], center=true);
+      translate([1, 15, 0])
+        cube([5, 30, 2], center=true);
+      translate([1, 20, 2])
+        cube([5, 20, 5], center=true);
     }
     cylinder(r=2.5/2+extra_radius, h=16, center=true, $fn=12);
-    translate([0, 12, 2]) rotate([0, 90, 0])
+    translate([0, 25, 2]) rotate([0, 90, 0])
       cylinder(r=m3_radius, h=16, center=true, $fn=12);
   }
 }
@@ -73,9 +73,14 @@ module retractable() {
         cube([10, 12, 2*height], center=true);
     }
     // Probe deployment trigger.
-    translate([3.6, -face_offset-1.1, 19.5]) rotate([90, 0, 0]) {
-      % trigger();
-      cylinder(r=2.5/2, h=40, center=true, $fn=12);
+    translate([9.5/2-2.5, -face_offset+1, 9]) {
+      rotate([90, 0, 0]) {
+        % trigger();
+        cylinder(r=2.5/2, h=40, center=true, $fn=12);
+        cylinder(r=4.5, h=2.5, center=true);
+      }
+      translate([2, -8.5, height/2])
+        cube([10, 20, height], center=true);
     }
     // Sub-miniature micro switch.
     translate([-2.5, -face_offset-3, 9]) {
@@ -90,4 +95,4 @@ module retractable() {
 
 retractable();
 
-translate([18, -8, 1]) trigger();
+translate([18, -14, 1]) trigger();
