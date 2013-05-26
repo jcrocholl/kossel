@@ -2,27 +2,12 @@ include <configuration.scad>;
 
 use <microswitch.scad>;
 
-height = 30;
-height2 = 16;
+use <trigger.scad>;
+
+height = 34;
+height2 = 13;
 tunnel = 2.4;
 face_offset = 4;
-
-module trigger() {
-  difference() {
-    union() {
-      cylinder(r=3.5, h=2, center=true, $fn=24);
-      translate([1, 6, 0]) rotate([0, 0, 15]) translate([0, 4, 0])
-        cube([3, 10, 2], center=true);
-      translate([1, 15, 0])
-        cube([5, 30, 2], center=true);
-      translate([1, 20, 2])
-        cube([5, 20, 5], center=true);
-    }
-    cylinder(r=2.5/2+extra_radius, h=16, center=true, $fn=12);
-    translate([0, 25, 2]) rotate([0, 90, 0])
-      cylinder(r=m3_radius, h=16, center=true, $fn=12);
-  }
-}
 
 module foot() {
   difference() {
@@ -69,18 +54,18 @@ module retractable() {
     // Flat front face.
     translate([0, -face_offset-10, height/2+2.1]) difference() {
       cube([30, 20, height], center=true);
-      translate([-5, 17, 0]) rotate([30, 0, 0])
-        cube([10, 12, 2*height], center=true);
+      translate([-5, 16, 0]) rotate([30, 0, 0])
+        cube([10, 12, height-18], center=true);
     }
+    // Trigger spring.
+    translate([-10, -1, 17]) rotate([0, -45, 0]) #
+      cylinder(r=2.2, h=20, center=true, $fn=12);
     // Probe deployment trigger.
-    translate([9.5/2-2.5, -face_offset+1, 9]) {
-      rotate([90, 0, 0]) {
+    translate([-3.5, -face_offset-1, height-3]) {
+      rotate([90, 0, 180]) {
         % trigger();
         cylinder(r=2.5/2, h=40, center=true, $fn=12);
-        cylinder(r=4.5, h=2.5, center=true);
       }
-      translate([2, -8.5, height/2])
-        cube([10, 20, height], center=true);
     }
     // Sub-miniature micro switch.
     translate([-2.5, -face_offset-3, 9]) {
@@ -94,5 +79,3 @@ module retractable() {
 }
 
 retractable();
-
-translate([18, -14, 1]) trigger();
