@@ -2,10 +2,8 @@ include <configuration.scad>;
 
 use <microswitch.scad>;
 
-use <trigger.scad>;
-
-height = 34;
-height2 = 13;
+height = 26;
+height2 = 26;
 tunnel = 2.4;
 face_offset = 4;
 
@@ -45,30 +43,32 @@ module retractable() {
       translate([-3, -3, height2/2])
         cube([18, 6, height2], center=true);
       // Feet for vertical M3 screw attachment.
-      foot();
-      scale([1, -1, 1]) foot();
-    }
-    cylinder(r=tunnel/2+extra_radius, h=3*height, center=true, $fn=12);
-    translate([0, -6, height/2+15])
-      cube([tunnel-0.5, 12, height], center=true);
-    // Flat front face.
-    translate([0, -face_offset-10, height/2+2.1]) difference() {
-      cube([30, 20, height], center=true);
-      translate([-5, 16, 0]) rotate([30, 0, 0])
-        cube([10, 12, height-18], center=true);
-    }
-    // Trigger spring.
-    translate([-10, -1, 17]) rotate([0, -45, 0]) #
-      cylinder(r=2.2, h=20, center=true, $fn=12);
-    // Probe deployment trigger.
-    translate([-3.5, -face_offset-1, height-3]) {
-      rotate([90, 0, 180]) {
-        % trigger();
-        cylinder(r=2.5/2, h=40, center=true, $fn=12);
+      rotate([0, 0, 90]) {
+        foot();
+        scale([1, -1, 1]) foot();
       }
     }
+    translate([-19, 0, height/2+6]) rotate([0, 15, 0])
+      cube([20, 20, height], center=true);
+    cylinder(r=tunnel/2+extra_radius, h=3*height, center=true, $fn=12);
+    translate([0, -6, height/2+12])
+      cube([tunnel-0.5, 12, height], center=true);
+    rotate([0, 0, 30]) translate([0, -6, height/2+22])
+      cube([tunnel, 12, height], center=true);
+    // Safety needle spring.
+    translate([-4, 0, height-10]) rotate([90, 0, 0])
+      cylinder(r=2.5/2, h=40, center=true, $fn=12);
+    translate([-4, 0, height-3]) rotate([90, 0, 0])
+      cylinder(r=2.5/2, h=40, center=true, $fn=12);
+    // Effector screw heads.
+    rotate([0, 0, 330]) translate([-12.5, 0, 2])
+      # cylinder(r=4, h=30, $fn=24);
+    // Flat front face.
+    translate([0, -face_offset-10, height/2]) difference() {
+      cube([30, 20, 2*height], center=true);
+    }
     // Sub-miniature micro switch.
-    translate([-2.5, -face_offset-3, 9]) {
+    translate([-2.5, -face_offset-3, 5]) {
       % microswitch();
       for (x = [-9.5/2, 9.5/2]) {
         translate([x, 0, 0]) rotate([90, 0, 0])
