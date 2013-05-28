@@ -56,13 +56,13 @@ module retractable() {
     rotate([0, 0, 30]) translate([0, -6, height/2+22])
       cube([tunnel, 12, height], center=true);
     // Safety needle spring.
-    translate([-4, 0, height-10]) rotate([90, 0, 0])
+    translate([-4.5, 0, height-11]) rotate([90, 0, 0])
       cylinder(r=2.5/2, h=40, center=true, $fn=12);
-    translate([-4, 0, height-3]) rotate([90, 0, 0])
-      cylinder(r=2.5/2, h=40, center=true, $fn=12);
+    translate([-4, 0, height-2]) rotate([90, 0, 0])
+      cylinder(r=1/2, h=40, center=true, $fn=12);
     // Effector screw heads.
     rotate([0, 0, 330]) translate([-12.5, 0, 2])
-      # cylinder(r=4, h=30, $fn=24);
+      cylinder(r=4, h=30, $fn=24);
     // Flat front face.
     translate([0, -face_offset-10, height/2]) difference() {
       cube([30, 20, 2*height], center=true);
