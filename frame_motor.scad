@@ -23,11 +23,14 @@ module frame_motor() {
     translate([0, motor_offset, 0]) {
       // Motor shaft/pulley cutout.
       rotate([90, 0, 0]) cylinder(r=12, h=20, center=true, $fn=60);
-      // NEMA 17 mounting screws.
-      for (a = [0:90:359]) rotate([0, a, 0]) {
-          translate([15.5, 0, 15.5]) rotate([90, 0, 0])
-            cylinder(r=1.65, h=20, center=true);
+      // NEMA 17 stepper motor mounting screws.
+      for (x = [-1, 1]) for (z = [-1, 1]) {
+        scale([x, 1, z]) translate([15.5, -5, 15.5]) {
+          rotate([90, 0, 0]) cylinder(r=1.65, h=20, center=true, $fn=12);
+          // Easier ball driver access.
+          rotate([74, -35, 0]) # cylinder(r=1.65, h=60, $fn=12);
         }
+      }
     }
   }
   // NEMA 17 stepper motor.
