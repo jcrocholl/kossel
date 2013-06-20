@@ -28,7 +28,7 @@ module frame_motor() {
         scale([x, 1, z]) translate([15.5, -5, 15.5]) {
           rotate([90, 0, 0]) cylinder(r=1.65, h=20, center=true, $fn=12);
           // Easier ball driver access.
-          rotate([74, -35, 0]) # cylinder(r=1.65, h=60, $fn=12);
+          rotate([74, -30, 0]) # cylinder(r=1.8, h=60, $fn=12);
         }
       }
     }
