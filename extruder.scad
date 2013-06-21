@@ -15,7 +15,7 @@ difference() {
     translate([31,20,21]) rotate([90,0,0]) cylinder (h=20, r=8);
 
     //pushfit/pneufit mount
-    translate([filament_offset, 6.5, 10])
+    translate([filament_offset, 6.5, 13])
       cylinder(r=7.5, h=20, center=true, $fn=6);
 
     //filament support
@@ -74,7 +74,7 @@ difference() {
     cylinder(h=60, r=1.1, $fn=12);
 
   //pushfit/pneufit mount
-  translate([filament_offset, 6.5, -0.5]) # import("m5_internal.stl");
+  translate([filament_offset, 6.5, 0]) # import("m5_internal.stl");
 
   //clamp slit
   translate([25,-1,10]) cube([2, 22, 35]);
