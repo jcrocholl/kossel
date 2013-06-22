@@ -26,7 +26,7 @@ difference() {
     //	  translate([9,6.5,-7]) rotate([0,0,0]) cylinder (h=16, r=5, $fn=12);
 
     //clamp
-    translate([21,0,28]) cube([12, 20, 14]);
+    translate([20, 0, 28]) cube([13, 20, 14]);
   }
 
   //pulley opening
