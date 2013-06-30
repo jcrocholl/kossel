@@ -6,15 +6,15 @@ Most of these parts are now stable and won't change much more.
 How to print Mini Kossel
 ========================
 
-3x plate_3x.stl (about 3x80g = 240g of plastic)
-1x plate_1x.stl (about 50g of plastic)
+* 3x plate_3x.stl (about 3x80g = 240g of plastic)
+* 1x plate_1x.stl (about 50g of plastic)
 
 Links
 =====
 
-Bill of Materials: http://reprap.org/wiki/Kossel
-Mailing list: http://groups.google.com/group/deltabot
-Project history: http://deltabot.tumblr.com
+* Bill of Materials: http://reprap.org/wiki/Kossel
+* Mailing list: http://groups.google.com/group/deltabot
+* Project history: http://deltabot.tumblr.com
 
 Pay it forward
 ==============
