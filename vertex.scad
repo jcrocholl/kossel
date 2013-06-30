@@ -84,11 +84,11 @@ module vertex(height, idler_offset, idler_space) {
               translate([a*7.5, y, 0]) rotate([0, a*90, 0]) screw_socket();
             }
             // Nut tunnels.
-            for (y = [0:4]) {
-              translate([0, -100-y, 3])
-                rotate([0, 0, -a*30]) cylinder(r=4, h=16, $fn=6);
-              translate([0, -100-y, -3]) scale([1, 1, -1])
-                rotate([0, 0, a*30]) cylinder(r=4, h=16, $fn=6);
+	    for (z = [-1, 1]) {
+	      scale([1, 1, z]) translate([0, -100, 3]) minkowski() {
+	        rotate([0, 0, -a*30]) cylinder(r=4, h=16, $fn=6);
+		cube([0.1, 5, 0.1], center=true);
+	      }
             }
           }
         }
