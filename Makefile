@@ -13,6 +13,9 @@ include $(wildcard *.deps)
 %.ascii.stl: %.scad
 	openscad -m make -d $*.deps -o $@ $<
 
+%.gcode: %.stl
+	slic3r -o $@ $<
+
 # Replace tabs with spaces.
 %.tab: %.scad
 	cp $< $@
