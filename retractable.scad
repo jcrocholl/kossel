@@ -2,10 +2,11 @@ include <configuration.scad>;
 
 use <microswitch.scad>;
 
-height = 26;
-height2 = 26;
-tunnel = 2.4;
-face_offset = 4;
+height = 26;  // Main half-round extrusion height.
+height2 = 26;  //  Main rectangular extrusion height.
+// A 2.0mm allen wrench (between flats) has a 2.22mm width between corners.
+tunnel = 2.4;  //  Allen wrench slot width.
+face_offset = 4;  // Offset from allen wrench to flat face for microswitch.
 
 module foot() {
   difference() {
@@ -31,15 +32,19 @@ module foot() {
 module retractable() {
   difference() {
     union() {
+      // Main body extrusion: vertical cylinder around allen wrench.
       translate([0, 0, height/2])
         cylinder(r=6, h=height, center=true, $fn=32);
+      // Rectanglar extrusion for mounting microswitch.
       translate([0, -3, height/2])
         cube([12, 6, height], center=true);
-      // Lower part on the left.
+      // Lower part on the left: vertical cylinder.
       translate([-6, 0, height2/2])
         cylinder(r=6, h=height2, center=true, $fn=32);
+      // Rectanglar extrusion to connect two vertical cylinders.
       translate([-3, 0, height2/2])
         cube([6, 12, height2], center=true);
+      // Rectangular extrusion near face for mounting microswitch.
       translate([-3, -3, height2/2])
         cube([18, 6, height2], center=true);
       // Feet for vertical M3 screw attachment.
@@ -48,16 +53,21 @@ module retractable() {
         scale([1, -1, 1]) foot();
       }
     }
+    // Taper left edge.
     translate([-19, 0, height/2+6]) rotate([0, 15, 0])
       cube([20, 20, height], center=true);
+    // Vertical hole for allen wrench.
     cylinder(r=tunnel/2+extra_radius, h=3*height, center=true, $fn=12);
+    // Slot for allen wrench.
     translate([0, -6, height/2+12])
       cube([tunnel-0.5, 12, height], center=true);
+    // Cutout at top for allen wrench to rotate and latch.
     rotate([0, 0, 30]) translate([0, -6, height/2+22])
       cube([tunnel, 12, height], center=true);
-    // Safety needle spring.
+    // Safety needle screw mounting hole.
     translate([-4.5, 0, height-11]) rotate([90, 0, 0])
       cylinder(r=2.5/2, h=40, center=true, $fn=12);
+    // Hole for safety needle.
     translate([-4, 0, height-2]) rotate([90, 0, 0])
       cylinder(r=1/2, h=40, center=true, $fn=12);
     // Effector screw heads.
@@ -72,6 +82,7 @@ module retractable() {
       % microswitch();
       for (x = [-9.5/2, 9.5/2]) {
         translate([x, 0, 0]) rotate([90, 0, 0])
+          // Cylinder mounting holes.
           cylinder(r=2.5/2, h=40, center=true, $fn=12);
       }
     }
