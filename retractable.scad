@@ -5,8 +5,9 @@ use <microswitch.scad>;
 height = 26;  // Main half-round extrusion height.
 height2 = 26;  //  Main rectangular extrusion height.
 // A 2.0mm allen wrench (between flats) has a 2.22mm width between corners.
-hole_dia = 2.4;  // Allen wrench distance between corners.  Extra_radius will be added.
-tunnel = hole_dia-0.5;  //  Allen wrench slot width.
+hole_dia = 2.22;  // Allen wrench distance between corners.  Extra_radius will be added.
+tunnel_extra = 0.0;  // Extra width in slot.
+tunnel = hole_dia+tunnel_extra;  //  Allen wrench slot width.
 face_offset = 4;  // Offset from allen wrench to flat face for microswitch.
 
 module foot() {
@@ -64,7 +65,7 @@ module retractable() {
       cube([tunnel, 12, height], center=true);
     // Cutout at top for allen wrench to rotate and latch.
     rotate([0, 0, 30]) translate([0, -6, height/2+22])
-      cube([hole_dia, 12, height], center=true);
+      cube([hole_dia+2*extra_radius, 12, height], center=true);
     // Safety needle screw mounting hole.
     translate([-4.5, 0, height-11]) rotate([90, 0, 0])
       cylinder(r=2.5/2, h=40, center=true, $fn=12);
