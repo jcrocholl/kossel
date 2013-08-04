@@ -1,6 +1,7 @@
 all: frame_top.stl frame_motor.stl carriage.stl endstop.stl glass_tab.stl \
 effector.stl retractable.stl power_supply.stl extruder.stl frame_extruder.stl \
-m5_internal.stl plate_3x.stl plate_1x.stl
+m5_internal.stl plate_3x.stl plate_1x.stl \
+switch_holder.stl
 
 .SECONDARY:
 
