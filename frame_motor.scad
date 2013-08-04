@@ -1,10 +1,9 @@
 include <configuration.scad>;
 
 use <vertex.scad>;
+use <nema17.scad>;
 
 $fn = 24;
-motor_offset = 44;
-motor_length = 47;
 
 module frame_motor() {
   difference() {
@@ -32,11 +31,7 @@ module frame_motor() {
         }
       }
     }
-  }
-  // NEMA 17 stepper motor.
-  % translate([0, motor_offset + motor_length/2, 0]) intersection() {
-    cube([42.2, motor_length, 42.2], center=true);
-    rotate([0, 45, 0]) cube([52, motor_length, 52], center=true);
+    translate([0, motor_offset, 0]) rotate([90, 0, 0]) % nema17();
   }
 }
 
