@@ -12,7 +12,7 @@ cone_r2 = 14;
 module effector() {
   difference() {
     union() {
-      cylinder(r=offset-2, h=height, center=true, $fn=36);
+      cylinder(r=offset-3, h=height, center=true, $fn=60);
       for (a = [60:120:359]) rotate([0, 0, a]) {
 	rotate([0, 0, 30]) translate([offset-2, 0, 0])
 	  cube([10, 13, height], center=true);
