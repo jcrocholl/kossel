@@ -8,9 +8,7 @@ triangle_radius = glass_radius * 2.13;
 
 module curve_slot(r, h) {
   linear_extrude(h) minkowski() {
-    union() {
-      circle(r=r, h=2*height, center=true, $fn=12);
-    }
+    circle(r=r, h=2*height, center=true, $fn=12);
     intersection() {
       square([16, 3*glass_radius], center=true);
       difference() {
