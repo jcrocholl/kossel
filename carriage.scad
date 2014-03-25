@@ -50,12 +50,16 @@ module carriage() {
     // Screws for linear slider.
     for (x = [-10, 10]) {
       for (y = [-10, 10]) {
-        translate([x, y, thickness]) #
+        translate([x, y, thickness]) 
           cylinder(r=m3_wide_radius, h=30, center=true, $fn=12);
       }
     }
+
+    // potential screw to hold a washer to keep belts in-place
+    translate([3,-2.5,8]) cylinder(r=1,h=9,$fn=12);
+
     // Screws for ball joints.
-    translate([0, 16, horn_thickness/2]) rotate([0, 90, 0]) #
+    translate([0, 16, horn_thickness/2]) rotate([0, 90, 0]) 
       cylinder(r=m3_wide_radius, h=60, center=true, $fn=12);
     // Lock nuts for ball joints.
     for (x = [-1, 1]) {
