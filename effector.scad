@@ -43,4 +43,7 @@ module effector() {
   }
 }
 
-translate([0, 0, height/2]) effector();
+// Shift up and add a brim for easier printing at quelab
+union() {
+translate([0, 0, height/2+.32]) effector();
+color("Cyan") cylinder(h=.4,r1=34.3,r2=34,$fn=6);}

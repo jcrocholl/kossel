@@ -78,4 +78,11 @@ module retractable() {
   }
 }
 
+// put solid layer below holes for quelab printer
+union(){
 retractable();
+color("Cyan") {
+  cylinder(h=.4,r=3,$fn=8);
+  translate([ 11,6.5,0]) cylinder(h=.4,r=3,$fn=8);
+  translate([-11,6.5,0]) cylinder(h=.4,r=3,$fn=8);
+}}

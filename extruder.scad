@@ -29,8 +29,12 @@ module extruder() {
     translate([16,21,21]) rotate([90,0,0]){
       cylinder (h=22, r=6.6);
 
-      rotate([0,0,45]) {
-        //translate([14,0,0]) cylinder(h=22, r=1.6, $fn=12);
+      // Holes for screws to mount into gearhead
+      #rotate([0,0,45]) {
+        // smear hole where tab flexes to go around bolt
+        hull() { translate([15,-.8,0]) cylinder(h=22, r=1.9, $fn=12);
+        translate([14,0,0]) cylinder(h=22, r=1.6, $fn=12); }
+
         translate([0,14,0]) cylinder(h=22, r=1.6, $fn=12);
         translate([-14,0,0]) cylinder(h=22, r=1.6, $fn=12);
         translate([0,-14,0]) cylinder(h=22, r=1.6, $fn=12);
@@ -48,18 +52,20 @@ module extruder() {
     #translate([31,22,21]) rotate([90,30,0]) cylinder (h=8.01, r=4.7, $fn=6);
 
     //bearing
-    difference() {
+    // slic3r's overhang fill seems to work fine for me (ab)
+    //difference() {
       union() {
         translate([31,9.5,21]) rotate([90,0,0]) cylinder (h=5.25, r=8.5);
         translate([31,9.5-5.25,21-8.25-2]) cube([20, 5.25, 18.5]);
         //opening between bearing and pulley
         translate([20,9.5-5.25,21-8.25+3.25+1]) cube([10, 5.25, 8]);
       }
-      //removable supports
-      for (z = [15:3:27]) {
-        translate([36, 10, z]) # cube([20, 20, 0.5], center=true);
-      }
-    }
+
+      ////removable supports
+      //for (z = [15:3:27]) {
+      //  translate([36, 10, z])  cube([20, 20, 0.5], center=true);
+      //}
+    //}
 
     //filament path chamfer
     translate([filament_offset,6.5,15]) rotate([0,0,0]) #
@@ -83,4 +89,7 @@ module extruder() {
   }
 }
 
-extruder();
+// adding brim for quelab print
+union(){
+translate([-20,22,.32]) extruder();
+color("Cyan") cylinder(h=.4,r1=28.3,r2=28,$fn=8);}
