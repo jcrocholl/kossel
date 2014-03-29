@@ -61,12 +61,27 @@ module sub2(height,idler_offset,idler_space) {  difference() {
   }
 }}
 
+// add a little extra bracing to the edge to try to keep from warping
+module endBrace(height) {
+  translate([ 43.05,57.5,0.34]) rotate([0,0,60]) {
+    // extend leg a bit
+    hull() { cube([1,4,height]);
+      translate([10,2,0]) cylinder(h=15,r=1.5, $fn=16);
+    }
+    hull() {
+      translate([10,2,0]) cylinder(h=13,r=1.5, $fn=16);
+      translate([9,2,0]) cube([3,12,3]);
+    }
+  }
+}
+
 module vertex(height, idler_offset, idler_space) {
-  union() {
+  //union() {
     /* we will use full brim/raft at quelab, added later...
     // Pads to improve print bed adhesion for slim ends.
     translate([-37.5, 52.2, -height/2]) cylinder(r=8, h=0.5);
     translate([37.5, 52.2, -height/2]) cylinder(r=8, h=0.5);*/
+
     difference() { vertexShell(height);
       sub2(height,idler_offset,idler_space);
       translate([0, 58, 0]) minkowski() {
@@ -90,17 +105,22 @@ module vertex(height, idler_offset, idler_space) {
               translate([a*7.5, y, 0]) rotate([0, a*90, 0]) screw_socket();
             }
             // Nut tunnels.
-	    for (z = [-1, 1]) {
-	      scale([1, 1, z]) translate([0, -100, 3]) minkowski() {
-	        rotate([0, 0, -a*30]) cylinder(r=4, h=16, $fn=6);
-		cube([0.1, 5, 0.1], center=true);
-	      }
+            for (z = [-1, 1]) {
+	           scale([1, 1, z]) translate([0, -100, 3]) minkowski() {
+	             rotate([0, 0, -a*30]) cylinder(r=4, h=16, $fn=6);
+		          cube([0.1, 5, 0.1], center=true);
+	           }
             }
           }
         }
       }
     }
-  }
+
+    // attempt to keep ends from pulling up as it cools
+    //translate([30,65,-height/2]) rotate([0,0,-30]) cube([15,3,3]);
+    //mirror([1,0,0]) endBrace(height);
+    //                endBrace(height);
+  //}
 }
 
 // ------------ pad/brim to help sticking/warping on Quelab printer (ab)
@@ -108,13 +128,13 @@ module footTab() {
 x1=13; y1=30;
 x2=5;  y2=40;
   linear_extrude(height=0.4)
-    polygon(points=[[0,0],[-x1,y1],[-x2,y2],   [x2,y2],[x1,y1]],
+    polygon(points=[[0,0],[-x1,y1+5],[-x2,y2+10],   [x2,y2+10],[x1+5,y1+10]],
           paths=[[0,1,2,3,4,0]]);
 }
 
 module vertexPad() { color("Cyan") {
   translate([0,-3,0]) scale([2,1,1]) cylinder(h=.4,r1=16.3,r2=16,$fn=6);
-  translate([ 25,34,0]) rotate(-33) footTab();
+  translate([ 25,34,0]) rotate(-33) mirror([1,0,0]) footTab();
   translate([-25,34,0]) rotate( 33) footTab();
   linear_extrude(height=0.4)
     polygon(points=[[16,10],[35.6,44.2],[-35.6,44.2],[-16,10]],paths=[[0,1,2,3,0]]);

@@ -24,4 +24,6 @@ module frame_top() {
 union() {
 translate([0, 0, 7.5+.34]) rotate([0,180,0]) frame_top();
 vertexPad();
+mirror([1,0,0]) endBrace(extrusion);
+                endBrace(extrusion);
 }
