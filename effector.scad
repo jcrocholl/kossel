@@ -43,7 +43,25 @@ module effector() {
   }
 }
 
+module supportBlade() {
+  intersection() { 
+    translate([-2,-3,0]) cube([5,6,5]);
+    translate([0,-.2,-1.3]) rotate([0,-38,0]) hull() {
+      cube([3.3,.4,1.5]);
+      translate([0,-.8,-3]) cube([3,2,1]);
+    }
+  }
+}
+
 // Shift up and add a brim for easier printing at quelab
 union() {
 translate([0, 0, height/2+.32]) effector();
-color("Cyan") cylinder(h=.4,r1=34.3,r2=34,$fn=6);}
+color("Cyan") {
+  cylinder(h=.4,r1=34.3,r2=34,$fn=6);
+  for (a = [0,120,240]) {
+    rotate([0,0,a]) {
+      translate([ 18.4,-20,0.1]) supportBlade();
+      translate([-18.4,-20,0.1]) rotate([0,0,180]) supportBlade();
+    }
+  }
+}}
