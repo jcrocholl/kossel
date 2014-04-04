@@ -14,7 +14,7 @@ module motorScrewsAndAccess(){
       scale([x, 1, z]) translate([15.5, -5, 15.5]) {
         rotate([90, 0, 0]) cylinder(r=1.65, h=20, center=true, $fn=12);
         // Easier ball driver access.
-        rotate([74, -30, 0]) cylinder(r=1.8, h=60, $fn=12);
+        //rotate([74, -30, 0]) cylinder(r=1.8, h=60, $fn=12);
       }
     }
   }
@@ -38,7 +38,7 @@ module frame_motor() {
     //translate([20.5, -10, 0]) rotate([90, -90, 30])
     //  scale([0.11, 0.11, 1]) import("logotype.stl");
 
-    motorCablePaths();
+    //motorCablePaths();
     motorScrewsAndAccess();
 
     translate([0, motor_offset, 0]) rotate([90, 0, 0]) % nema17();

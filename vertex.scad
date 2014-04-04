@@ -14,8 +14,10 @@ module extrusion_cutout(h, extra) {
 }
 
 module screw_socket() {
+  extraCounterSink = 0.4;  // add a little extra countersink for Quelab printer
   cylinder(r=m3_wide_radius, h=20, center=true);
-  translate([0, 0, 3.8]) cylinder(r=3.5, h=5);
+  translate([0, 0, 3.8-extraCounterSink])
+    cylinder(r=3.5, h=5);
 }
 
 module screw_socket_cone() {
@@ -61,66 +63,59 @@ module sub2(height,idler_offset,idler_space) {  difference() {
   }
 }}
 
-// add a little extra bracing to the edge to try to keep from warping
-module endBrace(height) {
-  translate([ 43.05,57.5,0.34]) rotate([0,0,60]) {
-    // extend leg a bit
-    hull() { cube([1,4,height]);
-      translate([10,2,0]) cylinder(h=15,r=1.5, $fn=16);
+module vertex(height, idler_offset, idler_space) {
+  difference() {
+    vertexShell(height);
+    sub2(height,idler_offset,idler_space);
+    translate([0, 58, 0]) minkowski() {
+      intersection() {
+        rotate([0, 0, -90])
+          cylinder(r=55, h=height, center=true, $fn=3);
+        translate([0, 7, 0])
+          cube([100, 30, 2*height], center=true);
+      }
+      cylinder(r=roundness, h=1, center=true);
     }
-    hull() {
-      translate([10,2,0]) cylinder(h=13,r=1.5, $fn=16);
-      translate([9,2,0]) cube([3,12,3]);
+    extrusion_cutout(height+10, 2*extra_radius);
+    for (z = [0:30:height]) {
+      translate([0, -7.5-extra_radius, z+7.5-height/2]) rotate([90, 0, 0])
+        screw_socket_cone();
+      for (a = [-1, 1]) {
+        rotate([0, 0, 30*a]) translate([-16*a, 111, z+7.5-height/2]) {
+          // % rotate([90, 0, 0]) extrusion_cutout(200, 0);
+          // Screw sockets.
+          for (y = [-88, -44]) {
+            translate([a*7.5, y, 0]) rotate([0, a*90, 0]) screw_socket();
+          }
+          // Nut tunnels.
+          for (zzz = [-1, 1]) { if ((height<20) || (zzz>0)) {
+          assign(zz=((z<20)?-1:1)*zzz){
+            scale([1, 1, zz]) translate([0, -100, 3]) minkowski() {
+              //rotate([0, 0, -a*30]) #cylinder(r=4, h=16, $fn=6);
+              rotate([0, 0, -a*30]) #cylinder(r=4, h=5, $fn=6);
+                cube([0.1, 5, 0.1], center=true);
+            }
+          }}}
+        }
+      }
     }
   }
 }
 
-module vertex(height, idler_offset, idler_space) {
-  //union() {
-    /* we will use full brim/raft at quelab, added later...
-    // Pads to improve print bed adhesion for slim ends.
-    translate([-37.5, 52.2, -height/2]) cylinder(r=8, h=0.5);
-    translate([37.5, 52.2, -height/2]) cylinder(r=8, h=0.5);*/
 
-    difference() { vertexShell(height);
-      sub2(height,idler_offset,idler_space);
-      translate([0, 58, 0]) minkowski() {
-        intersection() {
-          rotate([0, 0, -90])
-            cylinder(r=55, h=height, center=true, $fn=3);
-          translate([0, 7, 0])
-            cube([100, 30, 2*height], center=true);
-        }
-        cylinder(r=roundness, h=1, center=true);
-      }
-      extrusion_cutout(height+10, 2*extra_radius);
-      for (z = [0:30:height]) {
-        translate([0, -7.5-extra_radius, z+7.5-height/2]) rotate([90, 0, 0])
-          screw_socket_cone();
-        for (a = [-1, 1]) {
-          rotate([0, 0, 30*a]) translate([-16*a, 111, z+7.5-height/2]) {
-            // % rotate([90, 0, 0]) extrusion_cutout(200, 0);
-            // Screw sockets.
-            for (y = [-88, -44]) {
-              translate([a*7.5, y, 0]) rotate([0, a*90, 0]) screw_socket();
-            }
-            // Nut tunnels.
-            for (z = [-1, 1]) {
-	           scale([1, 1, z]) translate([0, -100, 3]) minkowski() {
-	             rotate([0, 0, -a*30]) cylinder(r=4, h=16, $fn=6);
-		          cube([0.1, 5, 0.1], center=true);
-	           }
-            }
-          }
-        }
-      }
+// add a little extra bracing to the edge to try to keep from warping
+module endBrace(height) {
+br=1.2;
+  translate([ 43.05,57.5,0.34]) rotate([0,0,60]) {
+    // extend leg a bit
+    hull() { cube([1,4,height]);
+      translate([10,br,0]) cylinder(h=15,r=br, $fn=16);
     }
-
-    // attempt to keep ends from pulling up as it cools
-    //translate([30,65,-height/2]) rotate([0,0,-30]) cube([15,3,3]);
-    //mirror([1,0,0]) endBrace(height);
-    //                endBrace(height);
-  //}
+    hull() {
+      translate([10,br,0]) cylinder(h=13,r=br, $fn=16);
+      translate([9,2,0]) cube([2*br,12,2]);
+    }
+  }
 }
 
 // ------------ pad/brim to help sticking/warping on Quelab printer (ab)

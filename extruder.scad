@@ -92,4 +92,5 @@ module extruder() {
 // adding brim for quelab print
 union(){
 translate([-20,22,.32]) extruder();
-color("Cyan") cylinder(h=.4,r1=28.3,r2=28,$fn=8);}
+color("Cyan") cylinder(h=.4,r1=28.3,r2=28,$fn=8);
+}
