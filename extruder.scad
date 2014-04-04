@@ -9,7 +9,7 @@ module extruder() {
   rotate([90, 0, 0]) difference() {
     union() {
       //main cylinder
-      translate([16,20,21]) rotate([90,0,0]) cylinder(h=20, r=17.5);
+      translate([16,20,21]) rotate([90,0,0]) cylinder(h=20, r=17.5, $fn=48);
 
       //bearing mount
       translate([31,20,21]) rotate([90,0,0]) cylinder (h=20, r=8);
@@ -27,10 +27,10 @@ module extruder() {
 
     //pulley opening
     translate([16,21,21]) rotate([90,0,0]){
-      cylinder (h=22, r=6.6);
+      cylinder (h=22, r=6.7, $fn=32);
 
       // Holes for screws to mount into gearhead
-      #rotate([0,0,45]) {
+      rotate([0,0,45]) {
         // smear hole where tab flexes to go around bolt
         hull() { translate([15,-.8,0]) cylinder(h=22, r=1.9, $fn=12);
         translate([14,0,0]) cylinder(h=22, r=1.6, $fn=12); }
@@ -45,14 +45,18 @@ module extruder() {
     translate([16,21,21]) rotate([90,0,0]) cylinder (h=3.35, r=11.25);
 
     //pulley hub indentation
-    translate([16,20-2,21]) rotate([90,0,0]) cylinder (h=5.6, r=7);
+    // my little groved drive does not need this (ab)
+    //translate([16,20-2,21]) rotate([90,0,0]) cylinder (h=5.6, r=7);
+    // however, the set screw does stick out, so it needs a little extra at the top
+    translate([16,2.5,21]) rotate([90,0,0]) cylinder (h=4, r=7.5);
 
     //bearing screws
-    translate([31,21,21]) rotate([90,0,0]) cylinder (h=22, r=2.6, $fn=12);
-    #translate([31,22,21]) rotate([90,30,0]) cylinder (h=8.01, r=4.7, $fn=6);
+    translate([31,21,21]) rotate([90,0,0]) cylinder (h=22, r=2.6, $fn=16);
+    translate([31,22,21]) rotate([90,30,0]) cylinder (h=8.01, r=4.7, $fn=6);
 
     //bearing
-    // slic3r's overhang fill seems to work fine for me (ab)
+    // slic3r 9.9 or before overhang fill works for me (ab)
+    //        1.0+ fill does not work at all.  almost anywhere ;-(
     //difference() {
       union() {
         translate([31,9.5,21]) rotate([90,0,0]) cylinder (h=5.25, r=8.5);
@@ -68,7 +72,7 @@ module extruder() {
     //}
 
     //filament path chamfer
-    translate([filament_offset,6.5,15]) rotate([0,0,0]) #
+    translate([filament_offset,6.5,15]) rotate([0,0,0])
       cylinder(h=3, r1=0.5, r2=3, $fn=12);
 
     //filament path
@@ -76,7 +80,7 @@ module extruder() {
       cylinder(h=60, r=1.1, $fn=12);
 
     //pushfit/pneufit mount
-    translate([filament_offset, 6.5, 0]) # cylinder(r=2.3, h=8, $fn=12);
+    translate([filament_offset, 6.5, 0]) cylinder(r=2.3, h=8, $fn=12);
 
     //clamp slit
     translate([25,-1,10]) cube([2, 22, 35]);
