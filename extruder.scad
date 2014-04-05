@@ -12,7 +12,7 @@ module extruder() {
       translate([16,20,21]) rotate([90,0,0]) cylinder(h=20, r=17.5, $fn=48);
 
       //bearing mount
-      translate([31,20,21]) rotate([90,0,0]) cylinder (h=20, r=8);
+      translate([31,20-3,21]) rotate([90,0,0]) #cylinder (h=20-3, r=8);
 
       //pushfit/pneufit mount
       translate([filament_offset, 6.5, 13])
@@ -22,7 +22,7 @@ module extruder() {
       translate([21.75,6.5,34]) rotate([0,0,0]) cylinder (h=8, r=3, $fn=12);
 
       //clamp
-      translate([20, 0, 28]) cube([13, 20, 14]);
+      translate([20, 0, 28-2.4]) cube([13, 20, 14+2.5]);
     }
 
     //pulley opening
