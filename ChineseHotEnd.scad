@@ -17,7 +17,7 @@ diamNut = 10;
     union() {
       translate([0,0,-widthCap]) {
         cylinder(h=40,r=radCyl+spread,$fn=48);
-        translate([0,0,-heightNut-.5]) cylinder(h=9.9,r=diamNut/2+spread,$fn=6);
+        translate([0,0,-heightNut-.5]) cylinder(h=9.9,r=diamNut/2+1+2*spread,$fn=6);
       }
 
     }

@@ -37,7 +37,7 @@ module effector() {
       }
 
       // extra cap for chinese hot end
-      cylinder(r=9,h=14.5,$fn=6);
+      cylinder(r=8.5,h=14.5,$fn=6);
     }
     // for shorter hot-end that Johann used:
     //translate([0, 0, push_fit_height-height/2]) cylinder(r=hotend_radius, h=height, $fn=36);
