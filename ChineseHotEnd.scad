@@ -13,11 +13,12 @@ radCyl = 16.12/2;
 widthCap = 5.1;
 heightNut = 8.5;
 diamNut = 10;
+radNutEdges = 11.7/2;  // tips of hexagons used for $fn=6 cyl, not face diam
   difference() {
     union() {
       translate([0,0,-widthCap]) {
         cylinder(h=40,r=radCyl+spread,$fn=48);
-        translate([0,0,-heightNut-.5]) cylinder(h=9.9,r=diamNut/2+1+2*spread,$fn=6);
+        translate([0,0,-heightNut-.5]) cylinder(h=9.9,r=radNutEdges+2*spread,$fn=6);
       }
 
     }
