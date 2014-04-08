@@ -41,7 +41,8 @@ module effector() {
     }
     // for shorter hot-end that Johann used:
     //translate([0, 0, push_fit_height-height/2]) cylinder(r=hotend_radius, h=height, $fn=36);
-    translate([0,0,-4.1]) mirror([0,0,1]) ChineseHotEnd();
+    translate([0,0,-4.1+.3]) mirror([0,0,1]) ChineseHotEnd();
+    translate([0,0,-height/2-.2]) cylinder(h=5.6,r=16.12/2+.2,$fn=48);  // mount depth for hot end is critical.  spread adjustments on ChineseHotEnd may not be perfect.  This adjusts mount depth
     translate([0, 0, -6+14]) import("m5_internal.stl");
     for (a = [0:60:359]) rotate([0, 0, a]) {
       translate([0, mount_radius, 0])

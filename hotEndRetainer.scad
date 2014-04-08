@@ -15,9 +15,9 @@ module hotEndRetainer() {
 radGroove = 12.1/2;
   difference() {
     // groove width is 4.5.  Make a little thinner for "slop" and pad
-    cylinder(r=offset-3, h=4, $fn=60);
+    cylinder(r=offset-3, h=4.4, $fn=60);
 
-    translate([0,0,-.1]) cylinder(r=radGroove+.2,h=4.5,$fn=48); 
+    translate([0,0,-.1]) cylinder(r=radGroove+.2,h=5,$fn=48); 
 
     for (a = [0:60:359]) rotate([0, 0, a]) {
       translate([0, mount_radius, 0])
