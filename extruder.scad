@@ -12,7 +12,7 @@ module extruder() {
       translate([16,20,21]) rotate([90,0,0]) cylinder(h=20, r=17.5, $fn=48);
 
       //bearing mount
-      translate([31,20-3,21]) rotate([90,0,0]) #cylinder (h=20-3, r=8);
+      translate([31,20-3,21]) rotate([90,0,0]) cylinder (h=20-3, r=8);
 
       //pushfit/pneufit mount
       translate([filament_offset, 6.5, 13])
@@ -27,7 +27,7 @@ module extruder() {
 
     //pulley opening
     translate([16,21,21]) rotate([90,0,0]){
-      cylinder (h=22, r=6.7, $fn=32);
+      cylinder (h=22, r=6.7+.1, $fn=48);
 
       // Holes for screws to mount into gearhead
       rotate([0,0,45]) {
@@ -59,10 +59,10 @@ module extruder() {
     //        1.0+ fill does not work at all.  almost anywhere ;-(
     //difference() {
       union() {
-        translate([31,9.5,21]) rotate([90,0,0]) cylinder (h=5.25, r=8.5);
-        translate([31,9.5-5.25,21-8.25-2]) cube([20, 5.25, 18.5]);
+        translate([31,9.5+0.75,21]) rotate([90,0,0]) cylinder (h=5.25+.5, r=8.5);
+        translate([31,9.5+0.75-5.25-.5,21-8.25-2]) cube([20, 5.25, 18.5]);
         //opening between bearing and pulley
-        translate([20,9.5-5.25,21-8.25+3.25+1]) cube([10, 5.25, 8]);
+        translate([20,9.5+0.75-5.25-.5,21-8.25+3.25+1]) cube([10, 5.25, 8]);
       }
 
       ////removable supports
@@ -84,6 +84,7 @@ module extruder() {
 
     //clamp slit
     translate([25,-1,10]) cube([2, 22, 35]);
+    translate([25.5,-1,34]) rotate([0,10,0]) cube([1.5, 22, 10]);
     //clamp nut
     translate([10.5,12,38]) rotate([0,90,0])
       cylinder(h=11, r=m3_nut_radius, $fn=6);
