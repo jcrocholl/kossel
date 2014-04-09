@@ -48,7 +48,7 @@ module extruder() {
     // my little groved drive does not need this (ab)
     //translate([16,20-2,21]) rotate([90,0,0]) cylinder (h=5.6, r=7);
     // however, the set screw does stick out, so it needs a little extra at the top
-    translate([16,2.5,21]) rotate([90,0,0]) cylinder (h=4, r=7.5);
+    translate([16,18,21]) rotate([90,0,0]) cylinder (h=7, r=7.5);
 
     //bearing screws
     translate([31,21,21]) rotate([90,0,0]) cylinder (h=22, r=2.6, $fn=16);
@@ -97,5 +97,5 @@ module extruder() {
 // adding brim for quelab print
 union(){
 translate([-20,22,.32]) extruder();
-color("Cyan") cylinder(h=.4,r1=28.3,r2=28,$fn=8);
+//color("Cyan") cylinder(h=.4,r1=28.3,r2=28,$fn=8);
 }
