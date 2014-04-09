@@ -43,7 +43,11 @@ module effector() {
     //translate([0, 0, push_fit_height-height/2]) cylinder(r=hotend_radius, h=height, $fn=36);
     translate([0,0,-4.1+.3]) mirror([0,0,1]) ChineseHotEnd();
     translate([0,0,-height/2-.2]) cylinder(h=5.6,r=16.12/2+.2,$fn=48);  // mount depth for hot end is critical.  spread adjustments on ChineseHotEnd may not be perfect.  This adjusts mount depth
-    translate([0, 0, -6+14]) import("m5_internal.stl");
+
+    // overkill. 
+    //translate([0, 0, -6+14]) import("m5_internal.stl");
+    translate([0, 0, -6+14]) cylinder(h=8,r=4.9/2-.2,$fn=16);
+
     for (a = [0:60:359]) rotate([0, 0, a]) {
       translate([0, mount_radius, 0])
 	     cylinder(r=m3_wide_radius, h=2*height, center=true, $fn=12);
@@ -65,7 +69,7 @@ module supportBlade() {
 union() {
 translate([0, 0, height/2+.32]) effector();
 color("Cyan") {
-  cylinder(h=.4,r1=34.3,r2=34,$fn=6);
+  cylinder(h=.4,r=33.3,$fn=6);
   for (a = [0,120,240]) {
     rotate([0,0,a]) {
       translate([ 18.4,-20,0.1]) supportBlade();
