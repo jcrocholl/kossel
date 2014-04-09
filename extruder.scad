@@ -5,6 +5,20 @@ include <configuration.scad>;
 
 filament_offset = 22.5;
 
+// This is slightly larger than the actual bearing to allow some spinning clearance
+module bearingSpace() {
+bearingRadius=16/2;
+bearingWidth=5;  // outside part
+hubRadius=7.75/2;
+hubInset=0.5;
+union() {
+  difference() {
+    cylinder(r=bearingRadius+0.5,h=bearingWidth+2*hubInset);
+    translate([0,0,-.1]) cylinder(r=hubRadius-0.2,h=bearingWidth+2);
+  }
+  translate([0,0,hubInset]) cylinder(r=hubRadius+1,h=bearingWidth);
+}}
+
 module extruder() {
   rotate([90, 0, 0]) difference() {
     union() {
@@ -51,7 +65,7 @@ module extruder() {
     translate([16,18,21]) rotate([90,0,0]) cylinder (h=7, r=7.5);
 
     //bearing screws
-    translate([31,21,21]) rotate([90,0,0]) cylinder (h=22, r=2.6, $fn=16);
+    translate([31,21,21]) rotate([90, 0,0]) cylinder (h=22  , r=2.6, $fn=16);
     translate([31,22,21]) rotate([90,30,0]) cylinder (h=8.01, r=4.7, $fn=6);
 
     //bearing
@@ -59,10 +73,13 @@ module extruder() {
     //        1.0+ fill does not work at all.  almost anywhere ;-(
     //difference() {
       union() {
-        translate([31,9.5+0.75,21]) rotate([90,0,0]) cylinder (h=5.25+.5, r=8.5);
-        translate([31,9.5+0.75-5.25-.5,21-8.25-2]) cube([20, 5.25, 18.5]);
+        // instead of just cylinder, make little extra space to spin freely
+        //translate([31,9.5+0.75,21]) rotate([90,0,0]) #cylinder (h=5.25, r=8.5);
+        translate([31,9.5+0.6,21]) rotate([90,0,0]) bearingSpace();
+
+        //translate([31,9.5+0.6-5.25-.4,21-8.25-2]) #cube([20, 5.25, 18.5]);
         //opening between bearing and pulley
-        translate([20,9.5+0.75-5.25-.5,21-8.25+3.25+1]) cube([10, 5.25, 8]);
+        translate([20,9.5+0.75-5.25-.5,21-8.25+3.25+1]) #cube([6, 5.25, 8]);
       }
 
       ////removable supports
@@ -97,5 +114,5 @@ module extruder() {
 // adding brim for quelab print
 union(){
 translate([-20,22,.32]) extruder();
-//color("Cyan") cylinder(h=.4,r1=28.3,r2=28,$fn=8);
+color("Cyan") cylinder(h=.4,r=25,$fn=6);
 }
