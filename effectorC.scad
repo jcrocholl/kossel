@@ -37,7 +37,10 @@ module effector() {
       }
 
       // extra cap for chinese hot end
-      cylinder(r=8.5,h=14.5,$fn=6);
+      hull() {
+        cylinder(r=8.5,h=12,$fn=6);
+        cylinder(r=4,h=16,$fn=20);
+      }
     }
     // for shorter hot-end that Johann used:
     //translate([0, 0, push_fit_height-height/2]) cylinder(r=hotend_radius, h=height, $fn=36);
@@ -46,12 +49,16 @@ module effector() {
 
     // overkill. 
     //translate([0, 0, -6+14]) import("m5_internal.stl");
-    translate([0, 0, -6+14]) cylinder(h=8,r=4.9/2-.2,$fn=16);
+    translate([0, 0, -6+14]) cylinder(h=11,r=4.9/2-.2,$fn=16);
 
     for (a = [0:60:359]) rotate([0, 0, a]) {
       translate([0, mount_radius, 0])
 	     cylinder(r=m3_wide_radius, h=2*height, center=true, $fn=12);
     }
+
+    // slice in half to check wall thicknesses, diagnostic only
+    //translate([-30,0,-10]) cube([60,30,30]);    
+
   }
 }
 
