@@ -159,6 +159,13 @@ union() {
     //linear_extrude(height=0.4)
     //  polygon(points=[[17,-20],[23,16],[17,28],  [-17,28],[-23,16],[-17,-20]],
     //          paths=[[0,1,2,3,4,5,0]]);
+    hull() {
+      for (i=[-wheel_offset,wheel_offset]) {
+        translate([-extrusion_width/2-wheel_radius,base_shift+i,0])
+          cylinder(h=0.4,r=7.15,$fn=24);
+      }
+      translate([24.15,base_shift-14,0]) cube([9,28,0.4]);
+    }
 
     // support material, forced
     translate([ 15,16.2,base_thickness]) earBrace();
