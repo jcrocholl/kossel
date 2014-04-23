@@ -98,7 +98,7 @@ bthick = base_thickness + 2*dilation;
       }
     }
     if (dilation==0) { // this is the ACTUAL mount, not a socket, add screw holes
-      translate([0,0,-3]) wheelAxleHole();
+      translate([0,0,-2.2]) wheelAxleHole();
       translate([0,0,bthick/2]) rotate([0,90,0]) {
         for (i=[-9,9]) {
           translate([0,i,-3]) wheelAxleHole();
@@ -125,6 +125,7 @@ supportSpread = 6;
         }
       }
     }
+    translate([-8,-30,-.1]) cube([16,60,1.5]); // extra clearance for extrusion rail
   }
 }
 
@@ -132,7 +133,8 @@ module wheelBaseHoles() {
 dx = extrusion_width/2+wheel_radius;
   translate([-dx, -wheel_offset,0]) wheelAxleHole();
   translate([-dx,  wheel_offset,0]) wheelAxleHole();
-  translate([dx-3.8,0,0]) mobileWheelMount(.3);
+  translate([dx-6,0,0]) mobileWheelMount(.3);
+  translate([dx-2,0,0]) mobileWheelMount(.3);
 }
 
 module earBrace() {
@@ -146,6 +148,15 @@ module earBrace() {
   }
 }
 
+module mobileSupport() {
+  for (i=[26,30]) {
+    intersection() {
+      translate([i  ,base_shift-8.9,-0.4]) rotate([0,5,-90]) earBrace();
+      translate([i-2,base_shift-17,.3]) cube([4,8,4]);
+    }
+  }
+}
+
 union() {
   difference() {
     union() {
@@ -155,6 +166,7 @@ union() {
     translate([0,base_shift,0]) wheelBaseHoles();
   }
   translate([23,base_shift,0.3]) mobileWheelMount(0);
+
   color("Cyan") {
     //linear_extrude(height=0.4)
     //  polygon(points=[[17,-20],[23,16],[17,28],  [-17,28],[-23,16],[-17,-20]],
@@ -170,5 +182,7 @@ union() {
     // support material, forced
     translate([ 15,16.2,base_thickness]) earBrace();
     translate([-15,16.2,base_thickness]) mirror([1,0,0]) earBrace();
+    mobileSupport();
+    translate([0,2*base_shift,0]) mirror([0,1,0]) mobileSupport();
   } 
 }
