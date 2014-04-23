@@ -78,6 +78,10 @@ module carriage() {
                    center=true, $fn=6);
       }
     }
+
+    // shave off corners, not necessary when attached to wheel base
+    translate([6,-20,-.3]) rotate([0,0,-25]) cube([10,30,9]);
+    translate([-15,-25,-.3]) rotate([0,0,16]) cube([10,30,9]);
   }
 }
 
