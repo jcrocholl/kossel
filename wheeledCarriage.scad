@@ -129,7 +129,7 @@ supportSpread = 6;
         }
       }
     }
-    translate([-8,-30,-.1]) cube([16,60,1.5]); // extra clearance for extrusion rail
+    //translate([-8,-30,-.1]) cube([16,60,1.5]); // extra clearance for extrusion rail
   }
 }
 
@@ -161,7 +161,7 @@ module mobileSupport() {
   }
 }
 
-union() {
+difference() { union() {
   difference() {
     union() {
       translate([0,0,base_thickness]) carriage();
@@ -189,4 +189,6 @@ union() {
     mobileSupport();
     translate([0,2*base_shift,0]) mirror([0,1,0]) mobileSupport();
   } 
+}
+translate([-8.5,-20,-.1]) cube([17,60,1.1]); // extra clearance for extrusion rail
 }
