@@ -112,7 +112,7 @@ bthick = base_thickness + 2*dilation;
   }
 }
 
-module wheelBase() {
+module wheelBase1() {
 dx = extrusion_width/2+wheel_radius;
 supportSpread = 6;
   difference() {
@@ -130,6 +130,44 @@ supportSpread = 6;
       }
     }
     translate([-8,-30,-.1]) cube([16,60,1.5]); // extra clearance for extrusion rail
+  }
+}
+module wheelBase() {
+dx = extrusion_width/2+wheel_radius;
+supportSpread = 6;
+  difference() {
+    union() {
+      for (i=[-wheel_offset,wheel_offset]) {
+        hull() {
+          translate([-dx, i,0]) wheelAxleBrace();
+          translate([-dx+12,(i<0)?i+8:i-8,4]) cylinder(r=4,h=base_thickness-7,$fn=6);
+        }
+      }
+      //translate([ dx-3,-17,0]) %cube([9,34,base_thickness]);
+      translate([0,0,base_thickness/2]) rotate([0,90,0]) {
+        for (i=[-9,9]) {
+          translate([0,i,-20]) cylinder(r=6,h=41);
+        }
+        translate([-4, 12.4,-13]) cylinder(r=4,h=23,$fn=3);
+      }
+      translate([-12,-15,6]) rotate([45,0,0]) cube([21,3,8]);
+      translate([-14,-18,9]) cube([22,10,3]);
+
+      hull() { 
+        translate([ dx- 9,-17,0]) cube([15,34,base_thickness]);
+        translate([ dx-20,-12,4]) cube([11,24,base_thickness-4]);
+      }
+      translate([-dx- 2,-16,0]) cube([ 6,32,base_thickness]);
+    }
+    translate([0,0,base_thickness/2]) rotate([0,90,0]) {
+      for(i=[-9,9]) {
+        translate([0,i,-24]) {
+          cylinder(r=m3_wide_radius,h=60,$fn=12);
+          cylinder(r1=m3_nut_radius+.4, r2=m3_nut_radius-.2, h=7, $fn=6);
+        }
+      }
+    }
+//    translate([-8,-30,-.1]) cube([16,60,1.5]); // extra clearance for extrusion rail
   }
 }
 
@@ -160,7 +198,7 @@ module mobileSupport() {
     }
   }
 }
-
+difference(){
 union() {
   difference() {
     union() {
@@ -180,8 +218,8 @@ union() {
         translate([-extrusion_width/2-wheel_radius,base_shift+i,0])
           cylinder(h=0.4,r=7.15,$fn=24);
       }
-      translate([24.15,base_shift-14,0]) cube([9,28,0.4]);
     }
+    translate([14,base_shift-16,0]) cube([20,32,0.4]);
 
     // support material, forced
     translate([ 15,16.2,base_thickness]) earBrace();
@@ -189,4 +227,6 @@ union() {
     mobileSupport();
     translate([0,2*base_shift,0]) mirror([0,1,0]) mobileSupport();
   } 
+}
+translate([-8,-25,-.1]) cube([16,60,1]); // extra clearance for extrusion rail
 }
