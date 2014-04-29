@@ -28,7 +28,12 @@ module carriage() {
   difference() {
     union() {
       // Main body.
-      translate([0, 4, thickness/2]) cube([27, 40, thickness], center=true);
+      //translate([0, 4, thickness/2]) %cube([27, 40, thickness], center=true);
+      hull() {
+        translate([-13, 10,0]) cube([26,14,thickness]);
+        translate([ -8,-14,0]) cube([16, 1,thickness]);
+      }
+
       // Ball joint mount horns.
       for (x = [-1, 1]) {
         scale([x, 1, 1]) intersection() {
@@ -41,14 +46,15 @@ module carriage() {
       // Belt clamps.
       difference() {
         union() {
-          translate([6.5, -2.5, horn_thickness/2+1])
-            cube([14, 7, horn_thickness-2], center=true);
-          translate([10.75, 2.5, horn_thickness/2+1])
-            cube([5.5, 16, horn_thickness-2], center=true);
+          translate([6.5, -2.5, horn_thickness/2])
+            cube([14, 7, horn_thickness], center=true);
+          translate([10.75, 2.5, horn_thickness/2])
+            cube([5.5, 16, horn_thickness-5], center=true);
         }
         // Avoid touching diagonal push rods (carbon tube).
         translate([20, -10, 12.5]) rotate([35, 35, 30])
           cube([40, 40, 20], center=true);
+        translate([9,-10,-1]) rotate([0,0,-15]) cube([6,18,20]);
       }
       for (y = [-12, 7]) {
         translate([1.25, y, horn_thickness/2+1])
@@ -80,8 +86,8 @@ module carriage() {
     }
 
     // shave off corners, not necessary when attached to wheel base
-    translate([6,-20,-.3]) rotate([0,0,-25]) cube([10,30,9]);
-    translate([-15,-25,-.3]) rotate([0,0,16]) cube([10,30,9]);
+    //%translate([6,-20,-.3]) rotate([0,0,-25]) cube([10,30,9]);
+    //%translate([-15,-25,-.3]) rotate([0,0,16]) cube([10,30,9]);
   }
 }
 
@@ -112,7 +118,7 @@ bthick = base_thickness + 2*dilation;
           translate([0,i,-3]) wheelAxleHole();
         }
       }
-      translate([-8,-6,-.1]) cube([3.5,12,1.3]);
+      // move to main #translate([-8,-6,-.1]) cube([3.5,12,1.3]);
     }
   }
 }
@@ -155,8 +161,9 @@ supportSpread = 6;
         }
         translate([-4, 12.4,-13]) cylinder(r=4,h=23,$fn=3);
       }
-      translate([-12,-15,6]) rotate([45,0,0]) cube([21,3,8]);
+      translate([-12,-15,6]) rotate([45,0,0]) cube([20,3,8]);
       translate([-14,-18,9]) cube([22,10,3]);
+      translate([-14,-15,6]) cube([22,4,3]);
 
       hull() { 
         translate([ dx- 9,-16,0]) cube([15,32,base_thickness]);
@@ -225,7 +232,7 @@ difference() { union() {
           cylinder(h=0.4,r=6.65,$fn=24);
       }
     }
-    translate([14,base_shift-17,0]) cube([20,34,0.4]);
+    translate([11,base_shift-17,0]) cube([22.2,34,0.4]);
 
     // support material, forced
     translate([ 15,16.2,base_thickness]) earBrace();
@@ -234,5 +241,6 @@ difference() { union() {
     translate([0,2*base_shift,0]) mirror([0,1,0]) mobileSupport();
   } 
 }
-translate([-8.5,-20,-.1]) cube([17,60,1.1]); // extra clearance for extrusion rail
+translate([-8.5,-20,-.1]) cube([17,60,1.2]); // extra clearance for extrusion rail
+translate([ 10 ,0.5,-.1]) cube([ 9,15,1.2]);
 }
