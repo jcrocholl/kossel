@@ -11,12 +11,13 @@ belt_x = 5.6;
 belt_z = 7;
 
 // Parameters for wheeled base
-base_thickness = 12;
+base_thickness = 11;
 wheel_radius = 8;  // delrin wheels
 extrusion_width = 15;
 wheel_offset = 20;
 base_shift = 8;
 m3_head_radius=5.4/2+0.2;
+boltSep = 8;  // tension bolt seperation half-dist
 
 module carriage() {
   // Timing belt (up and down).
@@ -27,8 +28,7 @@ module carriage() {
   difference() {
     union() {
       // Main body.
-      translate([0, 4, thickness/2])
-        cube([27, 40, thickness], center=true);
+      translate([0, 4, thickness/2]) cube([27, 40, thickness], center=true);
       // Ball joint mount horns.
       for (x = [-1, 1]) {
         scale([x, 1, 1]) intersection() {
@@ -85,7 +85,12 @@ module carriage() {
   }
 }
 
-module wheelAxleBrace() { cylinder(h=base_thickness,r=7,$fn=24); }
+module wheelAxleBrace() {
+  hull() {
+    cylinder(h=1,r=6.5,$fn=24);
+    translate([0,0,base_thickness-3]) cylinder(h=6,r1=6.5,r2=4.5);
+  }
+}
 module wheelAxleHole() {
   translate([0,0,-30]) cylinder(h=60,r=m3_wide_radius,$fn=12);
   translate([0,0,base_thickness-1]) cylinder(h=10,r=m3_head_radius,$fn=16);
@@ -94,20 +99,20 @@ module mobileWheelMount(dilation) {
 bthick = base_thickness + 2*dilation;
   difference() {
     union() {
-      cylinder(h=bthick,r=7+dilation,$fn=24);
-      //translate([0,-14,0]) cube([10,28,bthick]);
+      cylinder(h=bthick,r=6.5+dilation,$fn=24);
       translate([0,0,bthick/2]) rotate([0,90,0]) hull() {
-        translate([0,-9,0])cylinder(h=10,r=bthick/2,$fn=6);
-        translate([0, 9,0])cylinder(h=10,r=bthick/2,$fn=6);
+        translate([0,-boltSep,0])cylinder(h=10,r=bthick/2,$fn=6);
+        translate([0, boltSep,0])cylinder(h=10,r=bthick/2,$fn=6);
       }
     }
     if (dilation==0) { // this is the ACTUAL mount, not a socket, add screw holes
       translate([0,0,-2.2]) wheelAxleHole();
       translate([0,0,bthick/2]) rotate([0,90,0]) {
-        for (i=[-9,9]) {
+        for (i=[-boltSep,boltSep]) {
           translate([0,i,-3]) wheelAxleHole();
         }
       }
+      translate([-8,-6,-.1]) cube([3.5,12,1.3]);
     }
   }
 }
@@ -140,13 +145,13 @@ supportSpread = 6;
       for (i=[-wheel_offset,wheel_offset]) {
         hull() {
           translate([-dx, i,0]) wheelAxleBrace();
-          translate([-dx+12,(i<0)?i+8:i-8,4]) cylinder(r=4,h=base_thickness-7,$fn=6);
+          translate([-dx+10,(i<0)?i+9:i-9,8]) cylinder(r=2,h=1,$fn=6);
         }
       }
       //translate([ dx-3,-17,0]) %cube([9,34,base_thickness]);
       translate([0,0,base_thickness/2]) rotate([0,90,0]) {
-        for (i=[-9,9]) {
-          translate([0,i,-20]) cylinder(r=6,h=41);
+        for (i=[-boltSep,boltSep]) {
+          translate([0,i,-20]) cylinder(r=5.3,h=41);
         }
         translate([-4, 12.4,-13]) cylinder(r=4,h=23,$fn=3);
       }
@@ -154,13 +159,14 @@ supportSpread = 6;
       translate([-14,-18,9]) cube([22,10,3]);
 
       hull() { 
-        translate([ dx- 9,-17,0]) cube([15,34,base_thickness]);
+        translate([ dx- 9,-16,0]) cube([15,32,base_thickness]);
         translate([ dx-20,-12,4]) cube([11,24,base_thickness-4]);
       }
-      translate([-dx- 2,-16,0]) cube([ 6,32,base_thickness]);
+      translate([-dx-2,-16,0]) cube([ 7,32,base_thickness]);
+      translate([-dx+2, -6,base_thickness*0.55]) cube([ 9,16,3]);
     }
     translate([0,0,base_thickness/2]) rotate([0,90,0]) {
-      for(i=[-9,9]) {
+      for(i=[-boltSep,boltSep]) {
         translate([0,i,-24]) {
           cylinder(r=m3_wide_radius,h=60,$fn=12);
           cylinder(r1=m3_nut_radius+.4, r2=m3_nut_radius-.2, h=7, $fn=6);
@@ -216,7 +222,7 @@ difference() { union() {
     hull() {
       for (i=[-wheel_offset,wheel_offset]) {
         translate([-extrusion_width/2-wheel_radius,base_shift+i,0])
-          cylinder(h=0.4,r=7.15,$fn=24);
+          cylinder(h=0.4,r=6.65,$fn=24);
       }
     }
     translate([14,base_shift-17,0]) cube([20,34,0.4]);
@@ -228,5 +234,5 @@ difference() { union() {
     translate([0,2*base_shift,0]) mirror([0,1,0]) mobileSupport();
   } 
 }
-#translate([-8.5,-20,-.1]) cube([17,60,1.1]); // extra clearance for extrusion rail
+translate([-8.5,-20,-.1]) cube([17,60,1.1]); // extra clearance for extrusion rail
 }
