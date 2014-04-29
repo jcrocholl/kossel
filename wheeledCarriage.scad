@@ -74,7 +74,7 @@ module carriage() {
     for (x = [-1, 1]) {
       scale([x, 1, 1]) intersection() {
         translate([horn_x, 16, horn_thickness/2]) rotate([90, 0, -90])
-          cylinder(r1=m3_nut_radius, r2=m3_nut_radius+0.5, h=8,
+          cylinder(r1=m3_nut_radius-0.2, r2=m3_nut_radius+0.5, h=8,
                    center=true, $fn=6);
       }
     }
