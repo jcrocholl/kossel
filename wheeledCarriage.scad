@@ -37,12 +37,20 @@ module carriage() {
       // Ball joint mount horns.
       for (x = [-1, 1]) {
         scale([x, 1, 1]) intersection() {
-          translate([0, 15, horn_thickness/2])
-            cube([separation, 18, horn_thickness], center=true);
+          translate([0, 14.5, horn_thickness/2])
+            cube([separation, 19, horn_thickness], center=true);
           translate([horn_x, 16, horn_thickness/2]) rotate([0, 90, 0])
             cylinder(r1=14, r2=2.5, h=separation/2-horn_x);
         }
       }
+
+      // left side support
+      hull() {
+         translate([-9.8,7,12]) scale([1,2,1]) rotate([0,0,22.5]) cylinder(h=1,r=2,$fn=8);
+         translate([-9.6,-2,6]) sphere(1.25,$fn=8);
+         translate([-10.2, 7,5]) cylinder(h=1,r=2.25,$fn=8);
+      }
+
       // Belt clamps.
       difference() {
         union() {
