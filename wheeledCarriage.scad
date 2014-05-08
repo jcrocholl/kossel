@@ -298,7 +298,7 @@ difference() { union() {
     }
     translate([0,base_shift,0]) wheelBaseHoles();
   }
-  translate([23-1,base_shift-2,0.3]) mobileWheelMount(0);
+  translate([23-1,base_shift-1.5,0.3]) mobileWheelMount(0);
 
   color("Cyan") {
     hull() {
@@ -312,7 +312,7 @@ difference() { union() {
     // support material, forced
     translate([ 17.3,11,base_thickness+.9])                 scale([0.5,0.6,0.7]) earBrace();
     translate([-17.3,11,base_thickness+.9]) mirror([1,0,0]) scale([0.5,0.6,0.7]) earBrace();
-    translate([-1,-2,0]) {
+    translate([-1,-1.5,0]) {
       mobileSupport();
       translate([0,2*base_shift,0]) mirror([0,1,0]) mobileSupport();
     }
