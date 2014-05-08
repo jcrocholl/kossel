@@ -42,8 +42,16 @@ thick=5;  // less thick for carriage
 module endstopCarriage(tilt=0) {
   difference() {
     union() {
-      translate([-width/2-1,-height/2,0]) cube([width+2+5, height+2, thick]);
-      translate([  -1.25   ,-height/2,2]) cube([  2.5    , height+2, thick]);
+      //translate([-width/2-1,-height/2,0]) cube([width+2+5, height+2, thick]);
+      hull() {
+        translate([-4,-4,0])  cylinder(h=thick,r=4,$fn=22);
+        translate([ 4,-4,0])  cylinder(h=thick,r=4,$fn=22);
+        translate([ 0, 4,0]) {
+          translate([-4,0,0]) cylinder(h=thick,r=4,$fn=22);
+          rotate([0,0,tilt]) translate([9.5,0,0]) cylinder(h=thick,r=4,$fn=22);
+        }
+      }
+      translate([-2.5/2,-8,2]) cube([  2.5    , height+1, thick]);
     }
 
     // bolt hole to attach to extrusion
