@@ -126,14 +126,6 @@ module carriage1() {
       }
     }
 
-    //// Screws for linear slider.
-    //for (x = [-10, 10]) {
-    // for (y = [-10, 10]) {
-    // translate([x, y, thickness])
-    // cylinder(r=m3_wide_radius, h=30, center=true, $fn=12);
-    // }
-    //}
-
     // potential screw to hold a washer to keep belts in-place
     translate([3,-2.5,8]) cylinder(r=1,h=9,$fn=12);
 
@@ -148,10 +140,6 @@ module carriage1() {
                    center=true, $fn=6);
       }
     }
-
-    // shave off corners, not necessary when attached to wheel base
-    //%translate([6,-20,-.3]) rotate([0,0,-25]) cube([10,30,9]);
-    //%translate([-15,-25,-.3]) rotate([0,0,16]) cube([10,30,9]);
   }
 }
 
@@ -297,6 +285,12 @@ difference() { union() {
       translate([0,base_shift,0.3]) wheelBase();
     }
     translate([0,base_shift,0]) wheelBaseHoles();
+
+    // make sure top of carriage has large flat area for switch contact and clearance
+    hull() {
+      translate([21 ,24   ,3]) cube([0.5,2*5,20]);
+      translate([1.2,24+12,3]) cylinder(h=20,r=12,$fn=48);
+    }
   }
   translate([23-1,base_shift-1.5,0.3]) mobileWheelMount(0);
 
