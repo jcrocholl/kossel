@@ -278,6 +278,9 @@ module mobileSupport() {
   }
 }
 
+use <endstop.scad>;
+%translate([0,37,5]) rotate([180,0,0]) endstopCarriage();
+
 difference() { union() {
   difference() {
     union() {
@@ -288,8 +291,8 @@ difference() { union() {
 
     // make sure top of carriage has large flat area for switch contact and clearance
     hull() {
-      translate([21 ,24   ,3]) cube([0.5,2*5,20]);
-      translate([1.2,24+12,3]) cylinder(h=20,r=12,$fn=48);
+      translate([21 ,24  ,3]) cube([0.5,2*5,20]);
+      translate([-.7,24+9,3]) cylinder(h=20,r=9,$fn=48);
     }
   }
   translate([23-1,base_shift-1.5,0.3]) mobileWheelMount(0);

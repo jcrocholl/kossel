@@ -46,10 +46,9 @@ module endstopCarriage(tilt=0) {
       hull() {
         translate([-4,-4,0])  cylinder(h=thick,r=4,$fn=22);
         translate([ 4,-4,0])  cylinder(h=thick,r=4,$fn=22);
-        translate([ 0, 4,0]) {
-          translate([-4,0,0]) cylinder(h=thick,r=4,$fn=22);
-          rotate([0,0,tilt]) translate([9.5,0,0]) cylinder(h=thick,r=4,$fn=22);
-        }
+        translate([-4, 4,0])  cylinder(h=thick,r=4,$fn=22);
+        translate([ 0, 4,0])  rotate([0,0,tilt]) translate([9.5+2,0,0])
+                              cylinder(h=thick,r=4,$fn=22);
       }
       translate([-2.5/2,-8,2]) cube([  2.5    , height+1, thick]);
     }
@@ -62,10 +61,12 @@ module endstopCarriage(tilt=0) {
     }
 
     translate([0, 4, -1]) {
-      rotate([90,0,180+tilt]) scale([-1,1,1]) translate([9.5/2,-2,0]) %microswitch();
-      rotate([0,0,tilt]) 
-        #translate([9.5,0,-1]) cylinder(r=2.4/2, h=8, $fn=12);
-        #translate([ 0 ,0,-1]) cylinder(r=2.4/2, h=5, $fn=12);
+      translate([2,0,0]) {
+        %rotate([90,0,180+tilt]) scale([-1,1,1]) translate([9.5/2,-2,0]) microswitch();
+        rotate([0,0,tilt])
+          #translate([9.5,0,-1]) cylinder(r=2.4/2, h=8, $fn=12);
+          #translate([ 0 ,0,-1]) cylinder(r=2.4/2, h=5, $fn=12);
+      }
     }
   }
 }
