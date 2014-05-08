@@ -6,7 +6,7 @@ thickness = 9;  // 1mm thicker than linear rail.
 width = 15;  // Same as vertical extrusion.
 height = 15;
 
-module endstop() {
+module endstopForRail() {
   difference() {
     union() {
       cube([width, thickness, height], center=true);
@@ -15,7 +15,7 @@ module endstop() {
       translate([0, 2, 0])
         cube([2.5, thickness, height], center=true);
     }
-    translate([0, 0, 3]) rotate([90, 0, 0]) {
+    #translate([0, 0, 3]) rotate([90, 0, 0]) {
       cylinder(r=m3_wide_radius, h=20, center=true, $fn=12);
       translate([0, 0, 3.6-thickness/2]) {
         cylinder(r=3, h=10, $fn=24);
@@ -35,4 +35,32 @@ module endstop() {
   }
 }
 
-translate([0, 0, height/2]) endstop();
+thick=5;  // less thick for carriage
+// for more recent design of integrated wheeledCarriage
+//           use tilt=11.3 for first iteration with trapazoidal base
+//             slope on original trapazoid bottom carriage was 8mm in 40.
+module endstopCarriage(tilt=0) {
+  difference() {
+    union() {
+      translate([-width/2-1,-height/2,0]) cube([width+2+5, height+2, thick]);
+      translate([  -1.25   ,-height/2,2]) cube([  2.5    , height+2, thick]);
+    }
+
+    // bolt hole to attach to extrusion
+    translate([0,-2.5,0]) {
+      translate([0,0,-1]) cylinder(r=m3_wide_radius, h=20, $fn=12);
+      translate([0,0,-1]) cylinder(r=3, h=4.4, $fn=24);
+      translate([0,0, thick]) cylinder(r1=m3_wide_radius, r2=7, h=4, $fn=24);
+    }
+
+    translate([0, 4, -1]) {
+      rotate([90,0,180+tilt]) scale([-1,1,1]) translate([9.5/2,-2,0]) %microswitch();
+      rotate([0,0,tilt]) 
+        #translate([9.5,0,-1]) cylinder(r=2.4/2, h=8, $fn=12);
+        #translate([ 0 ,0,-1]) cylinder(r=2.4/2, h=5, $fn=12);
+    }
+  }
+}
+
+//translate([0,30, height/2]) endstopForRail();
+endstopCarriage(11.3*0);
