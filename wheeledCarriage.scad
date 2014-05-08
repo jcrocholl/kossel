@@ -27,6 +27,62 @@ module carriage() {
     cube([1.7, 100, belt_width], center=true);
   difference() {
     union() {
+      // Main body
+      hull() {
+        translate([-9.5,-4,-.5]) cube([19.2,33,1]);
+        translate([-9.5,2,thickness-1]) cube([19.2,22,1]);
+      }
+
+      // Ball joint mount horns.
+      for (x = [-1, 1]) {
+        scale([x, 1, 1]) intersection() {
+          translate([0, 15, horn_thickness/2])
+            cube([separation, 18, horn_thickness], center=true);
+          translate([horn_x, 16, horn_thickness/2]) rotate([0, 90, 0])
+            cylinder(r1=14, r2=2.5, h=separation/2-horn_x);
+        }
+      }
+
+      // side support
+      for (i=[-1,1]) { hull() {
+         translate([ 9.8*i, 8,12]) scale([1,2,1]) rotate([0,0,22.5]) cylinder(h=1,r=2,$fn=8);
+         translate([ 9.8*i,24,12]) scale([1,2,1]) rotate([0,0,22.5]) cylinder(h=1,r=2,$fn=8);
+         translate([ 9.6*i,-3,0]) sphere(1.25,$fn=8);
+         translate([ 9.6*i,33,0]) sphere(1.25,$fn=8);
+         translate([14*i,15,0]) cylinder(h=1,r=3,$fn=6);
+      }}
+
+      for (y = [0, 25]) {
+        translate([1.25, y, horn_thickness/2]) difference() {
+          cube([7, 8, horn_thickness], center=true);
+          translate([0,0,2]) cylinder(r=1,h=6,$fn=12);  // pilot hole for possible cover screw
+        }
+      }
+    }
+
+    // Screws for ball joints.
+    translate([0, 16, horn_thickness/2]) rotate([0, 90, 0]) 
+      cylinder(r=m3_wide_radius, h=60, center=true, $fn=12);
+    // Lock nuts for ball joints.
+    for (x = [-1, 1]) {
+      scale([x, 1, 1]) intersection() {
+        translate([horn_x, 16, horn_thickness/2]) rotate([90, 0, -90])
+          cylinder(r1=m3_nut_radius-0.2, r2=m3_nut_radius+0.5, h=8,
+                   center=true, $fn=6);
+      }
+    }
+    //translate([0,9,2]) cylinder(h=6,r=4,$fn=6); // hollow out main body a bit
+  }
+}
+
+module carriage1() {
+  // Timing belt (up and down).
+  translate([-belt_x, 0, belt_z + belt_width/2]) %
+    cube([1.7, 100, belt_width], center=true);
+  translate([belt_x, 0, belt_z + belt_width/2]) %
+    cube([1.7, 100, belt_width], center=true);
+  difference() {
+    union() {
       // Main body.
       //translate([0, 4, thickness/2]) %cube([27, 40, thickness], center=true);
       hull() {
@@ -157,29 +213,44 @@ supportSpread = 6;
   difference() {
     union() {
       for (i=[-wheel_offset,wheel_offset]) {
-        hull() {
+        hull() { // main wheel axle screw holder pair
           translate([-dx, i,0]) wheelAxleBrace();
           translate([-dx+10,(i<0)?i+9:i-9,8]) cylinder(r=2,h=1,$fn=6);
         }
       }
-      //translate([ dx-3,-17,0]) %cube([9,34,base_thickness]);
+
+      // tension screw housing pair
       translate([0,0,base_thickness/2]) rotate([0,90,0]) {
         for (i=[-boltSep,boltSep]) {
           translate([0,i,-20]) cylinder(r=5.3,h=41);
         }
-        translate([-4, 12.4,-13]) cylinder(r=4,h=23,$fn=3);
-      }
-      translate([-12,-15,6]) rotate([45,0,0]) cube([20,3,8]);
-      translate([-14,-18,9]) cube([22,10,3]);
-      translate([-14,-15,6]) cube([22,4,3]);
 
-      hull() { 
+        // top side bracing
+        //%translate([-4, 12.4,-13]) cylinder(r=4,h=23,$fn=3);
+      }
+      hull() {      // top side bracing
+        translate([-9.5, 13,11]) cube([19.5,7,2]);
+        translate([-4, 9,4]) cube([8,1,1]);
+      }
+
+      hull() { // bottom edge extra brace
+        translate([-10,-17,10]) cube([20,3,4]);
+        translate([-10,-12, 6]) cube([20,4,1]);
+      }
+
+      hull() { // brace section for mobile mount 
         translate([ dx- 9,-16,0]) cube([15,32,base_thickness]);
         translate([ dx-20,-12,4]) cube([11,24,base_thickness-4]);
       }
+
+      // brace between main fixed wheel axles
       translate([-dx-2,-16,0]) cube([ 7,32,base_thickness]);
+
+      // fill in little middle-underside gap between braces
       translate([-dx+2, -6,base_thickness*0.55]) cube([ 9,16,3]);
     }
+
+    // Adjustable tension screw holes
     translate([0,0,base_thickness/2]) rotate([0,90,0]) {
       for(i=[-boltSep,boltSep]) {
         translate([0,i,-24]) {
@@ -188,7 +259,6 @@ supportSpread = 6;
         }
       }
     }
-//    translate([-8,-30,-.1]) cube([16,60,1.5]); // extra clearance for extrusion rail
   }
 }
 
@@ -223,7 +293,7 @@ module mobileSupport() {
 difference() { union() {
   difference() {
     union() {
-      translate([0,0,base_thickness]) carriage();
+      translate([0,-5,base_thickness]) carriage();
       translate([0,base_shift,0.3]) wheelBase();
     }
     translate([0,base_shift,0]) wheelBaseHoles();
@@ -243,8 +313,8 @@ difference() { union() {
     translate([11,base_shift-17,0]) cube([22.2,34,0.4]);
 
     // support material, forced
-    translate([ 15,16.2,base_thickness]) earBrace();
-    translate([-15,16.2,base_thickness]) mirror([1,0,0]) earBrace();
+    translate([ 15,11.2,base_thickness]) earBrace();
+    translate([-15,11.2,base_thickness]) mirror([1,0,0]) earBrace();
     mobileSupport();
     translate([0,2*base_shift,0]) mirror([0,1,0]) mobileSupport();
   } 
