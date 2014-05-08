@@ -12,12 +12,12 @@ belt_z = 7;
 
 // Parameters for wheeled base
 base_thickness = 11;
-wheel_radius = 8;  // delrin wheels
+wheel_radius = 8; // delrin wheels
 extrusion_width = 15;
 wheel_offset = 20;
 base_shift = 8;
 m3_head_radius=5.4/2+0.2;
-boltSep = 8;  // tension bolt seperation half-dist
+boltSep = 8; // tension bolt seperation half-dist
 
 module carriage() {
   // Timing belt (up and down).
@@ -72,17 +72,17 @@ module carriage() {
 
     //// Screws for linear slider.
     //for (x = [-10, 10]) {
-    //  for (y = [-10, 10]) {
-    //    translate([x, y, thickness]) 
-    //      cylinder(r=m3_wide_radius, h=30, center=true, $fn=12);
-    //  }
+    // for (y = [-10, 10]) {
+    // translate([x, y, thickness])
+    // cylinder(r=m3_wide_radius, h=30, center=true, $fn=12);
+    // }
     //}
 
     // potential screw to hold a washer to keep belts in-place
     translate([3,-2.5,8]) cylinder(r=1,h=9,$fn=12);
 
     // Screws for ball joints.
-    translate([0, 16, horn_thickness/2]) rotate([0, 90, 0]) 
+    translate([0, 16, horn_thickness/2]) rotate([0, 90, 0])
       cylinder(r=m3_wide_radius, h=60, center=true, $fn=12);
     // Lock nuts for ball joints.
     for (x = [-1, 1]) {
@@ -137,7 +137,7 @@ supportSpread = 6;
   difference() {
     hull() {
       translate([-dx, -wheel_offset,0]) wheelAxleBrace();
-      translate([-dx,  wheel_offset,0]) wheelAxleBrace();
+      translate([-dx, wheel_offset,0]) wheelAxleBrace();
       translate([ dx-3,-17,0]) cube([9,34,base_thickness]);
     }
     translate([0,0,base_thickness/2]) rotate([0,90,0]) {
@@ -173,7 +173,7 @@ supportSpread = 6;
       translate([-14,-18,9]) cube([22,10,3]);
       translate([-14,-15,6]) cube([22,4,3]);
 
-      hull() { 
+      hull() {
         translate([ dx- 9,-16,0]) cube([15,32,base_thickness]);
         translate([ dx-20,-12,4]) cube([11,24,base_thickness-4]);
       }
@@ -188,14 +188,14 @@ supportSpread = 6;
         }
       }
     }
-//    translate([-8,-30,-.1]) cube([16,60,1.5]); // extra clearance for extrusion rail
+// translate([-8,-30,-.1]) cube([16,60,1.5]); // extra clearance for extrusion rail
   }
 }
 
 module wheelBaseHoles() {
 dx = extrusion_width/2+wheel_radius;
   translate([-dx, -wheel_offset,0]) wheelAxleHole();
-  translate([-dx,  wheel_offset,0]) wheelAxleHole();
+  translate([-dx, wheel_offset,0]) wheelAxleHole();
   translate([dx-6,0,0]) mobileWheelMount(.3);
   translate([dx-2,0,0]) mobileWheelMount(.3);
 }
@@ -214,7 +214,7 @@ module earBrace() {
 module mobileSupport() {
   for (i=[26,30]) {
     intersection() {
-      translate([i  ,base_shift-8.9,-0.4]) rotate([0,5,-90]) earBrace();
+      translate([i ,base_shift-8.9,-0.4]) rotate([0,5,-90]) earBrace();
       translate([i-2,base_shift-17,.3]) cube([4,8,4]);
     }
   }
@@ -232,8 +232,8 @@ difference() { union() {
 
   color("Cyan") {
     //linear_extrude(height=0.4)
-    //  polygon(points=[[17,-20],[23,16],[17,28],  [-17,28],[-23,16],[-17,-20]],
-    //          paths=[[0,1,2,3,4,5,0]]);
+    // polygon(points=[[17,-20],[23,16],[17,28], [-17,28],[-23,16],[-17,-20]],
+    // paths=[[0,1,2,3,4,5,0]]);
     hull() {
       for (i=[-wheel_offset,wheel_offset]) {
         translate([-extrusion_width/2-wheel_radius,base_shift+i,0])
@@ -247,7 +247,7 @@ difference() { union() {
     translate([-15,16.2,base_thickness]) mirror([1,0,0]) earBrace();
     mobileSupport();
     translate([0,2*base_shift,0]) mirror([0,1,0]) mobileSupport();
-  } 
+  }
 }
 translate([-8.5,-20,-.1]) cube([17,60,1.2]); // extra clearance for extrusion rail
 translate([ 10 ,0.5,-.1]) cube([ 9,15,1.2]);
