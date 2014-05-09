@@ -43,7 +43,7 @@ module fanBoltReceivers() {
 module fanMount() {
   union() {
     translate([-2,0,0]) fanBoltReceivers();
-    %translate([-20,0,18.5]) rotate([0,90,0]) cylinder(r=10,h=35,$fn=24); // hot end proxy
+    %translate([-20,0,18.5]) rotate([0,90,0]) cylinder(r=9,h=35,$fn=24); // hot end proxy
 
     // frame under outside edge of fan
     translate([-22,-20,0]) difference() {
@@ -51,30 +51,34 @@ module fanMount() {
       translate([2,2,-1]) cube([36,36,6]);
 
       // notch in frame for bolt
-      translate([36,20,6]) rotate([0,90,0]) cylinder(h=4,r=6,$fn=6);
+      translate([36,20,6]) rotate([0,90,0]) cylinder(h=4,r=6,$fn=9);
 
       // don't bother with top of frame.  Will generate too much fill.
       // may glue more ducting there later if necessary
       translate([-1,7,-1]) cube([3.3,26,8]);
     }
 
+/*
     // attach fan frame to retainer
     difference() {
-      translate([18,-20,0]) hull() {
-        cube([3,40,9]);
-        translate([0,3,19]) cube([3,34,1]);
+      translate([18,0,5]) rotate([0,90,0]) scale([1.2,1,1]) cylinder(h=3,r=20,$fn=48);
+      //%translate([18,-20,0]) hull() {
+      //  cube([3,40,9]);
+      //  translate([0,3,18]) #cube([3,34,1]);
+      //}
 
-      }
-
-      translate([17,0,18.5]) rotate([0,90,0]) cylinder(h=5,r=17.5-2,$fn=48);
+      translate([17,0,18.5]) rotate([0,90,0]) cylinder(h=5,r=17.5-2,$fn=48); // chop off stuff that fills in drill holes
+      translate([17,-22,-30]) cube([5,44,30]); // chop off part of bottom plate over fan
     }
-
+*/
     // duct/redirection toward hot-end
-    translate([-22,0,5]) rotate([0,90,0]) scale([1.3,1,1]) difference() {
+    translate([-22,0,5]) rotate([0,90,0]) scale([1.2,1,1]) difference() {
       cylinder(h=42,r=20,$fn=48);
-      translate([ 0 ,0,-1]) cylinder(h=44,r=19,$fn=48);
-      translate([-18,0,-1]) cylinder(h=44,r=16,$fn=16);
-      translate([2,-22,-1]) cube([20,44,44]);
+      translate([ 0 ,0,-2]) cylinder(h=42,r=19,$fn=48);
+      translate([-22,0,-1]) cylinder(h=44,r=16,$fn=16);
+      translate([3.8,-22,-1]) cube([20,44,44]); // chop off stuff that intersects with fan
+      translate([-6,0,39]) scale([1,2,1]) cylinder(h=5,r=7,$fn=16); // chop off stuff that fills in drill holes
+      translate([-17,0,39]) scale([1,2,1]) cylinder(h=5,r=7,$fn=16);
     }
   }
 }
