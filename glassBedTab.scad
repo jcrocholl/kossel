@@ -10,6 +10,9 @@ intersection(){
       cylinder(r=170/2,h=4,$fn=180);
       translate([0,0,-4]) cylinder(r=160/2,h=8,$fn=160);
     }
-    translate([0, -7,-1]) cylinder(r=(m3threadOD/2)+.2,h=9,$fn=12);
+    translate([0, -7,-.2]) {
+      cylinder(r=(m3threadOD/2)+.2,h=9,$fn=12);
+      cylinder(r1=5.9/2,r2=5.5/2,h=1.7,$fn=16);
+    }
   }
 }
