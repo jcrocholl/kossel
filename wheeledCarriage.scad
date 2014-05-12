@@ -53,9 +53,18 @@ module carriage() {
       }}
 
       for (y = [0, 25]) {
-        translate([1.25, y, horn_thickness/2]) difference() {
-          cube([7, 8, horn_thickness], center=true);
-          translate([0,0,2]) cylinder(r=1,h=6,$fn=12);  // pilot hole for possible cover screw
+        translate([1.25, y, horn_thickness/2]) {
+          if (y<5) { // tabs to help hold belt
+            translate([2.5,7.5,0]) cube([10,3,horn_thickness],center=true);
+            translate([7,3,0]) cube([ 2,9,horn_thickness],center=true);
+          } else {
+            translate([-.3,-6.75,0]) cube([6,1.5,horn_thickness],center=true);
+            translate([6.75,-.5 ,0]) cube([2,9,horn_thickness],center=true);
+          }
+          difference() {
+            cube([7, 8, horn_thickness], center=true);
+            translate([0,0,2]) cylinder(r=1,h=6,$fn=12);  // pilot hole for possible cover screw
+          }
         }
       }
     }
@@ -279,7 +288,7 @@ module mobileSupport() {
 }
 
 use <endstop.scad>;
-%translate([0,37,5]) rotate([180,0,0]) endstopCarriage();
+%translate([0,39,6.5]) rotate([180,0,0]) endstopCarriage();
 
 difference() { union() {
   difference() {
