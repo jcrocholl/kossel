@@ -47,7 +47,7 @@ module endstopCarriage(tilt=0) {
         translate([-4,-4,0])  cylinder(h=thick,r=4,$fn=22);
         translate([ 4,-4,0])  cylinder(h=thick,r=4,$fn=22);
         translate([-4, 6,0])  cylinder(h=thick,r=4,$fn=22);
-        translate([ 0, 6,0])  rotate([0,0,tilt]) translate([9.5+6,0,0])
+        translate([ 6, 6,0])  rotate([0,0,tilt]) translate([9.5,0,0])
                               cylinder(h=thick,r=4,$fn=22);
       }
       translate([-3/2,-8,3.5]) cube([3, height+1, thick]);
