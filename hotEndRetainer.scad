@@ -29,6 +29,7 @@ radGroove = 12.1/2;
 }
 
 fanBoltSep = 32;  // distance between fan bolt centers
+/*
 module fanBoltReceivers() {
   for(x=[-1,1]) { for(y=[-1,1]) {
     translate(fanBoltSep*0.5*[x,y,0]) difference() {
@@ -39,38 +40,35 @@ module fanBoltReceivers() {
     }
   }}
 }
+*/
 
 module fanMount() {
   union() {
-    translate([-2,0,0]) fanBoltReceivers();
-    %translate([-20,0,18.5]) rotate([0,90,0]) cylinder(r=9,h=35,$fn=24); // hot end proxy
-
     // frame under outside edge of fan
     translate([-22,-20,0]) difference() {
       cube([40,40,4]);
-      translate([2,2,-1]) cube([36,36,6]);
+
+      // flatten circle edges for extra bracing
+      translate([20,20,1]) intersection() {
+        cylinder(r=19,h=10,$fn=48,center=true);
+        cube([35,35,8],center=true);
+      }
 
       // notch in frame for bolt
       translate([36,20,6]) rotate([0,90,0]) cylinder(h=4,r=6,$fn=9);
 
       // don't bother with top of frame.  Will generate too much fill.
       // may glue more ducting there later if necessary
-      translate([-1,7,-1]) cube([3.3,26,8]);
+      translate([-1,7,-1]) cube([15,26,8]);
+
+      // fan bolt holes.
+      // make tight enough to directly thread an M3 bolt, no nut
+      translate([20,20,-1]) { for(x=[-1,1]) { for(y=[-1,1]) {
+        translate(fanBoltSep*0.5*[x,y,0]) 
+          cylinder(h=6,r=2.8/2,$fn=9);
+      }}}
     }
 
-/*
-    // attach fan frame to retainer
-    difference() {
-      translate([18,0,5]) rotate([0,90,0]) scale([1.2,1,1]) cylinder(h=3,r=20,$fn=48);
-      //%translate([18,-20,0]) hull() {
-      //  cube([3,40,9]);
-      //  translate([0,3,18]) #cube([3,34,1]);
-      //}
-
-      translate([17,0,18.5]) rotate([0,90,0]) cylinder(h=5,r=17.5-2,$fn=48); // chop off stuff that fills in drill holes
-      translate([17,-22,-30]) cube([5,44,30]); // chop off part of bottom plate over fan
-    }
-*/
     // duct/redirection toward hot-end
     translate([-22,0,5]) rotate([0,90,0]) scale([1.2,1,1]) difference() {
       cylinder(h=42,r=20,$fn=48);
@@ -86,10 +84,12 @@ module fanMount() {
 // Shift up and add a brim for easier printing at quelab
 union() {
 translate([0, 0, .3]) hotEndRetainer();
-translate([0,-18.5,fanBoltSep/2+6.7]) rotate([-90,90,0]) fanMount();
+translate([0,-18.5,fanBoltSep/2+5.5]) rotate([-90,90,0]) fanMount();
 color("Cyan") {
   cylinder(h=.4,r=17.1,$fn=60);
   }
 }
 
+%ChineseHotEnd();  // to show overlay
 //%translate([50,0,0]) fanMount();
+//%translate([0,22,0]) grooveRing(0);
