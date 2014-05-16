@@ -1,5 +1,5 @@
-beltThick  = 1.7;  // thickness of belt from back to tooth tip
-beltThick2 = 2.3;  // thickness of DOUBLED over belt, back to back, teeth interlocked
+beltThick  = 1.5 + 0.3;  // thickness of belt from back to tooth tip
+beltThick2 = 2.4 + 0.3;  // thickness of DOUBLED over belt, back to back, teeth interlocked
 
 module beltCatch(height,full=false)
 {
@@ -44,4 +44,3 @@ module beltCatch(height,full=false)
 
 beltCatch(6);
 %translate([0,-20,0]) mirror([0,1,0]) beltCatch(6,full=true);
-

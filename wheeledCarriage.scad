@@ -71,8 +71,6 @@ module carriage() {
                    center=true, $fn=6);
       }
     }
-
-    //translate([0,9,2]) cylinder(h=6,r=4,$fn=6); // hollow out main body a bit
   }
 }
 
@@ -112,9 +110,10 @@ bthick = base_thickness + 2*dilation;
 module cableCatchBrace() {
   hull() {
     translate([-2, 0,13]) cube([12,4,1]);
-    translate([ 2,-7,13]) cube([ 9,2,1]);
-    translate([11,-1,0]) cube([ 8,6,9]);
+    translate([ 2,-7,13]) cube([6.5,1,2.5]);
+    translate([11,-1,0]) cube([ 9.5,7.5,9.5]);
   }
+  translate([4,-7,5]) cube([12,7,5]); // flat pad for stop switch
 }
 
 module wheelBase() {
@@ -135,15 +134,6 @@ supportSpread = 6;
           translate([0,i,-20]) cylinder(r=5.3,h=41);
         }
       }
-      //%hull() {      // top side bracingh
-      //  translate([-9.5, 13,11]) cube([19.5,7,2]);
-      //  translate([-4, 9,4]) cube([8,1,1]);
-      //}
-      //
-      //%hull() { // bottom edge extra brace
-      //  translate([-10,-17,10]) cube([20,3,4]);
-      //  translate([-10,-12, 6]) cube([20,4,1]);
-      //}
 
       hull() { // brace section for mobile mount 
         translate([ dx- 9,-16,0]) cube([15,32,base_thickness]);
@@ -175,8 +165,8 @@ supportSpread = 6;
 
 module wheelBaseHoles() {
 dx = extrusion_width/2+wheel_radius;
-  translate([-dx, -wheel_offset,0]) wheelAxleHole();
-  translate([-dx, wheel_offset,0]) wheelAxleHole();
+  translate([-dx,-wheel_offset,1]) wheelAxleHole();
+  translate([-dx, wheel_offset,1]) wheelAxleHole();
   translate([dx-6,0,0]) mobileWheelMount(.3);
   translate([dx-2,0,0]) mobileWheelMount(.3);
 }
@@ -202,7 +192,7 @@ module mobileSupport() {
 }
 
 use <endstop.scad>;
-%translate([0,39,6.5]) rotate([180,0,0]) endstopCarriage();
+%translate([0,36.5,6.5]) rotate([180,0,0]) endstopCarriage();
 
 difference() { union() {
   difference() {
@@ -221,7 +211,7 @@ difference() { union() {
           cylinder(h=0.4,r=6.65,$fn=24);
       }
     }
-    translate([11,-17,0]) cube([22.2,34,0.4]);
+    translate([9,-17,0]) cube([23,34,0.4]);
 
     // support material, forced
     translate([ 17.3,0,base_thickness+.9])                 scale([0.5,0.6,0.7]) earBrace();
@@ -232,6 +222,7 @@ difference() { union() {
     }
   }
 }
-translate([-8.5,-20,-.1]) cube([17,60,1.2]); // extra clearance for extrusion rail
-translate([ 10 ,-7.5,-.1])cube([ 9,15,1.2]);
+translate([-8.5, -20,-.1]) cube([17,60,1.2]); // extra clearance for extrusion rail
+translate([ 13 ,-7.5,-.1]) cube([ 5,15,1.2]);
+translate([ 8.5,  -6,-.1]) cube([ 5,12,.51]);
 }
