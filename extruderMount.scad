@@ -38,8 +38,8 @@ module extruderMount() {
       }
     }
 
-    translate([0,-8,40]) rotate([-90,45,0])
-      #scale([1.007,1.007,1]) shortNema17body();
+    translate([0,-8.2,40]) rotate([-90,45,0])
+      #scale([1.007,1.007,1.01]) shortNema17body();
   }
 }
 

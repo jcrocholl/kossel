@@ -1,14 +1,14 @@
 module grooveRing(spread) {
 radGroove = 12.1/2;
 widthGroove = 4.5;
-  difference() {
-    cylinder(h=widthGroove+1.6*spread+1,r=10,$fn=24);
-    cylinder(h=6,r=radGroove+spread*0.6,$fn=32);
+  #difference() {
+    cylinder(h=widthGroove+1.6*spread+1*0,r=10,$fn=24);
+    translate([0,0,-.1]) cylinder(h=6,r=radGroove+spread*0.6,$fn=32);
   }
 }
 
 module ChineseHotEnd() {
-spread = 0.2;
+spread = 0.2*0;
 radCyl = 16.12/2;
 widthCap = 5.1;
 heightNut = 8.5;

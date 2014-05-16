@@ -56,17 +56,18 @@ module endstopCarriage(tilt=0) {
     // bolt hole to attach to extrusion
     translate([0,-2.5,0]) {
       translate([0,0,-1]) cylinder(r=m3_wide_radius, h=20, $fn=12);
-      translate([0,0,-1]) cylinder(r=3, h=3.3, $fn=24);
+      translate([0,0,-1]) #cylinder(r=3, h=3.3, $fn=24);
       translate([0,0,thick+1]) rotate([0,0,30])
-        cylinder(r1=5.5/2,r2=7/2,h=4,$fn=6);
+        cylinder(r1=5.8/2,r2=8/2,h=4,$fn=6);
     }
 
     translate([3, 6, -1]) {
       translate([2.5,0,0]) {
         %rotate([90,0,180+tilt]) scale([-1,1,1]) translate([9.5/2,-2,0]) microswitch();
+        // 2.4mm diam was good for M2.5.  go a little smaller for #2
         rotate([0,0,tilt])
-          translate([9.5,0,-1.5]) cylinder(r=2.4/2, h=thick+4, $fn=12);
-          translate([ 0 ,0,-1.5]) cylinder(r=2.4/2, h=thick  , $fn=12);
+          translate([9.5,0,-1.5]) cylinder(r=2.3/2, h=thick+4, $fn=12);
+          translate([ 0 ,0,-1.5]) cylinder(r=2.3/2, h=thick  , $fn=12);
       }
     }
   }
