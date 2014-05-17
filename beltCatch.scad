@@ -1,5 +1,6 @@
-beltThick  = 1.5 + 0.3;  // thickness of belt from back to tooth tip
-beltThick2 = 2.4 + 0.3;  // thickness of DOUBLED over belt, back to back, teeth interlocked
+beltThick  = 1.5 + 0.2;  // thickness of belt from back to tooth tip
+// the doubled belt part must be very tight, or teeth will slip.
+beltThick2 = 2.4 + 0.0;  // thickness of DOUBLED over belt, back to back, teeth interlocked
 
 module beltCatch(height,full=false)
 {
@@ -21,11 +22,12 @@ module beltCatch(height,full=false)
         translate([-10*.7071,10*.7071,-1]) rotate([0,0,-45]) cube([10,20,height+2]);
       }
       translate([-postRad-beltThick-3,-.1,0]) hull() {
-        translate([-2, 0,0]) cube([5,3,height]);
-        translate([ 1,13,0]) cube([2,1,height]);
+        translate([-2, 0,0]) cube([5,3  ,height]);
+        translate([ 1,18,0]) cube([2,1.3,height]);
       }
       hull() {
-        translate([-postRad-beltThick+beltThick2, 2.0*postRad+beltThick+.5,0]) cube([2,5.7,height]);
+        translate([-postRad-beltThick+beltThick2, 2.0*postRad+beltThick+.5,0])
+          cube([2,11,height]);
         rotate([0,0,43]) translate([postRad+beltThick,0,0]) cube([3,1,height]);
       }
     }
@@ -42,5 +44,8 @@ module beltCatch(height,full=false)
   }
 }
 
-beltCatch(6);
+union(){
+  beltCatch(6.3);
+  translate([-7,-4.8,-2.5]) cube([11,24,2.7]);
+}
 %translate([0,-20,0]) mirror([0,1,0]) beltCatch(6,full=true);

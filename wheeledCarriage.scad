@@ -56,7 +56,7 @@ module carriage() {
       translate([1.75, 8.7,3]) mirror([1,0,0])   beltCatch(9.2);
 
       // belt catch support/fill
-      translate([ 3  ,-22.6,3]) cube([5,45.2,3.5]);
+      translate([ 3  ,-27.6,3]) #cube([5,55.2,3.5]);
       translate([-2.2,-16.4,3]) cube([6,32.8,3.5]);
     }
 
@@ -109,11 +109,11 @@ bthick = base_thickness + 2*dilation;
 
 module cableCatchBrace() {
   hull() {
-    translate([-2, 0,13]) cube([12,4,1]);
-    translate([ 2,-7,13]) cube([6.5,1,2.5]);
-    translate([11,-1,0]) cube([ 9.5,7.5,9.5]);
+    translate([-2,  0,13]) cube([12 ,4  ,1  ]);
+    translate([ 2,-10,13]) cube([6.5,1  ,2.5]);
+    translate([11, -1, 0]) cube([9.5,7.5,9.5]);
   }
-  translate([4,-7,5]) cube([12,7,5]); // flat pad for stop switch
+  translate([4,-8,5]) cube([12,7,5]); // flat pad for stop switch
 }
 
 module wheelBase() {
@@ -192,7 +192,7 @@ module mobileSupport() {
 }
 
 use <endstop.scad>;
-%translate([0,36.5,6.5]) rotate([180,0,0]) endstopCarriage();
+%translate([0,37.5,6.5]) rotate([180,0,0]) endstopCarriage();
 
 difference() { union() {
   difference() {
