@@ -52,12 +52,12 @@ module carriage() {
          translate([14*i,0,0]) cylinder(h=1,r=3,$fn=6);
       }}
 
-      translate([1.75,-8.7,3]) rotate([0,0,180]) beltCatch(9.2);
-      translate([1.75, 8.7,3]) mirror([1,0,0])   beltCatch(9.2);
+      translate([2.1,-8.1,3.5]) rotate([0,0,180]) beltCatch(9);
+      translate([2.1, 8.1,3.5]) mirror([1,0,0])   beltCatch(9);
 
       // belt catch support/fill
-      translate([ 3  ,-27.6,3]) #cube([5,55.2,3.5]);
-      translate([-2.2,-16.4,3]) cube([6,32.8,3.5]);
+      translate([ 3  ,-26.7,3.5]) cube([4,53.4,3.5]);
+      translate([-1.6,-16  ,3.5]) cube([6,32,3.5]);
     }
 
     // Screws for ball joints.
@@ -109,11 +109,11 @@ bthick = base_thickness + 2*dilation;
 
 module cableCatchBrace() {
   hull() {
-    translate([-2,  0,13]) cube([12 ,4  ,1  ]);
-    translate([ 2,-10,13]) cube([6.5,1  ,2.5]);
+    translate([-1,  0,13.5]) cube([12 ,4  ,1  ]);
+    translate([ 2,-10,13.5]) cube([6.5,1  ,2.5]);
     translate([11, -1, 0]) cube([9.5,7.5,9.5]);
   }
-  translate([4,-8,5]) cube([12,7,5]); // flat pad for stop switch
+  translate([4,-7.7,5]) cube([12,7,5]); // flat pad for stop switch
 }
 
 module wheelBase() {

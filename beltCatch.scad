@@ -4,13 +4,13 @@ beltThick2 = 2.4 + 0.0;  // thickness of DOUBLED over belt, back to back, teeth 
 
 module beltCatch(height,full=false)
 {
-  postRad = 3;  // radius of main post
+  postRad = 2.7;  // radius of main post
   difference() {
     hull() {
       cylinder(h=height,r=postRad,$fn=32);
       translate([-postRad,0,0]) cube([0.6,2.0*postRad,height]);
     }
-    translate([0,0,height-4]) cylinder(h=5,r=1,$fn=11);  // pilot hole for optional lock-in screw
+    translate([0,0,height-4]) cylinder(h=5,r=.6,$fn=11);  // pilot hole for optional lock-in screw
   }
 
   difference() {
@@ -23,7 +23,7 @@ module beltCatch(height,full=false)
       }
       translate([-postRad-beltThick-3,-.1,0]) hull() {
         translate([-2, 0,0]) cube([5,3  ,height]);
-        translate([ 1,18,0]) cube([2,1.3,height]);
+        translate([ 1,17.7,0]) cube([2,1,height]);
       }
       hull() {
         translate([-postRad-beltThick+beltThick2, 2.0*postRad+beltThick+.5,0])
@@ -46,6 +46,6 @@ module beltCatch(height,full=false)
 
 union(){
   beltCatch(6.3);
-  translate([-7,-4.8,-2.5]) cube([11,24,2.7]);
+  translate([-6.4,-4.6,-2.5]) cube([10.1,23.2,2.7]);
 }
 %translate([0,-20,0]) mirror([0,1,0]) beltCatch(6,full=true);
