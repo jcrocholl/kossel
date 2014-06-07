@@ -71,7 +71,7 @@ module drive_block(){
 		//****drive****
 		translate([filament_offset_x+filament_d/2+5.6/2-bite,drive_offset_y,2.5]){
 			translate([0,0,-3]) cylinder(r=8.8/2,h=20);
-			translate([0,0,-0.6]) scale([1,1,1.1]) scale([1,1,1]) bearing_623();
+			//translate([0,0,-0.6]) scale([1,1,1.1]) scale([1,1,1]) bearing_623();
             translate([0,0,(8.8-5)/2-0.6]) cylinder(r1=5,r2=8.8/2,h=(8.8-5)/2);
 			translate([0,0,14.5]) scale([1,1,2]) scale([1,1,1]) bearing_623();
 		}
