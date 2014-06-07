@@ -1,8 +1,9 @@
 include <configuration.scad>;
+include <teardrop.scad>
 
 use <microswitch.scad>;
 
-thickness = 9;  // 1mm thicker than linear rail.
+thickness = 6;  // thinner endstop required for the delrin V roller version
 width = 15;  // Same as vertical extrusion.
 height = 15;
 
@@ -16,9 +17,9 @@ module endstop() {
         cube([2.5, thickness, height], center=true);
     }
     translate([0, 0, 3]) rotate([90, 0, 0]) {
-      cylinder(r=m3_wide_radius, h=20, center=true, $fn=12);
-      translate([0, 0, 3.6-thickness/2]) {
-        cylinder(r=3, h=10, $fn=24);
+      teardrop(r=m3_wide_radius, h=20, center=true, $fn=12,truncate=true);
+      translate([0, 0, 3.6-thickness/2-0.2]) {
+        teardrop(r=3.2, h=10, $fn=24,truncate=true);
         translate([0, 5, 5])
           cube([6, 10, 10], center=true);
       }
@@ -29,7 +30,7 @@ module endstop() {
       % microswitch();
       for (x = [-9.5/2, 9.5/2]) {
         translate([x, 0, 0]) rotate([90, 0, 0])
-          cylinder(r=2.5/2, h=40, center=true, $fn=12);
+          cylinder(r=2.6/2, h=40, center=true, $fn=12);
       }
     }
   }
