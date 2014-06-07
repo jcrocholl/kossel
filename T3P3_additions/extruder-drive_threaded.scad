@@ -11,7 +11,7 @@ bite=-0.5;
 motor_hole_pitch=31;//26;
 frame_clamp = true;  // Flattens end where Mendel frame clamp lands - AB
 
-//da8=sqrt(2+sqrt(2))/4;
+da8=0.5;
 echo(da8);
 
 dx=filament_offset_x+filament_d/2+5.6/2-bite;
@@ -52,7 +52,8 @@ module drive_block(){
 		translate([filament_offset_x-filament_d/2-5,drive_offset_y,5]){
 			cylinder(r=5.5,h=5);
 			rotate([0,0,22.5]) difference() {
-				cylinder(r=3.3*da8,h=40,center=true,$fn=8);
+				translate([0,0,8])cylinder(r=3.3*da8,h=10,center=true,$fn=8);
+				translate([0,0,-4])cylinder(r=2.9*da8,h=10,center=true,$fn=8);
 				translate([0,0,5]) cylinder(r=3.5*da8,h=0.3);
 			}
 			translate([0,0,9]) cylinder(r=3.1,h=14);
@@ -64,6 +65,7 @@ module drive_block(){
 			}
 		}
 		translate([filament_offset_x-0.5-3,0,-0.1]) cube([1,30,20]);
+		translate([filament_offset_x-0.5-3+0.5,+30,+0.2]) rotate([90,-90,0]) cylinder(r=2,h=30,$fn=3); // chamfer added by TL to remove fettling requirement
 		
 
 		//****drive****
@@ -97,6 +99,7 @@ module drive_block(){
 		//for motor flange
 		//translate([0,0,-0.1]) cylinder(r=11.4,h=2.4);
 		translate([0,0,-0.1]) cylinder(r=3.5,h=20);
+		translate([0,0,-0.7]) cylinder(r1=4.65,r2=3.5,h=2);//chamfer added by TL to remove fettling requirement
 		
 		//****motor mount holes****
 		for(i=[1,-1]){
