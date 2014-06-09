@@ -35,7 +35,7 @@ module NEMA17(){
 
 module bearing_623(){
 	difference(){
-		cylinder(r=5,h=4,$fn=64,center=true);
+		cylinder(r=5.3,h=4,$fn=64,center=true);
 		cylinder(r=1.5,h=4.2,center=true,$fn=64);
 	}
 }
