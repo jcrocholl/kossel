@@ -135,7 +135,7 @@ module body()
 			cylinder(r=m3LooseRadius, h=bodyWidth+smidge);
 			cylinder(r=m3LooseHeadRadius, h=m3HeadHeight);
 			translate([0, 0, bodyWidth+smidge-m3NutHeight])
-			cylinder(r=m3NutRadius, h=m3NutHeight, $fn=6);
+			cylinder(r=m3NutRadius-0.075, h=m3NutHeight, $fn=6);
 		}
 	}
 
@@ -167,7 +167,7 @@ module underM3x25(h)
 {
 	// This is an M3 screw hole, with room for a nyloc nut on the bottom.
 	cylinder(r=m3LooseRadius, h=h);
-	cylinder(r=m3NutRadius, h=m3NutHeight, $fn=6);
+	cylinder(r=m3NutRadius-0.075, h=m3NutHeight, $fn=6);
 	//chamfer added by TL
 	translate([0,0,-0.2])
 	cylinder(r1=m3NutRadius+1,r2=m3NutRadius-1, h=m3NutHeight/2, $fn=6);
