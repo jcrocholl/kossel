@@ -11,7 +11,7 @@ bite=-0.5;
 motor_hole_pitch=31;//26;
 frame_clamp = true;  // Flattens end where Mendel frame clamp lands - AB
 
-da8=0.5;
+da8=0.55;
 echo(da8);
 
 dx=filament_offset_x+filament_d/2+5.6/2-bite;
@@ -41,7 +41,7 @@ module drive_block(){
 				translate([-3,0,0]) cube([3,3,40]);
 			}
 				//boss for carriage mount hole
-				//rotate([90,0,0]) translate([23,7,(31-4)/2]) rotate([0,0,22.5]) cylinder(r=14*da8,h=7.5,$fn=8); //removed by TL as not required for Kossel Mini
+				rotate([90,0,0]) translate([23,7,(31-4)/2]) rotate([0,0,22.5]) cylinder(r=14*0.5412,h=7.5,$fn=8);
 				//boss for idler tensioner hole
 				translate([20.6,25,14]) rotate([0,-90,0]) cylinder(r=3.5,h=25.6);
 				//boss for drive bearings
@@ -53,9 +53,9 @@ module drive_block(){
 			cylinder(r=5.5,h=5);
 			rotate([0,0,22.5]) difference() {
 				translate([0,0,8])cylinder(r=3.3*da8,h=10,center=true,$fn=8);
-				translate([0,0,-4])cylinder(r=2.9*da8,h=10,center=true,$fn=8);
 				translate([0,0,5]) cylinder(r=3.5*da8,h=0.3);
 			}
+			translate([0,0,-4])cylinder(r=2.9*da8,h=10,center=true,$fn=8);
 			translate([0,0,9]) cylinder(r=3.1,h=14);
 			translate([-9,0,2.5]) cube([24,11,5],center=true);
 			translate([-15,2,2.4]) union(){
@@ -124,14 +124,14 @@ module drive_block(){
 				translate([24,12,0]) cylinder(r=20,h=18,center=true);
 			}
 		//****carriage mount holes****
-		/*translate([2,0,0]) for(i=[1,-1]){
+		translate([2,0,0]) for(i=[1,-1]){
 			rotate([90,0,0]) translate([filament_offset_x+i*16+1.5,7.5,5])
 			{
         translate([0,0,-8]) rotate([0,0,22.5]) cylinder(r=3.3*da8,h=30,$fn=8);
 				rotate([0,0,30]) cylinder(r=5.8/sqrt(3),h=3,$fn=6);
 				translate([-5.8/2,0,0]) cube([5.8,10,3]);
 			}
-		}*/ //removed by TL as not required for Kossel Mini
+		} 
 	}
 }
 module insert(){
