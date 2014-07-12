@@ -71,7 +71,7 @@ module fanMount() {
 
     // duct/redirection toward hot-end
     translate([-22,0,5]) rotate([0,90,0]) scale([1.2,1,1]) difference() {
-      cylinder(h=42,r=20,$fn=48);
+      cylinder(h=42,r=20.5,$fn=48);
       translate([ 0 ,0,-2]) cylinder(h=42,r=19,$fn=48);
       translate([-22,0,-1]) cylinder(h=44,r=16,$fn=16);
       translate([3.8,-22,-1]) cube([20,44,44]); // chop off stuff that intersects with fan
