@@ -9,7 +9,7 @@ require 'laserPartsUtil.pl';
 
 &printLaserCutHeader($wmm,$hmm);
 
-&ArduinoMegaMountHoles(112,240);
+&ArduinoMegaMountHoles(112,230);
 
 &startPart(110,170);
 print "M0,0 l10,0
@@ -20,8 +20,7 @@ l0,-3 l10,0 l0,3 l10,0
 l0,-3 l10,0 l0,3 l10,0
 l0,-3 l10,0 l0,3 l10,0
 l0,10 l3,0 l0,10 l-3,0
-l0,10 l3,0 l0,10 l-3,0
-l0,10 l3,0 l0,10 l-3,0
+l0,10 l3,0 l0,15 l-3,0
 l0,10 l3,0 l0,10 l-3,0 l0,10
 l-10,0 l0,3 l-10,0 l0,-3
 l-10,0 l0,3 l-10,0 l0,-3
@@ -30,8 +29,7 @@ l-10,0 l0,3 l-10,0 l0,-3
 l-10,0 l0,3 l-10,0 l0,-3
 l-10,0 l0,3 l-10,0 l0,-3 l-10,0
 l0,-10 l-3,0 l0,-10 l3,0
-l0,-10 l-3,0 l0,-10 l3,0
-l0,-10 l-3,0 l0,-10 l3,0
+l0,-10 l-3,0 l0,-15 l3,0
 l0,-10 l-3,0 l0,-10 l3,0 Z
 $endPart";
 
@@ -41,8 +39,7 @@ l0,3 l-10,0 l0,-3 l-10,0
 l0,3 l-10,0 l0,-3 l-10,0
 l0,3 l-10,0 l0,-3 l-13,0
 l0,13 l3,0 l0,10 l-3,0
-l0,10 l3,0 l0,10 l-3,0
-l0,10 l3,0 l0,10 l-3,0
+l0,10 l3,0 l0,15 l-3,0
 l0,10 l3,0 l0,10 l-3,0
 l0,13
 l13,0 l0,-3 l10,0 l0,3
@@ -51,7 +48,7 @@ l10,0 l0,-3 l10,0 l0,3
 l13,0 l0,-3 $endPart";
 
 print "<desc>USB port and power holes</desc>
-<g transform='translate(16.8,259) rotate(-90)'>
+<g transform='translate(16.8,249) rotate(-90)'>
 <g transform='translate(0,90) scale(1,-1)'>
 <path d='M14,19.5 l23.4,0 l0,17 l-23.4,0 Z'/>
 <path d='M66,6 l-14.3,0 l0,13 l14.3,0 Z'/>
