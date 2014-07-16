@@ -31,6 +31,9 @@ l0,-10 l-3,0 l0,-15 l3,0
 l0,-10 l-3,0 l0,-10 l3,0 Z
 $endPart";
 
+print "<desc>Hole to align with reset button</desc>\n";
+&plotCircle(147,142,3.5,12);
+
 &startPart(110-3,170);
 print "M3,0 l0,-3 l-13,0
 l0,3 l-10,0 l0,-3 l-10,0
