@@ -37,5 +37,18 @@ hole for duct on main box.</desc>
 <path transform='translate(40,20)' stroke='#009900'
 d='M0,0 l0,30 l42,0 l0,-30 Z'/>\n\n";
 
-print "</g></svg>\n"; # end of drawing
+print "\n<desc>Vent holes
+Delete this for actual brace cut, but delete everything else to cut
+vent holes in main box.</desc>\n";
+for ($x=10; $x < 70; $x+=18) {
+    for ($y=4; $y<=16; $y+=4) {
+	print "<path transform='translate($x,$y)' stroke='#009900' d='";
+	&drawArc('M', 0,0,1, 90,270,15);
+	&drawArc('L',13,0,1,-90, 90,15);
+	print " Z'/>\n";
+    }
+}
+
+
+print "\n\n</g></svg>\n"; # end of drawing
 
