@@ -89,14 +89,21 @@ sub parseSizeFromFileName() {
     local ($w,$h) = (384,384);
     $_ = $fNam;
     chomp;
+    s/^.*\///;
+#print STDERR "\n$_\n";
     s/\..*$//;
+#print STDERR "\n$_\n";
     local @a = split /x/;
+#print STDERR "$#a\n";
+print STDERR "$a[$#a-1]x";
+print STDERR "$a[$#a]\n";
     if ($#a < 1) { return($w,$h); } 
     $h = $a[$#a];
     $_ = $a[$#a-1];
     @a = split /[a-zA-Z_\+\-\s\.]/;
     if ($#a < 0) { return($w,$h); } 
     $w = $a[$#a];
+print STDERR "$w x $h\n";
     return($w,$h);
 }
 
