@@ -5,7 +5,7 @@ m3threadOD = 2.88;
 intersection(){
   translate([0,-5,-1]) scale([1,1.3,1]) cylinder(r=18,h=9,$fn=64);
   difference() {
-    translate([0,44,0]) scale([1,2,1]) cylinder(r=30,h=3+3,$fn=120);
+    translate([0,44,0]) scale([1,2,1]) cylinder(r=30,h=3+3.5,$fn=120);
     translate([0,170/2,3]) {
       // make this a little too small, so that we can mount with screw
       // slightly off perfect perpendicular to give some slop/freedom
