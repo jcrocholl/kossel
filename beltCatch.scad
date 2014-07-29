@@ -46,7 +46,7 @@ module beltCatch(height,full=false)
 
     // pilot hole for optional lock-in screw
     translate([1,1.7*postRad+.7*beltThick+3,height-4])
-      cylinder(h=5,r=.8,$fn=11);
+      cylinder(h=5,r=.8,$fn=6);
 
   }
 }

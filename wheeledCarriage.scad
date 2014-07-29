@@ -7,7 +7,7 @@ thickness = 6;
 horn_thickness = 13;
 horn_x = 8;
 
-belt_width = 5;
+belt_width = 6;
 belt_x = 5.6;
 belt_z = 7;
 
@@ -202,27 +202,27 @@ difference() { union() {
     }
     wheelBaseHoles();
   }
-  translate([23-1,0,0.3]) mobileWheelMount(0);
+  translate([23+5,0,0.3]) mobileWheelMount(0);
 
   color("Cyan") {
-    hull() {
+    %hull() {
       for (i=[-wheel_offset,wheel_offset]) {
         translate([-extrusion_width/2-wheel_radius,i,0])
           cylinder(h=0.4,r=6.65,$fn=24);
       }
     }
-    translate([9,-17,0]) cube([23,34,0.4]);
+    //%translate([9,-17,0]) cube([23,34,0.4]);
 
     // support material, forced
     translate([ 17.3,0,base_thickness+.9])                 scale([0.5,0.6,0.7]) earBrace();
     translate([-17.3,0,base_thickness+.9]) mirror([1,0,0]) scale([0.5,0.6,0.7]) earBrace();
-    translate([-1,-1.5*0,0]) {
+    translate([5,-1.5*0,.2]) {
       mobileSupport();
       mirror([0,1,0]) mobileSupport();
     }
   }
 }
 translate([-8.5, -20,-.1]) cube([17,60,1.2]); // extra clearance for extrusion rail
-translate([ 13 ,-7.5,-.1]) cube([ 5,15,1.2]);
+translate([ 19 ,-7.5,-.1]) cube([ 5,15,1.2]);
 translate([ 8.5,  -6,-.1]) cube([ 5,12,.51]);
 }
