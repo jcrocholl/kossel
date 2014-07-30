@@ -66,21 +66,40 @@ module supportBlade() {
   intersection() { 
     translate([-2,-3,0]) cube([5,6,5]);
     translate([0,-.2,-1.3]) rotate([0,-38,0]) hull() {
-      cube([3.3,.4,1.5]);
+      cube([3.3,.2,1.5]);
       translate([0,-.8,-3]) cube([3,2,1]);
     }
   }
 }
 
-// Shift up and add a brim for easier printing at quelab
-union() {
-translate([0, 0, height/2+.32]) effector();
-color("Cyan") {
-  cylinder(h=.4,r=33.3,$fn=6);
-  for (a = [0,120,240]) {
-    rotate([0,0,a]) {
-      translate([ 18.4,-20,0.1]) supportBlade();
-      translate([-18.4,-20,0.1]) rotate([0,0,180]) supportBlade();
-    }
+module nutCatcher() {
+  difference() {
+    cylinder(h=5,r1=5,r2=4.5,$fn=18);
+    // nuts are 5.5mm wide.  radius to corner is 5.5/2/.866=3.1755
+    translate([0,0,-.1]) cylinder(h=5.2,r1=3,r2=3.3,$fn=6);
   }
-}}
+}
+
+use <probePost.scad>;
+
+// Shift up and add a brim for easier printing at quelab
+difference() {
+  union() {
+    translate([0, 0, height/2+.32*0]) effector();
+    color("Cyan") {
+      //cylinder(h=.4,r=33.3,$fn=6);
+      for (a = [0,120,240]) {
+        rotate([0,0,a]) {
+          translate([ 18.4,-20,0.1*0]) supportBlade();
+          translate([-18.4,-20,0.1*0]) rotate([0,0,180]) supportBlade();
+        }
+      }
+    }
+    translate([0,-12.5,height])retractable();
+    for (a=[-30:60:240]) { rotate([0,0,a]) {
+      translate([12.5,0,height-.3]) nutCatcher();
+    }}
+  }
+  // bore out a larger hole to hold bowden tube for lower-friction probe guide
+  translate([0,-12.5,-1]) cylinder(h=21.1,r=3.95/2,$fn=24);
+}
