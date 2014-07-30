@@ -74,9 +74,9 @@ module supportBlade() {
 
 module nutCatcher() {
   difference() {
-    cylinder(h=5,r1=5,r2=4.5,$fn=18);
+    cylinder(h=3.3,r1=5,r2=4.5,$fn=18);
     // nuts are 5.5mm wide.  radius to corner is 5.5/2/.866=3.1755
-    translate([0,0,-.1]) cylinder(h=5.2,r1=3,r2=3.3,$fn=6);
+    translate([0,0,-.1]) cylinder(h=3.5,r1=3.08,r2=3.3,$fn=6);
   }
 }
 
