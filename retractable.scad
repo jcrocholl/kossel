@@ -64,7 +64,7 @@ module retractable() {
     // make sure we clear the hot-end hull on top
     translate([0,12.5,-1]) hotEndHullProxy();
     // Sub-miniature micro switch.
-    translate([-2.5, -face_offset-3, 5]) {
+    translate([-2.5+0.7, -face_offset-3, 5]) {
       % microswitch();
       for (x = [-9.5/2, 9.5/2]) {
         translate([x, 0, 0]) rotate([90, 0, 0])
@@ -77,7 +77,10 @@ module retractable() {
 // put solid layer below holes for quelab printer
 //union(){
 //  translate([0,0,0.15])
+difference() {
     retractable();
+    translate([0,0,-.1]) #cylinder(r=3.95/2,h=10.5,$fn=24);
+}
 //  color("Cyan") {
 //    hull() {
 //      translate([-11,-4.5,0]) cube([7,10,.3]);
