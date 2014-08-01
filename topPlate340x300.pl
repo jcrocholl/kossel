@@ -36,35 +36,36 @@ printf("<g transform='translate(%.3f,%.3f)'>\n",$wmm/2,$hmm*0.65);
 local $iyLo = $yLo-$borderWidth;
 local $yHi = $yLo-$h;
 local $iyHi = $yHi + 2 * $borderWidth;
-print "<path style='stroke:#FFAA00' d='";
-printf("M%.3f,%.3f L0,%.3f L%.3f,%.3f Z'/>\n",$oLen/2, $yLo, $yHi,-$oLen/2, $yLo);
-print "<path style='stroke:#FFAA00' d='";
-printf("M%.3f,%.3f L0,%.3f L%.3f,%.3f Z'/>\n",$iLen/2,$iyLo,$iyHi,-$iLen/2,$iyLo);
+
+# Slot center line
+local $syLo = (sin(30*$deg2rad)/cos(30*$deg2rad)) * ($sLen/2);
+local $sh = sqrt(3) * $sLen / 2;
+local $syHi = $syLo-$sh;
+
+&printEquilateralTriangle($oLen, $yLo,$ yHi);  # outside border of plate
+&printEquilateralTriangle($iLen,$iyLo,$iyHi);  # inside border of extrusion
+&printEquilateralTriangle($sLen,$syLo,$syHi);  # centerline of extrusion slot
 
 &printTruncTriangle(0,0,0,$oLen,$truncOffset,$rCurve);
 
 ### edge bolt holes
-local $syLo = (sin(30*$deg2rad)/cos(30*$deg2rad)) * ($sLen/2);
-local $sh = sqrt(3) * $sLen / 2;
-local $syHi = $syLo-$sh;
-print "<path style='stroke:#FFAA00' d='";
-printf("M%.3f,%.3f L0,%.3f L%.3f,%.3f Z'/>\n",$sLen/2,$syLo,$syHi,-$sLen/2,$syLo);
 
 local $r3 = 2.94/2 - 0.1; # radius for hole for M3 screw
 local $x1 = -$sLen/2+$boltOffset;
-&plotCircle(-$x1,$syLo,$r3,11);
-&plotCircle( $x1,$syLo,$r3,11);
-&plotCircle(  0 ,$syLo,$r3,11);
+local $nf = 24;  # number of facets for bolt holes
+&plotCircle(-$x1,$syLo,$r3,$nf);
+&plotCircle( $x1,$syLo,$r3,$nf);
+&plotCircle(  0 ,$syLo,$r3,$nf);
 local $dx = -2 * $x1;
 $x1 = $boltOffset/2;
 local $y1 = $syHi + $s60 * $boltOffset;
 print STDERR "syLo=$syLo  syHi=$syHi  sh=$sh  y1=$y1\n";
-&plotCircle( $x1,$y1,$r3,11);
-&plotCircle(-$x1,$y1,$r3,11);   $x1 += $dx/4;   $y1 += $s60 * $dx/2;
-&plotCircle( $x1,$y1,$r3,11);
-&plotCircle(-$x1,$y1,$r3,11);   $x1 += $dx/4;   $y1 += $s60 * $dx/2;
-&plotCircle( $x1,$y1,$r3,11);
-&plotCircle(-$x1,$y1,$r3,11);
+&plotCircle( $x1,$y1,$r3,$nf);
+&plotCircle(-$x1,$y1,$r3,$nf);   $x1 += $dx/4;   $y1 += $s60 * $dx/2;
+&plotCircle( $x1,$y1,$r3,$nf);
+&plotCircle(-$x1,$y1,$r3,$nf);   $x1 += $dx/4;   $y1 += $s60 * $dx/2;
+&plotCircle( $x1,$y1,$r3,$nf);
+&plotCircle(-$x1,$y1,$r3,$nf);
 
 print "</g></g></svg>";
 
@@ -80,11 +81,18 @@ sub printTruncTriangle() {
     local $v3x = -$v1x;  local $v3y = $v1y;
 
     print "<path transform='translate($x0,$y0) rotate($rot)' d='";
-    &drawArc('M',$v1x-$offst         ,$v1y-$rc            , $rc,  90,  30,-6);
-    &drawArc('L',$v1x-$offst/2-$s60*$rc,$v1y-$s60*$offst+$rc/2, $rc,  30, -30,-6);
-    &drawArc('L',$v2x+$offst/2-$s60*$rc,$v2y+$s60*$offst+$rc/2, $rc, -30, -90,-6);
-    &drawArc('L',$v2x-$offst/2+$s60*$rc,$v2y+$s60*$offst+$rc/2, $rc, -90,-150,-6);
-    &drawArc('L',$v3x+$offst/2+$s60*$rc,$v3y-$s60*$offst+$rc/2, $rc,-150,-210,-6);
-    &drawArc('L',$v3x+$offst           ,$v3y-$rc              , $rc,-210,-270,-6);
+    &drawArc('M',$v1x-$offst           ,$v1y-$rc              , $rc,  90,  30,-3);
+    &drawArc('L',$v1x-$offst/2-$s60*$rc,$v1y-$s60*$offst+$rc/2, $rc,  30, -30,-3);
+    &drawArc('L',$v2x+$offst/2-$s60*$rc,$v2y+$s60*$offst+$rc/2, $rc, -30, -90,-3);
+    &drawArc('L',$v2x-$offst/2+$s60*$rc,$v2y+$s60*$offst+$rc/2, $rc, -90,-150,-3);
+    &drawArc('L',$v3x+$offst/2+$s60*$rc,$v3y-$s60*$offst+$rc/2, $rc,-150,-210,-3);
+    &drawArc('L',$v3x+$offst           ,$v3y-$rc              , $rc,-210,-270,-3);
     print " Z'/>\n";
+}
+
+sub printEquilateralTriangle() {
+    local ($len,$lo,$hi) = @_;
+
+    print "<path style='stroke:#FFAA00' d='";
+    printf("M%.3f,%.3f L0,%.3f L%.3f,%.3f Z'/>\n",$len/2, $lo, $hi,-$len/2, $lo);
 }
