@@ -14,19 +14,19 @@ require 'laserPartsUtil.pl';
 
 &printLaserCutHeader($wmm,$hmm);
 
-$iLen = 269.445;  # inside length of triangle
-$rCurve = 4;  # radius of curves
-$truncOffset = 80;  # how far back from vertex do we want curve
-$extWidth = 15; # extrusion width
-$borderWidth = $extWidth; # width of border past inside iLen triangle
-$boltOffset = 70;  # dist from corner of extrusion centerline triangle to put first bolt
-
 $pi = 3.14159265359;
 $deg2rad = $pi / 180;
-$s = sin(60*$deg2rad);
+$s60 = sin(60*$deg2rad);
 
-$oLen = $iLen + 2*2*$borderWidth*$s;  # outside triangle length
-$sLen = $iLen +   2*   $extWidth*$s;  # extrusion slot centerline triangle len
+$iLen = 240 + 2 * 30*$s60;  # inside length of triangle (sin(60)==cos(30))
+$rCurve = 4;  # radius of curves
+$truncOffset = 73;  # how far back from vertex do we want curve
+$extWidth = 15; # extrusion width
+$borderWidth = $extWidth; # width of border past inside iLen triangle
+$boltOffset = 65;  # dist from corner of extrusion centerline triangle to put first bolt
+
+$oLen = $iLen + 2*2*$borderWidth*$s60;  # outside triangle length
+$sLen = $iLen +   2*   $extWidth*$s60;  # extrusion slot centerline triangle len
 local $yLo = (sin(30*$deg2rad)/cos(30*$deg2rad)) * ($oLen/2);
 local $h = sqrt(3) * $oLen / 2;
 print STDERR "yLo $yLo\n";
@@ -57,12 +57,12 @@ local $x1 = -$sLen/2+$boltOffset;
 &plotCircle(  0 ,$syLo,$r3,11);
 local $dx = -2 * $x1;
 $x1 = $boltOffset/2;
-local $y1 = $syHi + $s * $boltOffset;
+local $y1 = $syHi + $s60 * $boltOffset;
 print STDERR "syLo=$syLo  syHi=$syHi  sh=$sh  y1=$y1\n";
 &plotCircle( $x1,$y1,$r3,11);
-&plotCircle(-$x1,$y1,$r3,11);   $x1 += $dx/4;   $y1 += $s * $dx/2;
+&plotCircle(-$x1,$y1,$r3,11);   $x1 += $dx/4;   $y1 += $s60 * $dx/2;
 &plotCircle( $x1,$y1,$r3,11);
-&plotCircle(-$x1,$y1,$r3,11);   $x1 += $dx/4;   $y1 += $s * $dx/2;
+&plotCircle(-$x1,$y1,$r3,11);   $x1 += $dx/4;   $y1 += $s60 * $dx/2;
 &plotCircle( $x1,$y1,$r3,11);
 &plotCircle(-$x1,$y1,$r3,11);
 
@@ -81,10 +81,10 @@ sub printTruncTriangle() {
 
     print "<path transform='translate($x0,$y0) rotate($rot)' d='";
     &drawArc('M',$v1x-$offst         ,$v1y-$rc            , $rc,  90,  30,-6);
-    &drawArc('L',$v1x-$offst/2-$s*$rc,$v1y-$s*$offst+$rc/2, $rc,  30, -30,-6);
-    &drawArc('L',$v2x+$offst/2-$s*$rc,$v2y+$s*$offst+$rc/2, $rc, -30, -90,-6);
-    &drawArc('L',$v2x-$offst/2+$s*$rc,$v2y+$s*$offst+$rc/2, $rc, -90,-150,-6);
-    &drawArc('L',$v3x+$offst/2+$s*$rc,$v3y-$s*$offst+$rc/2, $rc,-150,-210,-6);
-    &drawArc('L',$v3x+$offst         ,$v3y-$rc            , $rc,-210,-270,-6);
+    &drawArc('L',$v1x-$offst/2-$s60*$rc,$v1y-$s60*$offst+$rc/2, $rc,  30, -30,-6);
+    &drawArc('L',$v2x+$offst/2-$s60*$rc,$v2y+$s60*$offst+$rc/2, $rc, -30, -90,-6);
+    &drawArc('L',$v2x-$offst/2+$s60*$rc,$v2y+$s60*$offst+$rc/2, $rc, -90,-150,-6);
+    &drawArc('L',$v3x+$offst/2+$s60*$rc,$v3y-$s60*$offst+$rc/2, $rc,-150,-210,-6);
+    &drawArc('L',$v3x+$offst           ,$v3y-$rc              , $rc,-210,-270,-6);
     print " Z'/>\n";
 }
