@@ -20,11 +20,11 @@ $s60 = sin(60*$deg2rad);
 
 $iLen = 240 + 2 * 30*$s60;  # inside length of triangle (sin(60)==cos(30))
 $rCurve = 4;  # radius of curves
-$truncOffset = 73;  # how far back from vertex do we want curve
+$truncOffset = 69;  # how far back from vertex do we want curve
 $extWidth = 15; # extrusion width
 $borderWidth = $extWidth; # width of border past inside iLen triangle
-$boltOffset = 65;  # dist from corner of extrusion centerline triangle to put first bolt
-$pulleyInsetFromInsideVertex = 47;  # approx.  needs calibration
+$boltOffset = 61;  # dist from corner of extrusion centerline triangle to put first bolt
+$pulleyInsetFromInsideVertex = 45;  # approx.  needs calibration
 $pulleyBoltSep = 14;  # from pulleyHolder.scad
 $pulleyBraceLen = 40;
 $pulleyBraceRad = 8;
@@ -63,7 +63,7 @@ local $br = (($iLen/2) / $s60) - $pulleyInsetFromInsideVertex;
 local $pbr = $pulleyBraceRad;
 local $pbd = 2*$pulleyBoltSep;
 local $pbl = $pulleyBraceLen;
-#&plotBrace(0,-$br,180,$r3,$pbr,$pbd,$pbl); # diag: show overlay
+&plotBrace(0,-$br,180,$r3,$pbr,$pbd,$pbl); # diag: show overlay
 local $x0 = -60.4;
 local $y0 = -110;
 local $pd = $pulleyBraceLen + 2*$pulleyBraceRad + 0.2;
