@@ -24,6 +24,10 @@ $truncOffset = 73;  # how far back from vertex do we want curve
 $extWidth = 15; # extrusion width
 $borderWidth = $extWidth; # width of border past inside iLen triangle
 $boltOffset = 65;  # dist from corner of extrusion centerline triangle to put first bolt
+$pulleyInsetFromInsideVertex = 47;  # approx.  needs calibration
+$pulleyBoltSep = 14;  # from pulleyHolder.scad
+$pulleyBraceLen = 40;
+$pulleyBraceRad = 8;
 
 $oLen = $iLen + 2*2*$borderWidth*$s60;  # outside triangle length
 $sLen = $iLen +   2*   $extWidth*$s60;  # extrusion slot centerline triangle len
@@ -48,9 +52,27 @@ local $syHi = $syLo-$sh;
 
 &printTruncTriangle(0,0,0,$oLen,$truncOffset,$rCurve);
 
+$r3 = 2.94/2 - 0.1; # radius for hole for M3 screw
+local $br = (($iLen/2) / $s60) - $pulleyInsetFromInsideVertex;
+#print STDERR "iLen = $iLen\npulley bolt radius = $br\n";
+&plotPulleyBoltHoles($br,   0,$pulleyBoltSep);
+&plotPulleyBoltHoles($br, 120,$pulleyBoltSep);
+&plotPulleyBoltHoles($br,-120,$pulleyBoltSep);
+
+# braces for pulley bolts
+local $pbr = $pulleyBraceRad;
+local $pbd = 2*$pulleyBoltSep;
+local $pbl = $pulleyBraceLen;
+#&plotBrace(0,-$br,180,$r3,$pbr,$pbd,$pbl); # diag: show overlay
+local $x0 = -60.4;
+local $y0 = -110;
+local $pd = $pulleyBraceLen + 2*$pulleyBraceRad + 0.2;
+&plotBrace($x0,$y0,120,$r3,$pbr,$pbd,$pbl); $x0 -= 0.5*$pd;  $y0 += $s60*$pd;
+&plotBrace($x0,$y0,120,$r3,$pbr,$pbd,$pbl); $x0 -= 0.5*$pd;  $y0 += $s60*$pd;
+&plotBrace($x0,$y0,120,$r3,$pbr,$pbd,$pbl);
+
 ### edge bolt holes
 
-local $r3 = 2.94/2 - 0.1; # radius for hole for M3 screw
 local $x1 = -$sLen/2+$boltOffset;
 local $nf = 24;  # number of facets for bolt holes
 &plotCircle(-$x1,$syLo,$r3,$nf);
@@ -88,6 +110,28 @@ sub printTruncTriangle() {
     &drawArc('L',$v3x+$offst/2+$s60*$rc,$v3y-$s60*$offst+$rc/2, $rc,-150,-210,-3);
     &drawArc('L',$v3x+$offst           ,$v3y-$rc              , $rc,-210,-270,-3);
     print " Z'/>\n";
+}
+
+sub plotPulleyBoltHoles() {
+    local ($pulleyRad, $ang, $boltSep) = @_;
+
+    print "<desc>Pulley Carriage Bolt Holes</desc><g transform='rotate($ang)'>\n";
+    &plotCircle(-$boltSep,-$pulleyRad,$r3,18);
+    &plotCircle( $boltSep,-$pulleyRad,$r3,18);
+    print "</g>\n";
+}
+
+sub plotBrace() {
+    local ($x0,$y0,$rot,$ri,$ro,$len,$bLen) = @_;
+
+    print "<desc>Connector Link (pulley bolt brace)</desc>
+<g transform='translate($x0,$y0) rotate($rot)'>\n";
+    &plotCircle(-$len/2,0,$ri,24);
+    &plotCircle( $len/2,0,$ri,24);
+    print "<path d='";
+    &drawArc('M', $bLen/2,0,$ro,-90, 90,6);
+    &drawArc('L',-$bLen/2,0,$ro, 90,270,6);
+    print "'/></g>\n";
 }
 
 sub printEquilateralTriangle() {
