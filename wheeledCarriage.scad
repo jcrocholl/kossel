@@ -77,8 +77,8 @@ module carriage() {
 
 module wheelAxleBrace() {
   hull() {
-    cylinder(h=1,r=6.5,$fn=24);
-    translate([0,0,base_thickness-3]) cylinder(h=6,r1=6.5,r2=4.5);
+    cylinder(h=1,r=5,$fn=36);
+    translate([0,0,base_thickness-3]) cylinder(h=6,r1=5,r2=3.7,$fn=36);
   }
 }
 module wheelAxleHole() {
@@ -109,7 +109,7 @@ bthick = base_thickness + 2*dilation;
 
 module cableCatchBrace() {
   hull() {
-    #translate([0, 1.5,12.4]) cube([12 ,3  ,1  ]);
+    translate([0, 1.5,12.4]) cube([12 ,3  ,1  ]);
     //translate([ 2, 5,11]) cube([6.5,1  ,2.5]);
     translate([13,-.5, 5  ]) cube([8,6,5]);
   }
@@ -148,7 +148,7 @@ supportSpread = 6;
       // tension screw housing pair
       translate([0,0,base_thickness/2]) rotate([0,90,0]) {
         for (i=[-boltSep,boltSep]) {
-          translate([0,i,-20]) cylinder(r=5.3,h=41);
+          translate([0,i,-20]) cylinder(r=4.2,h=41,$fn=36);
         }
       }
 
@@ -158,7 +158,11 @@ supportSpread = 6;
       }
 
       // brace between main fixed wheel axles
-      translate([-dx-2,-16,0]) cube([ 7,32,base_thickness]);
+      //%translate([-dx-2,-16,0]) cube([ 7,32,base_thickness]);
+      hull() {
+        translate([-dx+3, wheel_offset,6]) scale([1,2,3]) sphere(2,$fn=24);
+        translate([-dx+3,-wheel_offset,6]) scale([1,2,3]) sphere(2,$fn=24);
+      }
 
       // fill in little middle-underside gap between braces
       //translate([-dx+2, -6,base_thickness*0.55]) cube([ 9,16,3]);
@@ -209,7 +213,7 @@ module mobileSupport() {
 }
 
 use <endstop.scad>;
-%translate([0,34.4,6.5]) rotate([180,0,0]) endstopCarriage();
+%translate([0,34.4-2,6.5]) rotate([180,0,0]) endstopCarriage();
 
 difference() { union() {
   difference() {
@@ -222,12 +226,12 @@ difference() { union() {
   translate([23+5,0,0.05]) mobileWheelMount(0);
 
   color("Cyan") {
-    %hull() {
-      for (i=[-wheel_offset,wheel_offset]) {
-        translate([-extrusion_width/2-wheel_radius,i,0])
-          cylinder(h=0.4,r=6.65,$fn=24);
-      }
-    }
+    //%hull() {
+    //  for (i=[-wheel_offset,wheel_offset]) {
+    //    translate([-extrusion_width/2-wheel_radius,i,0])
+    //      cylinder(h=0.4,r=6.65,$fn=24);
+    //  }
+    //}
     //%translate([9,-17,0]) cube([23,34,0.4]);
 
     // support material, forced
