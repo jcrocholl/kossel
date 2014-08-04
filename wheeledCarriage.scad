@@ -109,11 +109,28 @@ bthick = base_thickness + 2*dilation;
 
 module cableCatchBrace() {
   hull() {
-    translate([-1, 0,13.5]) cube([12 ,4  ,1  ]);
-    translate([ 2,-8,13.5]) cube([6.5,1  ,2.5]);
-    translate([11,-1, 0  ]) cube([9.5,7.5,9.5]);
+    #translate([0, 1.5,12.4]) cube([12 ,3  ,1  ]);
+    //translate([ 2, 5,11]) cube([6.5,1  ,2.5]);
+    translate([13,-.5, 5  ]) cube([8,6,5]);
   }
-  translate([4,-7,5]) cube([12,7,5]); // flat pad for stop switch
+
+  // flat pad for stop switch
+  %translate([4,-7,5]) cube([12,7,5]); // flat pad for stop switch
+  hull() {
+    translate([7.5 ,4,7.5]) rotate([90,0,0]) cylinder(r1=3,r2=2.1,h=9,$fn=15);
+    translate([18  ,4,7.5]) rotate([90,0,0]) cylinder(r1=3,r2=2.1,h=9,$fn=15);
+    // some extra bracing
+    translate([13,0,3]) rotate([90,0,0]) scale([2,1,1]) cylinder(r1=4,r2=1,h=1,$fn=22);
+  }
+
+  // more bracing for under belt catch
+  hull() {
+    translate([-6,-6,13]) sphere(2,$fn=22);
+    translate([-10,2,14]) cube([11,1,1]); 
+    translate([-6,2,3]) sphere(1,$fn=18);
+    translate([-1,1,14]) sphere(2,$fn=22);
+  }
+
 }
 
 module wheelBase() {
@@ -136,7 +153,7 @@ supportSpread = 6;
       }
 
       hull() { // brace section for mobile mount 
-        translate([ dx- 9,-16,0]) cube([15,32,base_thickness]);
+        translate([ dx- 9,-16,.03]) cube([15,32,base_thickness]);
         translate([ dx-20,-12,4]) cube([11,24,base_thickness-4]);
       }
 
@@ -144,7 +161,7 @@ supportSpread = 6;
       translate([-dx-2,-16,0]) cube([ 7,32,base_thickness]);
 
       // fill in little middle-underside gap between braces
-      translate([-dx+2, -6,base_thickness*0.55]) cube([ 9,16,3]);
+      //translate([-dx+2, -6,base_thickness*0.55]) cube([ 9,16,3]);
 
       // extra bracing from belt catch to mobile mount rails
       translate([0,-15,1])                 cableCatchBrace();
@@ -197,12 +214,12 @@ use <endstop.scad>;
 difference() { union() {
   difference() {
     union() {
-      translate([0,-5+5,base_thickness]) carriage();
-      translate([0,0,0.3]) wheelBase();
+      translate([0,-5+5,base_thickness-.4]) mirror([1,0,0]) carriage();
+      wheelBase();
     }
     wheelBaseHoles();
   }
-  translate([23+5,0,0.3]) mobileWheelMount(0);
+  translate([23+5,0,0.05]) mobileWheelMount(0);
 
   color("Cyan") {
     %hull() {
@@ -216,13 +233,13 @@ difference() { union() {
     // support material, forced
     translate([ 17.3,0,base_thickness+.9])                 scale([0.5,0.6,0.7]) earBrace();
     translate([-17.3,0,base_thickness+.9]) mirror([1,0,0]) scale([0.5,0.6,0.7]) earBrace();
-    translate([5,-1.5*0,.2]) {
+    translate([5,-1.5*0,.1]) {
       mobileSupport();
       mirror([0,1,0]) mobileSupport();
     }
   }
 }
-translate([-8.5, -20,-.1]) cube([17,60,1.2]); // extra clearance for extrusion rail
-translate([ 19 ,-7.5,-.1]) cube([ 5,15,1.2]);
-translate([ 8.5,  -6,-.1]) cube([ 5,12,.51]);
+translate([-8.5, -20,-.1]) cube([17,60,1.3]); // extra clearance for extrusion rail
+translate([ 19 ,-7.5,-.2]) cube([ 5,15,1.4]);
+//translate([ 8.5,  -6,-.2]) #cube([ 5,12,1]);
 }
