@@ -25,7 +25,7 @@ $extWidth = 15; # extrusion width
 $borderWidth = $extWidth; # width of border past inside iLen triangle
 $boltOffset = 61;  # dist from corner of extrusion centerline triangle to put first bolt
 $pulleyInsetFromInsideVertex = 45;  # approx.  needs calibration
-$pulleyBoltSep = 14;  # from pulleyHolder.scad
+$pulleyBoltSep = 12;  # from pulleyHolder.scad
 $pulleyBraceLen = 40;
 $pulleyBraceRad = 8;
 
@@ -59,17 +59,17 @@ local $br = (($iLen/2) / $s60) - $pulleyInsetFromInsideVertex;
 &plotPulleyBoltHoles($br, 120,$pulleyBoltSep);
 &plotPulleyBoltHoles($br,-120,$pulleyBoltSep);
 
-# braces for pulley bolts
+### braces for pulley bolts
 local $pbr = $pulleyBraceRad;
 local $pbd = 2*$pulleyBoltSep;
 local $pbl = $pulleyBraceLen;
-&plotBrace(0,-$br,180,$r3,$pbr,$pbd,$pbl); # diag: show overlay
 local $x0 = -60.4;
 local $y0 = -110;
 local $pd = $pulleyBraceLen + 2*$pulleyBraceRad + 0.2;
 &plotBrace($x0,$y0,120,$r3,$pbr,$pbd,$pbl); $x0 -= 0.5*$pd;  $y0 += $s60*$pd;
 &plotBrace($x0,$y0,120,$r3,$pbr,$pbd,$pbl); $x0 -= 0.5*$pd;  $y0 += $s60*$pd;
 &plotBrace($x0,$y0,120,$r3,$pbr,$pbd,$pbl);
+#&plotBrace(0,-$br,180,$r3,$pbr,$pbd,$pbl); # diag: show overlay
 
 ### edge bolt holes
 
@@ -88,6 +88,14 @@ print STDERR "syLo=$syLo  syHi=$syHi  sh=$sh  y1=$y1\n";
 &plotCircle(-$x1,$y1,$r3,$nf);   $x1 += $dx/4;   $y1 += $s60 * $dx/2;
 &plotCircle( $x1,$y1,$r3,$nf);
 &plotCircle(-$x1,$y1,$r3,$nf);
+
+# decorative holes
+$dx=60;
+$br=30;
+$nf=90;
+&plotCircle(    0    ,-$dx  ,$br,$nf);
+&plotCircle( $dx*$s60, $dx/2,$br,$nf);
+&plotCircle(-$dx*$s60, $dx/2,$br,$nf);
 
 print "</g></g></svg>";
 

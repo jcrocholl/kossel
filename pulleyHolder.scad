@@ -1,12 +1,12 @@
-boltSep = 14;
-baseRad = 6.5;
-m3rad = 2.94/2;
+boltSep = 12;
+baseRad = 5;
+m3rad = 2.94/2 + .1;
 baseHeight = 10;
 
 module boltHolder() {
-  hull() {
-    cylinder(r=baseRad,h=baseHeight,$fn=32);
-    translate([0,0,baseHeight+2]) cylinder(r=4,h=1,$fn=32);
+  scale([.9,1.1,1]) hull() {
+    cylinder(r=baseRad,h=baseHeight,$fn=45);
+    translate([0,0,baseHeight+1]) cylinder(r=3.5,h=1,$fn=45);
   }
 }
 
@@ -25,9 +25,9 @@ module pulleyProxy() {
 }
 
 module pulleyArea() {
-w2=6;
-h2=3;
-cr=2;
+w2=5.2;
+h2=2.5;
+cr=2.5;
 bh=baseHeight+5;
 ef=24;
   difference() {
@@ -38,8 +38,8 @@ ef=24;
       translate([ w2,-h2,-1]) cylinder(r=cr,h=bh,$fn=ef);
     }
 
-    translate([0,-4.1,baseHeight/2]) rotate([ 90,0,0]) cylinder(r1=2,r2=6,h=3,$fn=22);
-    translate([0, 4.1,baseHeight/2]) rotate([-90,0,0]) cylinder(r1=2,r2=6,h=3,$fn=22);
+    translate([0,-3.8,baseHeight/2]) rotate([ 90,0,0]) cylinder(r1=2.5,r2=6,h=3,$fn=22);
+    translate([0, 3.8,baseHeight/2]) rotate([-90,0,0]) cylinder(r1=2.5,r2=6,h=3,$fn=22);
   }
 }
 
@@ -49,24 +49,17 @@ module pulleyHolder() {
       translate([-boltSep,0,0]) boltHolder();
       translate([ boltSep,0,0]) boltHolder();
       hull() {
-        //translate([-boltSep,-baseRad,0]) cube([2*boltSep,2*baseRad,baseHeight]);
-        translate([-boltSep,0,0]) cylinder(r=baseRad,h=baseHeight,$fn=32);
-        translate([ boltSep,0,0]) cylinder(r=baseRad,h=baseHeight,$fn=32);
-        translate([0,0,baseHeight/2]) rotate([90,0,0]) cylinder(r=4,h=20,center=true,$fn=24);
+        translate([-boltSep,0,0]) scale([.9,1.1,1]) cylinder(r=baseRad,h=baseHeight,$fn=48);
+        translate([ boltSep,0,0]) scale([.9,1.1,1]) cylinder(r=baseRad,h=baseHeight,$fn=48);
+        translate([0,0,baseHeight/2]) rotate([90,0,0]) cylinder(r=4,h=16,center=true,$fn=24);
       }
     }
-    //hull() {
-    //  translate([-boltSep,0,0]) boltHolder();
-    //  translate([ boltSep,0,0]) boltHolder();
-    //  translate([0,0,baseHeight/2]) rotate([90,0,0]) cylinder(r=3.5,h=22,center=true,$fn=24);
-    //}
 
     translate([-boltSep,0,baseHeight]) nutHole();
     translate([ boltSep,0,baseHeight]) nutHole();
-    //translate([0,0,baseHeight/2]) rotate([90,0,0]) cylinder(r=m3rad,h=24,center=true,$fn=11);
     translate([0,-baseRad-1,baseHeight/2]) rotate([ 90,0,0]) nutHole();
     translate([0, baseRad+1,baseHeight/2]) rotate([-90,0,0])
-      cylinder(r1=5.5/2-.2,r2=5.5/2+.2,h=4,$fn=23);
+      cylinder(r1=5.5/2-.1,r2=5.5/2+.3,h=5,$fn=23);
     pulleyArea();
   }
 }
