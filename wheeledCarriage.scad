@@ -76,14 +76,18 @@ module carriage() {
 
 
 module wheelAxleBrace() {
-  hull() {
-    cylinder(h=1,r=5,$fn=36);
-    translate([0,0,base_thickness-3]) cylinder(h=6,r1=5,r2=3.7,$fn=36);
+  //hull() {
+  //  cylinder(h=1,r=5,$fn=36);
+  //  translate([0,0,base_thickness-3]) cylinder(h=6,r1=5,r2=3.7,$fn=36);
+  //}
+  intersection() {
+    cylinder(h=base_thickness+3,r=5,$fn=36);
+    translate([0,0,4]) scale([1,1,3]) sphere(5,$fn=36);
   }
 }
 module wheelAxleHole() {
   translate([0,0,-30]) cylinder(h=60,r=m3_wide_radius,$fn=12);
-  translate([0,0,base_thickness-1]) cylinder(h=10,r=m3_head_radius,$fn=16);
+  translate([0,0,base_thickness-1]) cylinder(h=10,r=m3_head_radius,$fn=30);
 }
 module mobileWheelMount(dilation) {
 bthick = base_thickness + 2*dilation;
@@ -125,9 +129,9 @@ module cableCatchBrace() {
 
   // more bracing for under belt catch
   hull() {
-    translate([-6,-6,13]) sphere(2,$fn=22);
+    translate([-6,-6,14]) sphere(2,$fn=22);
     translate([-10,2,14]) cube([11,1,1]); 
-    translate([-6,2,3]) sphere(1,$fn=18);
+    translate([-8,4, 4]) sphere(1,$fn=18);
     translate([-1,1,14]) sphere(2,$fn=22);
   }
 
