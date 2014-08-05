@@ -15,7 +15,7 @@ belt_z = 7;
 base_thickness = 11;
 wheel_radius = 8; // delrin wheels
 extrusion_width = 15;
-wheel_offset = 20;
+wheel_offset = 18;
 m3_head_radius=5.4/2+0.2;
 boltSep = 8; // tension bolt seperation half-dist
 
@@ -152,16 +152,24 @@ supportSpread = 6;
         }
       }
 
-      hull() { // brace section for mobile mount 
-        translate([ dx- 9,-16,.03]) cube([15,32,base_thickness]);
-        translate([ dx-20,-12,4]) cube([11,24,base_thickness-4]);
+      // brace section for mobile mount 
+      //%hull() { // brace section for mobile mount 
+      //  translate([ dx- 9,-16,.03]) cube([15,32,base_thickness]);
+      //  translate([ dx-20,-12,4]) cube([11,24,base_thickness-4]);
+      //}
+      hull() {
+        translate([dx+6,-16,base_thickness/2+0.01]) scale([1,1,base_thickness/2]) sphere(1,$fn=36);
+        translate([dx+6, 16,base_thickness/2+0.01]) scale([1,1,base_thickness/2]) sphere(1,$fn=36);
+        translate([   6, 16,base_thickness/2+0.01]) scale([1,1,base_thickness/2]) sphere(1,$fn=36);
+        translate([   6,-16,base_thickness/2+0.01]) scale([1,1,base_thickness/2]) sphere(1,$fn=36);
+        translate([-4,0,10]) rotate([90,0,0]) cylinder(r=1.5,h=14,$fn=24,center=true);
       }
 
       // brace between main fixed wheel axles
       //%translate([-dx-2,-16,0]) cube([ 7,32,base_thickness]);
       hull() {
-        translate([-dx+3, wheel_offset,6]) scale([1,2,3]) sphere(2,$fn=24);
-        translate([-dx+3,-wheel_offset,6]) scale([1,2,3]) sphere(2,$fn=24);
+        translate([-dx+2, wheel_offset,6]) scale([1.5,.1,3]) sphere(2,$fn=36);
+        translate([-dx+2,-wheel_offset,6]) scale([1.5,.1,3]) sphere(2,$fn=36);
       }
 
       // fill in little middle-underside gap between braces
