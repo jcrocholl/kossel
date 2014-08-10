@@ -145,7 +145,7 @@ module retractable() {
 // put solid layer below holes for quelab printer
 //union(){
 //  translate([0,0,0.15])
-    retractable();
+   // retractable();
 //  color("Cyan") {
 //    hull() {
 //      translate([-11,-4.5,0]) cube([7,10,.3]);
@@ -166,5 +166,5 @@ module retractable() {
 // draw a probe handle guide plate, to be converted to DXF for laser cut
 translate([0,-20,0]) {
   %translate([0,0,-5.75]) nanoswitch();
-  nanoswitchGuide();
+  projection(cut=true) {translate([0,0,-2]) nanoswitchGuide();}
 }
