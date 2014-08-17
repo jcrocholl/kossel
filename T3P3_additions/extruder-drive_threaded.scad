@@ -80,7 +80,7 @@ module drive_block(){
 		translate([filament_offset_x,0,7.5]) rotate([90,0,0]){
 			rotate([0,0,30]) cylinder(r=filament_d/sqrt(3),h=60,center=true,$fn=6);
 			//filament guide tube counter bore
-			translate([0,0,-29]) cylinder(r=4.1/2,h=4); 
+			translate([0,0,-29]) cylinder(r=4.5/2,h=4); 
 			//barrel counter bore
 			translate([0,0,11.1+1]) {
 				//rotate([0,0,30]) cylinder(r=8.5/sqrt(3), h=3.3, $fn=6); //not required
