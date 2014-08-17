@@ -79,11 +79,12 @@ module drive_block(){
 		//****filament path****
 		translate([filament_offset_x,0,7.5]) rotate([90,0,0]){
 			rotate([0,0,30]) cylinder(r=filament_d/sqrt(3),h=60,center=true,$fn=6);
+			//filament guide tube counter bore
+			translate([0,0,-29]) cylinder(r=4.1/2,h=4); 
 			//barrel counter bore
 			translate([0,0,11.1+1]) {
-				rotate([0,0,30]) cylinder(r=8.5/sqrt(3), h=3.3, $fn=6);
-                //translate([0,6-8.5/sqrt(3),1.65]) cube([8.5,12,3.3], center=true); //removed by TL for threaded version
-                translate([0,0,0]) cylinder(r=4.2/2,h=10); //translate([0,0,2]) cylinder(r=5.3/2,h=8); (old version)
+				//rotate([0,0,30]) cylinder(r=8.5/sqrt(3), h=3.3, $fn=6); //not required
+              cylinder(r=4.2/2,h=10); 
 			}
 			
 			//drive clearance and lead in
