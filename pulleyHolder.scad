@@ -26,7 +26,7 @@ module pulleyProxy() {
 
 module pulleyArea() {
 w2=5.2;
-h2=2.5;
+h2=2.5+.2;
 cr=2.5;
 bh=baseHeight+5;
 ef=24;
@@ -38,8 +38,8 @@ ef=24;
       translate([ w2,-h2,-1]) cylinder(r=cr,h=bh,$fn=ef);
     }
 
-    translate([0,-3.8,baseHeight/2]) rotate([ 90,0,0]) cylinder(r1=2.5,r2=6,h=3,$fn=22);
-    translate([0, 3.8,baseHeight/2]) rotate([-90,0,0]) cylinder(r1=2.5,r2=6,h=3,$fn=22);
+    translate([0,-4,baseHeight/2]) rotate([ 90,0,0]) cylinder(r1=2.5,r2=6,h=3,$fn=22);
+    translate([0, 4,baseHeight/2]) rotate([-90,0,0]) cylinder(r1=2.5,r2=6,h=3,$fn=22);
   }
 }
 
@@ -51,7 +51,10 @@ module pulleyHolder() {
       hull() {
         translate([-boltSep,0,0]) scale([.9,1.1,1]) cylinder(r=baseRad,h=baseHeight,$fn=48);
         translate([ boltSep,0,0]) scale([.9,1.1,1]) cylinder(r=baseRad,h=baseHeight,$fn=48);
-        translate([0,0,baseHeight/2]) rotate([90,0,0]) cylinder(r=4,h=16,center=true,$fn=24);
+        // 16 wide is about perfect for M3-14 bolt.
+        // may want to switch to an M3-16 in the future, so this would have to be wider
+        translate([0,0,baseHeight/2]) 
+          rotate([90,0,0]) cylinder(r=4,h=16,center=true,$fn=24);
       }
     }
 
