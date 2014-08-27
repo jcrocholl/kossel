@@ -5,7 +5,7 @@ roundness = 6;
 
 module extrusion_cutout(h, extra) {
   difference() {
-    cube([extrusion+extra, extrusion+extra, h], center=true);
+    cube([extrusion+extra+.3, extrusion+extra+.3, h], center=true);
     for (a = [0:90:359]) rotate([0, 0, a]) {
       translate([extrusion/2, 0, 0])
         cube([6, 2.5, h+1], center=true);
@@ -54,14 +54,16 @@ module sub2(height,idler_offset,idler_space) {  difference() {
     }
     cylinder(r=roundness, h=1, center=true);
   }
-  // Idler support cones.
-  if (idler_space < 30) {
+  // Idler support cones.  [no longer putting idler here.  attached to top brace (ab)]
+  if (idler_space < 30*.001) {
     translate([0, 26+idler_offset-30, 0]) rotate([-90, 0, 0])
       cylinder(r1=30, r2=2, h=30-idler_space/2);
     translate([0, 26+idler_offset+30, 0]) rotate([90, 0, 0])
       cylinder(r1=30, r2=2, h=30-idler_space/2);
   }
 }}
+
+use <ext15.scad>;
 
 module vertex(height, idler_offset, idler_space) {
   difference() {
@@ -76,7 +78,8 @@ module vertex(height, idler_offset, idler_space) {
       }
       cylinder(r=roundness, h=1, center=true);
     }
-    extrusion_cutout(height+10, 2*extra_radius);
+    %extrusion_cutout(height+10, 2*extra_radius);  // try more detailed extrusion model
+    translate([0,0,-height/2-1]) scale([1.03,1.03,1]) ext15(height+2);
     for (z = [0:30:height]) {
       translate([0, -7.5-extra_radius, z+7.5-height/2]) rotate([90, 0, 0])
         screw_socket_cone();
@@ -92,7 +95,7 @@ module vertex(height, idler_offset, idler_space) {
           assign(zz=((z<20)?-1:1)*zzz){
             scale([1, 1, zz]) translate([0, -100, 3]) minkowski() {
               //rotate([0, 0, -a*30]) #cylinder(r=4, h=16, $fn=6);
-              rotate([0, 0, -a*30]) #cylinder(r=4, h=5, $fn=6);
+              rotate([0, 0, -a*30]) cylinder(r=4, h=5, $fn=6);
                 cube([0.1, 5, 0.1], center=true);
             }
           }}}
@@ -137,4 +140,4 @@ module vertexPad() { color("Cyan") {
 
 // =======================================================================
 
-translate([0, 0, 7.5]) vertex(3*15, idler_offset=0, idler_space=3);
+translate([0, 0, 7.5]) vertex(1*15, idler_offset=0, idler_space=13);
