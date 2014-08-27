@@ -52,9 +52,13 @@ module vertexB(thick) {
         }
       }
 
-      hull() {
-        translate([-15,2,0]) rotate([0,0,-40]) scale([1,2,1]) cylinder(r=5,h=thick+2,$fn=36);
-        translate([ 15,2,0]) rotate([0,0, 40]) scale([1,2,1]) cylinder(r=5,h=thick+2,$fn=36);
+      translate([-16,2,0]) cube([32,8,thick+2]);
+      for (a=[-1,1]) {
+        hull() {
+          translate([15*a, 4,0]) cylinder(r=2,h=thick+2,$fn=6);
+          translate([38*a,38,0]) cylinder(r=2,h=thick+2,$fn=6);
+        }
+        translate([16*a,7,thick/2]) rotate([0,0,20*a]) cube([10,8,thick+2],center=true);
       }
     }
 
