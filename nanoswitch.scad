@@ -1,6 +1,6 @@
 module nanoswitchHoles() {
-   translate([ 6.5/2,0,-15+13]) cylinder(h=22,r=1,$fn=16);
-   translate([-6.5/2,0,-15]) cylinder(h=22,r=1,$fn=16);
+   translate([ 6.5/2,0,-15+13]) cylinder(h=22,r=1+.05,$fn=16);
+   translate([-6.5/2,0,-15   ]) cylinder(h=22,r=1+.05,$fn=16);
 }
 
 module nanoswitch() {
@@ -15,15 +15,15 @@ module nanoswitch() {
 module guideSlot() {
   difference() {
     union() {
-      translate([-2.6,0,0]) scale([1,2,1]) cylinder(h=4,r=2,$fn=36);
-      translate([ 2.6,0,0]) scale([1,2,1]) cylinder(h=4,r=2,$fn=36);
+      translate([-2.75,0,0]) scale([1,2,1]) cylinder(h=4,r=2,$fn=36);
+      translate([ 2.75,0,0]) scale([1,2,1]) cylinder(h=4,r=2,$fn=36);
       hull() {
         translate([-11,-10,0]) cube([18,1,4]);
         translate([-9,-1,0]) cube([15,1,4]);
       }
       translate([-4.5,0,2]) cube([6,4,4],center=true);
     }
-  cylinder(h=5,r=.6,$fn=18);
+  cylinder(h=5,r=.75,$fn=18);
   }
 }
 
@@ -37,7 +37,7 @@ module nanoswitchGuide() {
       }
       translate([0,0,-1]) nanoswitchHoles();
     }
-    translate([2.4,5.5,-1]) guideSlot();
+    translate([2.4,5.2,-1]) guideSlot();
   }
 }
 
