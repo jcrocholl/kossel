@@ -6,13 +6,13 @@ baseHeight = 10;
 module boltHolder() {
   scale([.9,1.1,1]) hull() {
     cylinder(r=baseRad,h=baseHeight,$fn=45);
-    translate([0,0,baseHeight+1]) cylinder(r=3.5,h=1,$fn=45);
+    translate([0,0,baseHeight+1.5]) scale([1.3,1,1]) cylinder(r=3.5,h=1,$fn=45);
   }
 }
 
 module nutHole() {
   union() {
-    cylinder(r1=5.2/2/.866,r2=3/.866,h=5,$fn=6);
+    cylinder(r1=5.2/2/.866+.1,r2=3.2/.866,h=5,$fn=6);
     translate([0,0,-30]) cylinder(r=m3rad+.1,h=31,$fn=13);
   }
 }
