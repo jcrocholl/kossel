@@ -26,51 +26,61 @@ x0 = cos(30)*(rc-dy)-2.7*ro;  // multiplier of ro here is a total guess
   }
 }
 
+module vertexBframe(thick) {
+  union() {
+    difference() {
+      intersection() {
+        triRound(75,6,thick);
+
+        translate([0,0,-1]) hull() {
+          translate([0,-45,0]) 
+            scale([20,10,1]) cylinder(r=1,h=thick+2,$fn=64);
+          translate([-75,40,0]) cube([150,4,thick+2]);
+        }
+      }
+
+      hull() {
+        for(a=[-1,1]) { translate([25*a,-11,-1]) cylinder(r=8,h=thick+2,$fn=36); }
+        translate([-65,45,-1]) cube([130,1,thick+2]);
+      }
+    }
+
+    for(a=[-1,1]) {
+      hull() {
+        translate([58*a,36,0]) cylinder(r=8,h=thick,$fn=36);
+        translate([56*a,25,0]) cylinder(r=1,h=thick,$fn=6);
+      }
+    }
+  }
+}
+
+module m3hole(thick) { cylinder(r=2.94/2+.1, h=thick+2, $fn=11); }
+
 module vertexB(thick) {
   difference() {
-    intersection() {
-      triRound(80,2,thick);
-
-      translate([0,0,-1]) hull() {
-        translate([0,-10,0]) 
-          scale([41,14,1]) cylinder(r=1,h=thick+2,$fn=64);
-        translate([-75,40,0]) cube([150,2,thick+2]);
-      }
+    union() {
+      vertexBframe(thick);
+      translate([-50,10,0]) cube([100,5,thick]);
     }
 
-    translate([0,-6,-1]) scale([1.01,1.01,1]) ext20(30);
-    translate([-30,-4,-1]) cylinder(r=4,h=thick+2,$fn=64);
-    translate([ 30,-4,-1]) cylinder(r=4,h=thick+2,$fn=64);
+    translate([0,0,-1]) {
+      translate([0,-35,-1]) ext20(30,0.2);
 
-    translate([0,0,-1]) difference() {
-      intersection() {
-        triRound(64,6,thick+2);
-        hull() {
-          translate([-41,10,0]) cylinder(r=4,h=thick+2,$fn=48);
-          translate([ 41,10,0]) cylinder(r=4,h=thick+2,$fn=48);
-          translate([-65,35,0]) cube([130,1,thick+2]);
-        }
+      // M3 drill holes
+      for(a=[-1,1]) {
+        translate([20*a,-30,0]) m3hole(thick);
+        translate([58*a, 36,0]) m3hole(thick);
       }
+    } // end of z=-1 shift for subtractions
 
-      translate([-16,2,0]) cube([32,8,thick+2]);
-      for (a=[-1,1]) {
-        hull() {
-          translate([15*a, 4,0]) cylinder(r=2,h=thick+2,$fn=6);
-          translate([38*a,38,0]) cylinder(r=2,h=thick+2,$fn=6);
-        }
-        translate([16*a,7,thick/2]) rotate([0,0,20*a]) cube([10,8,thick+2],center=true);
-      }
-    }
+    // extrusion anchor screw
+    translate([0,-35,thick/2]) rotate([90,0,0]) {
+      m3hole(30);
+      translate([0,0,16]) cylinder(r1=5/2,r2=7/2,h=10,$fn=24);
+      translate([0,0, 2]) cylinder(r1=5,r2=3,h=6,$fn=24);
+    } 
 
-    translate([-20,-12,-1]) cylinder(r=2.94/2+.1,h=thick+2,$fn=11);
-    translate([ 20,-12,-1]) cylinder(r=2.94/2+.1,h=thick+2,$fn=11);
-
-    translate([-40,  0,-1]) cylinder(r=2.94/2+.1,h=thick+2,$fn=11);
-    translate([ 40,  0,-1]) cylinder(r=2.94/2+.1,h=thick+2,$fn=11);
-
-    translate([-60, 35,-1]) cylinder(r=2.94/2+.1,h=thick+2,$fn=11);
-    translate([ 60, 35,-1]) cylinder(r=2.94/2+.1,h=thick+2,$fn=11);
-  }    
+  } // end of difference   
 }
 
 vertexB(15);
