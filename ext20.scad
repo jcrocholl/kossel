@@ -7,12 +7,12 @@ $fn=24;
   }
 }
 
-module slotT625(len) {
-rs=6.25/2;
+module slotT625(len,fuzz) {
+rs=6.25/2-fuzz;
 d=6;
 re=0.5;
 $fn=24;
-w=20;
+w=20+fuzz*2;
   difference() {
     translate([-w/2-2,-9,0]) cube([w/2+2,18,len]);
 
@@ -31,9 +31,8 @@ w=20;
   }
 }
 
-module ext20(len) {
-w=20;
-//sw = 3;
+module ext20(len,fuzz) {
+w=20+fuzz*2;
 ro=1;
 $fn=24;
   difference() {
@@ -47,11 +46,11 @@ $fn=24;
     translate([0,0,-1]) {
       for (a=[0,90,180,270]) {
         rotate([0,0,a])
-          slotT625(len+2);
+          slotT625(len+2,fuzz);
       }
       %cylinder(r=4.25/2,h=len+2);
     }
   }
 }
 
-ext20(5);
+ext20(5,0.2);
