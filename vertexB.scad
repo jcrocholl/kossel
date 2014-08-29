@@ -78,14 +78,14 @@ module vertexB(thick) {
     } // end of z=-1 shift for subtractions
 
     // extrusion anchor screw
-    translate([0,-30,thick/2]) rotate([90,0,0]) {
-      m3hole(30);
-      translate([0,0,16]) cylinder(r1=5/2,r2=7/2,h=10,$fn=24);
-      translate([0,0, 2]) cylinder(r1=5,r2=3,h=6,$fn=24);
+    translate([0,-37,thick/2]) rotate([90,0,0]) {
+      cylinder(r=5/2,h=30, $fn=11);
+      translate([0,0,19-4]) cylinder(r1=4.2,r2=4.6,h=10,$fn=18);
+      translate([0,0,  3 ]) cylinder(r1=5  ,r2=3  ,h=6 ,$fn=18);
     } 
 
   } // end of difference   
 }
 
-vertexB(15);
+vertexB(13);
 
