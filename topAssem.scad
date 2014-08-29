@@ -19,7 +19,7 @@ translate([0,0,-1]) {
         // open holes so that holes from vertex can show through
         for (a=[0,120,240]) { rotate([0,0,a])
           for (b=[-1,1]) {
-            translate([58*b,-109,-1]) cylinder(r=4,h=23,$fn=6);
+            translate([58*b,-108,-1]) cylinder(r=4,h=23,$fn=6);
             translate([40*b,-138,-1]) cylinder(r=4,h=23,$fn=6);
           }
         }

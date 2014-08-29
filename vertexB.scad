@@ -5,10 +5,11 @@ t2 = thick+2;
   union() {
     difference() {
       intersection() {
-        translate([0,-5,0]) rotate([0,0,30]) cylinder(r=75,h=thick,$fn=3);
+        hull() for(a=[0,120,240]) rotate([0,0,a])
+          translate([0,-68,0]) cylinder(r=6,h=thick,$fn=36);
         translate([0,0,-1]) hull() {
           translate([0,-50,0]) 
-            scale([16,6,1]) cylinder(r=1,h=t2+2,$fn=64);
+            scale([16,8,1]) cylinder(r=1,h=t2+2,$fn=64);
           translate([-75,40,0]) cube([150,4,t2]);
         }
       }
@@ -18,10 +19,6 @@ t2 = thick+2;
         for(a=[-1,1]) { translate([22*a,-13,-1]) cylinder(r=8,h=t2,$fn=36); }
         translate([0,45,thick/2]) cube([130,1,t2],center=true);
       }
-
-      // chop off outside corners, so we can round tips with cylinders
-      for (a=[-1,1]) translate([64*a,36,thick/2])
-        rotate([0,0,30*a]) cube([8,12,t2],center=true);
     }
 
     // diagnostic ruler.  We want about 36mm between front of nema17
@@ -30,8 +27,8 @@ t2 = thick+2;
 
     for(a=[-1,1]) {
       hull() {
-        translate([57.8*a,32,0]) cylinder(r=6,h=thick,$fn=36);
-        translate([53*a,20,0]) cylinder(r=1,h=thick,$fn=6);
+        translate([cos(30)*68*a,68/2,0]) cylinder(r=6,h=thick,$fn=36);
+        translate([54*a,21,0]) cylinder(r=1,h=thick,$fn=6);
       }
     }
   }
@@ -71,17 +68,20 @@ module vertexB(thick) {
 
       // M3 drill holes
       for(a=[-1,1]) {
-        translate([19  *a,-31,0]) m3hole(thick);
-        translate([39  *a,  3,0]) m3hole(thick);
-        translate([57.8*a, 32,0]) m3hole(thick);
+        translate([19*a,-31,0]) m3hole(thick);
+        translate([39*a,  3,0]) m3hole(thick);
+        translate([59*a, 34,0]) m3hole(thick);
+
+        //smooth outer ear transition
+        translate([44*a,28.4,0]) cylinder(r=10,h=thick+2,$fn=60);
       }
     } // end of z=-1 shift for subtractions
 
     // extrusion anchor screw
     translate([0,-37,thick/2]) rotate([90,0,0]) {
       cylinder(r=5/2,h=30, $fn=11);
-      translate([0,0,19-4]) cylinder(r1=4.2,r2=4.6,h=10,$fn=18);
-      translate([0,0,  3 ]) cylinder(r1=5  ,r2=3  ,h=6 ,$fn=18);
+      translate([0,0,21-5]) cylinder(r1=4.2,r2=4.6,h=10,$fn=18);
+      translate([0,0,  3 ]) cylinder(r1=6  ,r2=4  ,h=6 ,$fn=18);
     } 
 
   } // end of difference   
