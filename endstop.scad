@@ -63,15 +63,16 @@ module endstopCarriage(tilt=0) {
 
     translate([3, 4, -1]) {
       translate([2.5,0,0]) {
-        %rotate([90,0,180+tilt]) scale([-1,1,1]) translate([9.5/2,-2,0]) microswitch();
+        %rotate([90,0,180+tilt]) scale([-1,1,1]) translate([9.5/2-1,-2,0]) microswitch();
         // 2.4mm diam was good for M2.5.  go a little smaller for #2
         rotate([0,0,tilt])
-          translate([9.5,0,-1.5]) cylinder(r=2.3/2, h=thick+4, $fn=12);
-          translate([ 0 ,0,-1.5]) cylinder(r=2.3/2, h=thick  , $fn=12);
+          #translate([9.5-1,0,-1.5]) cylinder(r=2.3/2, h=thick+4, $fn=12);
+          #translate([   -1,0,-1.5]) cylinder(r=2.3/2, h=thick  , $fn=12);
       }
     }
   }
 }
 
 //translate([0,30, height/2]) endstopForRail();
-endstopCarriage(11.3*0);
+mirror([1,0,0])  // switched sides of carriage
+  endstopCarriage(11.3*0);
