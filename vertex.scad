@@ -23,7 +23,7 @@ module screw_socket() {
 module screw_socket_cone() {
   union() {
     screw_socket();
-    scale([1, 1, -1]) cylinder(r1=4, r2=7, h=4);
+    scale([1, 1, -1]) cylinder(r1=4, r2=7, h=5);
   }
 }
 
@@ -49,8 +49,8 @@ module sub2(height,idler_offset,idler_space) {  difference() {
     intersection() {
       rotate([0, 0, -90])
         cylinder(r=55, h=height, center=true, $fn=3);
-      translate([0, -32, 0])
-        cube([100, 16, 2*height], center=true);
+      translate([0, -32+1.5, 0])
+        cube([100, 16-4, 2*height], center=true);
     }
     cylinder(r=roundness, h=1, center=true);
   }
@@ -78,7 +78,7 @@ module vertex(height, idler_offset, idler_space) {
       }
       cylinder(r=roundness, h=1, center=true);
     }
-    %extrusion_cutout(height+10, 2*extra_radius);  // try more detailed extrusion model
+    //%extrusion_cutout(height+10, 2*extra_radius);  // try more detailed extrusion model
     translate([0,0,-height/2-1]) scale([1.03,1.03,1]) ext15(height+2);
     for (z = [0:30:height]) {
       translate([0, -7.5-extra_radius, z+7.5-height/2]) rotate([90, 0, 0])

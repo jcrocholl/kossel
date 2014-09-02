@@ -12,7 +12,7 @@ module frame_top() {
     //translate([0, 65, 0]) rotate([90, 0, 0]) cylinder(r=m3_radius, h=55);
 
     // Vertical belt tensioner.
-    #translate([0, 10, 0]) rotate([18, 0, 0]) union() {
+    %translate([0, 10, 0]) rotate([18, 0, 0]) union() {
       cylinder(r=m3_wide_radius, h=30, center=true);
       //translate([0, -3, 8]) cube([2*m3_wide_radius, 6, 12], center=true);
       translate([0, 0, -2]) scale([1, 1, -1]) rotate([0, 0, 30])
