@@ -25,8 +25,7 @@ module carriage() {
     cube([1.7, 100, belt_width], center=true);
   translate([belt_x, 0, belt_z + belt_width/2]) %
     cube([1.7, 100, belt_width], center=true);
-  difference() {
-    union() {
+  difference() {union() {
       // Main body
       hull() {
         translate([-9.5,-15,-.5])         cube([19.2,30,1]);
@@ -78,14 +77,15 @@ module carriage() {
 module wheelAxleBrace() {
   intersection() {
     cylinder(h=base_thickness+3,r=6,$fn=36);
-    translate([0,0,3]) scale([1,1,2.5]) sphere(6.3,$fn=36);
+    translate([0,0,3]) scale([1,1,2.2]) sphere(6.5,$fn=36);
   }
 }
-module wheelAxleHole() {
+module wheelAxleHole(dHeadRad) {
 m3rad = 2.94/2+0.1;
   translate([0,0,-30]) cylinder(h=60,r=m3rad,$fn=13);
   translate([0,0,base_thickness-1])
-    cylinder(h=10,r1=m3_head_radius-.1,r2=m3_head_radius+.5,$fn=30);
+    cylinder(h=10,r1=m3_head_radius-.1+dHeadRad,
+                  r2=m3_head_radius+.5+dHeadRad,$fn=30);
 }
 module mobileWheelMount(dilation) {
 bthick = base_thickness + 2*dilation;
@@ -104,10 +104,10 @@ br = wheel_radius-2 + 2*dilation;
         }
     }
     if (dilation==0) { // this is the ACTUAL mount, not a socket, add screw holes
-      translate([0,0,-2.2]) wheelAxleHole();
+      translate([0,0,-2.2]) wheelAxleHole(0);
       translate([0,0,bthick/2]) rotate([0,90,0]) {
         for (i=[-boltSep,boltSep]) {
-          translate([0,i,-1]) wheelAxleHole();
+          translate([0,i,-1]) wheelAxleHole(-0.2);
         }
       }
     }
@@ -117,9 +117,10 @@ br = wheel_radius-2 + 2*dilation;
 module cableCatchBrace() {
 $fn=12;
   hull() {
-    translate([ 2,7,12]) scale([7,2,3]) sphere(1);
-    translate([26,-2,9]) scale([2,4,3]) sphere(1);
-    translate([ 4,-2,9]) scale([1,5,1]) sphere(1);
+    translate([ 1,7,12]) scale([7,2,3]) sphere(1);
+    translate([24,-2,7]) scale([2,3,5]) sphere(1);
+    translate([ 7,-2,9]) scale([1,3,1]) sphere(1);
+    translate([12,-5,8]) cube([16,1,4],center=true);
   }
 
   // more bracing for under belt catch
@@ -146,15 +147,20 @@ supportSpread = 6;
 
       // tension screw housing pair
       translate([0,0,base_thickness/2]) rotate([0,90,0]) {
-        for (i=[-boltSep,boltSep]) {
-          translate([0,i,-20]) cylinder(r=5,h=41,$fn=36);
+        for (i=[-1,1]) {
+          hull() translate([0,i*boltSep,-20]) {
+            cylinder(r=5,h=41,$fn=36);
+            translate([5.43,0,16.5]) cube([.1,2,32],center=true);
+          }
         }
       }
 
       // brace section for mobile mount 
       hull() {
-        translate([16,0,base_thickness/2])
-            cube([24, 44,base_thickness],center=true);
+        //%translate([16,0,base_thickness/2]) cube([24, 44,base_thickness],center=true);
+        for(a=[-1,1]) translate([4,15*a,base_thickness/2])
+          rotate([0,90,0]) rotate([0,0,22.5])
+            cylinder(r=base_thickness/2/cos(22.5),h=23,$fn=8);
         translate([-6,0,base_thickness]) cube([1,14,.1],center=true);
       }
 
@@ -183,14 +189,14 @@ supportSpread = 6;
 module wheelBaseHoles() {
 dx = extrusion_width/2+wheel_radius;
   for (a=[-wheel_offset,wheel_offset])
-    translate([-dx+0.5,a,1]) wheelAxleHole();
+    translate([-dx+0.5,a,1]) wheelAxleHole(0);
   translate([dx-2,0,0]) mobileWheelMount(.15);
 }
 
 module earBrace() {
   intersection () {
     hull() {
-      rotate([0,55,0]) scale([2,1,1]) cylinder(r=.4,h=7,$nf=12);
+      rotate([0,55,0]) scale([2,1,1]) cylinder(r=.4,h=7,$fn=12);
       linear_extrude(height=0.1)
         polygon(points=[[0,0],[7,1.5],[7,-1.5]], paths=[[0,1,2,0]]);
     }
@@ -198,33 +204,52 @@ module earBrace() {
   }
 }
 
-use <endstop.scad>;
-%translate([0,35,6.5]) rotate([180,0,0]) endstopCarriage();
-
-%translate([extrusion_width/2+wheel_radius-1,0,0]) mobileWheelMount(0);
-
-difference() { union() {
+module frogCarriage() {
   difference() {
     union() {
       translate([0,0,base_thickness-.4]) mirror([1,0,0]) carriage();
       wheelBase();
     }
+
     wheelBaseHoles();
-  }
 
-  color("Cyan") {
-    //%hull() {
-    //  for (i=[-wheel_offset,wheel_offset]) {
-    //    translate([-extrusion_width/2-wheel_radius,i,0])
-    //      cylinder(h=0.4,r=6.65,$fn=24);
-    //  }
-    //}
-    //%translate([9,-17,0]) cube([23,34,0.4]);
-
-    // support material, forced
-    translate([ 17.3,0,base_thickness+.9])                 scale([0.5,0.6,0.7]) earBrace();
-    translate([-17.3,0,base_thickness+.9]) mirror([1,0,0]) scale([0.5,0.6,0.7]) earBrace();
+    // extra clearance for extrusion rail
+    translate([-9, -30,-.1]) cube([18,60,1.5]);
   }
 }
-translate([-9, -30,-.1]) cube([18,60,1.5]); // extra clearance for extrusion rail
+
+module supportPillar(x,y,len,rot=0) {
+  translate([x,y,0]) difference() {
+                          rotate([0,0,rot]) cylinder(r=2  ,h=len  ,$fn=6);
+    translate([0,0,-0.5]) rotate([0,0,rot]) cylinder(r=1.7,h=len+1,$fn=6);
+  }
+}
+
+use <endstop.scad>;
+%translate([0,33,6.5]) rotate([180,0,0]) endstopCarriage();
+
+%translate([extrusion_width/2+wheel_radius-1+22*0,0,0]) mobileWheelMount(0);
+
+union() {
+  frogCarriage();
+
+  // support structures
+  color("Cyan") {
+    translate([ 17.3,0,base_thickness+.9])                 scale([0.5,0.6,0.7]) earBrace();
+    translate([-17.3,0,base_thickness+.9]) mirror([1,0,0]) scale([0.5,0.6,0.7]) earBrace();
+    for (i=[-1,1]) {
+      supportPillar(19.3*i,0,12.2);  // under horn earBrace()'s
+      supportPillar(17,11*i,base_thickness+.4);
+      supportPillar(11,11*i,base_thickness+.4,12);
+      supportPillar(12,4.8*i,base_thickness+.4,30);
+
+      supportPillar(6,16*i,2);
+      supportPillar(4,10*i,2);
+      supportPillar(4.6,3.5*i,2,30);
+      supportPillar(-1.5,10*i,2,30);
+      supportPillar(-6.5  ,10*i,2,30);
+    }
+    supportPillar(15,0,base_thickness+.4);
+    supportPillar( 9,0,base_thickness+.4);
+  }
 }
