@@ -97,10 +97,19 @@ br = wheel_radius-2 + 2*dilation;
         if(dilation==0) translate([0,0,bthick*0.7])
           scale([1,1,2]) sphere(br+0.5,$fn=36);
       }
-      translate([-br+2,0,base_thickness/2])
+      if (0) %translate([-br+2,0,base_thickness/2])
         rotate([0,90,0]) for (a=[-boltSep,boltSep]) {
           translate([0,a,0]) rotate([0,0,30])
             cylinder(h=wheel_radius*2+99*abs(dilation),r=(bthick/2)/cos(30),$fn=6);
+        }
+      translate([-br+2,0,base_thickness/2])
+        rotate([0,90,0]) for (a=[-1,1]) {
+          translate([0,boltSep*a*1.0,0])
+            intersection() {
+              cylinder(h=wheel_radius*2+99*abs(dilation),
+                 r=bthick*0.6,$fn=60);
+              cube([bthick,30,40],center=true);
+            }
         }
     }
     if (dilation==0) { // this is the ACTUAL mount, not a socket, add screw holes
@@ -238,7 +247,7 @@ y0 = y + ((y>0)?dy:-dy)/2;
 use <endstop.scad>;
 %translate([0,33,6.5]) rotate([180,0,0]) endstopCarriage();
 
-translate([extrusion_width/2+wheel_radius-1+22,0,0]) mobileWheelMount(0);
+%translate([extrusion_width/2+wheel_radius-1+22,0,0]) mobileWheelMount(0);
 
 union() {
   frogCarriage();
