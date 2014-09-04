@@ -14,10 +14,11 @@ module extrusion_cutout(h, extra) {
 }
 
 module screw_socket() {
-  extraCounterSink = 0.4;  // add a little extra countersink for Quelab printer
-  cylinder(r=m3_wide_radius, h=20, center=true);
+extraCounterSink = 0.4;  // add a little extra countersink for Quelab printer
+m3rad = 2.93/2 + 0.1;
+  cylinder(r=m3rad, h=20, center=true, $fn=13);
   translate([0, 0, 3.8-extraCounterSink])
-    cylinder(r=3.5, h=5);
+    cylinder(r=5.35/2+.2, h=5, $fn=24);
 }
 
 module screw_socket_cone() {
@@ -109,7 +110,7 @@ module vertex(height, idler_offset, idler_space) {
 // add a little extra bracing to the edge to try to keep from warping
 module endBrace(height) {
 br=1.2;
-  translate([ 43.05,57.5,0.34]) rotate([0,0,60]) {
+  translate([ 43.05,57.5,0]) rotate([0,0,60]) {
     // extend leg a bit
     hull() { cube([1,4,height]);
       translate([10,br,0]) cylinder(h=15,r=br, $fn=16);
