@@ -1,7 +1,7 @@
 module slotT1(w,rs,re,len) {
 $fn=24;
   hull() {
-    translate([-w/2+re,-rs-re,0]) cylinder(r=re,h=len);
+    translate([-w/2+re,-rs-re+.2,0]) cylinder(r=re,h=len);
     translate([   -1   , -8  ,0]) cube([1,8-rs+1.45,len]);
     translate([-w/2-0.5,-10  ,0]) cube([w/2,1,len]);
   }
@@ -25,7 +25,7 @@ $fn=24;
 
       translate([-w/2, 0 ,-1]) hull() {
         translate([d-rs,0,0]) cylinder(r=rs-0.5,h=len+2);
-        translate([0,-rs,0]) cube([0.1,2*rs,len+2]);
+        translate([0,-rs+.2,0]) cube([0.1,2*rs-.4,len+2]);
       }
     }
   }
