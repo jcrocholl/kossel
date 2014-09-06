@@ -1,8 +1,8 @@
 module slotT1(w,rs,re,len) {
 $fn=24;
   hull() {
-    translate([-w/2+re,-rs-re+.2,0]) cylinder(r=re,h=len);
-    translate([   -1   , -8  ,0]) cube([1,8-rs+1.45,len]);
+    translate([-w/2+re,-rs-re,0]) cylinder(r=re,h=len);
+    translate([   -1   , -8  ,0]) cube([1,8-rs+1.2,len]);
     translate([-w/2-0.5,-10  ,0]) cube([w/2,1,len]);
   }
 }
@@ -10,7 +10,7 @@ $fn=24;
 // rs -- radius of slot (slot width/2)
 // d  -- depth  of slot
 module slotT(w,rs,d,len) {
-re=0.5;
+re=0.3;
 $fn=24;
   difference() {
     translate([-w/2-2,-9,0]) cube([w/2+2,18,len]);
@@ -18,8 +18,8 @@ $fn=24;
     translate([0,0,-1]) difference() {
       union() {
         translate([-w/2+d-rs,-10,0]) cube([6,20,len+2]);
-        slotT1(w,rs,re,len+2);
         mirror([0,1,0]) slotT1(w,rs,re,len+2);
+                        slotT1(w,rs,re,len+2);
       }
 
       translate([-w/2, 0 ,-1]) hull() {
