@@ -5,7 +5,7 @@ roundness = 6;
 
 m3rad = 2.93/2;
 m3headRad = 5.36/2;
-m3nutRad = 5.5/2/cos(60);
+m3nutRad = 5.5/2/cos(30);
 
 module extrusion_cutout(h, extra) {
   difference() {
@@ -27,7 +27,8 @@ extraCounterSink = 0.4;  // add a little extra countersink for Quelab printer
 module screw_socket_cone() {
   union() {
     screw_socket();
-    scale([1,1,-1]) cylinder(r1=1.6, r2=m3nutRad+1, h=5, $fn=6);
+    translate([0,0,-1.5]) scale([1,1,-1]) rotate([0,0,30])
+      cylinder(r1=m3nutRad, r2=m3nutRad+1, h=5, $fn=6);
   }
 }
 
