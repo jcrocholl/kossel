@@ -7,7 +7,7 @@ translate([0,0,-1]) {
   difference() {
     union() {
       for (a=[0,120,240]) {
-        rotate([0,0,a]) translate([0,-141,0]) vertexB(16);
+        rotate([0,0,a]) translate([0,-141,0]) vertexB(16,-0.15);
       }
 
       difference() {
@@ -63,3 +63,5 @@ translate([0,0,-1]) {
 }
 
 %translate([-350/2,130,0]) cube([350,20,20]);
+%translate([0,0,20]) cylinder(r=9*25.4/2,h=4,$fn=180);
+%translate([0,0,30]) cylinder(r=250/2,h=3.3,$fn=180);
