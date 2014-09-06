@@ -23,19 +23,17 @@ m3nutRad = 5.45/2/cos(30) + 0.1;
   }
 }
 
+use <support.scad>;
+
 union() {
   translate([0, 0, 7.5]) rotate([0,180,0]) frame_top();
   //vertexPad();
   mirror([1,0,0]) endBrace(extrusion);
                   endBrace(extrusion);
 
-// unfortunately, slic3r 1 needs two wall layers on a feature, or
-// it is removed from the gcode.  hence support walls must be 2
-// layers thick, which is a bummer
   color("Cyan") { // support material
-    for (a=[-1,1]) translate([18.2*a,-1,0]) difference() {
-                          cylinder(r=2.1     ,h=5,$fn=6);
-      translate([0,0,-1]) cylinder(r=2.1-0.35,h=7,$fn=6);
-    }
+    for (a=[-1,1]) supportPillar(18.2*a,-1,5);
+    translate([0,0,5]) supportPillar(0,-5,5,r=0.7);
   }
+
 }
