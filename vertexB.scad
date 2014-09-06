@@ -54,9 +54,9 @@ t2 = thick+2;
   }
 }
 
-module m3hole(thick) { cylinder(r=2.94/2+.1, h=thick+2, $fn=11); }
+module m3hole(thick,fuzz) { cylinder(r=2.94/2+fuzz, h=thick+2, $fn=11); }
 
-module vertexB(thick) {
+module vertexB(thick,fuzz) {
   difference() {
     union() {
       vertexBframe(thick);
@@ -64,13 +64,13 @@ module vertexB(thick) {
     }
 
     translate([0,0,-1]) {
-      translate([0,-37,0]) ext20(thick+11,0.2);
+      translate([0,-37,0]) ext20(thick+11,fuzz);
 
       // M3 drill holes
       for(a=[-1,1]) {
-        translate([19*a,-31,0]) m3hole(thick);
-        translate([39*a,  3,0]) m3hole(thick);
-        translate([59*a, 34,0]) m3hole(thick);
+        translate([19*a,-31,0]) m3hole(thick,fuzz/2);
+        translate([39*a,  3,0]) m3hole(thick,fuzz/2);
+        translate([59*a, 34,0]) m3hole(thick,fuzz/2);
 
         //smooth outer ear transition
         translate([44*a,28.4,0]) cylinder(r=10,h=thick+2,$fn=60);
@@ -87,5 +87,5 @@ module vertexB(thick) {
   } // end of difference   
 }
 
-vertexB(13);
+vertexB(16,0.2);
 
