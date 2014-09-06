@@ -57,8 +57,9 @@ translate ([0,0,2]) probeMount();
   translate([0,0,2]) cylinder(r=5.5,h=9,$fn=60);
 }
 
-// wires
-translate([0,-9,0.2])#cube([0.5,10,0.5],center=true);
-#rotate([60,0,60]) translate([0,10,-0.5]) cube([0.5,10,0.5],center=true);
-#translate([0,-3,4]) rotate([0,0,-30]) cube([0.5,5.5,0.5]);
-#translate([0,3,0.2]) cube([5.5,0.5,0.5],center=true);
+color([.8,.4,.4]) { // wires
+  translate([0,-9,0.2]) cube([0.5,10,0.5],center=true);
+  rotate([60,0,60]) translate([0,10,-0.5]) cube([0.5,10,0.5],center=true);
+  translate([0,-3,4]) rotate([0,0,-30]) cube([0.5,5.5,0.5]);
+  translate([0,3,0.2]) cube([5.5,0.5,0.5],center=true);
+}
