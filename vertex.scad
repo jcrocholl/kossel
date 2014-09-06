@@ -3,6 +3,10 @@ include <configuration.scad>;
 $fn = 24;
 roundness = 6;
 
+m3rad = 2.93/2;
+m3headRad = 5.36/2;
+m3nutRad = 5.5/2/cos(60);
+
 module extrusion_cutout(h, extra) {
   difference() {
     cube([extrusion+extra+.3, extrusion+extra+.3, h], center=true);
@@ -15,8 +19,7 @@ module extrusion_cutout(h, extra) {
 
 module screw_socket() {
 extraCounterSink = 0.4;  // add a little extra countersink for Quelab printer
-m3rad = 2.93/2 + 0.1;
-  cylinder(r=m3rad, h=20, center=true, $fn=13);
+  cylinder(r=m3rad+0.1, h=20, center=true, $fn=13);
   translate([0, 0, 3.8-extraCounterSink])
     cylinder(r=5.35/2+.2, h=5, $fn=24);
 }
@@ -24,7 +27,7 @@ m3rad = 2.93/2 + 0.1;
 module screw_socket_cone() {
   union() {
     screw_socket();
-    scale([1, 1, -1]) cylinder(r1=4, r2=7, h=5);
+    scale([1,1,-1]) cylinder(r1=1.6, r2=m3nutRad+1, h=5, $fn=6);
   }
 }
 
@@ -64,12 +67,13 @@ module sub2(height,idler_offset,idler_space) {  difference() {
   }
 }}
 
-use <ext15.scad>;
+//use <ext15.scad>;  // Mistumi
+use <ext15ob.scad>;  // OpenBeam
 
-module vertex(height, idler_offset, idler_space) {
+module vertex(height) {
   difference() {
     vertexShell(height);
-    sub2(height,idler_offset,idler_space);
+    sub2(height);
     translate([0, 58, 0]) minkowski() {
       intersection() {
         rotate([0, 0, -90])
@@ -79,8 +83,11 @@ module vertex(height, idler_offset, idler_space) {
       }
       cylinder(r=roundness, h=1, center=true);
     }
+
     //%extrusion_cutout(height+10, 2*extra_radius);  // try more detailed extrusion model
-    translate([0,0,-height/2-1]) scale([1.03,1.03,1]) ext15(height+2);
+    // fuzz=0.3 was good fit on OpenBeam
+    translate([0,0,-height/2-1]) ext15(height+2,0.3);
+
     for (z = [0:30:height]) {
       translate([0, -7.5-extra_radius, z+7.5-height/2]) rotate([90, 0, 0])
         screw_socket_cone();
@@ -141,4 +148,5 @@ module vertexPad() { color("Cyan") {
 
 // =======================================================================
 
-translate([0, 0, 7.5]) vertex(1*15, idler_offset=0, idler_space=13);
+vertex(15);
+//intersection() { cube([25,25,20],center=true); vertex(15); }

@@ -34,14 +34,14 @@ module ext15(len,fuzz=0) {
 w=15;
 
 wz = w + fuzz;
-w1 = wz-abs(fuzz);
+w1 = wz-abs(fuzz)*2;
   difference() {
     union() {
       translate([0,0,len/2]) cube([wz,wz,len],center=true);
       if (abs(fuzz) > 0) { // extra room on corners, where slop can be a problem 
         for(i=[-1,1]) for(j=[-1,1])
           translate([i*w1/2,j*w1/2,0])
-           cylinder(r=abs(fuzz),h=len,$fn=8);
+           cylinder(r=abs(fuzz)*2,h=len,$fn=8);
       }
     }
 
@@ -56,4 +56,4 @@ w1 = wz-abs(fuzz);
 
 ext15(2,0.2);
 ext15(4);
-ext15(6,-0.1);
+translate([0,0,3.98]) ext15(2,-0.1);
