@@ -1,4 +1,5 @@
-use <ext20.scad>;
+//use <ext20.scad>;
+use <ext20v.scad>;
 
 module vertexBframe(thick) {
 t2 = thick+2;
