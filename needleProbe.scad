@@ -9,8 +9,9 @@ module magnetMount() {
 
   // magnet base
   difference() {
-    translate([0,0,-2]) cylinder(r=5,h=2,$fn=60);
-    translate([0,0,-3]) cylinder(r=.4,h=4,$fn=24);
+    translate([0,0,-2]) triPlate();
+    //%translate([0,0,-2]) cylinder(r=5,h=2,$fn=60);
+    translate([0,0,-3]) cylinder(r=.6,h=4,$fn=24);
   }
 }
 
@@ -34,7 +35,7 @@ module probeMount() {
         translate([0,-3,-.05]) color([.5,.5,.6]) pinHead();
 
       difference() {
-        cylinder(r=5,h=2,$fn=60);  // main plate
+        triPlate(); //cylinder(r=5,h=2,$fn=60);  // main plate
 
         for(i=[-120,0,120]) rotate([0,0,i])  // pin holes
           translate([0,-3,-1]) cylinder(r=0.25,h=5,$fn=24);
@@ -47,12 +48,20 @@ module probeMount() {
   translate([0,0,-8]) scale([1,1,2]) sphere(0.3,$fn=36);
 }
 
+module triPlate() {
+  rotate([0,0,30]) intersection() {
+    cylinder(r=8,h=2,$fn=3);
+    translate([0,0,-1]) rotate([0,0,60]) cylinder(r=10,h=4,$fn=3);
+  }
+}
+
+//translate([0,0,22]) triPlate();
 
 magnetMount();
 translate ([0,0,2]) probeMount();
 
 // case can be 3D printed or machined
-%translate([0,0,-4]) difference() {
+if(0) %translate([0,0,-4]) difference() {
   cylinder(r=7,h=10,$fn=60);
   translate([0,0,2]) cylinder(r=5.5,h=9,$fn=60);
 }
