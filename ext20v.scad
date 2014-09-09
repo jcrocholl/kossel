@@ -1,19 +1,19 @@
 // cut-out model to fit Openbuilds V-Slot 20mm extrusion
 
-module slotV(len,fuzz) {
+module slotV(len,fuzz,verbose) {
   difference() {
     translate([-10-1,0,0]) cylinder(r=5.2+1+fuzz,h=len,$fn=4);
     translate([-8+.3+4/2,0,len/2]) cube([4,7,len],center=true);  // arbitrary .3mm extra lip to tab
   }
 
   // actual slot profile
-  %hull() {
+  if(verbose % 2) %hull() {
     translate([-10+2+1.2/2,0,len/2]) cube([1.2,10.6,len],center=true);
     translate([-5,0,len/2]) cube([2,4,len],center=true);
   }
 }
 
-module ext20(len,fuzz) {
+module ext20(len,fuzz,verbose=3) {
 w=20+fuzz*2;
 w2f = w/2 - 0.6*abs(fuzz);
 ro=1;
@@ -29,9 +29,9 @@ $fn=24;
     translate([0,0,-1]) {
       for (a=[0,90,180,270]) {
         rotate([0,0,a])
-          slotV(len+2,fuzz);
+          slotV(len+2,fuzz,verbose);
       }
-      %cylinder(r=2,h=len+2);
+      if (floor(verbose/2) % 2) %cylinder(r=2,h=len+2);
     }
   }
 }
