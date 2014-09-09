@@ -1,9 +1,12 @@
+// complete top (bottom) assembly, fused with vertexB drawing.
+// take a slice of this to generate DXF drawing for laser cut
+
 use <vertexB.scad>;
 
 m3rad = 2.94/2-.1;
 
 //projection(cut=true)
-translate([0,0,-1]) {
+translate([0,0,-0.2]) {
   difference() {
     union() {
       for (a=[0,120,240]) {
@@ -49,13 +52,18 @@ translate([0,0,-1]) {
         }
       }
 
-      // decorative holes
-      cylinder(r=30,h=17,$fn=120);
-      for(d=[0,60,120,180,240,300]) {
-        rotate([0,0,d]) translate([75,0,0]) cylinder(r=25,h=17,$fn=96);
-      }
-      for(d=[30,150,270]) {
-        rotate([0,0,d]) translate([112,0,0]) cylinder(r=15,h=17,$fn=96);
+      if (1) {
+         // decorative holes
+         cylinder(r=30,h=17,$fn=120);
+         for(d=[0,60,120,180,240,300]) {
+           rotate([0,0,d]) translate([75,0,0]) cylinder(r=25,h=17,$fn=96);
+         }
+         for(d=[30,150,270]) {
+           rotate([0,0,d]) translate([112,0,0]) cylinder(r=15,h=17,$fn=96);
+         }
+      } else {
+         // a big ring might be better for under print bed
+         cylinder(r=90,h=18,$fn=120);
       }
 
     }
