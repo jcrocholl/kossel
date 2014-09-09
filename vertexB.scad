@@ -56,6 +56,26 @@ t2 = thick+2;
 }
 
 module m3hole(thick,fuzz) { cylinder(r=2.94/2+fuzz, h=thick+2, $fn=11); }
+module m5socketHead(len,fuzz,counterSink=0) {
+  union() {
+    translate([0,0,-0.03]) cylinder(h=len+0.03,r=4.88/2+fuzz, $fn=13);
+    translate([0,0,-5-counterSink])
+      cylinder(h=5+counterSink,
+        r1=8.5/2+fuzz+(len+counterSink)*0.02,
+        r2=8.5/2+fuzz-0.1,
+        $fn=24);
+  }
+}
+module m5slotNut() {
+  translate([0,0,-1.6/2]) cube([10,15,1.61],center=true);
+  cylinder(h=1.4,r=7/2,$fn=36);
+}
+module extrusionAnchorCutout(z,fuzz) {
+  translate([0,-52,z]) {
+    translate([0,6.6,0]) rotate([ 90,0,0]) m5slotNut();
+    rotate([-90,0,0]) m5socketHead(10,fuzz,2);
+  }
+}
 
 module vertexB(thick,fuzz) {
   difference() {
@@ -65,7 +85,7 @@ module vertexB(thick,fuzz) {
     }
 
     translate([0,0,-1]) {
-      translate([0,-37,0]) ext20(thick+11,fuzz);
+      translate([0,-37,0]) ext20(thick+11*0.2,fuzz,2);
 
       // M3 drill holes
       for(a=[-1,1]) {
@@ -78,15 +98,15 @@ module vertexB(thick,fuzz) {
       }
     } // end of z=-1 shift for subtractions
 
-    // extrusion anchor screw
-    translate([0,-37,thick/2]) rotate([90,0,0]) {
-      cylinder(r=5/2,h=30, $fn=11);
-      translate([0,0,21-5]) cylinder(r1=4.2,r2=4.6,h=10,$fn=18);
-      translate([0,0,  3 ]) cylinder(r1=6  ,r2=4  ,h=6 ,$fn=18);
-    } 
+    // extrusion anchor screw(s)
+    if(thick < 21) {
+      extrusionAnchorCutout(thick/2,fuzz);
+    } else {
+      extrusionAnchorCutout(      9,fuzz);
+      extrusionAnchorCutout(thick-9,fuzz);
+    }
 
   } // end of difference   
 }
 
-vertexB(16,0.2);
-
+vertexB(1?16:45,0.2);
