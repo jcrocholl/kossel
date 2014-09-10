@@ -5,7 +5,8 @@ module magnetMount() {
   // magnets for contacts and alignment
   color([0,0.4,0.8])
   for(i=[-120,0,120]) rotate([0,0,i])
-    translate([0,-3,0]) cylinder(r=1.5,h=1,$fn=36);
+    translate([0,-3,0]) sphere(1.5,$fn=36);   // 3mm bucky balls
+                  //cylinder(r=1.5,h=1,$fn=36);  // rare earth disk magnets
 
   // magnet base
   difference() {
