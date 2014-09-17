@@ -22,6 +22,10 @@ module magnetMount(notional=0) {
 
     translate([0,0,-4]) cylinder(r=.6,h=5,$fn=24);
 
+    // drill hole for magnet contact wire
+    translate([0,-3.5,0]) rotate([90,0,0])
+      rotate([0,0,-30]) cylinder(r=0.8,h=12,$fn=3);
+
   }
 }
 
@@ -91,10 +95,12 @@ translate([0,20, 0]) magnetMount();
 translate([20,0,-1]) probeMount();
 translate([-20,0,-1]) { // cap
   difference() {
-  triPlate(3,13,15);
+    triPlate(3,13,15);
+
     translate([0,0,2]) difference() {
       cylinder(r=12,h=4,$fn=6);
       translate([0,0,-1]) triPlate(6,10-0.2,12-0.2);
     }
+    translate([0,0,-1]) cylinder(r=0.6,h=6,$fn=6); // pass-trough for probe plate contact
   }
 }
