@@ -1,6 +1,6 @@
 module nanoswitchHoles() {
-   translate([ 6.5/2,0,-15+13]) cylinder(h=22,r=1+.05,$fn=16);
-   translate([-6.5/2,0,-15   ]) cylinder(h=22,r=1+.05,$fn=16);
+   translate([ 6.5/2,0,-15+13]) cylinder(h=33,r=1+.05,$fn=16);
+   translate([-6.5/2,0,-15   ]) cylinder(h=33,r=1+.05,$fn=16);
 }
 
 module nanoswitch() {
