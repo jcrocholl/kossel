@@ -13,10 +13,14 @@ difference() {
       translate([-2.4,16,11.5]) cube([12,7,1.3],center=true);
       //translate([-1,7,3]) scale([8,2,2]) sphere(1,$fn=12);
       translate([0,7,3]) cube([6,2,4],center=true);
-      translate([-1,12,0.5]) cube([16,4,1],center=true);
+      translate([-1,9,0.5]) cube([16,10,1],center=true);
     }
   }
-  translate([-ew/2,-eh/2,mountPlateThickness]) cube([ew,eh,5]);
+  //%translate([-ew/2,-eh/2,mountPlateThickness]) cube([ew,eh,5]);
+  translate([-ew/2,-eh/2,mountPlateThickness]) hull() {
+    translate( [ 0.1, 0.1,0]) cube([ew-0.2,eh-0.2,0.1]);
+    translate([-0.2,-0.2,3]) cube([ew+0.4,eh+0.4,0.1]);
+  }
   translate([0,0,-1]) cylinder(r=2.94/2+.2,h=9,$fn=24);
   translate([-2.4,15,0]) nanoswitchHoles();
 }
