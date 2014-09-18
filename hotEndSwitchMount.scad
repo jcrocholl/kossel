@@ -6,12 +6,13 @@ difference() {
   union() {
     hull() {
       translate([-9,-6,0]) cube([18,13,5]);
-      translate([-1.5,10,0.5]) cube([15,10,1],center=true);
+      translate([-1.5,10,0.5]) cube([15,6,1],center=true);
     }
     hull() {
-      translate([-2.4,16,8]) cube([12,7,2.3],center=true);
-      translate([-1,7,3]) scale([8,2,2]) sphere(1,$fn=12);
-      translate([-1.5,10,0.5]) cube([15,10,1],center=true);
+      translate([-2.4,16,8.5]) cube([12,7,1.3],center=true);
+      //translate([-1,7,3]) scale([8,2,2]) sphere(1,$fn=12);
+      translate([-2,7,3]) cube([6,2,4],center=true);
+      translate([-1.5,10,0.5]) cube([15,6,1],center=true);
     }
   }
   translate([-ew/2,-eh/2,3]) cube([ew,eh,5]);
