@@ -1,15 +1,23 @@
 // sketch for low-impact surface probe switch
 // Aaron Birenboim   06sep14
 
-module magnetMount(notional=0) {
+module magnetGroup(fuzz=0,disk=0) {
+// not sure which orientation is better, try both?
+diskMagnetRot = 1?[0,90,0]:[90,0,0];
+ for(i=[-120,0,120]) rotate([0,0,i]) translate([0,-3,0])
+   if (disk) rotate(diskMagnetRot)
+     cylinder(h=1,r=1.5,$fn=36,center=true);
+   else
+     sphere(2.94/2+fuzz,$fn=36);   // 3mm bucky balls
+}
+
+module magnetMount(notional=0,disk=0) {
   // magnets for contacts and alignment
-  if (notional) color([0,0.4,0.8])
-  for(i=[-120,0,120]) rotate([0,0,i])
-    translate([0,-3,0]) sphere(1.5,$fn=36);   // 3mm bucky balls
+  if (notional) color([0,0.4,0.8]) magnetGroup(disk=disk);
 
   // magnet base
   difference() {
-      translate([0,0,-3]) triPlate(3+5,13,15);
+      translate([0,0,-3]) triPlate(3+7,13,15);
       triPlate(10,10,12);
 
     // skip this for actual printed model... 
@@ -17,14 +25,13 @@ module magnetMount(notional=0) {
     if (notional)
       translate([0,0,0.4]) cylinder(r=10,h=10,$fn=6);
     else // hollow out for magnet spheres
-      for(i=[-120,0,120]) rotate([0,0,i])
-        translate([0,-3,0]) sphere(1.5+0.15,$fn=36);   // 3mm bucky balls
+      magnetGroup(0.15,disk=disk);
 
     translate([0,0,-4]) cylinder(r=.6,h=5,$fn=24);
 
     // drill hole for magnet contact wire
-    translate([0,-3.5,0]) rotate([90,0,0])
-      rotate([0,0,-30]) cylinder(r=0.8,h=12,$fn=3);
+    translate([0,-3.3,0]) rotate([90,0,0])
+      rotate([0,0,-30]) cylinder(r=0.8,h=6,$fn=3);
 
   }
 }
@@ -33,10 +40,10 @@ module pinHead() {
     union() {  // head
       intersection() {
         translate([0,0,-1]) cube([2,2,2],center=true);
-        scale([0.6,0.6,0.4]) sphere(1,$fn=36);
+        scale([0.8,0.8,0.4]) sphere(1,$fn=36);
       }
 
-    translate([0,0,-0.05]) cylinder(r=.2,h=10,$fn=24); // shaft
+    translate([0,0,-0.05]) cylinder(r=.32,h=10,$fn=24); // shaft
   }
 }
 
@@ -52,15 +59,15 @@ module probeMount(notional=0) {
         triPlate(1.5);  // main plate, fiberglass plastic, like PCB
 
         for(i=[-120,0,120]) rotate([0,0,i])  // pin holes
-          translate([0,-3,-1]) cylinder(r=0.3,h=5,$fn=24);
-        translate([0,0,-1]) cylinder(r=0.3,h=5,$fn=24);
+          translate([0,-3,-1]) cylinder(r=0.4,h=5,$fn=24);
+        translate([0,0,-1]) cylinder(r=0.4,h=5,$fn=24);
       }
     }
   }
 
   if (notional) { // show probe pin for notional drawing
     translate([0,0,1.6])mirror([0,0,1]) color([.3,.3,.5]) pinHead();  // main probe
-    translate([0,0,-8]) scale([1,1,2]) sphere(0.3,$fn=36);
+    translate([0,0,-8]) scale([1,1,2]) sphere(0.4,$fn=36);
   }
 }
 
@@ -74,7 +81,7 @@ module triPlate(h=2,r1=8,r2=10) {
 //translate([0,0,22]) triPlate();
 
 // main, in-place view
-magnetMount(1);
+magnetMount(1,disk=1);
 translate ([0,0,2]) probeMount(1);
 
 // case can be 3D printed or machined
@@ -84,14 +91,14 @@ if(0) %translate([0,0,-4]) difference() {
 }
 
 color([.8,.4,.4]) { // wires
-  translate([0,-9,0.2]) cube([0.5,10,0.5],center=true);
+  translate([0,-8,0.2]) cube([0.5,10,0.5],center=true);
   rotate([60,0,60]) translate([0,10,-0.5]) cube([0.5,10,0.5],center=true);
   translate([0,-3,3.5]) rotate([0,0,-30]) cube([0.5,5.5,0.5]);
   translate([0,3,0.2]) cube([5.5,0.5,0.5],center=true);
 }
 
 // parts to be fabricated
-translate([0,20, 0]) magnetMount();
+translate([0,20, 0]) magnetMount(disk=1);
 translate([20,0,-1]) probeMount();
 translate([-20,0,-1]) { // cap
   difference() {
