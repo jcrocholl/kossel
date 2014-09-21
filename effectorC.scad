@@ -39,7 +39,7 @@ module effector() {
       // extra cap for chinese hot end
       hull() {
         cylinder(r=8.5,h=12,$fn=6);
-        cylinder(r=4,h=16,$fn=20);
+        cylinder(r=3.6,h=16,$fn=24);
       }
     }
     // for shorter hot-end that Johann used:
