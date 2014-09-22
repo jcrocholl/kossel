@@ -2,7 +2,7 @@
 
 module slotV(len,fuzz,verbose) {
   difference() {
-    translate([-10-1,0,0]) cylinder(r=5.2+1+fuzz,h=len,$fn=4);
+    translate([-10-1,0,0]) cylinder(r=5.2+1-fuzz,h=len,$fn=4);
     translate([-8+.3+4/2,0,len/2]) cube([4,7,len],center=true);  // arbitrary .3mm extra lip to tab
   }
 
@@ -23,7 +23,7 @@ $fn=24;
       translate([0,0,len/2]) cube([w,w,len],center=true);
       for(i=[-1,1]) for(j=[-1,1]) // extra clearance around corners
         translate([w2f*i,w2f*j,0])
-          cylinder(r=fuzz*2,h=len,$fn=8);
+          cylinder(r=abs(fuzz)*2,h=len,$fn=8);
     }
 
     translate([0,0,-1]) {
@@ -36,4 +36,15 @@ $fn=24;
   }
 }
 
-ext20(5,0.2);
+if (0) { // notional display
+  translate([0,0,4]) ext20(5,0.2);
+  ext20(5,0);
+  translate([0,0,-4]) ext20(5,-0.2);
+} else {
+  // quality of fit cutout test cut/print
+  projection(cut=true)
+  difference() {
+    cube([30,30,10],center=true);
+    translate([0,0,-12/2]) ext20(12,-0.2);
+  }
+}
