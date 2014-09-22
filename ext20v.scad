@@ -5,11 +5,14 @@
 
 module slotV(len,fuzz,verbose) {
 // center of square cylinder for V cut-out is 1mm outside of extrusion.
-// outside border of extrusion is 1.9mm.  inner slot width is 6.35mm.
+// outside border of extrusion is 1.9mm.  inner slot width is 6.35mm, but
+// corners are beveled, so ideal corner would be less
 // 1/2 slot width is the same dist as sr-(1+1.9), hence
-sr = 1+1.9+(6.35/2);
+sr = 1+1.9+(6.2/2);
   difference() {
-    translate([-10-1,0,0]) cylinder(r=sr-fuzz*sqrt(2),h=len,$fn=4);
+    // having testing trouble.  I don't want to worry about v-slot tab yet.
+    // make it extra small until I'm really ready to tweak it (remove -.5)
+    translate([-10-1,0,0]) cylinder(r=sr-fuzz*sqrt(2)-.5,h=len,$fn=4);
     translate([-8+.3+4/2,0,len/2]) cube([4,7,len],center=true);  // arbitrary .3mm extra lip to tab
   }
 
@@ -52,6 +55,6 @@ if (1) { // notional display
   projection(cut=true)
   difference() {
     cube([30,30,10],center=true);
-    translate([0,0,-12/2]) ext20(12,0); // quelab laser cutter
+    translate([0,0,-12/2]) ext20(12,-0.3); // quelab laser cutter
   }
 }
