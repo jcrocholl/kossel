@@ -3,8 +3,8 @@ include <configuration.scad>;
 barrel_radius = 8;
 barrel_height = 30;
 
-groove_radius = 6;
-groove_height = 4.6;
+groove_radius = 6.3;
+groove_height = 4.21;
 
 fan_offset = 15;
 
