@@ -2,8 +2,15 @@
 // 15mm extrusion braces, and nema17 motors
 
 use <vertexC.scad>;
+use <nema17.scad>;
 
-vertexC(45,0.1);
+difference() {
+  vertexC(45,0.1);
+  translate([0,48,45/2]) rotate([90,0,0]) {
+    nema17holes();
+    //translate([0,0,2])%nema17();
+  }
+}
 
 // support
 use <support.scad>;
@@ -23,4 +30,5 @@ color("Cyan") {
   }
   for(z=[7,30]) translate([ 1,-17,z]) supportPillar4(0,0,2  ,4,8.2);
   for(z=[9,32]) translate([.8,-10,z]) supportPillar4(0,0,1.6,4,4.4);
+  translate([0,44,11]) supportPillar(0,0,23,r=1.2,xscale=8);
 }
