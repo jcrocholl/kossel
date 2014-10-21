@@ -5,11 +5,12 @@ use <ext20v.scad>;
 use <ext15ob.scad>;
 
 
-module vertexCframe(thick,extCutout=true) {
+module vertexCframe(thick,fuzz,extCutout=true,motorHole=true) {
 t2 = thick+2;
   difference() {
     hull() {
-      translate([0,-15,0]) scale([21.2,10,1]) cylinder(h=thick,r=1,$fn=60);
+      for(a=[-1,1]) translate([12*a,-12,0])
+         cylinder(h=thick,r=10,$fn=36);
       translate([0,58,thick/2]) cube([127,2,thick],center=true);
     }
 
@@ -26,7 +27,7 @@ t2 = thick+2;
     }
 
     // motor shaft area cut-out
-    hull() {
+    if (motorHole) hull() {
       for (a=[-1,1]) {
         translate([12*a,24,-1]) cylinder(h=t2,r=8,$fn=36);
         translate([20*a,35,-1]) cylinder(h=t2,r=6,$fn=36);
@@ -40,7 +41,13 @@ t2 = thick+2;
       }
       translate([0,65,thick/2]) cube([90,2,thick],center=true);
     }
-    
+
+    // --------- extrusion cut-out
+    translate([0,0,-1]) ext20(thick+11,fuzz,2);
+
+    // M3 drill holes
+    for(a=[-1,1]) translate([30*a,41,-1]) m3hole(thick,fuzz/2);
+
   }
 
   // diagnostic ruler.  We want about 36mm between front of nema17
@@ -85,17 +92,7 @@ module e15nutAccess() {
 
 module vertexC(thick,fuzz) {
   difference() {
-    vertexCframe(thick);
-
-    translate([0,0,-1]) {
-      ext20(thick+11*0.2,fuzz,2);
-
-      // M3 drill holes
-      #for(a=[-1,1]) {
-        translate([30*a,41,0]) m3hole(thick,fuzz/2);
-      }
-
-    } // end of z=-1 shift for subtractions
+    vertexCframe(thick,fuzz);
 
     // extrusion anchor screw(s)
     if(thick < 21) {
@@ -108,9 +105,9 @@ module vertexC(thick,fuzz) {
     // extrusion mount holes
     for(a=[-1,1]) translate([0,0,thick/2]) {
        translate([-22.5*a,24,0])
-          rotate([0,0,120*a]) rotate([90,0,0]) #m3extHole(fuzz/2);
+          rotate([0,0,120*a]) rotate([90,0,0]) m3extHole(fuzz/2);
        translate([-38.3*a,52,0])
-          rotate([0,0,120*a]) rotate([90,0,0]) #m3extHole(fuzz/2);
+          rotate([0,0,120*a]) rotate([90,0,0]) m3extHole(fuzz/2);
     }
 
     // slot access cutouts
@@ -128,7 +125,7 @@ vertexC(1?15:45,0.08);
 // support
 use <support.scad>;
 module supportBlades() {
-  for (a=[0:3:66]) translate([-1.5,a,0]) cube([3,0.4,6.4]);
+  for (a=[0:3:66]) translate([-1.5,a,0]) cube([2.5,0.4,6.4]);
 }
 
 color("Cyan") {
@@ -136,11 +133,11 @@ color("Cyan") {
     supportPillar(19.2*a,-5.5,4.4);
     //translate([16.5*a,0,0]) rotate([0,0,-30*a])
     //   translate([-.2,0,0]) cube([0.4,68,6.4]);
-    translate([16*a,1,0]) rotate([0,0,-30*a]) supportBlades();
+    translate([15.8*a,1,0]) rotate([0,0,-30*a]) supportBlades();
   }
   translate([-22.5,-6.6,4.6]) supportPillar4(0,0,3,2,5.8, 30);
   translate([ 25.5,-6.6,4.6]) supportPillar4(0,0,3,2,5.8,-30);
-  translate([ 1,-19,3.2]) supportPillar4(0,0,2  ,4,8.6);
+  translate([ 1,-17,3.2]) supportPillar4(0,0,2  ,4,8.6);
   translate([.8,-10,5.4]) supportPillar4(0,0,1.6,4,4.4);
   //translate([-16,1,0]) rotate([0,0,30]) supportBlades();
 }
