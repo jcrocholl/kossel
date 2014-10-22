@@ -138,23 +138,15 @@ module vertexC(thick,fuzz) {
 
 vertexC(1?15:45,0.08);
 
-// support
-module supportBlades(h=6.4) {
-  for (a=[0:3:66]) translate([-1.5,a,0]) cube([2.5,0.4,h]);
-}
-
 use <support.scad>;
 
 color("Cyan") {
   for(a=[-1,1]) {
     supportPillar(19.2*a,-5.5,4.4);
-    //translate([16.5*a,0,0]) rotate([0,0,-30*a])
-    //   translate([-.2,0,0]) cube([0.4,68,6.4]);
-    translate([15.8*a,1,0]) rotate([0,0,-30*a]) supportBlades();
+    translate([15.6*a,0,0]) rotate([0,0,-30*a]) zigZag(66,2,6.2,2);
   }
   translate([-22.5,-6.6,4.6]) supportPillar4(0,0,3,2,5.8, 30);
   translate([ 25.5,-6.6,4.6]) supportPillar4(0,0,3,2,5.8,-30);
   translate([ 1,-17,3.2]) supportPillar4(0,0,2  ,4,8.6);
   translate([.8,-10,5.4]) supportPillar4(0,0,1.6,4,4.4);
-  //translate([-16,1,0]) rotate([0,0,30]) supportBlades();
 }
