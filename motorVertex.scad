@@ -18,9 +18,9 @@ use <support.scad>;
 color("Cyan") {
   for(a=[-1,1]) {
     supportPillar(19.2*a,-5.5,4.4);
-    translate([15.8*a,0, 0  ]) rotate([0,0,-30*a]) zigZag(66,2,6.2,2);
-    translate([15.8*a,0, 9  ]) rotate([0,0,-30*a]) zigZag(66,2,5.8,2);
-    translate([15.8*a,0,30.4]) rotate([0,0,-30*a]) zigZag(66,2,5.8,2);
+    translate([15.8*a,0, 0  ]) rotate([0,0,-30*a]) zigZag(66,-2*a,6.2,2);
+    translate([15.8*a,0, 9  ]) rotate([0,0,-30*a]) zigZag(66,-2*a,5.8,2);
+    translate([15.8*a,0,30.4]) rotate([0,0,-30*a]) zigZag(66,-2*a,5.8,2);
   }
   for(z=[4.6,45-10.4]) {
     translate([-22.5,-6.6,z]) supportPillar4(0,0,3,2,5.8, 30);
