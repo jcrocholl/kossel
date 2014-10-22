@@ -25,6 +25,22 @@ y0 = y + ((y>0)?dy:-dy)/2;
   }
 }
 
+module zigZag(ylen,width,height,step,thick=0.4) {
+  union() {
+    for(y=[0:step:ylen]) {
+      hull() {
+        translate([-width/2,y       ,0]) cylinder(h=height,r=thick/2,$fn=3);
+        translate([ width/2,y+step/2,0]) cylinder(h=height,r=thick/2,$fn=3);
+      }
+      hull() {
+        translate([ width/2,y+step/2,0]) cylinder(h=height,r=thick/2,$fn=3);
+        translate([-width/2,y+step  ,0]) cylinder(h=height,r=thick/2,$fn=3);
+      }
+    }
+  }
+}
+
 translate([0,10,0]) earBrace();
 supportPillar4(10,0,4,6,2,45);
 supportPillar(-10,0,4);
+translate([0,-22,0]) zigZag(20,4,4,2);
