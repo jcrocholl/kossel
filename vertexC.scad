@@ -51,7 +51,7 @@ t2 = thick+2;
     translate([0,0,-1]) ext20(thick+11,fuzz,2);
 
     // M3 drill holes
-    for(a=[-1,1]) translate([30*a,41,-1]) m3hole(thick,fuzz/2);
+    for(a=[-1,1]) translate([30*a,41,-1]) m3hole(thick,fuzz);
 
   }
 
