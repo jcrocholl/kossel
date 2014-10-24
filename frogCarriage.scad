@@ -116,7 +116,7 @@ br = wheel_radius-2 + 2*dilation;
       translate([0,0,-2.2]) wheelAxleHole(0);
       translate([0,0,bthick/2]) rotate([0,90,0]) {
         for (i=[-boltSep,boltSep]) {
-          translate([0,i,-1]) wheelAxleHole(-0.2);
+          translate([0,i,-1]) wheelAxleHole(-0.1);
         }
       }
     }
@@ -247,7 +247,7 @@ y0 = y + ((y>0)?dy:-dy)/2;
 use <endstop.scad>;
 %translate([0,33,6.5]) rotate([180,0,0]) endstopCarriage();
 
-%translate([extrusion_width/2+wheel_radius-1+22,0,0]) mobileWheelMount(0);
+%translate([extrusion_width/2+wheel_radius-1+22*0,0,0]) mobileWheelMount(0);
 
 union() {
   frogCarriage();
@@ -263,7 +263,7 @@ union() {
       // horn overhang
       supportPillar(14,12  *i,base_thickness+.4,r=1.2,xscale=3.5);
       supportPillar(12, 8.5*i,base_thickness+.4,-30*i,xscale=2.5,r=1.3);
-      supportPillar(12.6,4*i,base_thickness+.4,-38*i,r=1.4,xscale=3.5);
+      supportPillar(12.6,4*i,base_thickness+.4,-38*i,r=1.2,xscale=4);
 
       supportPillar(5.5,16.3*i,2,r=1.5);
       supportPillar4(8,14*i,5,4.5,2);
@@ -271,13 +271,12 @@ union() {
       supportPillar4(-6,9*i,12,2,2);
 
       supportPillar(5,4*i,2,70*i,r=1.2,xscale=2);
-      supportPillar(8.3,3.2*i,13,i*17,r=1.5);
-      supportPillar(-9,3*i,12,10*i,r=1.5);
-      supportPillar(-3.5,3.5*i,11,xscale=2.5,r=1.3);
+      supportPillar(8.5,3.3*i,13,i*17,r=1.2);
+      //supportPillar(-9,3*i,12,10*i,r=1.5);
+      //supportPillar(-3.5,3.5*i,11,xscale=2.5,r=1.3);
     }
-    //supportPillar(15,0,base_thickness+.4,r=1.5);
-    supportPillar(9,0,base_thickness+.4,xscale=4,r=1.5);
-    supportPillar(1,0,6,rot=90,xscale=6,r=1.2);
-    supportPillar(-5.5,0,12,r=1.3,xscale=4);
+    supportPillar(11,0,base_thickness+.4,xscale=2,r=2);
+    supportPillar(4.5,0,2,r=1.2);
+    supportPillar(-5.5,0,12,r=2,xscale=2);
   }
 }
