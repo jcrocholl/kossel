@@ -87,10 +87,12 @@ module carriage() {
 
 
 module wheelAxleBrace() {
-  intersection() {
-    cylinder(h=base_thickness+5,r=7.5,$fn=36);
-    translate([0,0,3]) scale([1,1,2.5]) sphere(8,$fn=36);
-  }
+  // with M5 screws, there is no longer much desire to make
+  // the tops taper down thinner.  A cylinder alone is adequate
+  //intersection() {
+    cylinder(h=base_thickness+5,r=6,$fn=36);
+  //  translate([0,0,3]) scale([1,1,2.5]) sphere(8,$fn=36);
+  //}
 }
 module wheelAxleHole(dHeadRad) {
   translate([0,0,-30]) cylinder(h=60,r=m3rad,$fn=13);
@@ -263,9 +265,14 @@ color("Cyan") {
     supportPillar(19.3*i,0,12.2,r=1.5);  // under horn earBrace()'s
 
     // horn overhang
-    supportPillar(13,12  *i,base_thickness+.2,r=1.2,xscale=4.5);
+    supportPillar(13  ,11.7*i,base_thickness+.2,r=1.2,xscale=4.5);
+    supportPillar(11  , 8  *i,base_thickness+.2,r=1.2,xscale=2.7);
+    supportPillar(11.6, 4  *i,base_thickness+.2,r=1.2,xscale=3.3);
   }
-  translate([12.1,-10,0]) zigZag(18,9,base_thickness+.2,2);
-  translate([-7,-6,0]) zigZag(11,8,base_thickness+2,2);
+  //translate([12.1,-10,0]) zigZag(18,9,base_thickness+.2,2);
+  supportPillar(12.4,0,base_thickness+.2,r=1.5,xscale=3);
+  //translate([-7,-6,0]) zigZag(11,8,base_thickness+2,2);
+  supportPillar(-9.5,0,9,r=1.4,xscale=5,rot=90);
+  supportPillar(-5  ,0,8,r=1.3,xscale=5,rot=90);
 }
 
