@@ -22,7 +22,7 @@ translate([0,0,-0.2]) {
         // this should allow us to draw both the motor shaft area,
         // and have an island drawing the idler holder holes.
         // delete whichever one(s) you do not want on LaserCut
-        rotate([0,0,a]) translate([0,-vertexTrad+33,-2])
+        rotate([0,0,a]) translate([0,-vertexTrad+32,-2])
            hull() for(b=[-1,1]) translate([17*b,0,0])
               cylinder(r=7,h=9,$fn=48);
       }
@@ -41,10 +41,11 @@ translate([0,0,-0.2]) {
          for (b=[-140:70:140]) translate([b,0,0]) m3hole(22,fuzz);
 
       // holes for belt tensioner idler
-      //    should be about 20mm in from front of extrusion
-      %translate([0,-vertexTrad+20,4]) cube([2*12,20,5],center=true);  // diagnostic for spacing from extrusion
+      //    should be 22mm in from front of 20mm extrusion
+      // for frogCarriage20v, using openbuilds wheel kit with spacer
+      %translate([0,-vertexTrad+10+11,4]) cube([2*12,22,5],center=true);  // diagnostic for spacing from extrusion
       for (a=[30,150,270]) rotate([0,0,a])
-         for(b=[-1,1]) translate([vertexTrad-33,12*b,0])
+         for(b=[-1,1]) translate([vertexTrad-32,12*b,0])
             #cylinder(r=m3rad,h=27,$fn=11);
 
       if (1) {
