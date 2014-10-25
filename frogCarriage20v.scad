@@ -28,6 +28,7 @@ boltSep = 12; // tension bolt seperation half-dist
 
 m3_head_radius=5.36/2+0.2;
 m3rad = 2.94/2+0.1;  // tight fit, at least for vertical m3 screw holes.
+m3nutRad = 5.45/2/cos(30);
 
 m5rad = 4.92/2;//4.88/2;
 m5_head_radius = 8.62/2;//8.5/2;  // 5mm head height, uses 4mm hex drive
@@ -197,7 +198,7 @@ supportSpread = 6;
       for(i=[-boltSep,boltSep]) {
         translate([0,i,-24]) {
           cylinder(r=m3rad,h=60,$fn=13);
-          cylinder(r1=m3_nut_radius+.4, r2=m3_nut_radius-.2, h=7, $fn=6);
+          cylinder(r1=m3nutRad+.4, r2=m3nutRad-.2, h=7, $fn=6);
         }
       }
     }
@@ -207,7 +208,7 @@ supportSpread = 6;
 module wheelBaseHoles() {
   for (a=[-wheel_offset,wheel_offset])
     translate([-wheel_dx,a,base_thickness+1]) wheelAxleHole5(0);
-  translate([wheel_dx-1.5,0,0  ]) mobileWheelMount(.1); // dilated version for main slot
+  translate([wheel_dx-1.5,0,0  ]) mobileWheelMount(.2); // dilated version for main slot
   // raise supported ceiling a bit, since it is hard to clen supports
   translate([wheel_dx+2.3,0,base_thickness-.7])
      cube([22,2*(boltSep+2),2],center=true);
@@ -236,17 +237,17 @@ module mobileMountSupportBlade() {
   }
 }
 module mobileMountSupport() {
-  for(a=[-5.5:3:9.5])
-    translate([a,-boltSep-4.1,0]) mobileMountSupportBlade();
+  for(a=[-3.9:4:10])
+    translate([a,-boltSep-4.3,0]) mobileMountSupportBlade();
 }
 
-use <endstop.scad>;
-%translate([0,34,6.5]) rotate([180,0,0]) endstopCarriage();
 
-%translate([wheel_dx+33*1,0,0]) {
+
+if (0)
+translate([wheel_dx+33*0,0,0]) {
    mobileWheelMount(0);
    // support
-   color("Cyan") {
+   color("Green") {
      //translate([3,0,0])
      mobileMountSupport();
      mirror([0,1,0]) mobileMountSupport();
@@ -256,7 +257,7 @@ use <endstop.scad>;
 frogCarriage();
 
 // support structures
-//if(0) 
+if(0) 
 color("Cyan") {
   translate([ 17.3,0,base_thickness+.9])                 scale([0.5,0.6,0.7]) earBrace();
   translate([-17.3,0,base_thickness+.9]) mirror([1,0,0]) scale([0.5,0.6,0.7]) earBrace();
@@ -275,4 +276,8 @@ color("Cyan") {
   supportPillar(-9.5,0,9,r=1.4,xscale=5,rot=90);
   supportPillar(-5  ,0,8,r=1.3,xscale=5,rot=90);
 }
+
+use <endstop20v.scad>;
+// This carriage sits 1.8mm above extrusion
+%translate([0,-40,6-1.8]) rotate([0,180,0]) microswitchEndstop20v(0);
 
