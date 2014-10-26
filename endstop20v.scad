@@ -9,7 +9,7 @@ module microswitchEndstop20v(fuzz) {
     hull() {
       translate([4.6,-4,0]) cylinder(h=10,r=5,$fn=36);
       translate([ -5,-4,0]) cylinder(h=10,r=5,$fn=36);
-      translate([4.6,10,0]) cylinder(h=10,r=5,$fn=36);
+      translate([3.6,10,0]) cylinder(h=10,r=5,$fn=36);
       translate([-18,10,0]) cylinder(h=10,r=5,$fn=36);
     }
 

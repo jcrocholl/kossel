@@ -27,10 +27,10 @@ wheel_offset = 25;  // wheel pair wheelbase
 boltSep = 12; // tension bolt seperation half-dist
 
 m3_head_radius=5.36/2+0.2;
-m3rad = 2.94/2+0.1;  // tight fit, at least for vertical m3 screw holes.
+m3rad = 2.94/2+0.15;  // tight fit, at least for vertical m3 screw holes.
 m3nutRad = 5.45/2/cos(30);
 
-m5rad = 4.92/2;//4.88/2;
+m5rad = 4.92/2 + 0.2;//4.88/2;
 m5_head_radius = 8.62/2;//8.5/2;  // 5mm head height, uses 4mm hex drive
 
 module carriage() {
@@ -88,12 +88,10 @@ module carriage() {
 
 
 module wheelAxleBrace() {
-  // with M5 screws, there is no longer much desire to make
-  // the tops taper down thinner.  A cylinder alone is adequate
-  //intersection() {
-    cylinder(h=base_thickness+5,r=6,$fn=36);
-  //  translate([0,0,3]) scale([1,1,2.5]) sphere(8,$fn=36);
-  //}
+  intersection() {
+    cylinder(h=base_thickness+5,r=7,$fn=36);
+    translate([0,0,-5.3]) scale([1,1,2.5]) sphere(10,$fn=36);
+  }
 }
 module wheelAxleHole(dHeadRad) {
   translate([0,0,-30]) cylinder(h=60,r=m3rad,$fn=13);
@@ -243,8 +241,8 @@ module mobileMountSupport() {
 
 
 
-if (0)
-translate([wheel_dx+33*0,0,0]) {
+//if (0)
+translate([wheel_dx+33*1,0,0]) {
    mobileWheelMount(0);
    // support
    color("Green") {
@@ -257,7 +255,7 @@ translate([wheel_dx+33*0,0,0]) {
 frogCarriage();
 
 // support structures
-if(0) 
+//if(0) 
 color("Cyan") {
   translate([ 17.3,0,base_thickness+.9])                 scale([0.5,0.6,0.7]) earBrace();
   translate([-17.3,0,base_thickness+.9]) mirror([1,0,0]) scale([0.5,0.6,0.7]) earBrace();
