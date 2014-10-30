@@ -55,7 +55,7 @@ translate([0,0,-0.2]) {
            rotate([0,0,d]) translate([75,0,-1]) cylinder(r=25,h=17,$fn=96);
          }
          for(d=[30,150,270]) {
-           rotate([0,0,d]) translate([110,0,-1]) cylinder(r=12,h=17,$fn=96);
+           rotate([0,0,d]) translate([110,0,-1]) scale([1,1.8,1]) cylinder(r=12,h=17,$fn=96);
          }
       } else {
          // a big ring might be better for under print bed
