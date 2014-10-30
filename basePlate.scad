@@ -36,9 +36,9 @@ translate([0,0,-0.2]) {
     // drill more holes in plate
     translate([0,0,-1]) {
 
-      // drill edge holes
+      // drill edge holes -- these can use extra slop
       for(a=[0,120,240]) rotate([0,0,a]) translate([0,extTrad,-4])
-         for (b=[-140:70:140]) translate([b,0,0]) m3hole(22,fuzz);
+         for (b=[-140:70:140]) translate([b,0,0]) m3hole(22,fuzz+.15);
 
       // holes for belt tensioner idler
       //    should be 22mm in from front of 20mm extrusion
