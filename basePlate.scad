@@ -9,15 +9,18 @@ extTrad    = 109.6;  // radius for horiz extrusion centers
 
 fuzz = -0.1;  // fuzz (contraction) for laser cut holes
 
+slop = 0.3;  // extra fuzz to add for slop in mounts
+
 //projection(cut=true)
 translate([0,0,-0.2]) {
   difference() {
     union() {
       for (a=[0,120,240]) {
-        rotate([0,0,a   ]) translate([0,-vertexTrad,-1]) vertexCframe(5,fuzz,motorHole=true);
+        rotate([0,0,a   ]) translate([0,-vertexTrad,-1]) vertexCframe(5,fuzz+slop,motorHole=true);
         // dialte a bit to make parts fuse.
         // initial numbers are close to exact
-        rotate([0,0,a-30]) translate([extTrad-.2,0,5]) cube([15+.50,300+1,15],center=true);
+        rotate([0,0,a-30]) translate([extTrad-.295,0,5])
+          cube([15+.5,300+1,15],center=true);
 
         // this should allow us to draw both the motor shaft area,
         // and have an island drawing the idler holder holes.
@@ -38,25 +41,34 @@ translate([0,0,-0.2]) {
 
       // drill edge holes -- these can use extra slop
       for(a=[0,120,240]) rotate([0,0,a]) translate([0,extTrad,-4])
-         for (b=[-140:70:140]) translate([b,0,0]) m3hole(22,fuzz+.15);
+         for (b=[-140:70:140]) translate([b,0,0]) m3hole(22,fuzz+.15+slop);
 
       // holes for belt tensioner idler
       //    should be 22mm in from front of 20mm extrusion
       // for frogCarriage20v, using openbuilds wheel kit with spacer
       %translate([0,-vertexTrad+10+11,4]) cube([2*12,22,5],center=true);  // diagnostic for spacing from extrusion
       for (a=[30,150,270]) rotate([0,0,a])
-         for(b=[-1,1]) translate([vertexTrad-32,12*b,0])
-            #cylinder(r=m3rad,h=27,$fn=11);
+         for(b=[-1,1]) translate([vertexTrad-32,12*b,-3])
+            cylinder(r=m3rad+.1,h=27,$fn=11);
 
       if (1) {
          // decorative holes
-         cylinder(r=30,h=17,$fn=120);
-         for(d=[0,60,120,180,240,300]) {
-           rotate([0,0,d]) translate([75,0,-1]) cylinder(r=25,h=17,$fn=96);
-         }
-         for(d=[30,150,270]) {
-           rotate([0,0,d]) translate([110,0,-1]) scale([1,1.8,1]) cylinder(r=12,h=17,$fn=96);
-         }
+         translate([0,0,-1]) cylinder(r=35,h=17,$fn=120);
+         for(d=[0,60,120,180,240,300])
+           rotate([0,0,d]) translate([75,0,-1])
+             cylinder(r=30,h=17,$fn=96);
+
+         for(d=[30,150,270]) rotate([0,0,d])
+           translate([118,0,-1])
+             hull() for(a=[-1,1]) translate([0,a*25,0])
+               cylinder(r=12,h=17,$fn=80);
+
+         for(d=[30,90,150,210,270,330]) rotate([0,0,d])
+           translate([90,0,-1]) cylinder(r=8,h=17,$fn=60);
+
+         //for(d=[30,150,270]) for (a=[-1,1]) rotate([0,0,d+a*24])
+         //  translate([118,0,-2]) cylinder(r=8,h=17,$fn=60);
+
       } else {
          // a big ring might be better for under print bed
          //cylinder(r=90,h=18,$fn=120);
