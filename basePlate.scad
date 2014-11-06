@@ -60,7 +60,7 @@ translate([0,0,-0.2]) {
 
          for(d=[30,150,270]) rotate([0,0,d])
            translate([118,0,-1])
-             hull() for(a=[-1,1]) translate([0,a*25,0])
+             hull() for(a=[-1,1]) translate([0,a*30,0])
                cylinder(r=12,h=17,$fn=80);
 
          for(d=[30,90,150,210,270,330]) rotate([0,0,d])
