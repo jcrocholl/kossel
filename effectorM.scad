@@ -3,14 +3,14 @@ use <longAllMetalBowdenHotEnd.scad>;  // as altered for chinese all-metal hot-en
 
 //metric_thread(diameter=5, pitch=0.8, length=8, internal=true);
 
-separation = 40;  // Distance between ball joint mounting faces.
+separation = 40+15;  // Distance between ball joint mounting faces.
 offset = 20+8;  // Same as DELTA_EFFECTOR_OFFSET in Marlin.
 mount_radius = 16; //12.5;  // Hotend mounting screws, standard would be 25mm.
 hotend_radius = 8;  // Hole for the hotend (J-Head diameter is 16mm).
 push_fit_height = 4;  // Length of brass threaded into printed plastic.
 height = 12;
 cone_r1 = 2.5;
-cone_r2 = 14;
+cone_r2 = 20;
 
 module effector() {
   difference() {
@@ -23,22 +23,30 @@ module effector() {
 	           cube([separation, 40, height], center=true);
 	           translate([0, -4, 0]) rotate([0, 90, 0])
 		          cylinder(r=10, h=separation, center=true);
-	           translate([separation/2-7, 0, 0]) rotate([0, 90, 0])
-		          cylinder(r1=cone_r2, r2=cone_r1, h=14, center=true, $fn=24);
+	           translate([separation/2-9, 0, 0]) rotate([0, 90, 0])
+		          cylinder(r1=cone_r2, r2=cone_r1, h=18, center=true, $fn=24);
 	         }
 	       rotate([0, 90, 0])
 	         cylinder(r=m3_radius, h=separation+1, center=true, $fn=12);
 	       rotate([90, 0, 90])
-	         cylinder(r=m3_nut_radius, h=separation-24, center=true, $fn=6);
+	         cylinder(r=m3_nut_radius, h=separation-30, center=true, $fn=6);
 	       }
         }
       }
 
+    // more bracing on effector
+    for(a=[90:120:355]) rotate([0,0,a]) translate([28,0,0])
+      intersection() {
+        cube([12,24,height],center=true);
+        translate([-4,0,0]) rotate([90,0,0])
+          cylinder(r=height*0.8,h=30,$fn=36,center=true);
+      }
     }
 
     // hole for hot-end
     cylinder(h=height+1,r=16/2+.1,$fn=60,center=true);
 
+    // bolt holes
     #for (a = [30:60:359]) rotate([0, 0, a]) {
       translate([0, mount_radius, 0])
 	     cylinder(r=m3_wide_radius, h=height+1, center=true, $fn=12);
