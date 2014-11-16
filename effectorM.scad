@@ -9,23 +9,15 @@ hotend_radius = 8;  // Hole for the hotend (J-Head diameter is 16mm).
 push_fit_height = 4;  // Length of brass threaded into printed plastic.
 height = 12;
 
-// parameters for rod mount horns.
-// these parameters should be the same for the carriage horns.
-separation = 40+10;  // Distance between ball joint mounting faces.
-cone_r1 = 2.5;
-cone_r2 = 20;
-cone_height=18;
+use <rodMountHorn.scad>;
 
 module rodMountHorns() {
-  for (a = [60:120:359]) rotate([0, 0, a])
-    for (s = [-1, 1]) scale([s, 1, 1])
-	   translate([0, offset, 0])
-	     intersection() {
-	       translate([0, -2, 0]) rotate([0, 90, 0])
-		      cylinder(r=8, h=separation, center=true);
-	       translate([separation/2-9, 0, 0]) rotate([0, 90, 0])
-		      cylinder(r1=cone_r2, r2=cone_r1, h=cone_height, center=true, $fn=24);
-	     }
+  for (a = [60:120:359]) rotate([0, 0, a]) translate([0, offset, 0])
+    intersection() {
+	   translate([0, -2, 0]) rotate([0, 90, 0])
+	     cylinder(r=8, h=55, center=true);
+	   rodMountHorn();
+    }
 }
 
 module effector() {
@@ -43,12 +35,9 @@ module effector() {
       }
     }
 
-    // nut cut-out on horns
+    // nut cut-out for horns
     for(a=[60:120:355]) rotate([0,0,a])
-      translate([0,offset,0]) rotate([0,90,0]) {
-        cylinder(r=m3_nut_radius, h=separation-30,center=true,$fn=6);
-        cylinder(r=m3_radius, h=separation+1, center=true, $fn=12);
-      }
+      translate([0,offset,0]) rodMountHornBore();
 
     // hole for hot-end
     cylinder(h=height+1,r=16/2+.1,$fn=60,center=true);
@@ -62,10 +51,12 @@ module effector() {
 
 // a fuzz of about .1 to .2 good for 3D printing.
 // -.1 to -.2 for laser cut projection
-module bracePlate(fuzz=.1) {
+module bracePlate(fuzz=.1,hole=6) {
   difference() {
     cylinder(r=24,h=2.4,$fn=60,center=true);
-    cylinder(r=6+fuzz,h=3,$fn=60,center=true);
+    // top base plate could be as low as 011.1mm and fit around nut
+    // default collar is 012mm
+    cylinder(r=hole+fuzz,h=3,$fn=60,center=true);
     for (a = [30:60:359]) rotate([0, 0, a]) {
       translate([0, mount_radius, 0])
 	     cylinder(r=2.94/2+fuzz, h=3, center=true, $fn=12);
@@ -94,7 +85,7 @@ translate([0,0,-6]) mirror([0,0,1]) %metalHotEnd();
 
 //projection(cut=true)
 %translate([0,0,8])
-  bracePlate(fuzz=0);
+  bracePlate(fuzz=0,hole=11.1/2);
 
 // other file may use bracePlate and nutCatcher modules
 // to build fan mounts and ducts

@@ -3,12 +3,10 @@
 
 include <configuration.scad>;
 use <beltCatch.scad>;
+use <rodMountHorn.scad>;
 
-separation = 40;  // width of rod mount cones
 thickness = 6;
 
-horn_thickness = 13;
-horn_x = 8;
 
 belt_width = 6;
 belt_x = 5.6;
@@ -33,6 +31,35 @@ m3nutRad = 5.45/2/cos(30);
 m5rad = 4.92/2 + 0.2;//4.88/2;
 m5_head_radius = 8.62/2;//8.5/2;  // 5mm head height, uses 4mm hex drive
 
+hornAxisHeight = 13/2;
+
+// 40mm separation version
+//module ballJointMountHorns() {
+//separation = 40;  // width of rod mount cones
+//horn_thickness = 13;
+//horn_x = 8;
+//      #for (x = [-1, 1]) {
+//        scale([x, 1, 1]) intersection() {
+//          translate([0, 0, horn_thickness/2])
+//            cube([separation, 18, horn_thickness], center=true);
+//          translate([horn_x, 0, horn_thickness/2]) rotate([0, 90, 0])
+//            cylinder(r1=14, r2=2.5, h=separation/2-horn_x);
+//        }
+//      }
+//}
+
+// for 50mm separation
+module ballJointMountHorns() {
+  translate([0,0,hornAxisHeight])
+    difference() {
+      intersection() {
+        rodMountHorn();  // for 50mm separation
+        cube([51,38-5,hornAxisHeight*2],center=true);
+      }
+      cube([16,50,22],center=true);
+    }
+}
+
 module carriage() {
   // Timing belt (up and down).
   for (a=[-1,1]) translate([a*belt_x, 0, belt_z + belt_width/2])
@@ -45,16 +72,8 @@ module carriage() {
         translate([-9.5, -8,thickness-1]) cube([19.2,16,1]);
       }
 
-      // Ball joint mount horns.
-      for (x = [-1, 1]) {
-        scale([x, 1, 1]) intersection() {
-          translate([0, 0, horn_thickness/2])
-            cube([separation, 18, horn_thickness], center=true);
-          translate([horn_x, 0, horn_thickness/2]) rotate([0, 90, 0])
-            cylinder(r1=14, r2=2.5, h=separation/2-horn_x);
-        }
-      }
-
+      ballJointMountHorns();
+ 
       // side support
       for (i=[-1,1]) { hull() {
          translate([ 9.8*i,-7.5,12]) scale([1,2,1]) rotate([0,0,22.5]) cylinder(h=1,r=2,$fn=8);
@@ -73,16 +92,8 @@ module carriage() {
     }
 
     // Screws for ball joints.
-    translate([0, 0, horn_thickness/2]) rotate([0, 90, 0]) 
-      cylinder(r=m3rad, h=60, center=true, $fn=13);
-    // Lock nuts for ball joints.
-    for (x = [-1, 1]) {
-      scale([x, 1, 1]) intersection() {
-        translate([horn_x, 0, horn_thickness/2]) rotate([90, 0, -90])
-          cylinder(r1=m3_nut_radius-0.2, r2=m3_nut_radius+0.5, h=8,
-                   center=true, $fn=6);
-      }
-    }
+    translate([0,0,hornAxisHeight]) rodMountHornBore(boreLen=13);
+
   }
 }
 
