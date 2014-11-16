@@ -9,17 +9,15 @@ module earBrace() {
   }
 }
 
-module supportPillar(x,y,len,rot=0,r=2,xscale=1) {
+module supportPillar(x,y,len,rot=0,r=2,xscale=1,yscale=1) {
   translate([x,y,0]) difference() {
-                          rotate([0,0,rot]) scale([xscale,1,1]) cylinder(r=r    ,h=len  ,$fn=6);
-    translate([0,0,-0.5]) rotate([0,0,rot]) scale([xscale,1,1]) cylinder(r=r-.25,h=len+1,$fn=6);
+                          rotate([0,0,rot]) scale([xscale,yscale,1]) cylinder(r=r    ,h=len  ,$fn=6);
+    translate([0,0,-0.5]) rotate([0,0,rot]) scale([xscale,yscale,1]) cylinder(r=r-.25,h=len+1,$fn=6);
   }
 }
 module supportPillar4(x,y,dx,dy,dz,rot=0) {
-t=0.3;
-x0 = x + ((x<0)?dx:-dx)/2;
-y0 = y + ((y>0)?dy:-dy)/2;
-  translate([x0,y0,dz/2]) rotate([0,0,rot]) difference() {
+t=0.2;
+  translate([x,y,dz/2]) rotate([0,0,rot]) difference() {
     cube([dx  ,dy  ,dz  ],center=true);
     cube([dx-t,dy-t,dz+1],center=true);
   }
