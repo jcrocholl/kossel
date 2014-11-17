@@ -1,7 +1,8 @@
-%translate([0,0,-121]) import("smoothie.stl");
+//projection(cut=true)
+%translate([0,0,-121]) import("smoothie.stl"); // older 4-driver smoothie board
 
 
-module smoothieHoles() {
+module smoothie4Holes() {
 hr = 1.8; // hole radius
 hh = 9;  // hole height
 $fn=12;
@@ -14,4 +15,4 @@ $fn=12;
   translate([62.3,23.2  ,-1]) cylinder(h=hh,r=hr+.2);
 }
 
-#smoothieHoles();
+#smoothie4Holes();
