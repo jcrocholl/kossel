@@ -33,20 +33,21 @@ m5_head_radius = 8.62/2;//8.5/2;  // 5mm head height, uses 4mm hex drive
 
 hornAxisHeight = 13/2;
 
-// 40mm separation version
-//module ballJointMountHorns() {
-//separation = 40;  // width of rod mount cones
-//horn_thickness = 13;
-//horn_x = 8;
-//      #for (x = [-1, 1]) {
-//        scale([x, 1, 1]) intersection() {
-//          translate([0, 0, horn_thickness/2])
-//            cube([separation, 18, horn_thickness], center=true);
-//          translate([horn_x, 0, horn_thickness/2]) rotate([0, 90, 0])
-//            cylinder(r1=14, r2=2.5, h=separation/2-horn_x);
-//        }
-//      }
-//}
+/* 40mm separation version
+module ballJointMountHorns() {
+separation = 40;  // width of rod mount cones
+horn_thickness = 13;
+horn_x = 8;
+      #for (x = [-1, 1]) {
+        scale([x, 1, 1]) intersection() {
+          translate([0, 0, horn_thickness/2])
+            cube([separation, 18, horn_thickness], center=true);
+          translate([horn_x, 0, horn_thickness/2]) rotate([0, 90, 0])
+            cylinder(r1=14, r2=2.5, h=separation/2-horn_x);
+        }
+      }
+}
+*/
 
 // for 50mm separation
 module ballJointMountHorns() {
@@ -56,7 +57,7 @@ module ballJointMountHorns() {
         rodMountHorn();  // for 50mm separation
         cube([51,16,hornAxisHeight*2],center=true);
       }
-      cube([16,50,22],center=true);
+      translate([-2,0,0]) cube([16,50,22],center=true);
     }
 }
 
@@ -65,7 +66,8 @@ module carriage() {
   for (a=[-1,1]) translate([a*belt_x, 0, belt_z + belt_width/2])
      %cube([1.7, 100, belt_width], center=true);
 
-  difference() {union() {
+  difference() {
+    union() {
       // Main body
       hull() {
         translate([-9.5,-15,-.5])         cube([19.2,30,1]);
@@ -75,14 +77,12 @@ module carriage() {
       ballJointMountHorns();
  
       // side support
-      for (i=[-1,1]) { hull() {
-        for(j=[-1,1]) {
-         translate([ 9.8*i,7.5*j,12]) scale([1,2,1])
-            rotate([0,0,22.5]) cylinder(h=1,r=2,$fn=8);
-          translate([ 9.6*i,18*j,0]) sphere(2,$fn=8);
-        }
-        translate([18*i,0,6]) cylinder(h=6,r=3,$fn=6);
-      }}
+      for (i=[-1,1]) hull() {
+        translate([10.6*i,0,12]) scale([1, 6  ,1]) cylinder(h=1 ,r=2,$fn=12);
+        translate([ 9  *i,0, 0]) scale([1,10.9,1]) cylinder(h=.1,r=2,$fn=18);
+
+        translate([18*i,0,2]) cylinder(h=7,r=3,$fn=6);
+      }
 
       translate([2.1,-8.1,3.5]) rotate([0,0,180]) beltCatch(9.5);
       translate([2.1, 8.1,3.5]) mirror([1,0,0])   beltCatch(9.5);

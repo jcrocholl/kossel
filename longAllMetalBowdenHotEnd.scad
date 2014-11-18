@@ -9,7 +9,7 @@ br=16.15/2 - bevilRad;
     translate([0,3.85,0]) hull() for(a=[-1,1]) for(b=[-1,1])
       translate([a*br,b*br,0]) cylinder(r=bevilRad,h=11.9,$fn=16);
 
-    translate([0,7.5,6.2]) rotate([0,90,0])
+    translate([0,3.85+16.15/2-6.25/2-1.6,3.6+6.25/2]) rotate([0,90,0])
       #cylinder(r=6.25/2,h=17,$fn=36,center=true);
   }
   translate([0,0,-5]) cylinder(r1=.5,r2=2,h=2.3,$fn=36);
@@ -26,8 +26,10 @@ module metalHotEnd() {
       translate([0,0,6.2+a*(2.2+1.2)]) cylinder(r=24.9/2,h=1.2,$fn=60);
   }
 
-  translate([0,0,-12-7]) cylinder(r=(9.9/2)/cos(30),h=6.4,$fn=6);
+  translate([0,0,-12-7]) cylinder(r=(9.86/2)/cos(30),h=6.4,$fn=6);
   translate([0,0,38+11.9+2.9]) rotate([180,0,0]) hotBlock();
 }
 
 metalHotEnd();
+
+//hotBlock();

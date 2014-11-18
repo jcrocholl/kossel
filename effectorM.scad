@@ -83,9 +83,16 @@ m3headRad=5.36/2;
 effector();
 translate([0,0,-6]) mirror([0,0,1]) %metalHotEnd();
 
+// pattern for laser-cut top plate
 //projection(cut=true)
 %translate([0,0,8])
   bracePlate(fuzz=0,hole=11.1/2);
+
+// split bottom plate into two parts
+if (0) difference() {
+  bracePlate(fuzz=.1,hole=6);
+  for (a=[-6,6]) translate([15,a,0]) cube([30,.2,6],center=true);
+}
 
 // other file may use bracePlate and nutCatcher modules
 // to build fan mounts and ducts

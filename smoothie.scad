@@ -24,6 +24,10 @@ $fn=12;
   translate([  8.5,120.9,-1]) cylinder(h=hh,r=hr);
   translate([101.6, 28.4,-1]) cylinder(h=hh,r=hr);
   translate([101  ,127.4,-1]) cylinder(h=hh,r=hr);
+
+hrp=2;
+  translate([49.5,4,-1]) cylinder(h=hh,r=hrp);
+  translate([59.5,4,-1]) cylinder(h=hh,r=hrp);
 }
 
 #smoothieX5holes();
