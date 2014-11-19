@@ -1,21 +1,49 @@
-// Glass print bed holder for silly 170mm diameter plate, that almost
-// fits INSIDE rails.
+// Glass print bed holder tab
 
-m3threadOD = 2.88;
-intersection(){
-  translate([0,-5,-1]) scale([1,1.3,1]) cylinder(r=18,h=9,$fn=64);
-  difference() {
-    translate([0,44,0]) scale([1,2,1]) cylinder(r=30,h=3+3.5,$fn=120);
-    translate([0,170/2,3]) {
-      // make this a little too small, so that we can mount with screw
-      // slightly off perfect perpendicular to give some slop/freedom
-      translate([0,0.7,0])
-        cylinder(r=170/2-.5,h=4,$fn=180);
-      translate([0,0,-4]) cylinder(r=160/2,h=8,$fn=160);
-    }
-    translate([0, -7,-.2]) {
-      cylinder(r=(m3threadOD/2)+.2,h=9,$fn=12);
-      cylinder(r1=5.9/2,r2=5.5/2,h=1.7,$fn=16); // countersink screw head
-    }
+// ---- 250mm borosilicate plate from ultibots.
+//plateDiam = 9.84 * 25.4;
+//plateThick = 3.3;
+//tabHeight = 6.5;
+
+// ---- 9" springform pan base, norpro, tempered glass 
+plateDiam = 9.03 * 25.4;
+plateThick = 4.9;
+tabHeight = 8;
+
+
+tabWidth = 3;  // amount of tab that sits on top of glass
+
+
+m3threadRad = 2.88/2;
+m3HeadRad = 5.4/2;
+
+plateRad = plateDiam/2;
+
+// need bolt head 4.5mm above extrusion to use 8mm bolt
+counterSink = tabHeight-4.5;  // depth of bolt head countersink
+
+
+difference() {
+  scale([1.3,1.6,1]) cylinder(r=10,h=tabHeight,$fn=60);
+
+  // m3 bolt hole
+  translate([0,-9,-1]) {
+    cylinder(r=m3threadRad+0.3,h=11,$fn=17);
+    cylinder(r1=m3HeadRad+.4,r2=m3HeadRad+.15,h=1+counterSink,$fn=25);
+  }
+
+  translate([0,plateRad-tabWidth,tabHeight-plateThick+.2]) {
+     cylinder(r=plateRad,h=plateThick+.3,$fn=180);
+     translate([0,0,-tabHeight+plateThick-1])
+       cylinder(r=plateRad-tabWidth,h=plateThick+2,$fn=180);
+  }
+
+}
+
+%color("Cyan") { // support
+  translate([0,-9,0]) difference() {
+    cylinder(h=counterSink-.3,r=2.35,$fn=8);
+    translate([0,0,-1])
+      cylinder(h=6,r=2.2,$fn=8);
   }
 }
