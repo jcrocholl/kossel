@@ -201,6 +201,16 @@ supportSpread = 6;
       // extra bracing from belt catch to mobile mount rails
       translate([0,-15,1])                 cableCatchBrace();
       translate([0, 15,1]) mirror([0,1,0]) cableCatchBrace();
+
+      // brace under mount horn on non-mobile side.
+      // not structurally necessary, but allows us to print with
+      // less support material
+      hull() {
+        translate([-19,0,11]) scale([1,2,1]) cylinder(r=2,h=.1,$fn=36);
+        translate([-15,0,10.7]) scale([1,2,1]) cylinder(r=4.3,h=.1,$fn=48);
+        translate([-16.7,0,6]) sphere(1,$fn=10);
+      }
+      
     }
 
     // Adjustable tension screw holes
@@ -273,7 +283,6 @@ color("Cyan") {
   translate([-22.3,0,base_thickness+.2]) mirror([1,0,0]) scale([0.5,0.6,0.7]) earBrace();
 
   // under horn.  Slightly different heights for mobile clearance
-  translate([-19 ,0,0]) rotate([0,0,90]) supportPillar(0,0,10.4,r=1,xscale=5);
   translate([19.5,0,0]) rotate([0,0,90]) supportPillar(0,0,base_thickness+.2,r=1,xscale=5);
 
 
