@@ -4,15 +4,38 @@
 // low accuracy... but high repeatability version
 // of a CNC probe
 
-magRad=8;  // radius of magnet group
+magRad=10.5;  // radius of magnet group
 
 sphereDiam = 3.0;  // new set of spheres appears to be true 3.0mm
-bitDiam = 1.12;  // 3/64" drill bit, for rods
+//bitDiam = 1.12;  // 3/64" drill bit, for rods
+bitDiam = 1.56;  // 1/16" drill bit
+
+mountTowerRad = 10;
 
 module magnetGroup(fuzz=0) {
  for(i=[-120,0,120]) rotate([0,0,i])
-   for (a=[-1,1])  translate([1.7*a,-magRad,0])
+   for (a=[-1,1])  translate([1.8*a,-magRad,0])
      sphere(sphereDiam/2+fuzz,$fn=36);   // 3mm bucky balls
+}
+module magnetGroupBase() {
+ for(i=[-120,0,120]) rotate([0,0,i]) hull()
+   for (a=[-1,1])  translate([1.8*a,-magRad,-1])
+     cylinder(r2=sphereDiam/2+.5,r1=sphereDiam/2+1.1,h=1.35,$fn=36);
+}
+
+module magnetJig(fuzz=0) {
+  difference() {
+    translate([0,0,-3]) triPlate(2.4,2*magRad-2,2*magRad+4.3);
+    magnetGroup(fuzz=fuzz);
+    translate([0,0,-4]) cylinder(r=1.7,h=5,$fn=32);
+
+    // mount towers
+    for(a=[-120,0,120]) rotate([0,0,a]) {
+      translate([0,mountTowerRad  ,-3.6]) cylinder(r=3.5,h=14,$fn=6);
+      //translate([0,mountTowerRad+2,-3.6]) 
+      //  scale([3,1,1]) rotate([0,0,30]) cylinder(r=4.5  ,h=14,$fn=3);
+    }
+  }
 }
 
 module magnetMount(notional=false,fuzz=0) {
@@ -21,22 +44,35 @@ module magnetMount(notional=false,fuzz=0) {
 
   // magnet base
   difference() {
-      translate([0,0,-3.6]) triPlate(6,12+magRad,16+magRad);
-      triPlate(10,9+magRad,13+magRad);
+    union() {
+      difference() {
+        translate([0,0,-3.6]) triPlate(3.6+1.5,2*magRad+2,2*magRad+8);
+        translate([0,0,-0.2]) triPlate(10     ,2*magRad-1,2*magRad+5);
+      }
+      magnetGroupBase();
+
+      // mount towers
+      for(a=[-120,0,120]) rotate([0,0,a])
+        translate([0,mountTowerRad,-3.6]) cylinder(r=4,h=14,$fn=6);
+    }
+
+    // screw holes for mount towers  #2 screw is diam 2.12
+    for(a=[-120,0,120]) rotate([0,0,a])
+        translate([0,mountTowerRad,5]) cylinder(r=2.12/2+fuzz,h=14,$fn=9);
+
+    magnetGroup(fuzz=fuzz);
 
     // skip this for actual printed model... 
     //   this is just to see insides easier for display
     if (notional)
-      translate([0,0,0.4]) cylinder(r=7+magRad,h=10,$fn=6);
-    else // hollow out for magnet spheres
-      magnetGroup(disk=disk,fuzz=fuzz);
+      translate([0,0,.5]) cylinder(r=7+magRad,h=10,$fn=6);
 
     // probe pass-through
     translate([0,0,-4]) cylinder(r=1.5,h=5,$fn=32);
 
     // drill holes for magnet contact wires
-    for(a=[-1,1]) translate([a*3,13,.4])
-      rotate([90,0,0]) rotate([0,0,-30]) cylinder(r=0.8,h=6,$fn=3);
+    for(a=[-1,1]) translate([a*5.5,15,.3])
+      rotate([90,0,0]) rotate([0,0,-30]) cylinder(r=1,h=6,$fn=3);
 
   }
 }
@@ -48,21 +84,22 @@ module probeMount(notional=false,fuzz=0) {
 
       // holders for rods
       for(a=[-120,0,120]) rotate([0,0,a])
-        rotate([90,0,0])
-        cylinder(r=bitDiam/2+1.5,h=6,$fn=6);
+        rotate([90,0,0]) rotate([0,0,22.5])
+        cylinder(r=bitDiam/2+1.5,h=8,$fn=8);
 
     }
 
     // chop off bottom of hull a bit
-    translate([0,0,-3]) cylinder(r=22,h=3-bitDiam/2-fuzz-.3,$fn=6);
+    translate([0,0,-3]) cylinder(r=22,h=3-bitDiam/2-fuzz-.2,$fn=6);
 
     // drill holes to hold rods
     for(a=[-120,0,120]) rotate([0,0,a])
-      #translate([0,-2,0] )rotate([90,0,0])
-        cylinder(r=bitDiam/2+fuzz,h=7.5,$fn=16);
+      #translate([0,-1.5,0] )rotate([90,0,0])
+        cylinder(r=bitDiam/2+fuzz,h=10.5,$fn=16);
 
     // hole for probe
-    #cylinder(r=bitDiam/2+fuzz,h=20,$fn=16,center=true);
+    //#cylinder(r=bitDiam/2+fuzz,h=20,$fn=16,center=true);
+    #cylinder(r=.7+fuzz,h=20,$fn=12,center=true); // for pin
   }
 }
 
@@ -75,7 +112,6 @@ module triPlate(h=2,r1=8,r2=10) {
 
 // parts to be fabricated
 //translate([35,0,0])
-%magnetMount(fuzz=0.1);//,notional=true);
-translate([0,0,1.3])
-probeMount(fuzz=0.1);
-
+%magnetMount(fuzz=0.16);//,notional=true);
+translate([0,0,1.5]) probeMount(fuzz=0.2);
+%translate([33,0,4]) magnetJig(fuzz=.11);
