@@ -18,12 +18,16 @@ module microswitchEndstop20v(fuzz) {
 
     // 5mm bolt hole
     cylinder(r=m5rad+fuzz,h=11,$fn=15);
-    translate([0,0,-1.5])
+    translate([0,0,-4])
        cylinder(r2=m5_head_radius,r1=m5_head_radius+.3,h=5,$fn=24);
 
     // 2.4mm diam was good for M2.5.  go a little smaller for #2
     translate([-16.5,10,-1]) for(a=[0,1])
        translate([9.5*a,0,-1]) cylinder(r=2.3/2, h=11, $fn=11);
+
+    // extra clearance for extrusion nut
+    translate([0,0,8.8]) cube([10,16,4],center=true);
+    translate([0,0,6  ]) cylinder(r=3.5+.2,h=4,$fn=17);
   }
 
   %translate([-9.5/2-7,10,-3]) rotate([-90,0,0]) microswitch();
@@ -31,10 +35,10 @@ module microswitchEndstop20v(fuzz) {
 
 microswitchEndstop20v(.1);
 
-// support
-color("Cyan") {
+// support (not helpful with current shallow countersink... just clean up with drill bit)
+%color("Cyan") {
   difference() {
-    cylinder(h=3.2,r=3.5,$fn=10);
+    cylinder(h=.8,r=3.5,$fn=10);
     translate([0,0,-1]) cylinder(h=7,r=3.2,$fn=10);
   }
 }
