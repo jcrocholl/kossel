@@ -228,7 +228,7 @@ supportSpread = 6;
 module wheelBaseHoles() {
   for (a=[-wheel_offset,wheel_offset])
     translate([-wheel_dx,a,base_thickness+1]) wheelAxleHole5(0);
-  translate([wheel_dx-1.5,0,0  ]) mobileWheelMount(.2); // dilated version for main slot
+  translate([wheel_dx-1.5,0,0  ]) mobileWheelMount(.15); // dilated version for main slot
   // raise supported ceiling a bit, since it is hard to clen supports
   translate([wheel_dx+2.3,0,base_thickness-.7])
      cube([22,2*(boltSep+2),2],center=true);
