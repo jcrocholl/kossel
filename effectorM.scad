@@ -53,13 +53,18 @@ module effector() {
 // -.1 to -.2 for laser cut projection
 module bracePlate(fuzz=.1,hole=6) {
   difference() {
-    cylinder(r=24,h=2.4,$fn=60,center=true);
+    union() {
+      cylinder(r=24,h=4,$fn=60);
+      for (a = [30:60:359]) rotate([0, 0, a])
+        translate([0, mount_radius, 3.9]) nutCatcher();
+    }
+    translate([0,0,2.4]) cylinder(r=8+fuzz,h=6,$fn=60);
     // top base plate could be as low as 011.1mm and fit around nut
     // default collar is 012mm
-    cylinder(r=hole+fuzz,h=3,$fn=60,center=true);
+    translate([0,0,-1]) cylinder(r=hole+fuzz,h=6,$fn=60);
     for (a = [30:60:359]) rotate([0, 0, a]) {
       translate([0, mount_radius, 0])
-	     cylinder(r=2.94/2+fuzz, h=3, center=true, $fn=12);
+	     cylinder(r=2.94/2+fuzz, h=9, center=true, $fn=12);
     }
   }
 }
@@ -80,18 +85,37 @@ m3headRad=5.36/2;
   }
 }
 
-effector();
+/////////////////////////////////////////////////////////////
+
 translate([0,0,-6]) mirror([0,0,1]) %metalHotEnd();
 
+effector();
+
 // pattern for laser-cut top plate
-//projection(cut=true)
+//projection(cut=true) translate([0,0,-1])
 %translate([0,0,8])
   bracePlate(fuzz=0,hole=11.1/2);
 
 // split bottom plate into two parts
-if (0) difference() {
+/*
+difference() {
   bracePlate(fuzz=.1,hole=6);
   for (a=[-6,6]) translate([15,a,0]) cube([30,.2,6],center=true);
+}
+*/
+fz=.2;
+if(0)
+if(0) {
+  difference() {
+    bracePlate(fuzz=.1,hole=6);
+    translate([15,0,4]) cube([30,12+fz,9],center=true);
+    translate([15,0,2.4+3]) cube([30,16+fz,6],center=true);
+  }
+} else {
+  intersection() {
+    bracePlate(fuzz=.1,hole=6);
+    translate([15,0,4]) cube([30,12-fz,9],center=true);
+  }
 }
 
 // other file may use bracePlate and nutCatcher modules
