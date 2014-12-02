@@ -134,8 +134,8 @@ module magnetMount(notional=false,fuzz=0) {
     translate([0,0,-4]) cylinder(r=1.5,h=5,$fn=32);
 
     // drill holes for magnet contact wires
-    for(a=[-1,1]) translate([a*5.5,15,.3])
-      rotate([90,0,0]) rotate([0,0,-30]) cylinder(r=1,h=6,$fn=3);
+    for(a=[-1,1]) translate([a*5.5,15,.65])
+      rotate([90,0,0]) rotate([0,0,18]) cylinder(r=1,h=6,$fn=5);
 
   }
 }
@@ -176,7 +176,7 @@ module triPlate(h=2,r1=8,r2=10) {
 // parts to be fabricated
 //translate([35,0,0])
 magnetMount(fuzz=0.16);//,notional=true);
-%translate([0,0,1.5]) probeMount(fuzz=0.2);
+translate([0,0,1.5]) probeMount(fuzz=0.2);
 %translate([33,0,4]) magnetJig(fuzz=.11);
 
 //translate([0,0,14])
