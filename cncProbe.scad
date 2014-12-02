@@ -41,36 +41,26 @@ module magnetJig(fuzz=0) {
 // top mounting plate for m6 bolt attachment
 module topPlateM6(fuzz=.1) {
   difference() {
-    union() {
-      // mount towers
-      for(a=[-120,0,120]) rotate([0,0,a])
-        translate([0,mountTowerRad,0]) cylinder(r=4,h=8,$fn=6);
-
-      rotate([0,0,60]) //difference() {
-        triPlate(6,20,30);
-      //  translate([0,0,3]) triPlate(4,14,24);
-      //}
-
-      // hex head catcher for M6
-      cylinder(h=6,r1=8,r2=6,$fn=6);
-    }
-
+    rotate([0,0,60]) triPlate(8,20,30);
 
     for(a=[-120,0,120]) rotate([0,0,a])
       translate([0,mountTowerRad,0]) {
         // mount tower cut-out
-        translate([0,0,3.3]) cylinder(r=4+fuzz*2,h=8,$fn=6);
+        translate([0,0,5]) cylinder(r=4+fuzz*2,h=8,$fn=6);
 
         // screw holes for mount towers  #2 screw is diam 2.12
-        translate([0,0,-1]) cylinder(r=2.12/2+fuzz+.2,h=14,$fn=13);
+        translate([0,0,-1]) {
+          cylinder(r=2.12/2+fuzz+.2,h=14,$fn=24); // drill hole
+          cylinder(r1=4.1/2+fuzz+.2,r2=4.1/2+fuzz,h=3,$fn=24); // countersink
+        }
       }
 
     // countersink for hex head on M6
     cylinder(r=5.9/2+fuzz,h=22,$fn=36,center=true);
-    translate([0,0,3]) cylinder(h=6,r1=9.9/2/cos(30)+0.5*fuzz,
+    translate([0,0,4]) cylinder(h=6,r1=9.9/2/cos(30)+0.5*fuzz,
                                     r2=9.9/2/cos(30)+3  *fuzz,$fn=6);
-    translate([0,0,2.3]) cylinder(r=9/2+3*fuzz,h=1,$fn=48);
-    translate([0,0,1]) cylinder(h=3,r1=5.9/2,r2=5.9/2+1,$fn=48);
+    translate([0,0,3.3]) cylinder(r=9/2+3*fuzz,h=1,$fn=48);
+    translate([0,0,2]) cylinder(h=3,r1=5.9/2,r2=5.9/2+1,$fn=48);
 
   }
 }
@@ -111,19 +101,27 @@ module magnetMount(notional=false,fuzz=0) {
   difference() {
     union() {
       difference() {
-        translate([0,0,-3.6]) triPlate(3.6+1.5,2*magRad+2,2*magRad+8);
+        translate([0,0,-3.6]) triPlate(3.6+2.6,2*magRad+2,2*magRad+8);
         translate([0,0,-0.2]) triPlate(10     ,2*magRad-1,2*magRad+5);
       }
       magnetGroupBase();
 
       // mount towers
       for(a=[-120,0,120]) rotate([0,0,a])
-        translate([0,mountTowerRad,-3.6]) cylinder(r=4,h=17,$fn=6);
+        translate([0,mountTowerRad,-3.6]) {
+          cylinder(r=4,h=17,$fn=6);
+
+          hull() {
+            translate([0,0 ,14]) cylinder(r=.4,h=1,$fn=6);
+            translate([0,0.8,6]) cube([20,1.3,.1],center=true);
+          }
+        }
     }
 
     // screw holes for mount towers  #2 screw is diam 2.12
     for(a=[-120,0,120]) rotate([0,0,a])
-        translate([0,mountTowerRad,5]) cylinder(r=2.12/2+fuzz,h=14,$fn=9);
+        translate([0,mountTowerRad,5])
+          #cylinder(r=2.12/2+fuzz-.2,h=14,$fn=9);
 
     magnetGroup(fuzz=fuzz);
 
@@ -178,9 +176,9 @@ module triPlate(h=2,r1=8,r2=10) {
 // parts to be fabricated
 //translate([35,0,0])
 magnetMount(fuzz=0.16);//,notional=true);
-translate([0,0,1.5]) probeMount(fuzz=0.2);
-translate([33,0,4]) magnetJig(fuzz=.11);
+%translate([0,0,1.5]) probeMount(fuzz=0.2);
+%translate([33,0,4]) magnetJig(fuzz=.11);
 
-translate([0,0,14])
-%translate([0,0,2.8]) rotate([180,0,60])
-  topPlateM6();
+//translate([0,0,14])
+//%translate([0,0,2.8]) rotate([180,0,60])
+  //topPlateM6();
