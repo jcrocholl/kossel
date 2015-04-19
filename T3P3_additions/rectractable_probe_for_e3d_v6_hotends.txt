@@ -1,0 +1,3 @@
+We are using this probe design:
+http://www.thingiverse.com/thing:188477
+for the mechanical retractable probe with e3d v6 hotends.
