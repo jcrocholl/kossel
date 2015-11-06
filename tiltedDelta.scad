@@ -43,6 +43,13 @@ module baseVertex() difference() {
     rotate([0,90,0]) M3railHole(8);
   for (a=[-1,1]) translate([17.8*a,26,0]) rotate([0,0,-90-a*60])
     rotate([0,90,0]) M3railHole(8);
+
+  translate([0,38,-5])
+    rotate([railTilt-90,0,0]) M5boltHole();
+
+  for (a=[-1,1])  translate([16.5*a,53,0])
+     rotate([0,-90*a,0]) rotate([0,0,a*(90-railTilt)]) M5boltHole();
+
 }
 
 // hole for setting up an 8mm M3 screw to attach to a 1515 extrusion
@@ -155,3 +162,17 @@ module dilatedExtrusions() {
       }
 }
 
+
+m5rad = 4.92/2;//4.88/2;
+m5_head_radius = 8.62/2;//8.5/2;  // 5mm head height, uses 4mm hex drive
+
+module M5boltHole(fuzz=0.05) {
+    cylinder(r=m5rad+fuzz,h=11,$fn=15);
+    translate([0,0,-14])
+       cylinder(r2=m5_head_radius,r1=m5_head_radius+1,h=15,$fn=24);
+
+    // extra clearance for extrusion nut
+    translate([0,0,8.8]) cube([10,16,4],center=true);
+    translate([0,0,6  ]) cylinder(r=3.5+.2,h=4,$fn=17);
+
+}
