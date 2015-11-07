@@ -14,15 +14,53 @@ railTilt = 10.8;  // degrees
 use <nema17.scad>;
 
 difference() {
-  translate([0,140,100]) baseVertex();
+  //union() {
+    translate([0,140,100]) baseVertex();
+  //  translate([0,0,960]) apex();
+  //  translate([0,213,-4]) foot();
+  //}
 
   dilatedExtrusions();  // for cut-outs for extrusions
+}
 
-  translate([0,151,84]) rotate([railTilt-90,0,0]) {
-    //%scale(1.02) nema17();
-    nema17MountHoles();
+module foot() {
+  //%rotate([0,0,45]) cylinder(r1=20,r2=5,h=20,$fn=4);
+  hull() {
+    for(x=[-1,1]) for(y=[-1,1])
+      translate([12*x,12*y,2]) sphere(2,$fn=24);
+    translate([0,0,12]) sphere(12,$fn=36);
   }
+}
 
+module apex() {
+  difference() {
+    hull() for (a=[-120,0,120]) rotate([0,0,a]) for(x=[-1,1]) {
+      translate([10*x,36, 0]) sphere(2,$fn=36);
+      translate([10*x,33,16]) sphere(2,$fn=36);
+    }
+
+    translate([0,0,-4]) cylinder(r1=15,r2=10,h=24,$fn=6);
+
+    // remove outside slot residual, and (most of) side rails
+    for (a=[-120,0,120]) rotate([0,0,a]) 
+      translate([0,30, 0]) 
+        rotate([railTilt,0,0]) cube([19.6,16,50],center=true);
+
+    // side bolt holes
+    for (a=[-120,0,120]) rotate([0,0,a]) for(x=[-1,1])
+      translate([15*x,27.1,8.6]) 
+        rotate([0,-90*x,0]) rotate([0,0,90]) M5boltHole(.15);
+
+    // inside bolt holes
+    for (a=[-120,0,120]) rotate([0,0,a])
+      translate([0,11,6]) 
+        rotate([railTilt-90,0,0]) M5boltHole(.15);
+
+
+    // flat edge cut-outs   
+    //for (a=[-60:120:355]) rotate([0,0,a]) 
+    //  #translate([0,28,-4]) scale([3.5,1,1]) cylinder(r1=7,r2=7,h=24,$fn=6);
+  }
 }
 
 //%scale(1.02) nema17();
@@ -32,6 +70,11 @@ difference() {
 module baseVertex() difference() {
   baseVertexShell();
 
+  translate([0,11,-16]) rotate([railTilt-90,0,0]) {
+    //%scale(1.02) nema17();
+    nema17MountHoles();
+  }
+
   // remove outside of vertical rail strip
   translate([0,60,0]) rotate([railTilt,0,0]) 
        cube([10,5,20],center=true);
@@ -39,12 +82,13 @@ module baseVertex() difference() {
   railZone();
   mirror([1,0,0]) railZone();
 
-  for (a=[-1,1]) translate([31*a,3,0]) rotate([0,0,-90-a*60])
+  for (a=[-1,1]) translate([31.6*a,2,0]) rotate([0,0,-90-a*60])
     rotate([0,90,0]) M3railHole(8);
-  for (a=[-1,1]) translate([17.8*a,26,0]) rotate([0,0,-90-a*60])
+  for (a=[-1,1]) translate([17*a,28,0]) rotate([0,0,-90-a*60])
     rotate([0,90,0]) M3railHole(8);
 
-  translate([0,38,-5])
+  // inside 20v mount screw
+  translate([0,37.5,-4])
     rotate([railTilt-90,0,0]) M5boltHole();
 
   for (a=[-1,1])  translate([16.5*a,53,0])
@@ -56,8 +100,8 @@ module baseVertex() difference() {
 module M3railHole() {
 nutRad = 5.46/2/cos(30);
   M3screwHole(8);
-  translate([0,0,-9]) rotate([0,0,30])
-    cylinder(r1=nutRad+.2,r2=nutRad-.1,h=5,$fn=6);
+  translate([0,0,-8.8]) rotate([0,0,30])
+    cylinder(r1=nutRad+.2,r2=nutRad,h=4,$fn=6);
 }
 
 // get rid of extranious junk around rails on vertex
@@ -132,19 +176,29 @@ module dilatedExtrusions() {
   for (a=[-120,0,120]) rotate([0,0,a]) 
     translate([0,212,0])
       rotate([railTilt,0,0]) {
-        ext20(1000,.1,0);
+
+        // make a little indent at foot of model to make feet fit better
+        difference() {
+          ext20(1000,.1,0);
+          cube([14,14,1],center=true);
+        }
 
         // want NEMA face plate 36ish mm from extrusion.
         // make sure this is carved out
         hull() {
-          translate([0,-7.5-36-20,100]) cube([50,40,80],center=true);
+          for(x=[-1,1]) translate([25*x,-7.5-36-4,100])
+             cylinder(r=4,h=80,$fn=24,center=true);
           translate([0,-7.5-36-30,100]) cube([90,1,80],center=true);
         }
+        //%hull() {
+        //  translate([0,-7.5-36-20,100]) cube([50,40,80],center=true);
+        //  translate([0,-7.5-36-30,100]) cube([90,1,80],center=true);
+        //}
 
         // clear zone for linear motion parts around shaft
         hull() for(x=[-1,1]) {
-          translate([10*x,-20,50]) cylinder(r=3,h=100,$fn=24);
-          translate([17*x,-35,50]) cylinder(r=3,h=100,$fn=24);
+          translate([10*x,-19,50]) cylinder(r=3,h=100,$fn=24);
+          translate([20*x,-36,50]) cylinder(r=3,h=100,$fn=24);
         }
       }
 
