@@ -1,13 +1,24 @@
 Release status
 ==============
 
-Most of these parts are now stable and won't change much more.
+These are Mr-What's tweaks to Johann's mini-kossel drawings
+circa Feb. 2014.
+The main changes are:
 
-How to print Mini Kossel
-========================
+   * Attach the carriage to a base that can mount Delrin wheels
+     that ride directly on the extrusion, instead of the
+     linear bearing rails.
 
-* 3x plate_3x.stl (about 3x80g = 240g of plastic)
-* 1x plate_1x.stl (about 50g of plastic)
+   * Added support material to make printing easier on Quelab's
+     public RepRap printer (Hackerspace in Albuquerque, NM)
+
+   * Simplified some parts.
+
+   * Changed effector head to carry a different shaped hot-end.
+
+   * Attempting to use pressure sensors on top of the NEMA-17 motors
+     instead of the probe.  This will require new, very tight tolerance
+     print bed mounts.
 
 Links
 =====
@@ -16,28 +27,13 @@ Links
 * Mailing list: http://groups.google.com/group/deltabot
 * Project history: http://deltabot.tumblr.com
 
-Pay it forward
-==============
+Upstream Project
+================
 
-Johann is offering free printed parts for Mini Kossel:
+Johann offers some free printed parts, on the condition that
+once you get a printer working, you give away two (2) sets
+of free parts to others.  After that, you are free to sell
+printed parts.
 
-* I'm going to make some Mini Kossel printed parts kits.
-* I'm going to give them away for free (as in beer).
-* Some kits may include some non-printed parts.
-* Free international shipping is included.
-* No delivery schedule, maybe only one kit per month.
-
-But there's no such thing as a free lunch. If you want to receive a
-free kit, you must swear by your geek honor:
-
-* To complete your Mini Kossel and tune it well.
-* To print two (2) Mini Kossel kits and also give them away for free.
-* To make your recipients agree to the same rule.
-
-After giving away the 2 free kits, you may sell printed parts for any
-price you want.
-
-If you're interested, please email johann@rocholl.net and let me know
-your favorite PLA color and mailing address. If you want to get your
-printed parts first, explain why you're more qualified than others to
-start giving away high quality printed parts soon.
+See Johann's main source project for more details.
+    https://github.com/jcrocholl/kossel

@@ -20,4 +20,7 @@ module frame_extruder() {
   }
 }
 
-frame_extruder();
+union() {
+  translate([0,0,.17]) frame_extruder();
+  color("Cyan") cube([15.2,29.2,0.4],center=true);
+}
