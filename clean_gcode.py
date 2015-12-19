@@ -93,7 +93,9 @@ if __name__ == '__main__':
     if len(sys.argv) < 2:
         sys.exit('usage: clean_gcode.py <filename> [--verbose]')
     infilename = sys.argv[1]
+    tmpfilename = '%s.tmp%s' % os.path.splitext(infilename)
+    with open(infilename, 'r') as infile:
+        with open(tmpfilename, 'w') as tmpfile:
+            rewrite(infile, tmpfile, '--verbose' in sys.argv)
     outfilename = '%s.clean%s' % os.path.splitext(infilename)
-    with open(infilename) as infile:
-        with open(outfilename, 'w') as outfile:
-            rewrite(infile, outfile, '--verbose' in sys.argv)
+    os.rename(tmpfilename, outfilename)
