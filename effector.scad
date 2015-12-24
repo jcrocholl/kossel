@@ -9,13 +9,15 @@ height = 8;
 cone_r1 = 2.5;
 cone_r2 = 14;
 
+face_tangent_offset = cos(60)*((separation/2)/tan(30) + offset);
+relief_width = tan(60-atan(separation/(2*offset)))*face_tangent_offset;
 module effector() {
   difference() {
     union() {
       cylinder(r=offset-3, h=height, center=true, $fn=60);
       for (a = [60:120:359]) rotate([0, 0, a]) {
-	rotate([0, 0, 30]) translate([offset-2, 0, 0])
-	  cube([10, 13, height], center=true);
+	rotate([0, 0, 30]) translate([face_tangent_offset-5-4.5, 0, 0])
+	  cube([10, relief_width*2, height], center=true);
 	for (s = [-1, 1]) scale([s, 1, 1]) {
 	  translate([0, offset, 0]) difference() {
 	    intersection() {
