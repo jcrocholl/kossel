@@ -1,9 +1,9 @@
-include <configuration.scad>;
-include <teardrop.scad>
+include <../configuration.scad>;
+include <../teardrop.scad>
 
-use <microswitch.scad>;
+use <../microswitch.scad>;
 
-thickness = 6;  // thinner endstop required for the delrin V roller version
+thickness = 6.4;  // thinner endstop required for the delrin V roller version
 width = 15;  // Same as vertical extrusion.
 height = 15;
 
