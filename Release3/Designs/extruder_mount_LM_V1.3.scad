@@ -25,13 +25,13 @@ e_mount_width=13.5;
 e_mount_thick=8;
 cap_head_depth=2.9;
 min_wall_thick=4;
-push_fit_clearance_r=13/2;
+push_fit_connection_r=12/2;
 e_offset_x=0.5;
 bracing_side=(frame_mount_hole_spacing-e_mount_width)/2-5;
 $fn=30;
 
 mirrored=0;//push fit conector position 0 for "standard" 1 for "mirrored"
-assembly=1; //if 1 this adds the extruder drive block
+assembly=0; //if 1 this adds the extruder drive block
 push_fit_offset_y=mirrored?e_mount_offset_y*2-29.9:29.9;
 
 
@@ -90,24 +90,25 @@ module extruder_mount(){
             }
             //pushfit clearance wall
             translate([e_offset_x,push_fit_offset_y,-frame_mount_width/2+e_mount_thick/2])
-            cylinder(r=push_fit_clearance_r+min_wall_thick,h=e_mount_thick,center=true, $fn=60);
+            cylinder(r=push_fit_connection_r+min_wall_thick,h=e_mount_thick,center=true, $fn=60);
          }
          
          //pushfit clearance
-         translate([e_offset_x,push_fit_offset_y,-frame_mount_width/2+e_mount_thick/2]){
-            cylinder(r=push_fit_clearance_r,h=e_mount_thick+1,center=true, $fn=60);
-            translate([(e_mount_width/2-e_offset_x)/2+0.2,0,0])
-                cube([e_mount_width/2-e_offset_x+0.1,
-                      push_fit_clearance_r*2,e_mount_thick+1],center=true);
-            translate([(min_wall_thick+e_mount_width-e_offset_x)/2,0,0])
-                cube([min_wall_thick+e_offset_x,
-                        (push_fit_clearance_r+min_wall_thick)*2,e_mount_thick+1],center=true);
+         translate([e_offset_x,push_fit_offset_y,-frame_mount_width/2+e_mount_thick/2+0.7]){
+            cylinder(r=push_fit_connection_r,h=e_mount_thick,center=true, $fn=60);
+            cylinder(r=push_fit_connection_r-2,h=e_mount_thick+3,center=true, $fn=60);
+            //translate([(e_mount_width/2-e_offset_x)/2+0.2,0,0])
+            //    cube([e_mount_width/2-e_offset_x+0.1,
+            //          push_fit_connection_r*2,e_mount_thick+1],center=true);
+            //translate([(min_wall_thick+e_mount_width-e_offset_x)/2,0,0])
+            //    cube([min_wall_thick+e_offset_x,
+            //      (push_fit_connection_r+min_wall_thick)*2,e_mount_thick+1],center=true);
          }
          //extruder mounting holes
          for(i=[-1,1])
          translate([e_offset_x,e_mount_offset_y+i*e_mount_hole_spacing/2,
                     -frame_mount_width/2+e_mount_thick/2]){
-            #cylinder(r=e_mount_hole_r,h=e_mount_thick+20,center=true, $fn=5);
+            cylinder(r=e_mount_hole_r,h=e_mount_thick+20,center=true, $fn=5);
             translate([0,0,e_mount_thick/2-cap_head_depth/2+0.01])
                 cylinder(r=e_mount_cap_head_r,h=cap_head_depth+0.01,center=true, $fn=20);
          } 
